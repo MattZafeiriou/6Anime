@@ -1,0 +1,37 @@
+.aboutmain {
+    margin: 0 5% 5% 5%;
+    color: rgb(200,200,200);
+}
+
+.aboutmain h1 {
+    margin-bottom: 20px;
+}
+
+.aboutmain p {
+    line-height: .5em;
+}
+
+.gradient {
+    height: 10vh;
+    background: rgb(10,10,10);
+    background: linear-gradient(180deg, rgba(10,10,10,1) 0%, rgba(39,39,39,1) 100%);
+}
+.accordion-button {
+    background-color: hsl(0, 0%, 15%) !important;
+    color: white;
+}
+
+.accordion-item{
+    background-color:hsl(0, 0%, 15%) !important;
+    color: white;
+}
+
+.accordion-button:focus {
+box-shadow: none;
+background-color: hsl(0, 0%, 10%) !important;
+}
+
+.accordion-button:not(.collapsed) {
+color: white;
+background-color: hsl(0, 0%, 10%) !important;
+}

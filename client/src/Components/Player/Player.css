@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+.main_player {
+    background-color: #141414;
+    width: 100%;
+    border-radius: 1em;
+    float: left;
+}
+
+.playerdiv {
+    margin-left: 15%;
+    margin-right: 15%;
+    display: inline-flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.playerr {
+    float: left;
+    width: 90%;
+}
+
+.player {
+    width: 100%;
+}
+
+.right_side {
+    float: left;
+    margin-top: 1.3em;
+    padding-top: 1em;
+    margin-left: 1em;
+}
+
+.section {
+    background-color: #141414;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 100%;
+}
+
+.related_anime_title {
+    color: rgb(180,180,180);
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 1em;
+}
+
+.related_anime_title a {
+    color: rgb(180,180,180);
+}
+
+.related_anime_title a:hover {
+    color: rgb(200,200,200);
+}
+
+.related_anime_info {
+    line-height: .3em;
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: .9em;
+    color: rgb(100,100,100);
+}
+
+.section_title {
+    color: white;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
+.related_anime {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0em 0em 0em;
+}
+
+.related_anime_img {
+    width: 3em;
+    min-width: 3em;
+    max-width: 3em;
+    height: max-content;
+    border-radius: 3px;
+    margin-right: .8em;
+}
+
+.separator {
+    background-color: #808080;
+    height: 1px;
+    width: 100%;
+}
+
+.pcontainer {
+    margin: 1em 5em 0em 5em;
+    overflow: auto;
+}
+
+.button, .button_disabled {
+    transition-duration: 200ms;
+    padding: .8em;
+    background-color: #222228;
+    border: solid #9b2727 1px;
+    font-family: serif;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: hsl(0, 60%, 50%) !important;
+    color: white;
+}
+
+.anime_img {
+    border-radius: 3px;
+    width: 30%;
+    min-width: 30%;
+    max-width: 30%;
+    height: max-content;
+    margin-right: 1em;
+}
+
+#anime_description {
+    color: rgb(180,180,180);
+    font-family: 'PT Serif', serif;
+}
+
+#anime_desc {
+    color: white;
+}
+
+.title {
+    font-family: 'PT Serif';
+    color: white;
+    width: 50%;
+}
+
+.title h3 {
+    padding: 0em 0em 0em .5em;
+    font-size: 1.5em;
+}
+
+.anime_tag {
+    background-color: rgb(99, 17, 17);
+    font-size: .9em;
+    padding: 6px;
+    color: white;
+    width: max-content;
+    border-radius: 3px;
+    margin-right: 5px;
+    text-transform: uppercase;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info_ {
+    display: block;
+    font-family: 'PT Serif';
+}
+
+.info_tag {
+    font-size: 1.2em;
+    float: left;
+    color: rgb(180,180,180);
+}
+
+.info_text {
+    font-size: 1.2em;
+    float: right;
+    color: white;
+}
+
+:root {
+    --plyr-color-main: #9b2727;
+}  

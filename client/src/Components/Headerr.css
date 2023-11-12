@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+* {
+    margin: 0px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+body {
+    background-color: rgb(39, 39, 39);
+}
+
+.top {
+    overflow: hidden;
+    max-height: 80px;
+    width: 100%;
+    background-color: #0a0a0a;
+}
+
+.active {
+    color: #9b2727;
+}
+
+.searchtop {
+    width: 20%;
+    margin-top: 17px;
+    margin-left: 20px;
+    float: left;
+}
+.searchtop input[type=text] {
+    transition-duration: 400ms;
+    width: calc(50% - 70px);
+    float: left;
+    padding: 9px;
+    padding-left: 15px;
+    border-style: none;
+    border-radius: 100px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: .8em;
+}
+
+.searchtop input[type=text]:hover {
+    width: calc(80% - 70px);
+}
+
+.searchtop input[type=text]:focus {
+    width: calc(100% - 70px);
+}
+
+.searchtop button {
+    float: left;
+    transition-duration: 0.2s;
+    padding: 3px 14px 8px 10px;
+    background: #9b2727;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.dropdown-content-top {
+    margin-top: 53px;
+    width: calc(20% - 70px + 25px);
+    margin-left: 90px;
+    position: absolute;
+    float: none;
+    display: grid;
+}
+
+.dropdown-content-top a {
+    transition-duration: .1s;
+    padding: 8px;
+    background-color: white;
+    color: rgb(30,30,30);
+    border-top: solid gray thin;
+    text-decoration: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.dropdown-content-top a:hover {
+    background-color: rgb(200,200,200);
+}
+
+.anime_list {
+    transition-duration: .3s;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #EDECE5;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 4px;
+    margin: 10px;
+    float: right;
+}
+
+.anime_list {
+    font-size: 1.5em;
+}
+
+.anime_list:hover {
+    color: #99988e;
+}
+
+.top_right {
+    margin-top: .5em;
+    margin-right: 2em;
+}
+
+.top img {
+    margin: 10px;
+    border-radius: 3px;
+    width: 50px;
+    float: left;
+}

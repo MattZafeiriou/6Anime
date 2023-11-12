@@ -1,0 +1,28 @@
+.container {
+    display: block;
+    width: fit-content;
+    padding: 2em;
+    border-radius: 5px;
+    margin-left: 5%;
+    background-color: #141414;
+}
+
+.container h1 {
+    font-family: 'PT Serif';
+    color: white;
+    font-size: 2em;
+}
+
+.container p {
+    font-family: 'PT Serif';
+    color: white;
+    font-size: 1em;
+}
+
+.contact_group {
+    display: flex;
+}
+
+#required {
+    color: rgb(200,0,0 );
+}
