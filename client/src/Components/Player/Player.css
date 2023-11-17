@@ -5,22 +5,22 @@
     border-radius: 1em;
     float: left;
 }
+#qualitySelector {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 
+.playerr {
+    float: left;
+    width: 90%;
+}
 .playerdiv {
     margin-left: 15%;
     margin-right: 15%;
     display: inline-flex;
     flex-direction: row;
     align-content: center;
-}
-
-.playerr {
-    float: left;
-    width: 90%;
-}
-
-.player {
-    width: 100%;
 }
 
 .right_side {
@@ -170,7 +170,3 @@
     float: right;
     color: white;
 }
-
-:root {
-    --plyr-color-main: #9b2727;
-}  

@@ -1,0 +1,143 @@
+.controls {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, #000);
+    align-items: center;
+    transition: opacity .2s;
+  }
+  
+  .video-player.playing .controls {
+    opacity: 0;
+  }
+  
+  .video-player:hover .controls {
+    opacity: 1;
+  }
+  
+  .control-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    opacity: .8;
+    transition: all .2s;
+  }
+  
+  .control-button:hover {
+    opacity: 1;
+  }
+  
+  .control-button.play-button {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .control-button.sound-button {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .control-button.fullscreen-button {
+    height: 35px;
+    width: 35px;
+  }
+  
+  .control-button svg {
+    stroke: #fff;
+    fill: transparent;
+  }
+  
+  .timeline {
+    -webkit-appearance: none;
+    width: calc(100% - 125px);
+    height: .5em;
+    background-color: rgba(255, 255, 255, .3);
+    border-radius: 5px;
+    background-size: 0% 100%;
+    background-image: linear-gradient(#fff, #fff);
+    background-repeat: no-repeat;
+  }
+  
+  .timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: rgba(255, 255, 255, .8);
+  }
+  
+  .timeline::-moz-range-thumb {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: rgba(255, 255, 255, .8);
+  }
+  
+  .timeline::-ms-thumb {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: rgba(255, 255, 255, .8);
+  }
+  
+  .timeline::-webkit-slider-thumb:hover {
+    background-color: #fff;
+  }
+  
+  .timeline:hover::-webkit-slider-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-moz-range-thumb:hover {
+    background-color: #fff;
+  }
+  
+  .timeline:hover::-moz-range-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-ms-thumb:hover {
+    background-color: #fff;
+  }
+  
+  .timeline:hover::-ms-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .timeline::-moz-range-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .timeline::-ms-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+.player {
+    width: 100%;
+    position: relative;
+}

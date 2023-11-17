@@ -98,10 +98,11 @@ class Header extends React.Component {
                             <Form.Label style={{color: 'rgb(180,180,180)'}}>Subject <span id='required'>*</span></Form.Label>
                             <Form.Select required className='contact_subject' aria-label="Floating label select example">
                                 <option selected disabled value="">Select Subject</option>
-                                <option value="technical">Technical</option>
-                                <option value="streaming">Streaming</option>
-                                <option value="copyright">Copyright</option>
-                                <option value="other">Other</option>
+                                <option value="technical">Technical Issues</option>
+                                <option value="streaming">Streaming Issues</option>
+                                <option value="copyright">Copyright Issues</option>
+                                <option value="recommendation">Anime Recommendations</option>
+                                <option value="other">Other..</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
                                 This field is required.

@@ -9,7 +9,6 @@ import NotFound from './Components/NotFound.js';
 import Contact from './Components/Contact/Contact.js';
 import Header from './Components/Header.js'
 import Headerr from './Components/Headerr.js'
-import Test from './Components/Player/test.js'
 import SubmitSuccess from './Components/Submit_Success/Submit_success.js'
 
 const Main = () => {
@@ -28,11 +27,6 @@ const Main = () => {
       <Route exact path='/submit_success' component={SubmitSuccess}>
         <Headerr/>
         <SubmitSuccess/>
-        <Footer/>
-      </Route>
-      <Route exact path='/test' component={Test}>
-        <Headerr/>
-        <Test/>
         <Footer/>
       </Route>
       <Route exact path='/p/*' component={Player}>

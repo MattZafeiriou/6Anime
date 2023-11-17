@@ -1,10 +1,11 @@
 import React, { createRef } from 'react';
 import {createRoot} from 'react-dom/client';
 import './Player.css'
-import Plyr from "plyr-react"
-import "plyr-react/plyr.css"
+import './videoplayer.css'
+import Hls from "hls.js";
 
-class Player extends React.Component {
+class Playerr extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -46,28 +47,14 @@ class Player extends React.Component {
             marginRight: '1em',
             marginBottom: '1em'
         }
-        this.plyrProps = {
-            source: {
-                type: 'video',
-                title: 'Example video',
-                sources: [
-                    {
-                        src: '',
-                        type: 'video/mp4',
-                        size: 1080
-                    }
-                ]
-            }, // https://github.com/sampotts/plyr#the-source-setter
-        }
         this.player = createRef();
         this.getVideoInfo = this.getVideoInfo.bind(this);
         this.getVideoInfo();
         this.render = this.render.bind(this);
-        this.MyPlyrVideo = this.MyPlyrVideo.bind(this);
         this.setCookies = this.setCookies.bind(this);
     }
 
-
+    
     getVideoInfo()
     {
         let name = window.location.href.split("/")[4];
@@ -152,18 +139,17 @@ class Player extends React.Component {
             }
             // Create anime episode buttons
             const epsDiv = document.getElementById('episodes');
-            if (info.episodes > 1)
-                for (let i = 1; i <= info.episodes; i++)
-                {
-                    const newDiv = document.createElement('div');
-                    epsDiv.appendChild(newDiv);
-                    // Render the component into the new div
-                    const root = createRoot(newDiv);
-                    if (i == this.state.episode)
-                        root.render(<this.Button text={i} customStyle={this.customSelectedStyle}/>)
-                    else
-                        root.render(<this.Button text={i} link={"ep" + i} customStyle={this.customStyle}/>)
-                }
+            for (let i = 1; i <= info.episodes; i++)
+            {
+                const newDiv = document.createElement('div');
+                epsDiv.appendChild(newDiv);
+                // Render the component into the new div
+                const root = createRoot(newDiv);
+                if (i == this.state.episode)
+                    root.render(<this.Button text={i} customStyle={this.customSelectedStyle}/>)
+                else
+                    root.render(<this.Button text={i} link={"ep" + i} customStyle={this.customStyle}/>)
+            }
             
         });
         // Change banner image
@@ -224,12 +210,6 @@ class Player extends React.Component {
             this.setCookie("currentTime", plyrInstance.currentTime, 7);
             this.setCookie("currentVolume", plyrInstance.volume, 7);
         }, 1000);
-    }
-
-
-
-    MyPlyrVideo() {
-        return <Plyr ref={this.player} {...this.plyrProps} />
     }
 
     Button = (proms) => {
@@ -315,24 +295,72 @@ class Player extends React.Component {
         );
     }
 
+    componentDidMount() {
+        
+    }
+
+    componentDidUpdate() {
+        const video = this.player;
+        const hls = new Hls();
+        const url = "https://eno.tendoloads.com/_v6/04c62d67738da375aca8b1659516f077c74801fa368082aa2ebd5c4556d4a621e40149ff082d9d6b627f702d28718f4cefec91e79fa9d9f8e407df2c2424be0114f0b211b8e8eb14baff1d78eb556215114a397444824941bed9fc5f7e12ed38b17fff668113bf7e2be351ef365348a89ba0ec5cdbbc56fd9b916d6342e2f46b/master.m3u8";
+   
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        
+        // hls.startLevel = 2;
+        // hls.nextLevel = 2;
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+
+            var availableLevels = hls.levels;
+  
+            // Log the available resolutions
+            availableLevels.forEach(function (level, index) {
+              console.log('Resolution ' + index + ': ' + level.width + 'x' + level.height);
+            });
+            video.loadSource();
+            hls.attachMedia(video)
+        });
+
+    }
+
     render() {
-        // if (!this.state.loaded_info)
-        // {
-        //     return (
-        //         <div/>
-        //     );
-        // }
         return (
-        <><link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+        <>
             <div className="gradient"></div>
             <div className='playerdiv'>
                 <div className='playerr'>
                     <div className='title'>
                         <h3 id='title'>{this.state.title} - Episode {this.state.episode}</h3>
                     </div>
+                    {/* Player Section starts here */}
                     <div className="main_player">
+                        {/* Video Player Starts here */}
                         <div className='player'>
-                            <this.MyPlyrVideo id='videoPlayer'/>
+                            {/* Video Player */}
+                            <video id="player" playsinline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
+                                ref={player => (this.player = player)}>
+                                <source src="" type="video/mp4" />
+                                <track src="https://cc.bunnyccdn.co/ca/6e/ca6e95a207b37aa7dfff60a5fe12dd75/eng-3.vtt" label="English" srcLang='en' kind="subtitles" default />
+                            </video>
+                            {/* Video Controls */}
+                            <div class="controls">
+                                <button class="play-button control-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <input type="range" min="0" max="100" class="timeline" value="0" />
+                                <button class="sound-button control-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                    </svg>
+                                </button>
+                                <button class="control-button fullscreen-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <div className='separator'/>
                         <div className='pcontainer'>
@@ -383,4 +411,4 @@ class Player extends React.Component {
     );
     };
 }
-export default Player;
+export default Playerr;
