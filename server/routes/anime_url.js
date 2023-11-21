@@ -27,28 +27,29 @@ router.get('/', function(req, res, next) {
     const folder = urlParams.get("name") + "/ep" + urlParams.get("ep");
 
     // Obtain file id
-    var file_id = "";
-    fs.readFile(path.resolve(__dirname + "/../public/p/" + folder + "/anime_url.txt"), 'utf8', (err, data) => {
-        if (err) {
-            console.log("Could not find anime_url.txt for folder: " + folder + "\n" + err);
-            res.sendFile(__dirname + "/public/404.html")
-            return;
-        }
-        file_id = data
+    //var file_id = "";
+    res.sendFile(path.resolve(__dirname + "/../public/p/" + folder + "/anime_url.json"))
+    // fs.readFile(path.resolve(__dirname + "/../public/p/" + folder + "/anime_url.txt"), 'utf8', (err, data) => {
+    //     if (err) {
+    //         console.log("Could not find anime_url.txt for folder: " + folder + "\n" + err);
+    //         res.sendFile(__dirname + "/public/404.html")
+    //         return;
+    //     }
+    //     file_id = data
 
-        if (isValidHttpUrl(file_id)) {
-            res.status(200).send(file_id);
-            return;
-		} else {
-            // vars
-            var login = "ef0834371263a674dd24";
-            var key = "Zr6aVGvYPXSq8RQ";
+    //     if (isValidHttpUrl(file_id)) {
+    //         res.status(200).send(file_id);
+    //         return;
+	// 	} else {
+    //         // vars
+    //         var login = "ef0834371263a674dd24";
+    //         var key = "Zr6aVGvYPXSq8RQ";
 
-            // get download link
-            streamtapeutils.get_download_ticket(file_id, login, key, res)
-        }
+    //         // get download link
+    //         streamtapeutils.get_download_ticket(file_id, login, key, res)
+    //     }
 
-    });
+    // });
 });
 
 module.exports = router;

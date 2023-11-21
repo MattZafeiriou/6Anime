@@ -28,8 +28,12 @@
     "folder_name": "Shingeki_No_Kyojin_s4_part4"
   },
   "8": {
+    "name": "Shingeki No Kyojin Final Season Part 3",
+    "folder_name": "Shingeki_No_Kyojin_s4_part3"
+  },
+  "9": {
     "name": "Tenki No Ko",
     "folder_name": "Tenki_No_Ko"
   },
-  "max_numbers": 8
+  "max_numbers": 9
 }

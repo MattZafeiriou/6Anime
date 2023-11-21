@@ -2,13 +2,13 @@ import {React, Component} from 'react';
 import './MainP.css'
 import './index.css'
 import logoImg from '../logo.png'
-import { Image } from 'react-bootstrap';
+import { Image, ToastContainer, Toast } from 'react-bootstrap';
 
 class MainP extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { apiResponse: "", foldersnames: [] };
+        this.state = { apiResponse: "", foldersnames: [], showToast: false };
 
         this.addTopDropdown = this.addTopDropdown.bind(this);
         this.typingTop = this.typingTop.bind(this);
@@ -123,6 +123,13 @@ class MainP extends Component {
         );
     }
 
+    componentDidMount() {
+        this.toggleShowToast();
+    }
+
+    toggleShowToast = () => {
+        this.setState({showToast: !this.state.showToast});
+    }
     render() {
         return (
             <>
@@ -143,6 +150,19 @@ class MainP extends Component {
                     <this.Qna q="How can I make this sh*t too?" a="IDK man just do it - Adidas or smth"/>
                 </div>
                 <div className="space"><br/></div>
+                <ToastContainer
+            className="p-3"
+            position="bottom-center"
+            style={{ zIndex: 1 }}
+            >
+                <Toast show={this.state.showToast} delay={5000} autohide onClose={this.toggleShowToast} style={{backgroundColor: 'rgb(50,50,50)', color: 'rgb(200,200,200)'}}>
+                    <Toast.Header style={{backgroundColor: 'rgb(50,50,50)', color: 'rgb(180,180,180)'}}>
+                        <strong className="me-auto">Info</strong>
+                        <small>Now</small>
+                    </Toast.Header>
+                    <Toast.Body>This website hosts no media in its servers!</Toast.Body>
+                </Toast>
+            </ToastContainer>
             </>
         );
     }

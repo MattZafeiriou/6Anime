@@ -5,11 +5,6 @@
     border-radius: 1em;
     float: left;
 }
-#qualitySelector {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-  }
 
 .playerr {
     float: left;
