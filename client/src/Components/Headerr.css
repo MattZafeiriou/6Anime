@@ -18,8 +18,8 @@ body {
 .top {
     overflow: hidden;
     max-height: 80px;
-    width: 100%;
-    background-color: #0a0a0a;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .active {
@@ -27,49 +27,45 @@ body {
 }
 
 .searchtop {
-    width: 20%;
-    margin-top: 17px;
-    margin-left: 20px;
-    float: left;
+    width: 310px;
+    margin-top: 15px;
+    margin-right: 20px;
+    float: right;
+    border: solid rgba(255,255,255,.2) 1px;
+    border-radius: 10px;
 }
 .searchtop input[type=text] {
-    transition-duration: 400ms;
-    width: calc(50% - 70px);
-    float: left;
-    padding: 9px;
-    padding-left: 15px;
-    border-style: none;
-    border-radius: 100px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    font-size: .8em;
+    transition-duration: 300ms;
+    width: calc(100% - 36px);
+    float: right;
+    padding: 8px;
+    font-size: 1em;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: rgb(200,200,200);
 }
-
-.searchtop input[type=text]:hover {
-    width: calc(80% - 70px);
+.searchtop {
+    transition-duration: .1s;
 }
-
-.searchtop input[type=text]:focus {
-    width: calc(100% - 70px);
+.searchtop:focus-within {
+    border-color: #9b2727;
 }
 
 .searchtop button {
-    float: left;
+    float: right;
+    background-color: rgba(0,0,0,0);
     transition-duration: 0.2s;
-    padding: 3px 14px 8px 10px;
-    background: #9b2727;
+    padding: 6px 0px 6px 10px;
     font-size: 17px;
-    border: none;
     cursor: pointer;
-    border-radius: 100px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border: none;
+    color: black;
 }
 
 .dropdown-content-top {
-    margin-top: 53px;
+    margin-top: 50px;
     width: calc(20% - 70px + 25px);
-    margin-left: 90px;
+    margin-left: 68px;
     position: absolute;
     float: none;
     display: grid;
@@ -90,34 +86,53 @@ body {
     background-color: rgb(200,200,200);
 }
 
-.anime_list {
-    transition-duration: .3s;
+.left_list {
+    transition-duration: .2s;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 500;
     color: #EDECE5;
     text-decoration: none;
     font-size: 30px;
     padding: 4px;
     margin: 10px;
+    margin-top: 25px;
+    float: left;
+    font-size: .9em;
+}
+
+.left_list:hover {
+    color: #9b2727;
+}
+
+.donate_button {
+    transition-duration: .3s;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 10px 30px 10px 30px;
+    margin: 6px;
+    margin-top: 15px;
     float: right;
+    font-size: .9em;
+    background: rgb(155,39,39);
 }
 
-.anime_list {
-    font-size: 1.5em;
+.donate_button:hover {
+    padding: 10px 32px 12px 32px;
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-top: 10px;
 }
 
-.anime_list:hover {
-    color: #99988e;
+#donate {
+    color: white;
 }
-
-.top_right {
-    margin-top: .5em;
-    margin-right: 2em;
-}
-
 .top img {
-    margin: 10px;
     border-radius: 3px;
+    margin-top: 15px;
+    margin-right: 1em;
     width: 50px;
     float: left;
 }

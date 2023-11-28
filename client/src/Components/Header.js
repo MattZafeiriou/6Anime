@@ -9,7 +9,7 @@ const Header = () => {
     <Navbar expand="lg" style={{backgroundColor:"#1A1A1A"}}>
       <Container fluid>
         <Navbar.Brand className='navOptions' href="/">
-            <Image src={logoImg} roundedCircle style={{width:'2.5em', height:'2.5em'}}/>
+            <Image src={logoImg} style={{width:'2.5em', height:'2.5em'}}/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

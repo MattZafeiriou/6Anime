@@ -125,6 +125,7 @@ class MainP extends Component {
 
     componentDidMount() {
         this.toggleShowToast();
+        document.getElementById("home").classList.add("active");
     }
 
     toggleShowToast = () => {
@@ -138,7 +139,7 @@ class MainP extends Component {
                     <Image align="center" id="logo_mid" src={logoImg}/>
                     <br/><br/>
                     <form>
-                        <input type="text" autocomplete="off" id="searching" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Search Anime Series" onInput={this.typingTop}/>
+                        <input type="text" autocomplete="off" id="searching" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Find Anime Series" onInput={this.typingTop}/>
                         <button type="submit"><i className="fa fa-search"></i></button>
                     </form>
                 </div>
