@@ -262,6 +262,7 @@ class Playerr extends React.Component {
                 <div className='playerr'>
                     <div className='title'>
                         <h3 id='title'>{this.state.title} - Episode {this.state.episode}</h3>
+                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href='../'>Play</a> <span>&#62;</span> <a href='#'>{this.state.title}</a></h5>
                     </div>
                     {/* Player Section starts here */}
                     <div className="main_player">
@@ -311,8 +312,9 @@ class Playerr extends React.Component {
                     </div>
                 </div>
                 <div className='right_side'>
-                    <div className='section related_anime_div'>
-                        <h3 className='section_title'>Related Anime</h3>
+                    <div className='section top_anime_div'>
+                        <h3 className='section_title'>Top Anime</h3>
+                            
                     </div>
                 </div>
             </div>

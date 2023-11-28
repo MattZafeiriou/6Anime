@@ -8,7 +8,8 @@
 
 .playerr {
     float: left;
-    width: 90%;
+    width: 75%;
+    padding-right: 1em;
 }
 .playerdiv {
     margin-left: 15%;
@@ -20,9 +21,9 @@
 
 .right_side {
     float: left;
-    margin-top: 1.3em;
-    padding-top: 1em;
-    margin-left: 1em;
+    padding-top: 2.3em;
+    padding-left: 1em;
+    width: 25%;
 }
 
 .section {
@@ -128,9 +129,17 @@
     width: 50%;
 }
 
-.title h3 {
-    padding: 0em 0em 0em .5em;
-    font-size: 1.5em;
+.title h5 {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1em;
+}
+
+.title a {
+    color: rgb(100,100,100);
+}
+.title a:hover {
+    color: rgb(200,200,200);
 }
 
 .anime_tag {
