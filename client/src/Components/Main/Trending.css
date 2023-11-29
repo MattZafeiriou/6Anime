@@ -1,0 +1,102 @@
+.trending_page {
+    margin-top: 5%;
+    display: grid;
+}
+
+.trending_header h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    float: left;
+}
+.trending_header a {
+    font-size: .9em;
+    transition-duration: .1s;
+    font-weight: 600;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    float: right;
+}
+
+.trending_header a:hover {
+    color: #ff4b2b;
+}
+
+.trending_header {
+    display: inline;
+}
+
+.trending_list {
+    margin-top: 1em;
+}
+
+.trending_card img {
+    transition-duration: .3s;
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.trending_card img:hover {
+    opacity: 1;
+}
+
+.trending_card_img {
+    width: 300px;
+}
+
+.trending_card_img:hover .trending_card_play_button {
+    opacity: 1;
+    margin-top: calc(200px - 1.3em);
+}
+
+.trending_card_play_button:hover {
+    color: #ff4b2b;
+    border-color: #ff4b2b;
+    width: 2.8em;
+    height: 2.8em;
+    padding-left: .88em;
+    padding-top: .45em;
+    margin-left: calc(150px - 1.4em);
+    margin-top: calc(200px - 1.4em) !important;
+}
+
+.trending_card a {
+    color: white;
+}
+
+.trending_card p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1em;
+    line-height: 0em;
+    margin-top: 1.8em;
+}
+
+.trending_card_play_button {
+    transition-duration: .3s;
+    opacity: 0;
+    color: white;
+    border: solid 3px white;
+    border-radius: 50%;
+    width: 2.6em;
+    height: 2.6em;
+    padding-left: .78em;
+    padding-top: .37em;
+    position: absolute;
+    margin-left: calc(150px - 1.3em);
+    margin-top: calc(200px - 2em);
+}
+
+.trending_card h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    width: 300px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+}

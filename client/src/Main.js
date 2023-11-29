@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Footer from './Components/Footer.js'
-import Home from './Components/MainP.js';
+import Home from './Components/Main/MainP.js';
 import About from './Components/About/About.js';
 import Player from './Components/Player/Player.js';
 import NotFound from './Components/NotFound.js';

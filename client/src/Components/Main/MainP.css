@@ -1,0 +1,83 @@
+.main {
+    /* background-image: url("test-background.jpg"); */
+    background: rgb(25,7,7);
+    background: linear-gradient(180deg, rgba(25,7,7,1) 0vh, rgba(155,39,39,1) 50vh, rgba(25,7,7,1) 95vh);
+}
+
+.main_page {
+    margin-top: 20px;
+    width: 90vw;
+    margin-left: 5vw;
+}
+
+.watch_button {
+    transition-duration: .3s;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #9b2727;
+    border: none;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 9px;
+}
+
+.watch_button:hover {
+    margin-bottom: 5px;
+    padding: 17px 34px;
+    margin-top: 0em;
+}
+
+.carouselCaption {
+    margin-right: 60%;
+    margin-bottom: 10vh;
+}
+.carouselCaption h1 {
+    font-size: 3em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.carouselCaption h3 {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+
+}
+.anime_tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 1em;
+    align-items: center;
+    justify-content: center;
+}
+.anime_tag {
+    background-color: #9b2727;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+}
+.anime_tag p {
+    margin-bottom: 0px;
+}
+
+.main_page_content {
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.5);
+}
+#top_img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    filter: brightness(40%);
+}

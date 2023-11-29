@@ -63,6 +63,7 @@ body {
 }
 
 .dropdown-content-top {
+    z-index: 1;
     margin-top: 50px;
     width: calc(20% - 70px + 25px);
     margin-left: 68px;
