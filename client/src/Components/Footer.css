@@ -5,8 +5,9 @@
     font-weight: 400;
 }
 .footertext {
-    color: black;
-    padding: 20px 30px;
+    color: white;
+    padding: 20px 0px;
+    margin-left: 5%;
     bottom: 0px;
 }
 

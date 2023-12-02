@@ -194,3 +194,14 @@
     font-weight: 100;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media only screen and (max-width: 800px) {
+    .trending_back {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 1);
+    }
+    .trending_next {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 1);
+    }
+}

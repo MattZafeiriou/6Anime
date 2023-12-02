@@ -21,6 +21,7 @@ class RandomVideo extends Component {
         sectionTop = document.getElementsByClassName("random_video_trailer")[0].offsetTop;
         if (windowBottom > sectionTop) {
             document.getElementsByClassName("random_video_trailer")[0].classList.add("random_video_trailer_shown");
+            document.getElementsByClassName("random_video_trailer_info")[0].classList.add("random_video_trailer_info_shown");
         }
     }
 
@@ -36,10 +37,20 @@ class RandomVideo extends Component {
                 <h3>Let us help you!</h3>
                 <span className='random_video_span'/>
                 <div className='random_video_trailer'>
-                    <iframe src="https://www.youtube.com/embed/Q6iK6DjV_iE?autoplay=1&mute=1" style={{
-                        width: '60%',
-                        aspectRatio: '16 / 9'
-                    }} title="Weathering With You [Official Subtitled Trailer, GKIDS]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div className='random_video_trailer_vid'>
+                        <iframe id="random_video_trailer" src="https://www.youtube.com/embed/Q6iK6DjV_iE" title="Weathering With You [Official Subtitled Trailer, GKIDS]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div className='random_video_trailer_info'>
+                        <h1 className='random_video_trailer_title'>Weathering With You</h1>
+                        <p className='random_video_trailer_desc'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div className='random_video_trailer_tags'>
+                            <p>Action</p>
+                            <p>Adventure</p>
+                            <p>Drama</p>
+                        </div>
+                        <button className='random_video_trailer_button'>Watch Now!</button>
+                        <button className='add_to_list_button'>Add to my list</button>
+                    </div>
                 </div>
             </div>
             </>
