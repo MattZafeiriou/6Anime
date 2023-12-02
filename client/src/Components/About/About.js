@@ -7,6 +7,7 @@ class Header extends React.Component {
   constructor(proms)
   {
     super(proms);
+    document.body.classList.add('main');
   }
 
   componentDidMount() {
@@ -16,7 +17,6 @@ class Header extends React.Component {
   render() {
     return (
       <>
-          <div className="gradient"></div>
           <div className="aboutmain">
               <h1>About Us</h1>
               <p>We are a group of 4 students who made this project as a school final term project.</p>

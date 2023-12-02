@@ -7,6 +7,8 @@ class Header extends React.Component {
     constructor(proms)
     {
         super(proms);
+        document.body.classList.add('main');
+
         this.state = {
             validated: false,
             showToast: false,
@@ -72,8 +74,7 @@ class Header extends React.Component {
     render() {
         return (
         <>
-            <div className="gradient"></div>
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', marginTop: '3em'}}>
                 <div className='container'>
                     <h1>Contact Us</h1>
                     <Form noValidate validated={this.state.validated} action="" onSubmit={this.SubmitForm}>

@@ -1,0 +1,40 @@
+.random_video {
+    margin-top: 3em;
+}
+
+.random_video h1 {
+    transition-duration: .5s;
+    font-size: 2em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    opacity: 0;
+}
+.random_video h3 {
+    transition-delay: 1s;
+    transition-duration: .3s;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    opacity: 0;
+}
+
+.video_headtitle_shown h1 {
+    opacity: 1 !important;
+}
+
+.video_headtitle_shown h3 {
+    opacity: 1 !important;
+}
+
+.random_video_trailer {
+    transition-duration: .5s;
+    opacity: 0;
+}
+
+.random_video_trailer_shown {
+    opacity: 1 !important;
+}

@@ -13,7 +13,8 @@ function getNames() {
         let data = JSON.parse(rawdata);
 
         names = [];
-        for (var i = 1; i <= data.max_numbers; i++)
+        let max_numbers = Object.keys(data).length;
+        for (var i = 1; i <= max_numbers; i++)
         {
             var name = data["" + i].name;
             names.push(name);

@@ -25,10 +25,13 @@ router.get('/', function(req, res) {
 
         if (most_recent == null)
             initializeMostRecent();
-        
-        for (var i = 1; i <= JSON.parse(most_recent).max_numbers; i++) {
+
+        let max_numbers = Object.keys(JSON.parse(most_recent)).length;
+
+        for (var i = 1; i <= max_numbers; i++) {
             var indexname = JSON.parse(most_recent)["" + i].name;
             if (indexname == name) {
+                console.log(JSON.parse(most_recent)["" + i].folder_name);
                 res.status(200).send(JSON.parse(most_recent)["" + i].folder_name);
                 break;
 			}

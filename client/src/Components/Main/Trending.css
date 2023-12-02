@@ -11,6 +11,7 @@
     margin-bottom: 0.5em;
     float: left;
 }
+
 .trending_header a {
     font-size: .9em;
     transition-duration: .1s;
@@ -31,6 +32,14 @@
 
 .trending_list {
     margin-top: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.trending_card {
+    display: inline-block;
+    margin-right: 16px;
+    position: relative
 }
 
 .trending_card img {
@@ -54,6 +63,11 @@
     margin-top: calc(200px - 1.3em);
 }
 
+.trending_card_img:hover .trending_card_addtolist {
+    opacity: 1;
+    margin-top: calc(400px - 40px - 15px);
+}
+
 .trending_card_play_button:hover {
     color: #ff4b2b;
     border-color: #ff4b2b;
@@ -63,6 +77,11 @@
     padding-top: .45em;
     margin-left: calc(150px - 1.4em);
     margin-top: calc(200px - 1.4em) !important;
+    transition-duration: .1s;
+}
+
+.trending_card_addtolist:hover {
+    background-color: #ff4b2b;
 }
 
 .trending_card a {
@@ -74,6 +93,42 @@
     font-size: 1em;
     line-height: 0em;
     margin-top: 1.8em;
+}
+
+.trending_card h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    width: 300px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.trending_card_addtolist {
+    z-index: 1;
+    opacity: 0;
+    transition-duration: .3s;
+    color: white;
+    background-color: rgba(255,255,255,.3);
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    width: 280px;
+    height: 40px;
+    position: absolute;
+    margin-left: calc(10px);
+    margin-top: calc(400px - 40px - 5px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.trending_card_addtolist h3 {
+    text-align: center;
+    font-size: 1em;
+    font-weight: 300;
+    margin-top: .8em;
 }
 
 .trending_card_play_button {
@@ -91,12 +146,51 @@
     margin-top: calc(200px - 2em);
 }
 
-.trending_card h3 {
-    font-size: 1.1em;
-    font-weight: 600;
-    width: 300px;
+
+.trending_back:hover {
+    opacity: 1;
+    background-color: #ff4b2b;
+}
+
+.trending_back {
+    visibility: hidden;
+    transition-duration: .3s;
+    position: absolute;
+    padding: 2em .6em 2em .6em;
+    border-radius: 5px;
+    z-index: 1;
+    margin-top: 200px;
+    margin-left: .5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    opacity: .4;
     color: white;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 0.5em;
-    margin-top: 1em;
+    font-weight: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.trending_next:hover {
+    opacity: 1;
+    background-color: #ff4b2b;
+}
+
+.trending_next {
+    transition-duration: .3s;
+    position: absolute;
+    padding: 2em .6em 2em .6em;
+    border-radius: 5px;
+    z-index: 1;
+    margin-top: 200px;
+    margin-left: calc(90vw - .4em - 1.6em - .5em);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    opacity: .4;
+    color: white;
+    font-weight: 100;
+    background-color: rgba(0, 0, 0, 0.5);
 }

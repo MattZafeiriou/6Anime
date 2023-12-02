@@ -19,6 +19,7 @@ class Playerr extends React.Component {
 
     constructor(props) {
         super(props);
+        document.body.classList.add('main');
         let episode = window.location.href.split("/")[5];
         if (episode == undefined || episode == null || episode == "")
         {
@@ -257,7 +258,6 @@ class Playerr extends React.Component {
     render() {
         return (
         <>
-            <div className="gradient"></div>
             <div className='playerdiv'>
                 <div className='playerr'>
                     <div className='title'>
@@ -312,8 +312,8 @@ class Playerr extends React.Component {
                     </div>
                 </div>
                 <div className='right_side'>
-                    <div className='section top_anime_div'>
-                        <h3 className='section_title'>Top Anime</h3>
+                    <div className='section related_anime_div'>
+                        <h3 className='section_title'>Related Anime</h3>
                             
                     </div>
                 </div>

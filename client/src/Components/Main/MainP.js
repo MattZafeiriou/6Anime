@@ -1,6 +1,7 @@
 import {React, Component} from 'react';
 import './MainP.css'
 import Trending from './Trending.js';
+import RandomVideo from './RandomVideo.js';
 import { Carousel, Image } from 'react-bootstrap';
 
 class MainP extends Component {
@@ -69,6 +70,7 @@ class MainP extends Component {
                     </Carousel>
                 </div>
                 <Trending/>
+                <RandomVideo/>
             </div>
             </>
         );
