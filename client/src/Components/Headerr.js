@@ -24,19 +24,21 @@ class Header extends Component {
         var x = document.getElementById("searchingtop").value;
         document.getElementById("topdropdown").innerHTML="";
         if (x==="")
-            document.getElementById("topdropdown").style.visibility="hidden";
-        else {
+        {
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter keywords to search</h5>";
+        
+        } else {
             for (var i=0; i<string.length; i++) {
                 this.getNameTop(string[i]);
             }
-            document.getElementById("topdropdown").style.visibility="visible";
+            document.getElementById("topdropdown").classList.remove("inactive-dropdown");
         }
 
     }
 
     removeTopDropdown()
     {
-        document.getElementById("topdropdown").style.visibility="hidden";
+        document.getElementById("topdropdown").classList.add("inactive-dropdown");
     }
     
     sendSearchTop(string)
@@ -66,7 +68,7 @@ class Header extends Component {
         {
             this.typingTop();
         }
-        document.getElementById("topdropdown").style.visibility="visible";
+        document.getElementById("topdropdown").classList.remove("inactive-dropdown");
     }
 
     getNameTop(string)
@@ -81,17 +83,12 @@ class Header extends Component {
             .then(res => {
                 data = res;
                 this.state.foldersnames[string] = data;
-                var epNum = this.getCookie(this.state.foldersnames[string]);
-                if (!epNum) // if user has no cookie of that anime, make the episode number of it 1
-                    epNum = 1;
-                var finaldropdown = '<a href="/p/' + data + '/ep' + epNum + '">' + string + '</a>\n';
+
+                var finaldropdown = '<a href="/watch/' + data + '">' + string + '</a>\n';
                 document.getElementById("topdropdown").innerHTML+=finaldropdown;
             });
         } else{
-            var epNum = this.getCookie(this.state.foldersnames[string]);
-            if (!epNum) // if user has no cookie of that anime, make the episode number of it 1
-                epNum = 1;
-            var finaldropdown = '<a href="/p/' + this.state.foldersnames[string] + '/ep' + epNum + '">' + string + '</a>\n';
+            var finaldropdown = '<a href="/watch/' + this.state.foldersnames[string] + '">' + string + '</a>\n';
             document.getElementById("topdropdown").innerHTML+=finaldropdown;
         }
     }
@@ -138,9 +135,9 @@ class Header extends Component {
                 <div className="searchtop">
                     <form>
                         <input type="text" autoComplete="off" id="searchingtop" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Find Anime Series, Movies and more" onInput={this.typingTop}/>
-                        <button id="searchButton" type="submit" style={{fill: 'white'}}><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
+                        <button id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
                     </form>
-                    <div className="dropdown-content-top" id="topdropdown" visibility="hidden"></div>
+                    <div className="dropdown-content-top inactive-dropdown" id="topdropdown" visibility="hidden"></div>
                 </div>
 
             </div>
