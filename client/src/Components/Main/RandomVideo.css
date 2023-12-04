@@ -88,7 +88,7 @@
     font-size: 1.2em;
     margin-top: 10px;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition-duration: .5s;
 }
 
@@ -106,7 +106,7 @@
     font-size: 1em;
     margin-top: 10px;
     padding: 10px 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition-duration: .5s;
 }
 
@@ -163,7 +163,7 @@
         font-size: 1.5em;
     }
     .random_video_trailer_tags p {
-        font-size: 1.2em;
+        font-size: 1em;
         padding: 10px;
     }
     random_video_trailer_desc {

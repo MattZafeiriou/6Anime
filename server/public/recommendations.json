@@ -1,0 +1,32 @@
+{
+  "1": {
+    "name": "Shingeki No Kyojin",
+    "folder_name": "Shingeki_No_Kyojin",
+    "tags": [
+      "Action",
+      "Mystery",
+      "Drama"],
+    "description": "Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls. What makes these giants truly terrifying is that their taste for human flesh is not born out of hunger but what appears to be out of pleasure.",
+    "img": "https://i.pinimg.com/originals/5b/26/26/5b262629a153363a7f0e150a6ca9dffb.png"
+  },
+  "2": {
+    "name": "Naruto: Shippuden Part 1",
+    "folder_name": "Naruto_Shippuden_Part_1",
+    "tags": [
+      "Action",
+      "Adventure",
+      "Comedy"],
+    "description": "It has been two and a half years since Naruto Uzumaki left Konohagakure, the Hidden Leaf Village, for intense training following events which fueled his desire to be stronger. Now Akatsuki, the mysterious organization of elite rogue ninja, is closing in on their grand plan which may threaten the safety of the entire shinobi world.",
+    "img": "https://www.abystyle.com/img/c/m/22_S_Naruto_Shippuden.jpg"
+  },
+  "3": {
+    "name": "Weathering With You",
+    "folder_name": "Tenki_No_Ko",
+    "tags": [
+      "Drama",
+      "Fantasy",
+      "Romance"],
+    "description": "Tokyo is currently experiencing rain showers that seem to disrupt the usual pace of everyone living there to no end. Amidst this seemingly eternal downpour arrives the runaway high school student Hodaka Morishima, who struggles to financially support himself—ending up with a job at a small-time publisher. At the same time, the orphaned Hina Amano also strives to find work to sustain herself and her younger brother.",
+    "img": "https://furypixel.com/wp-content/uploads/2019/04/Tenki-no-Ko-Weathering-With-You-Cover-1.jpg" 
+  }
+}

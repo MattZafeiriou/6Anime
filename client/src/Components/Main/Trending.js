@@ -8,8 +8,11 @@ class Trending extends Component {
         this.state = {
             firstCard: 1,
             lastCard: 7,
-            maxCards: 7
+            maxCards: 7,
+            startX: 0,
         }
+
+        this.oof = this.oof.bind(this);
     }
 
     Card(props) {
@@ -18,7 +21,7 @@ class Trending extends Component {
                 <div className="trending_card_img">
                     <a href={props.href}>
                         <div className="trending_card_play_button">
-                            <i class="fa-solid fa-play"></i>
+                            <i className="fa-solid fa-play"></i>
                         </div>
                         <a href='javascript:void(0)' className="trending_card_addtolist">
                             <h3>Add to my list</h3>
@@ -44,6 +47,12 @@ class Trending extends Component {
         this.setState({lastCard: next});
     }
 
+    oof(event) {
+        alert('oof');
+        this.setState({startX: event.clientX});
+        alert(event.clientX)
+    }
+
     render() {
         return (
             <>
@@ -51,9 +60,9 @@ class Trending extends Component {
             <div className='trending_page'>
                 <div className='trending_header'>
                     <h1>Trending Anime</h1>
-                    <a href='/trending'>View all <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href='/trending'>View all <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
-                <div className='trending_list'>
+                <div className='trending_list' onDragStart={this.oof}>
                 <a onClick={() => {
                         if (this.state.firstCard == 1) return;
                         document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
@@ -66,7 +75,7 @@ class Trending extends Component {
                     }}
                     href='javascript:void(0)'>
                     <div className='trending_back'>
-                        <i class="fa-solid fa-less-than"></i>
+                        <i className="fa-solid fa-less-than"></i>
                     </div>
                 </a>
                 <a onClick={() => {
@@ -82,7 +91,7 @@ class Trending extends Component {
                     }} 
                     href='javascript:void(0)'>
                     <div className='trending_next'>
-                        <i class="fa-solid fa-greater-than"></i>
+                        <i className="fa-solid fa-greater-than"></i>
                     </div>
                 </a>
                     <this.Card href="/watch/shit" id="card1" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>

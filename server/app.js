@@ -15,6 +15,7 @@ var getVideoRouter = require("./routes/getvideo");
 var getImageRouter = require("./routes/getimage");
 var animeURLRouter = require("./routes/anime_url");
 var sendFormRouter = require("./routes/send_form");
+var recommendationsRouter = require("./routes/recommendations");
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use("/get_video", getVideoRouter);
 app.use("/get_image", getImageRouter);
 app.use("/anime_url", animeURLRouter);
 app.use("/send_form", sendFormRouter);
+app.use("/recommendations", recommendationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

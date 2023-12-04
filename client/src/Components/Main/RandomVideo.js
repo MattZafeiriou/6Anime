@@ -38,7 +38,7 @@ class RandomVideo extends Component {
                 <span className='random_video_span'/>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
-                        <iframe id="random_video_trailer" src="https://www.youtube.com/embed/Q6iK6DjV_iE" title="Weathering With You [Official Subtitled Trailer, GKIDS]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        {/* <iframe id="random_video_trailer" src="https://www.youtube.com/embed/Q6iK6DjV_iE" title="Weathering With You [Official Subtitled Trailer, GKIDS]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
                     </div>
                     <div className='random_video_trailer_info'>
                         <h1 className='random_video_trailer_title'>Weathering With You</h1>

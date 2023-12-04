@@ -107,25 +107,26 @@
 @media only screen and (max-width: 800px) {
     .watch_button {
         padding: 20px 30px;
-        font-size: 1.3em;
+        font-size: 1em;
         margin-top: 15px;
     }
     .watch_button:hover {
         margin-bottom: 5px;
         padding: 25px 35px;
+        font-size: 1.2em;
         margin-top: 0em;
     }
     .carouselCaption h1 {
         font-size: 2.3em;
     }
     .carouselCaption h3 {
-        font-size: 1.2em;
+        font-size: 1em;
     }
     .anime_tag p {
         font-size: 1em;
     }
     .carouselCaption {
         margin-right: 0px;
-        margin-bottom: 10vh;
+        margin-bottom: 5vh;
     }
 }

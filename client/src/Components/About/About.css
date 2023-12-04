@@ -1,14 +1,18 @@
 .aboutmain {
     margin: 3em 5% 5% 5%;
-    color: rgb(200,200,200);
+    color: white;
 }
 
 .aboutmain h1 {
     margin-bottom: 20px;
+    color: white;
+    font-weight: 600;
 }
 
 .aboutmain p {
     line-height: .5em;
+    color: white;
+    font-weight: 300;
 }
 
 .gradient {

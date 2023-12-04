@@ -29,7 +29,7 @@ const Main = () => {
         <SubmitSuccess/>
         <Footer/>
       </Route>
-      <Route exact path='/p/*' component={Player}>
+      <Route exact path='/watch/*' component={Player}>
         <Headerr/>
         <Player/>
         <Footer/>
