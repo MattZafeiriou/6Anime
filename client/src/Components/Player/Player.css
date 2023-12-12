@@ -8,7 +8,7 @@
 
 .playerr {
     float: left;
-    width: 75%;
+    width: calc(75vw * 0.8);
     padding-right: 1em;
 }
 .playerdiv {

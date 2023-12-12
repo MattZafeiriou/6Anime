@@ -15,11 +15,6 @@
     font-weight: 300;
 }
 
-.gradient {
-    height: 10vh;
-    background: rgb(10,10,10);
-    background: linear-gradient(180deg, rgba(10,10,10,1) 0%, rgba(39,39,39,1) 100%);
-}
 .accordion-button {
     background-color: hsl(0, 0%, 15%) !important;
     color: white;
@@ -38,4 +33,7 @@ background-color: hsl(0, 0%, 10%) !important;
 .accordion-button:not(.collapsed) {
 color: white;
 background-color: hsl(0, 0%, 10%) !important;
+}
+body {
+    height: 100vh;
 }

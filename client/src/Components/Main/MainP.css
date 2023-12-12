@@ -82,6 +82,10 @@
     filter: brightness(40%);
 }
 
+.carousel-item {
+    background-color: rgba(0,0,0,.4);
+}
+
 @media only screen and (max-width: 1200px) {
     .watch_button {
         padding: 13px 25px;
@@ -101,6 +105,9 @@
     }
     .anime_tag p {
         font-size: .8em;
+    }
+    .carouselCaption {
+        margin-bottom: 5vh;
     }
 }
 

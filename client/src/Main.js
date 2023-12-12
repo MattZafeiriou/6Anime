@@ -7,9 +7,9 @@ import About from './Components/About/About.js';
 import Player from './Components/Player/Player.js';
 import NotFound from './Components/NotFound.js';
 import Contact from './Components/Contact/Contact.js';
-import Header from './Components/Header.js'
 import Headerr from './Components/Headerr.js'
 import SubmitSuccess from './Components/Submit_Success/Submit_success.js'
+import Donate from './Components/Donate/Donate.js'
 
 const Main = () => {
   return (
@@ -39,8 +39,15 @@ const Main = () => {
         <Contact/>
         <Footer/>
       </Route>
+      <Route exact path='/donate' component={Donate}>
+        <Headerr/>
+        <Donate/>
+        <Footer/>
+      </Route>
       <Route path='*' component={NotFound}>
+        <Headerr/>
         <NotFound/>
+        <Footer/>
       </Route>
     </Switch>
   );

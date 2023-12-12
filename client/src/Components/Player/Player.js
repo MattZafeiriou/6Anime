@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import './Player.css'
 import './videoplayer.css'
 import VideoPlayer from './videoplayer';
+import { Placeholder } from 'react-bootstrap';
 
 class Playerr extends React.Component {
 
@@ -19,12 +20,11 @@ class Playerr extends React.Component {
 
     constructor(props) {
         super(props);
-        document.body.classList.add('main');
         let episode = window.location.href.split("/")[5];
-        if (episode == undefined || episode == null || episode == "")
+        if (episode === undefined || episode === null || episode === "")
         {
             let last_ep = this.getCookie("last_ep");
-            if (last_ep == null)
+            if (last_ep === null)
                 window.location.href = "/watch/" + window.location.href.split("/")[4] + "/ep1";
             else
                 window.location.href = "/watch/" + window.location.href.split("/")[4] + "/ep" + last_ep;
@@ -78,13 +78,20 @@ class Playerr extends React.Component {
         this.render = this.render.bind(this);
     }
 
-    
+    loading(proms) {
+        return (
+            <Placeholder as="p" animation="glow" className="loadingPlayer" style={proms.style}>
+                <Placeholder xs={12} />
+            </Placeholder>
+        )
+    }
+
     getVideoInfo()
     {
         let name = window.location.href.split("/")[4];
-        this.state.episode = window.location.href.split("/")[5].replace("ep", "");
+        this.setState({episode: window.location.href.split("/")[5].replace("ep", "")})
 
-        url = "get_video/?name=" + name;
+        let url = "get_video/?name=" + name;
         let data;
         fetch("http://localhost:9000/" + url)
         .then(res => res.text())
@@ -98,7 +105,7 @@ class Playerr extends React.Component {
             this.setState({loaded_info: info.true});
             this.setState({episodesno: info.episodes}, () =>
             {
-                if (this.state.episodesno == 1)
+                if (this.state.episodesno === 1)
                     this.setState({type: "Movie"});
             });
             this.setState({premiered: info.premiered});
@@ -107,8 +114,13 @@ class Playerr extends React.Component {
             this.setState({relatedFolders: info.other_seasons_folders});
             this.setState({relatedNames: info.other_seasons_names}, () => {this.setRelatedAnime();});
 
+            for (let el of document.getElementsByClassName('loadingPlayer'))
+            {
+                el.style.display = 'none';
+            }
+
             let oof = false;
-            if (this.state.episode == 1)
+            if (this.state.episode === 1)
             {
                 oof = true;
                 document.getElementById("next_ep").children[0].href = "ep" + (parseInt(this.state.episode) + 1);
@@ -119,7 +131,7 @@ class Playerr extends React.Component {
                 btn.classList.add('button_disabled');
                 btn.children[0].innerHTML = "No Previous Episode";
             }
-            if (info.episodes == this.state.episode)
+            if (info.episodes === this.state.episode)
             {
                 oof = true;
                 document.getElementById("previous_ep").children[0].href = "ep" + (parseInt(this.state.episode) - 1);
@@ -154,7 +166,7 @@ class Playerr extends React.Component {
                 epsDiv.appendChild(newDiv);
                 // Render the component into the new div
                 const root = createRoot(newDiv);
-                if (i == this.state.episode)
+                if (i === this.state.episode)
                     root.render(<this.Button text={i} customStyle={this.customSelectedStyle}/>)
                 else
                     root.render(<this.Button text={i} link={"ep" + i} customStyle={this.customStyle}/>)
@@ -162,15 +174,14 @@ class Playerr extends React.Component {
             
         });
         // Change banner image
-        var url = "get_image/?name=" + name;
+        url = "get_image/?name=" + name;
         fetch("http://localhost:9000/" + url)
         .then(res => res.arrayBuffer())
         .then(data => {
             const blob = new Blob([data], { type: 'image/jpeg' }); // Adjust the type as per your image format
             const imgUrl = URL.createObjectURL(blob);
 
-            this.setState({img: imgUrl});
-            this.state.loaded_info = true;
+            this.setState({img: imgUrl, loaded_info: true});
         })
         .catch(error => {
             console.error('Error fetching image:', error);
@@ -250,7 +261,7 @@ class Playerr extends React.Component {
         return (
             <>
                 <div className='related_anime'>
-                    <a href={proms.link}><img id={proms.img_id} className='related_anime_img' src={proms.img}/></a>
+                    <a href={proms.link}><img alt="" id={proms.img_id} className='related_anime_img' src={proms.img}/></a>
                     <div style={{display: 'block'}}>
                         <h3 className='related_anime_title'><a href={proms.link}>{proms.title}</a></h3>
                         <h5 className='related_anime_info'>Season {proms.season} <span>&#8226;</span> {proms.epsno} episodes</h5>
@@ -266,7 +277,7 @@ class Playerr extends React.Component {
             <div className='playerdiv'>
                 <div className='playerr'>
                     <div className='title'>
-                        <h3 id='title'>{this.state.title} - Episode {this.state.episode}</h3>
+                        <h3 style={{display: 'flex'}} id='title'>{this.state.title}<this.loading style={{width: '5em'}}/> - Episode {this.state.episode}</h3>
                         <h5><a href='../../'>Home</a> <span>&#62;</span> <a href='../'>{this.state.type}</a> <span>&#62;</span> <a href='#'>{this.state.title}</a></h5>
                     </div>
                     {/* Player Section starts here */}
@@ -292,11 +303,11 @@ class Playerr extends React.Component {
                         <div className='pcontainer'>
                             <div style={{marginBottom: '1em'}}>
                                 <div style={{display: 'flex'}}>
-                                    <img className='anime_img' src={this.state.img}/>
+                                    <img className='anime_img' alt="" src={this.state.img}/>
                                     <div style={{display: 'block'}}>
                                         <h2 id='anime_desc'>Description</h2>
                                         <div className='separator'/>
-                                        <p style={{marginTop: '1em'}} id='anime_description'>{this.state.description}</p>
+                                        <p style={{marginTop: '1em'}} id='anime_description'>{this.state.description}<this.loading/><this.loading/><this.loading/><this.loading/><this.loading/></p>
                                         <div id='tags' className='tags'>
                                         </div>
                                     </div>

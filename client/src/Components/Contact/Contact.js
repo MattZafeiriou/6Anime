@@ -7,7 +7,6 @@ class Header extends React.Component {
     constructor(proms)
     {
         super(proms);
-        document.body.classList.add('main');
 
         this.state = {
             validated: false,
@@ -126,13 +125,13 @@ class Header extends React.Component {
                     <p>If you want to support our work and keep the website running you may donate through the following methods:</p>
                     <br/>
                     
-                    <a href='/404'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png' alt='PayPal' style={{width: '10vw'}}/></a>
+                    <a href='../donate_paypal'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png' alt='PayPal' style={{width: '10vw'}}/></a>
                     <br/>
                     <br/>
-                    <a href='/404'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/1200px-Bitcoin_logo.svg.png' alt='Bitcoin' style={{width: '10vw'}}/></a>
+                    <a href='../donate_bitcoin'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/1200px-Bitcoin_logo.svg.png' alt='Bitcoin' style={{width: '10vw'}}/></a>
                     <br/>
                     <br/>
-                    <a href='/404'><img src='https://altcoinsbox.com/wp-content/uploads/2023/01/full-ethereum-logo-grey.png' alt='Ethereum' style={{width: '10vw'}}/></a>
+                    <a href='../donate_ethereum'><img src='https://altcoinsbox.com/wp-content/uploads/2023/01/full-ethereum-logo-grey.png' alt='Ethereum' style={{width: '10vw'}}/></a>
                     <br/>
                     <br/>
                     <p>Thank you for preferring us!</p>

@@ -53,7 +53,7 @@ class VideoPlayer extends React.Component {
         }
 
         if (global)
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/p" + "; SameSite=None; Secure";
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/p; SameSite=None; Secure";
         else
         {
             let name2 = window.location.href.split("/")[4];
@@ -88,11 +88,12 @@ class VideoPlayer extends React.Component {
 
         hls.loadSource(url);
         hls.attachMedia(video);
-        
+        video.addEventListener("timeupdate", (event) => {
+            document.getElementById("currenttimee").innerHTML = "Time: " + video.currentTime.toFixed(2);
+        });
         // hls.startLevel = 2;
         // hls.nextLevel = 2;
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-
             var availableLevels = hls.levels;
   
             // Log the available resolutions
@@ -102,13 +103,28 @@ class VideoPlayer extends React.Component {
             video.loadSource();
             hls.attachMedia(video)
         });
-
     }
     
     render() {
         return (
             <div className="video-player">
-                <video controls id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
+                <div className='controls'>
+                    <button onClick={() => {
+                        const player = this.player;
+                        if (player.paused)
+                            player.play();
+                        else
+                            player.pause();
+                    }}>Play</button>
+                    <h1 id="currenttimee">Time:</h1>
+                    <progress id="file" value="32" max="100"> 32% </progress>
+                    
+                    <button onClick={() => {
+                        const player = document.getElementsByClassName('video-player')[0];
+                        player.requestFullscreen();
+                    }}>Fullscreen</button>
+                </div>
+                <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
                     ref={player => (this.player = player)}>
                     <source src="" type="video/mp4" />
                     <track id="captions" src="" label="English" srcLang='en' kind="subtitles" default />

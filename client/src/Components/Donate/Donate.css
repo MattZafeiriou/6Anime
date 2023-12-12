@@ -1,0 +1,46 @@
+.donatemain {
+    margin: 3em 5% 5% 5%;
+    color: white;
+}
+
+.donatemain h1 {
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 600;
+}
+
+.donatemain h4 {
+    line-height: .5em;
+    color: white;
+    font-weight: 300;
+}
+
+body {
+    height: 100vh;
+}
+
+.paymentMethod img {
+    width: 200px;
+}
+
+.paymentMethod {
+    margin: 1em 0;
+}
+
+.paymentMethod button {
+    transition-duration: .3s;
+    margin: 0em 1em;
+    background-color: #ff4b2b;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    min-height: 50px;
+    font-size: 1.2em;
+    font-weight: 600;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.paymentMethod button:hover {
+    background-color: #9b2727;
+}

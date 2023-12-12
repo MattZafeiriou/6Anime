@@ -3,12 +3,6 @@ import './About.css'
 import { Accordion } from 'react-bootstrap';
 
 class Header extends React.Component {
-  
-  constructor(proms)
-  {
-    super(proms);
-    document.body.classList.add('main');
-  }
 
   componentDidMount() {
     document.getElementById("about").classList.add("active");
@@ -28,7 +22,7 @@ class Header extends React.Component {
               <br/>
               <br/>
               <h1>Frequently Asked Questions</h1>
-            <Accordion>
+            <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0">
                 <Accordion.Header>What is the purpose of this website?</Accordion.Header>
                 <Accordion.Body>

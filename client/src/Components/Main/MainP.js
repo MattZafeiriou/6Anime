@@ -2,7 +2,7 @@ import {React, Component} from 'react';
 import './MainP.css'
 import Trending from './Trending.js';
 import RandomVideo from './RandomVideo.js';
-import { Carousel, Image } from 'react-bootstrap';
+import { Carousel, Image, Placeholder } from 'react-bootstrap';
 
 class MainP extends Component {
 
@@ -42,7 +42,6 @@ class MainP extends Component {
             }
         };
 
-        document.body.classList.add('main');
         this.CarouselImg = this.CarouselImg.bind(this);
         this.loadInfo = this.loadInfo.bind(this);
         this.loadCarousel();
@@ -98,6 +97,10 @@ class MainP extends Component {
                 srcImg: recinfo[3].img
             }
         });
+        for (let el of document.getElementsByClassName("loadingMain"))
+        {
+            el.style.display = "none";
+        }
     }
 
     loadCarousel() {
@@ -112,6 +115,14 @@ class MainP extends Component {
         });
     }
 
+    loading() {
+        return (
+            <Placeholder as="p" animation="glow" className="loadingMain">
+                <Placeholder xs={12} />
+            </Placeholder>
+        )
+    }
+
     CarouselImg(props) {
         return (
             <>
@@ -123,8 +134,8 @@ class MainP extends Component {
                             <this.Tag name={props.tag2}/>
                             <this.Tag name={props.tag3}/>
                         </div>
-                        <h1>{props.name}</h1>
-                        <h3>{props.description}</h3>
+                        <h1>{props.name}<this.loading/></h1>
+                        <h3>{props.description}<this.loading/></h3>
                         <this.WatchButton href={props.href}/>
                     </div>
                 </Carousel.Caption>
