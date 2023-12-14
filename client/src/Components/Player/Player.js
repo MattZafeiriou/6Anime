@@ -89,7 +89,7 @@ class Playerr extends React.Component {
     getVideoInfo()
     {
         let name = window.location.href.split("/")[4];
-        this.setState({episode: window.location.href.split("/")[5].replace("ep", "")})
+        this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
         let url = "get_video/?name=" + name;
         let data;
@@ -242,7 +242,7 @@ class Playerr extends React.Component {
                     let vname = info.name;
                     let vep = info.episodes;
                     let season = info.season;
-                    let vlink = "/p/" + info.folder_name;
+                    let vlink = "/watch/" + info.folder_name;
                     let raDiv = document.getElementsByClassName('related_anime_div')[0];
                     const newDiv = document.createElement('div');
                     raDiv.appendChild(newDiv);

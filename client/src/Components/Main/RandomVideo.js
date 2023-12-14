@@ -48,7 +48,7 @@ class RandomVideo extends Component {
                             <p>Adventure</p>
                             <p>Drama</p>
                         </div>
-                        <button className='random_video_trailer_button'>Watch Now!</button>
+                        <a href="/watch/Tenki_No_Ko"><button className='random_video_trailer_button'>Watch Now!</button></a>
                         <button className='add_to_list_button'>Add to my list</button>
                     </div>
                 </div>

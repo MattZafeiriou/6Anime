@@ -4,13 +4,100 @@
 }
 
 .controls {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
     color: white;
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
     align-items: center;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.hide {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.controls button:hover {
+    color: #ccc;
+}
+
+.controls h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.controls #progressBar {
+    width: 100%;
+    cursor: pointer;
+}
+
+.controls #audioBar {
+    width: 10%;
+    cursor: pointer;
+}
+
+#currenttime, #duration, #captionsIcon {
+    margin-right: .5em;
+    margin-left: .5em;
+}
+
+#audioIcon {
+    margin-right: .3em;
+}
+
+#player::cue {
+    background-color: transparent;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#play {
+    max-width: 1.2em;
+    min-width: 1.2em;
+}
+
+input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
+    width: 100%; /* Full-width */
+    height: 6px; /* Set a fixed height */
+    background: #ddd;
+    border-radius: 5px; /* Rounded corners */
+    outline: none; /* Remove default focus style */
+    margin: 5px 0; /* Add some spacing */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
+    width: 18px; /* Set a specific thumb width */
+    height: 18px; /* Set a specific thumb height */
+    background: #9b2727; /* Green thumb color */
+    border-radius: 50%; /* Round the thumb */
+    cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px; /* Set a specific thumb width for Firefox */
+    height: 18px; /* Set a specific thumb height for Firefox */
+    background: #9b2727; /* Green thumb color for Firefox */
+    border: none; /* Remove the border for Firefox */
+    border-radius: 50%; /* Round the thumb for Firefox */
+    cursor: pointer; /* Add a pointer cursor on hover for Firefox */
 }
