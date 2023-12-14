@@ -269,10 +269,14 @@ class VideoPlayer extends React.Component {
                 this.cooldownToHide();
             }}>
                 <div className='controls' onMouseEnter={() => {
+                    const controls = document.getElementsByClassName('controls')[0];
+                    controls.classList.remove('hide');
                     this.mouseInside = true;
                 }} onMouseLeave={() => {
                     this.mouseInside = false;
                 }} onMouseMove={() => {
+                    const controls = document.getElementsByClassName('controls')[0];
+                    controls.classList.remove('hide');
                     this.mouseInside = true;
                 }}>
                     <button id="play" onClick={() => {
@@ -288,40 +292,45 @@ class VideoPlayer extends React.Component {
                         }
                     }}><i class="fa-solid fa-play"></i></button>
                     <h5 id="currenttime">00:00</h5>
-                    <input type="range" id="progressBar" name="progressBar" defaultValue="0" min="0" max="100" onChange={
-                        () => {
-                            const player = this.player;
-                            player.currentTime = document.getElementById("progressBar").value;
-                            document.getElementById("currenttime").innerHTML = this.toHHMMSS(player.currentTime.toFixed(2));
-                            
-                            const currentPercentage = (player.currentTime / player.duration) * 100;
-                            const progressBar = document.getElementById("progressBar");
-                            progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
-                        }
-                    }></input>
+                    <div className='progress-bar'>
+                        <input type="range" id="progressBar" name="progressBar" defaultValue="0" min="0" max="100" onChange={
+                            () => {
+                                const player = this.player;
+                                player.currentTime = document.getElementById("progressBar").value;
+                                document.getElementById("currenttime").innerHTML = this.toHHMMSS(player.currentTime.toFixed(2));
+                                
+                                const currentPercentage = (player.currentTime / player.duration) * 100;
+                                const progressBar = document.getElementById("progressBar");
+                                progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+                            }
+                        }></input>
+                    </div>
+
                     <h5 id="duration">00:00:00</h5>
                     <button id="audioIcon" onClick={() => {
                         this.toggleMute();
 
                     }}><i class="fa-solid fa-volume-high"></i></button>
-                    <input type="range" id="audioBar" name="audioBar" defaultValue="0" min="0" max="100" onChange={
-                        () => {
-                            const player = this.player;
-                            const value = document.getElementById("audioBar").value;
-                            player.volume = value / 100;
-                            if (value == 0)
-                                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
-                            else if (value < 50)
-                                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
-                            else
-                                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
+                    <div className='audio-bar'>
+                        <input type="range" id="audioBar" name="audioBar" defaultValue="0" min="0" max="100" onChange={
+                            () => {
+                                const player = this.player;
+                                const value = document.getElementById("audioBar").value;
+                                player.volume = value / 100;
+                                if (value == 0)
+                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
+                                else if (value < 50)
+                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
+                                else
+                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
 
-                                                        
-                            const currentPercentage = value;
-                            const audioBar = document.getElementById("audioBar");
-                            audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
-                        }
-                    }></input>
+                                                            
+                                const currentPercentage = value;
+                                const audioBar = document.getElementById("audioBar");
+                                audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+                            }
+                        }></input>
+                    </div>
                     <button id="captionsIcon" onClick={() => {
                         const player = document.getElementsByClassName('video-player')[0];
                         const captions = document.getElementById('captions');

@@ -1,12 +1,16 @@
 .player {
     width: 100%;
     position: relative;
+    cursor: pointer;
 }
 
 .controls {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    cursor: default;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(2px);
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -21,7 +25,6 @@
 .hide {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    pointer-events: none;
 }
 
 .controls button {
@@ -31,16 +34,22 @@
     color: white;
     cursor: pointer;
     font-size: 1rem;
+    margin-top: 3px;
+    margin-bottom: 0px;
+    transition-duration: .1s;
 }
 
 .controls button:hover {
-    color: #ccc;
+    color: #ddd;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 .controls h5 {
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
+    margin-top: 2px;
 }
 
 .controls #progressBar {
@@ -49,7 +58,7 @@
 }
 
 .controls #audioBar {
-    width: 10%;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -59,7 +68,9 @@
 }
 
 #audioIcon {
-    margin-right: .3em;
+    margin-right: .5em;
+    max-width: 1.3em;
+    min-width: 1.3em;
 }
 
 #player::cue {
@@ -71,33 +82,80 @@
 #play {
     max-width: 1.2em;
     min-width: 1.2em;
-}
+} 
 
 input[type="range"] {
+    transition-duration: .1s;
     appearance: none;
     -webkit-appearance: none; /* Remove default styles in WebKit browsers */
     width: 100%; /* Full-width */
-    height: 6px; /* Set a fixed height */
+    height: 3px; /* Set a fixed height */
     background: #ddd;
     border-radius: 5px; /* Rounded corners */
     outline: none; /* Remove default focus style */
     margin: 5px 0; /* Add some spacing */
 }
 
+.progress-bar {
+    width: 100%;
+    height: 20px;
+}
+.audio-bar {
+    width: 10%;
+    height: 20px;
+}
+
+.progress-bar, .audio-bar { /* Override bootstrap progress-bar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+
+    margin-top: 3px;
+}
+
+.progress-bar:hover input[type="range"] {
+    height: 5px;
+}
+.audio-bar:hover input[type="range"] {
+    height: 5px;
+}
+
 input[type="range"]::-webkit-slider-thumb {
+    transition-duration: .2s;
     -webkit-appearance: none; /* Remove default styles in WebKit browsers */
-    width: 18px; /* Set a specific thumb width */
-    height: 18px; /* Set a specific thumb height */
+    width: 11px; /* Set a specific thumb width */
+    height: 11px; /* Set a specific thumb height */
     background: #9b2727; /* Green thumb color */
     border-radius: 50%; /* Round the thumb */
     cursor: pointer; /* Add a pointer cursor on hover */
+    opacity: 0;
 }
 
 input[type="range"]::-moz-range-thumb {
-    width: 18px; /* Set a specific thumb width for Firefox */
-    height: 18px; /* Set a specific thumb height for Firefox */
+    transition-duration: .2s;
+    width: 11px; /* Set a specific thumb width for Firefox */
+    height: 11px; /* Set a specific thumb height for Firefox */
     background: #9b2727; /* Green thumb color for Firefox */
     border: none; /* Remove the border for Firefox */
     border-radius: 50%; /* Round the thumb for Firefox */
     cursor: pointer; /* Add a pointer cursor on hover for Firefox */
+    opacity: 0;
+}
+
+.progress-bar:hover input[type="range"]::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.progress-bar:hover input[type="range"]::-moz-range-thumb {
+    opacity: 1;
+}
+.audio-bar:hover input[type="range"]::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.audio-bar:hover input[type="range"]::-moz-range-thumb {
+    opacity: 1;
 }
