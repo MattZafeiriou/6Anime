@@ -11,7 +11,8 @@ class VideoPlayer extends React.Component {
         this.state = {
             video_url: "",
             episode: "",
-            lastVolume: 0
+            lastVolume: 0,
+            bannerImg: ""
         }
 
         let name = window.location.href.split("/")[4];
@@ -32,6 +33,7 @@ class VideoPlayer extends React.Component {
         });
         this.keyPressed = this.keyPressed.bind(this);
         this.cooldownToHide = this.cooldownToHide.bind(this);
+        this.togglePlay = this.togglePlay.bind(this);
     }
 
     
@@ -63,7 +65,7 @@ class VideoPlayer extends React.Component {
         else
         {
             let name2 = window.location.href.split("/")[4];
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/watch/" + name2 + "; SameSite=None; Secure";
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/watch/" + name2 + "/ep" + this.state.episode + "; SameSite=None; Secure";
         }
     }
 
@@ -134,12 +136,15 @@ class VideoPlayer extends React.Component {
             {
                 player.play();
                 this.setPause();
+                document.getElementsByClassName("banner")[0].classList.add("hide");
+                document.getElementsByClassName("play-button")[0].classList.add("hidebutton");
                 this.cooldownToHide();
             }else
             {
                 player.pause();
                 this.setPlay();
                 const controls = document.getElementsByClassName('controls')[0];
+                document.getElementsByClassName("play-button")[0].classList.remove("hidebutton");
                 controls.classList.remove('hide');
             }
             e.preventDefault();
@@ -249,6 +254,23 @@ class VideoPlayer extends React.Component {
         button.innerHTML = "<i class='fa-solid fa-compress'></i>";
     }
 
+    togglePlay()
+    {
+        const player = this.player;
+        if (player.paused)
+        {
+            player.play();
+            this.setPause();
+            document.getElementsByClassName("banner")[0].classList.add("hide");
+            document.getElementsByClassName("play-button")[0].classList.add("hidebutton");
+        }else
+        {
+            player.pause();
+            this.setPlay();
+            document.getElementsByClassName("play-button")[0].classList.remove("hidebutton");
+        }
+    }
+
     render() {
         return (
             <>
@@ -268,6 +290,12 @@ class VideoPlayer extends React.Component {
             onMouseMove={() => {
                 this.cooldownToHide();
             }}>
+                <div className='play-button'>
+                    <h1><i className="fa-solid fa-play"></i></h1>
+                </div>
+                <div className='banner'>
+                    <img src={this.props.banner} alt="banner" />
+                </div>
                 <div className='controls' onMouseEnter={() => {
                     const controls = document.getElementsByClassName('controls')[0];
                     controls.classList.remove('hide');
@@ -280,16 +308,7 @@ class VideoPlayer extends React.Component {
                     this.mouseInside = true;
                 }}>
                     <button id="play" onClick={() => {
-                        const player = this.player;
-                        if (player.paused)
-                        {
-                            player.play();
-                            this.setPause();
-                        }else
-                        {
-                            player.pause();
-                            this.setPlay();
-                        }
+                        this.togglePlay();
                     }}><i class="fa-solid fa-play"></i></button>
                     <h5 id="currenttime">00:00</h5>
                     <div className='progress-bar'>
@@ -360,16 +379,7 @@ class VideoPlayer extends React.Component {
                 <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
                     ref={player => (this.player = player)}
                     onClick={() => {
-                        const player = this.player;
-                        if (player.paused)
-                        {
-                            player.play();
-                            this.setPause();
-                        }else
-                        {
-                            player.pause();
-                            this.setPlay();
-                        }
+                        this.togglePlay();
                     }}
                     onDoubleClick={() => {
                         const player = document.getElementsByClassName('video-player')[0];

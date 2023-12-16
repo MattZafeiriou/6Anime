@@ -45,8 +45,6 @@ class Playerr extends React.Component {
             premiered: "",
             season: "",
             episodesdu: "",
-            video_url: "",
-            subs_url: ""
         };
         this.customStyle = {
             backgroundColor: 'hsl(0, 60%, 30%)',
@@ -113,6 +111,7 @@ class Playerr extends React.Component {
             this.setState({episodesdu: info.duration + " min/ep"});
             this.setState({relatedFolders: info.other_seasons_folders});
             this.setState({relatedNames: info.other_seasons_names}, () => {this.setRelatedAnime();});
+            this.setState({img: info.poster, loaded_info: true});
 
             for (let el of document.getElementsByClassName('loadingPlayer'))
             {
@@ -173,19 +172,6 @@ class Playerr extends React.Component {
             }
             
         });
-        // Change banner image
-        url = "get_image/?name=" + name;
-        fetch("http://localhost:9000/" + url)
-        .then(res => res.arrayBuffer())
-        .then(data => {
-            const blob = new Blob([data], { type: 'image/jpeg' }); // Adjust the type as per your image format
-            const imgUrl = URL.createObjectURL(blob);
-
-            this.setState({img: imgUrl, loaded_info: true});
-        })
-        .catch(error => {
-            console.error('Error fetching image:', error);
-        });
     }
 
     Button = (proms) => {
@@ -223,33 +209,22 @@ class Playerr extends React.Component {
         // Change banner image
         for(let i = 0; i < this.state.relatedFolders.length; i++)
         {
-            let url = "get_image/?name=" + this.state.relatedFolders[i];
-            let imgUrl = "";
-
+            const url = "get_video/?name=" + this.state.relatedFolders[i];
             fetch("http://localhost:9000/" + url)
-            .then(res => res.arrayBuffer())
+            .then(res => res.text())
             .then(data => {
-                const blob = new Blob([data], { type: 'image/jpeg' }); // Adjust the type as per your image format
-                imgUrl = URL.createObjectURL(blob);
-
-                url = "get_video/?name=" + this.state.relatedFolders[i];
-                fetch("http://localhost:9000/" + url)
-                .then(res2 => res2.text())
-                .then(res2 => {
-                    let data2 = res2;
-                    let info = JSON.parse(data2);
-
-                    let vname = info.name;
-                    let vep = info.episodes;
-                    let season = info.season;
-                    let vlink = "/watch/" + info.folder_name;
-                    let raDiv = document.getElementsByClassName('related_anime_div')[0];
-                    const newDiv = document.createElement('div');
-                    raDiv.appendChild(newDiv);
-                    // Render the component into the new div
-                    const root = createRoot(newDiv);
-                    root.render(<this.RelatedAnime title={vname} link={vlink} season={season} img={imgUrl} epsno={vep}/>)
-                })
+                const info = JSON.parse(data);
+                const imgUrl = info.poster;
+                const vname = info.name;
+                const vep = info.episodes;
+                const season = info.season;
+                const vlink = "/watch/" + info.folder_name;
+                const raDiv = document.getElementsByClassName('related_anime_div')[0];
+                const newDiv = document.createElement('div');
+                raDiv.appendChild(newDiv);
+                // Render the component into the new div
+                const root = createRoot(newDiv);
+                root.render(<this.RelatedAnime title={vname} link={vlink} season={season} img={imgUrl} epsno={vep}/>)
             })
             .catch(error => {
                 console.error('Error fetching image:', error);
@@ -285,7 +260,7 @@ class Playerr extends React.Component {
                         {/* Video Player Starts here */}
                         <div className='player'>
                             {/* Video Player */}
-                            <VideoPlayer video={this.state.video_url} subs={this.state.subs_url}/>
+                            <VideoPlayer banner={this.state.img}/>
                         </div>
                         {/* Rest code */}
                         <div className='separator'/>
