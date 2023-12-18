@@ -80,22 +80,20 @@ class VideoPlayer extends React.Component {
         if (currentTime)
             player.currentTime = parseFloat(currentTime);
 
-        if (currentVolume)
-        {
-            const value = parseFloat(currentVolume);
-            player.volume = value;
-            document.getElementById("audioBar").value = value * 100;
-            if (value == 0)
-                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
-            else if (value * 100 < 50)
-                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
-            else
-                document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
+        currentVolume = currentVolume ? currentVolume : 1;
+        const value = parseFloat(currentVolume);
+        player.volume = value;
+        document.getElementById("audioBar").value = value * 100;
+        if (value == 0)
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
+        else if (value * 100 < 50)
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
+        else
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
 
-            const currentPercentage = value * 100;
-            const audioBar = document.getElementById("audioBar");
-            audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
-        }
+        const currentPercentage = value * 100;
+        const audioBar = document.getElementById("audioBar");
+        audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
         // Save current time and volume every second
         setInterval(() =>{
             this.setCookie("currentTime", player.currentTime, 7, false);

@@ -45,6 +45,8 @@ class Playerr extends React.Component {
             premiered: "",
             season: "",
             episodesdu: "",
+            views: 0,
+            viewsFormatted: ""
         };
         this.customStyle = {
             backgroundColor: 'hsl(0, 60%, 30%)',
@@ -84,6 +86,18 @@ class Playerr extends React.Component {
         )
     }
 
+    formatViews(views) {
+        if (views < 1000) {
+            return views;
+        } else if (views < 1000000) {
+            return (views / 1000).toFixed(1) + "K";
+        } else if (views < 1000000000) {
+            return (views / 1000000).toFixed(1) + "M";
+        } else {
+            return (views / 1000000000).toFixed(1) + "B";
+        }
+    }
+
     getVideoInfo()
     {
         let name = window.location.href.split("/")[4];
@@ -112,6 +126,18 @@ class Playerr extends React.Component {
             this.setState({relatedFolders: info.other_seasons_folders});
             this.setState({relatedNames: info.other_seasons_names}, () => {this.setRelatedAnime();});
             this.setState({img: info.poster, loaded_info: true});
+
+            fetch("http://localhost:9000/get_views/?name=" + name)
+            .then(res => res.text())
+            .then(res => {
+                this.setState({views: parseInt(res) + 1}, () => {
+                    this.setState({viewsFormatted: this.formatViews(this.state.views)});
+                });
+                
+                fetch("http://localhost:9000/add_view/?name=" + name + "&ep=" + this.state.episode)
+                .then(res => res.text())
+                .then(() => {})
+            })
 
             for (let el of document.getElementsByClassName('loadingPlayer'))
             {
@@ -296,6 +322,7 @@ class Playerr extends React.Component {
                                     <this.Info name='Episodes' text={this.state.episodesno}/>
                                     <this.Info name='Duration' text={this.state.episodesdu}/>
                                     <this.Info name='Premiered' text={this.state.premiered}/>
+                                    <this.Info name='Views' text={this.state.viewsFormatted}/>
                                 </div>
                             </div>
                             <div style={{margin:'1em'}}/>

@@ -12,10 +12,11 @@ var searchRouter = require("./routes/search");
 var folderRouter = require("./routes/getfolder");
 var playerRouter = require("./routes/player");
 var getVideoRouter = require("./routes/getvideo");
-var getImageRouter = require("./routes/getimage");
 var animeURLRouter = require("./routes/anime_url");
 var sendFormRouter = require("./routes/send_form");
 var recommendationsRouter = require("./routes/recommendations");
+var addViewRouter = require("./routes/add_view");
+var getViewRouter = require("./routes/get_views");
 
 var app = express();
 
@@ -37,10 +38,11 @@ app.use("/search/*", searchRouter);
 app.use("/getfolder/*", folderRouter);
 app.use("/p/*", playerRouter);
 app.use("/get_video", getVideoRouter);
-app.use("/get_image", getImageRouter);
 app.use("/anime_url", animeURLRouter);
 app.use("/send_form", sendFormRouter);
 app.use("/recommendations", recommendationsRouter);
+app.use("/add_view", addViewRouter);
+app.use("/get_views", getViewRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
