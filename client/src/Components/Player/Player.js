@@ -78,9 +78,9 @@ class Playerr extends React.Component {
         this.render = this.render.bind(this);
     }
 
-    loading(proms) {
+    loading(props) {
         return (
-            <Placeholder as="p" animation="glow" className="loadingPlayer" style={proms.style}>
+            <Placeholder as="p" animation="glow" className="loadingPlayer" style={props.style}>
                 <Placeholder xs={12} />
             </Placeholder>
         )
@@ -124,9 +124,15 @@ class Playerr extends React.Component {
             this.setState({season: info.season});
             this.setState({episodesdu: info.duration + " min/ep"});
             this.setState({relatedFolders: info.other_seasons_folders});
-            this.setState({relatedNames: info.other_seasons_names}, () => {this.setRelatedAnime();});
+            this.setState({relatedNames: info.other_seasons_names}, () => {
+                if (this.state.relatedFolders.length > 0)
+                    this.setRelatedAnime();
+                else
+                {
+                    document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
+                }
+            });
             this.setState({img: info.poster, loaded_info: true});
-
             fetch("http://localhost:9000/get_views/?name=" + name)
             .then(res => res.text())
             .then(res => {
@@ -138,6 +144,7 @@ class Playerr extends React.Component {
                 .then(res => res.text())
                 .then(() => {})
             })
+            this.setPopularAnime();
 
             for (let el of document.getElementsByClassName('loadingPlayer'))
             {
@@ -145,7 +152,7 @@ class Playerr extends React.Component {
             }
 
             let oof = false;
-            if (this.state.episode === 1)
+            if (this.state.episode == 1)
             {
                 oof = true;
                 document.getElementById("next_ep").children[0].href = "ep" + (parseInt(this.state.episode) + 1);
@@ -156,7 +163,7 @@ class Playerr extends React.Component {
                 btn.classList.add('button_disabled');
                 btn.children[0].innerHTML = "No Previous Episode";
             }
-            if (info.episodes === this.state.episode)
+            if (info.episodes == this.state.episode)
             {
                 oof = true;
                 document.getElementById("previous_ep").children[0].href = "ep" + (parseInt(this.state.episode) - 1);
@@ -185,48 +192,50 @@ class Playerr extends React.Component {
             }
             // Create anime episode buttons
             const epsDiv = document.getElementById('episodes');
+            if (info.episodes > 1)
             for (let i = 1; i <= info.episodes; i++)
             {
                 const newDiv = document.createElement('div');
                 epsDiv.appendChild(newDiv);
                 // Render the component into the new div
                 const root = createRoot(newDiv);
-                if (i === this.state.episode)
+                if (i == this.state.episode)
+                {
                     root.render(<this.Button text={i} customStyle={this.customSelectedStyle}/>)
-                else
+                }else
                     root.render(<this.Button text={i} link={"ep" + i} customStyle={this.customStyle}/>)
             }
             
         });
     }
 
-    Button = (proms) => {
+    Button = (props) => {
         return (
             <>
-                <a className='button' type='button' href={proms.link} style={proms.customStyle}>
+                <a className='button' type='button' href={props.link} style={props.customStyle}>
                     <div style={{textAlign: 'center', lineHeight: '1.9em'}}>
-                        {proms.text}
+                        {props.text}
                     </div>
                 </a>
             </>
         );
     }
 
-    Info = (proms) => {
+    Info = (props) => {
         return (
             <div className='pcontainer' style={{marginBottom: '0px', marginTop: '.1em'}}>
                 <div className='info_'>
-                    <h2 className='info_tag'>{proms.name}</h2>
-                    <h2 className='info_text'>{proms.text}</h2>
+                    <h2 className='info_tag'>{props.name}</h2>
+                    <h2 className='info_text'>{props.text}</h2>
                 </div>
             </div>
         );
     }
 
-    Tag = (proms) => {
+    Tag = (props) => {
         return (
             <>
-                <h5 className='anime_tag'>{proms.name}</h5>
+                <h5 className='anime_tag'>{props.name}</h5>
             </>
         );
     }
@@ -258,14 +267,77 @@ class Playerr extends React.Component {
         }
     }
 
-    RelatedAnime = (proms) => {
+    setPopularAnimeTitle(props)
+    {
+        if (Object.keys(props).length === 0)
+            return;
+
+        const url = "get_video/?name=" + props[0];
+        fetch("http://localhost:9000/" + url)
+        .then(res => res.text())
+        .then(data => {
+            const info = JSON.parse(data);
+            const imgUrl = info.poster;
+            const vname = info.name;
+            const vep = info.episodes;
+            const season = info.season;
+            const vlink = "/watch/" + info.folder_name;
+            fetch("http://localhost:9000/get_views/?name=" + props[0])
+            .then(res => res.text())
+            .then(res => {
+                const views = parseInt(res);
+                const raDiv = document.getElementsByClassName('popular_anime_div')[0];
+                const newDiv = document.createElement('div');
+                raDiv.appendChild(newDiv);
+                // Render the component into the new div
+                const root = createRoot(newDiv);
+                root.render(<this.PopularAnime title={vname} link={vlink} season={season} img={imgUrl} epsno={vep} views={views}/>)
+
+                // Remove first element from array
+                props.shift();
+                // Call function again
+                this.setPopularAnimeTitle(props);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching image:', error);
+        });
+    }
+
+    setPopularAnime()
+    {
+        const url = "get_popular/?max=6";
+        fetch("http://localhost:9000/" + url)
+        .then(res => res.text())
+        .then(data => {
+            const _info = JSON.parse(data);
+            this.setPopularAnimeTitle(_info);
+        });
+    }
+
+    RelatedAnime = (props) => {
         return (
             <>
                 <div className='related_anime'>
-                    <a href={proms.link}><img alt="" id={proms.img_id} className='related_anime_img' src={proms.img}/></a>
+                    <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img}/></a>
                     <div style={{display: 'block'}}>
-                        <h3 className='related_anime_title'><a href={proms.link}>{proms.title}</a></h3>
-                        <h5 className='related_anime_info'>Season {proms.season} <span>&#8226;</span> {proms.epsno} episodes</h5>
+                        <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
+                        <h5 className='related_anime_info'>Season {props.season} <span>&#8226;</span> {props.epsno} episodes</h5>
+                    </div>
+                </div>
+            </>
+        );
+    }
+
+    PopularAnime = (props) => {
+        return (
+            <>
+                <div className='related_anime'>
+                    <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img}/></a>
+                    <div style={{display: 'block'}}>
+                        <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
+                        <h5 className='related_anime_info'>Season {props.season} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'><span>&#8226;</span> {props.views} views</h5>
                     </div>
                 </div>
             </>
@@ -333,6 +405,10 @@ class Playerr extends React.Component {
                     <div className='section related_anime_div'>
                         <h3 className='section_title'>Related Anime</h3>
                             
+                    </div>
+                    <div className='section popular_anime_div'>
+                        <h3 className='section_title'>Popular Anime</h3>
+                        
                     </div>
                 </div>
             </div>

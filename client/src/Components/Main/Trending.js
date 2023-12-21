@@ -1,5 +1,6 @@
 import {React, Component} from 'react';
 import './Trending.css'
+import {createRoot} from 'react-dom/client';
 
 class Trending extends Component {
 
@@ -11,8 +12,9 @@ class Trending extends Component {
             maxCards: 7,
             startX: 0,
         }
-
         this.oof = this.oof.bind(this);
+        this.setPopularAnime = this.setPopularAnime.bind(this);
+        this.setPopularAnimeTitle = this.setPopularAnimeTitle.bind(this);
     }
 
     Card(props) {
@@ -39,12 +41,7 @@ class Trending extends Component {
     }
 
     componentDidMount() {
-        let lastCard = document.getElementById('card1');
-        let cardWidth = lastCard.offsetWidth + 16; // 16px margin
-        let listWidth = window.innerWidth * .9; // 90% of window width
-        let bruh = listWidth / cardWidth;
-        let next = Math.ceil(bruh);
-        this.setState({lastCard: next});
+        this.setPopularAnime();
     }
 
     oof(event) {
@@ -53,6 +50,67 @@ class Trending extends Component {
         alert(event.clientX)
     }
 
+    setPopularAnimeTitle(props, cardNo)
+    {
+        if (Object.keys(props).length === 0)
+        {
+            let lastCard = document.getElementById('card1');
+            let cardWidth = lastCard.offsetWidth + 16; // 16px margin
+            let listWidth = window.innerWidth * .9; // 90% of window width
+            let bruh = listWidth / cardWidth;
+            let next = Math.ceil(bruh);
+            this.setState({lastCard: next});
+            return;
+        }
+
+        const url = "get_video/?name=" + props[0];
+        fetch("http://localhost:9000/" + url)
+        .then(res => res.text())
+        .then(data => {
+            const info = JSON.parse(data);
+            const imgUrl = info.poster;
+            const vname = info.name;
+            const vep = info.episodes;
+            const premiered = info.premiered;
+            const duration = info.duration;
+            const genre = info.genre;
+            const tag1 = genre[0];
+            const tag2 = genre[1];
+            const year = premiered.split(' ')[premiered.split(' ').length - 1];
+            const vlink = "/watch/" + info.folder_name;
+            fetch("http://localhost:9000/get_views/?name=" + props[0])
+            .then(res => res.text())
+            .then(res => {
+                const views = parseInt(res);
+                const raDiv = document.getElementsByClassName('trending_list')[0];
+                const newDiv = document.createElement('div');
+                raDiv.appendChild(newDiv);
+                // Render the component into the new div
+                const root = createRoot(newDiv);
+                root.render(<this.Card href={vlink} id={"card" + cardNo} year={year} time={duration + " mins/ep"} tag1={tag1} tag2={tag2} img={imgUrl} title={vname} episodes={vep}/>)
+
+                // Remove first element from array
+                props.shift();
+                // Call function again
+                this.setPopularAnimeTitle(props, cardNo + 1);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching image:', error);
+        });
+    }
+
+    setPopularAnime()
+    {
+        const url = "get_popular/?max=6";
+        fetch("http://localhost:9000/" + url)
+        .then(res => res.text())
+        .then(data => {
+            const _info = JSON.parse(data);
+            this.setState({maxCards: _info.length});
+            this.setPopularAnimeTitle(_info, 1);
+        });
+    }
     render() {
         return (
             <>
@@ -63,7 +121,7 @@ class Trending extends Component {
                     <a href='/trending'>View all <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div className='trending_list' onDragStart={this.oof}>
-                <a onClick={() => {
+                    <a onClick={() => {
                         if (this.state.firstCard == 1) return;
                         document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
                         document.getElementsByClassName('trending_next')[0].style.visibility = 'visible';
@@ -74,11 +132,11 @@ class Trending extends Component {
                         this.setState({lastCard: this.state.lastCard - 1});
                     }}
                     href='javascript:void(0)'>
-                    <div className='trending_back'>
-                        <i className="fa-solid fa-less-than"></i>
-                    </div>
-                </a>
-                <a onClick={() => {
+                        <div className='trending_back'>
+                            <i className="fa-solid fa-less-than"></i>
+                        </div>
+                    </a>
+                    <a onClick={() => {
                         let card = document.getElementById('card' + this.state.lastCard);
                         if (card == null) return;
                         card.scrollIntoView({behavior: "smooth", block: "center"});
@@ -90,17 +148,10 @@ class Trending extends Component {
                         });
                     }} 
                     href='javascript:void(0)'>
-                    <div className='trending_next'>
-                        <i className="fa-solid fa-greater-than"></i>
-                    </div>
-                </a>
-                    <this.Card href="/watch/shit" id="card1" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card2" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card3" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card4" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card5" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card6" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
-                    <this.Card href="/watch/shit" id="card7" year="2023" time="24 mins/ep" tag1="Action" tag2="Drama" img='https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/323c82257b2f6567fabbb7bd55bfa753.jpe' title='Shingeki no Kyojin: The Final Season' episodes='16'/>
+                        <div className='trending_next'>
+                            <i className="fa-solid fa-greater-than"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
             </>

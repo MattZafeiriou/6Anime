@@ -3,7 +3,7 @@
 }
 
 .random_video h1 {
-    transition-duration: 1s;
+    transition-duration: .5s;
     font-size: 2em;
     font-weight: 600;
     color: white;
@@ -18,7 +18,7 @@
 }
 
 .random_video h3 {
-    transition-delay: 1s;
+    transition-delay: .5s;
     transition-duration: .5s;
     font-size: 1.2em;
     font-weight: 600;
@@ -37,7 +37,7 @@
 }
 
 .random_video_trailer {
-    transition-delay: 2s;
+    transition-delay: .9s;
     transition-duration: .5s;
     opacity: 0;
     display: flex;
@@ -67,7 +67,7 @@
     margin-left: 1em;
     padding: 1em;
     opacity: 0;
-    transition-delay: 2.5s;
+    transition-delay: 1.3s;
     transition-duration: .5s;
 }
 

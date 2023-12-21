@@ -51,7 +51,7 @@
 }
 
 .related_anime_info {
-    line-height: .3em;
+    line-height: .5em;
     font-family: 'Roboto';
     font-weight: 300;
     font-size: .9em;
@@ -99,6 +99,14 @@
     font-family: serif;
     font-size: 1.2em;
     border-radius: 5px;
+}
+
+.button_disabled {
+    pointer-events: none;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .button:hover {

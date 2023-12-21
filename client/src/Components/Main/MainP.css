@@ -2,6 +2,7 @@
     /* background-image: url("test-background.jpg"); */
     background: rgb(25,7,7);
     background: linear-gradient(180deg, rgba(25,7,7,1) 0vh, rgba(155,39,39,1) 50vh, rgba(25,7,7,1) 95vh);
+    overflow-x: hidden;
 }
 
 .main_page {

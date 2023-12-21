@@ -31,6 +31,7 @@
 }
 
 .trending_list {
+    display: flex;
     margin-top: 1em;
     white-space: nowrap;
     overflow: hidden;
@@ -77,7 +78,7 @@
     padding-top: .45em;
     margin-left: calc(150px - 1.4em);
     margin-top: calc(200px - 1.4em) !important;
-    transition-duration: .1s;
+    transition-duration: .3s;
 }
 
 .trending_card_addtolist:hover {
