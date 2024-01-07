@@ -100,8 +100,7 @@ class Header extends React.Component {
                                 <option selected disabled value="">Select Subject</option>
                                 <option value="technical">Technical Issues</option>
                                 <option value="streaming">Streaming Issues</option>
-                                <option value="copyright">Copyright Issues</option>
-                                <option value="recommendation">Anime Recommendations</option>
+                                <option value="copyright">DMCA</option>
                                 <option value="other">Other..</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
@@ -110,7 +109,7 @@ class Header extends React.Component {
                         </Form.Group>
                         <br/>
                         <Form.Group style={{color: 'rgb(180,180,180)', minWidth: '20vw'}}controlId="contactForm.text">
-                            <Form.Label>Text <span id='required'>*</span></Form.Label>
+                            <Form.Label>Message <span id='required'>*</span></Form.Label>
                             <Form.Control as="textarea" className='contact_text' required rows={5} />
                             <Form.Control.Feedback type="invalid">
                                 This field is required.

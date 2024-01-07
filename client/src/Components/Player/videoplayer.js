@@ -24,8 +24,8 @@ class VideoPlayer extends React.Component {
         .then(res => res.text())
         .then(data => {
             data = JSON.parse(data);
-            this.setState({video_url: data.url});
-            document.getElementById("captions").src = data.subs;
+            this.setState({video_url: data.video_url});
+            document.getElementById("captions").src = data.tracks[0];
             this.setCookies();
         })
         .catch(error => {

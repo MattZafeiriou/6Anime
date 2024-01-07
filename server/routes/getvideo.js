@@ -1,16 +1,19 @@
 var express = require('express');
-const fs = require('fs');
 var router = express.Router();
-const path = require('path');
+var sqlHandler = require("../sqlHandler");
 
 /* GET video info. */
 router.get('/', function(req, res, next) {
     var name = req.query.name;
-    fs.readFile(path.resolve(__dirname, './../public/p/' + name + '/info.json'), 'utf8', function(err, data) {
-        if (err) {
-            return console.log(err);
+
+    sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name = '" + name + "'", function (err, result, fields) {
+        if (err) throw err;
+        if (result.length == 0) {
+            res.status(404).send("Anime not found");
+            return;
         }
-        res.send(data);
+        console.log(result["0"]);
+        res.status(200).send(result["0"]);
     });
 });
 
