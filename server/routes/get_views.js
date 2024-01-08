@@ -1,18 +1,21 @@
 var express = require('express');
-const fs = require('fs');
 var router = express.Router();
-const path = require('path');
+var sqlHandler = require('./../sqlHandler');
 
 /* get view. */
 router.get('/', function(req, res, next) {
-    var name = req.query.name;
-    const fileData = fs.readFileSync(path.resolve(__dirname, './../public/views.json'), "utf8").trim();
-    const jsonData = JSON.parse(fileData);
-    if (jsonData[name] === undefined) {
-        res.send("0");
-    } else {
-        res.send(jsonData[name] + "");
-    }
+    const name = req.query.name;
+    const splitted = name.split('-');
+    const id = splitted[splitted.length - 1];
+
+    sqlHandler.con.query("SELECT * FROM Views WHERE id = ?", [id], function (err, result, fields) {
+        if (err) throw err;
+        if (result.length === 0) {
+            res.send("0");
+        } else {
+            res.send(result[0].views_count + "");
+        }
+    });
 });
 
 module.exports = router;

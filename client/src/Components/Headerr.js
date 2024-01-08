@@ -75,20 +75,20 @@ class Header extends Component {
     {
         if (this.state.foldersnames[string] == null)
         {
-            var url = "getfolder/?name=" + string;
+            var url = "get_video/?name=" + string;
             var data = "";
 
             fetch("http://localhost:9000/" + url)
             .then(res => res.text())
             .then(res => {
-                data = res;
+                data = JSON.parse(res);
                 this.state.foldersnames[string] = data;
 
-                var finaldropdown = '<a href="/watch/' + data + '">' + string + '</a>\n';
+                var finaldropdown = '<a href="/watch/' + data.folder_name + "-" + data.id + '">' + data.name + '</a>\n';
                 document.getElementById("topdropdown").innerHTML+=finaldropdown;
             });
         } else{
-            var finaldropdown = '<a href="/watch/' + this.state.foldersnames[string] + '">' + string + '</a>\n';
+            var finaldropdown = '<a href="/watch/' + this.state.foldersnames[string].folder_name + "-" + this.state.foldersnames[string].id + '">' + this.state.foldersnames[string].name + '</a>\n';
             document.getElementById("topdropdown").innerHTML+=finaldropdown;
         }
     }

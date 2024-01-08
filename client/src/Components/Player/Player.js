@@ -20,7 +20,15 @@ class Playerr extends React.Component {
 
     constructor(props) {
         super(props);
-        let episode = window.location.href.split("/")[5];
+        const episode = window.location.href.split("/")[5];
+        const name = window.location.href.split("/")[4];
+        const splitted = name.split("-");
+        const id = splitted[splitted.length - 1];
+
+        if (id === undefined || id === null || id === "" || (splitted.length < 2 && isNaN(splitted[0])))
+        {
+            alert("Invalid anime name. Return 404");
+        }
         if (episode === undefined || episode === null || episode === "")
         {
             let last_ep = this.getCookie("last_ep");
@@ -100,7 +108,10 @@ class Playerr extends React.Component {
 
     getVideoInfo()
     {
-        let name = window.location.href.split("/")[4];
+        const name = window.location.href.split("/")[4];
+        const splitted = name.split("-");
+        const id = splitted[splitted.length - 1];
+        const animeName = splitted.slice(0, -1).join("-");
         this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
         let url = "get_video/?name=" + name;
@@ -110,17 +121,20 @@ class Playerr extends React.Component {
         .then(res => {
             data = res;
             let info = JSON.parse(data);
-            this.setState({title: info.name}, () => {document.title = this.state.title + " - Episode " + this.state.episode + " | 6Anime"});
+            if (info.folder_name != animeName) // The anime name on url is different from the actual of the id's name
+            {
+                window.location.href = "/watch/" + info.folder_name + "-" + id;
+            }
+            this.setState({title: info.name}, () => {
+                document.title = this.state.title + " - Episode " + this.state.episode + " | 6Anime"}
+                );
+            const date = info.premiered.split("T")[0];
             this.setState({description: info.description});
             this.setState({genre: info.genre});
             this.setState({studios: info.studios});
             this.setState({loaded_info: info.true});
-            this.setState({episodesno: info.episodes}, () =>
-            {
-                if (this.state.episodesno === 1)
-                    this.setState({type: "Movie"});
-            });
-            this.setState({premiered: info.premiered});
+            this.setState({episodesno: info.episodes, type: info.type});
+            this.setState({premiered: date});
             this.setState({season: info.season});
             this.setState({episodesdu: info.duration + " min/ep"});
             this.setState({relatedFolders: info.other_seasons_folders});

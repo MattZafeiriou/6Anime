@@ -14,7 +14,7 @@ function getNames() {
         let max_numbers = Object.keys(data).length;
         for (var i = 0; i < max_numbers; i++)
         {
-            var name = data["" + i].name;
+            var name = data["" + i].folder_name + "-" + data["" + i].id;
             names.push(name);
         }
     }

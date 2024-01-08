@@ -12,9 +12,11 @@ router.get('/', function(req, res) {
     const urlParams = new URLSearchParams(queryString);
 
     if (urlParams.get("name")) {
-        var name = urlParams.get("name").replace('"', "").replace('"', "");
+        const name = urlParams.get("name").replace('"', "").replace('"', "");
+        const splitted = name.split("-");
+        const anime_id = splitted[splitted.length - 1];
 
-        sqlHandler.con.query("SELECT folder_name FROM Anime WHERE name='" + name + "';", function (err, result, fields) {
+        sqlHandler.con.query("SELECT folder_name FROM Anime WHERE id='" + anime_id + "';", function (err, result, fields) {
             if (err) throw err;
             res.status(200).send(result["0"]["folder_name"]);
         });

@@ -18,8 +18,8 @@ body {
 .top {
     overflow: hidden;
     max-height: 80px;
-    width: 90%;
-    margin-left: 5%;
+    width: 90vw;
+    margin-left: 5vw;
 }
 
 .active {
@@ -123,14 +123,13 @@ body {
 }
 
 .donate_button {
-    transition-duration: .3s;
+    transition-duration: .2s;
     font-family: 'Roboto', sans-serif;
     border-radius: 10px;
     font-weight: 600;
     text-decoration: none;
     padding: 10px 30px 10px 30px;
-    margin: 6px;
-    margin-top: 15px;
+    margin: 15px 2px 6px 6px;
     float: right;
     font-size: .9em;
     background: rgb(155,39,39);
@@ -138,9 +137,7 @@ body {
 
 .donate_button:hover {
     padding: 10px 32px 12px 32px;
-    margin-right: 4px;
-    margin-left: 4px;
-    margin-top: 10px;
+    margin: 10px 0px 6px 4px;
 }
 
 #donate {

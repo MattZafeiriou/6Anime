@@ -10,13 +10,16 @@ router.get('/', function(req, res, next) {
 
     const urlParams = new URLSearchParams(queryString);
 
-    sqlHandler.con.query("SELECT * FROM Episode WHERE anime_url = '" + urlParams.get("name") + "' AND episode_number = '" + urlParams.get("ep") + "'", function (err, result, fields) {
+    const name = urlParams.get("name");
+    const splitted = name.split("-");
+    const anime_id = splitted[splitted.length - 1];
+    const ep = urlParams.get("ep");
+    sqlHandler.con.query("SELECT * FROM Episode WHERE anime_id = '" + anime_id + "' AND episode_number = '" + ep + "'", function (err, result, fields) {
         if (err) throw err;
         if (result.length == 0) {
             res.status(404).send("Episode not found");
             return;
         }
-        console.log(result["0"]);
         res.status(200).send(result["0"]);
     });
 });

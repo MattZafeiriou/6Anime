@@ -8,10 +8,8 @@ var sqlHandler = require("./sqlHandler");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var testAPIRouter = require("./routes/testAPI");
 var searchRouter = require("./routes/search");
 var folderRouter = require("./routes/getfolder");
-var playerRouter = require("./routes/player");
 var getVideoRouter = require("./routes/getvideo");
 var animeURLRouter = require("./routes/anime_url");
 var sendFormRouter = require("./routes/send_form");
@@ -35,10 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/testAPI", testAPIRouter);
 app.use("/search/*", searchRouter);
 app.use("/getfolder/*", folderRouter);
-app.use("/p/*", playerRouter);
 app.use("/get_video", getVideoRouter);
 app.use("/anime_url", animeURLRouter);
 app.use("/send_form", sendFormRouter);

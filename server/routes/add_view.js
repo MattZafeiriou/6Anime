@@ -1,20 +1,35 @@
 var express = require('express');
-const fs = require('fs');
 var router = express.Router();
-const path = require('path');
+var sqlHandler = require('./../sqlHandler');
 
 /* Add view. */
 router.get('/', function(req, res, next) {
     var name = req.query.name;
-    const fileData = fs.readFileSync(path.resolve(__dirname, './../public/views.json'), "utf8").trim();
-    const jsonData = JSON.parse(fileData);
-    if (jsonData[name] === undefined) {
-        jsonData[name] = 1;
-    } else {
-        jsonData[name] += 1;
-    }
-    fs.writeFileSync(path.resolve(__dirname, './../public/views.json'), JSON.stringify(jsonData));
-    res.sendStatus(200);
+    const splitted = name.split('-');
+    const id = splitted[splitted.length - 1];
+
+    sqlHandler.con.query("SELECT * FROM Views WHERE id = ?", [id], function (err, result, fields) {
+        if (err) throw err;
+        if (result.length === 0) {
+            sqlHandler.con.query("SELECT * FROM Anime WHERE id = ?", [id], function (err, result, fields) {
+                if (err) throw err;
+                if (result.length === 0) {
+                    res.sendStatus(400);
+                    return;
+                }
+                sqlHandler.con.query("INSERT INTO Views (id, views_count) VALUES (?, ?)", [id, 1], function (err, result, fields) {
+                    if (err) throw err;
+                    res.sendStatus(200);
+                });
+            });
+
+        } else {
+            sqlHandler.con.query("UPDATE Views SET views_count = ? WHERE id = ?", [result[0].views_count + 1, id], function (err, result, fields) {
+                if (err) throw err;
+                res.sendStatus(200);
+            });
+        }
+    });
 });
 
 module.exports = router;

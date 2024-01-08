@@ -13,7 +13,7 @@ function connect()
 {
     con.connect(function(err) {
         if (err) throw err;
-        console.log("Connected!");
+        console.log("Connected to mySQL!");
     });
 
     con.query("SELECT * FROM Anime", function (err, result, fields) {
@@ -27,12 +27,4 @@ function getAllAnime()
     return anime;
 }
 
-function test()
-{
-    con.query("INSERT INTO Episode (anime_id, video_url, tracks, episode_number) VALUES (1, 'wowww url', '[\"zamn\"]', 32)", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-    });
-}
-
-module.exports = { con, connect, test, getAllAnime };
+module.exports = { con, connect, getAllAnime };
