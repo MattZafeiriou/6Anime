@@ -10,6 +10,8 @@ import Contact from './Components/Contact/Contact.js';
 import Headerr from './Components/Headerr.js'
 import SubmitSuccess from './Components/Submit_Success/Submit_success.js'
 import Donate from './Components/Donate/Donate.js'
+import AddVideo from './Components/AddVideo/AddVideo.js'
+import AnimeList from './Components/AnimeList/AnimeList.js'
 
 const Main = () => {
   return (
@@ -42,6 +44,14 @@ const Main = () => {
       <Route exact path='/donate' component={Donate}>
         <Headerr/>
         <Donate/>
+        <Footer/>
+      </Route>
+      <Route exact path='/create' component={AddVideo}>
+        <AddVideo/>
+      </Route>
+      <Route exact path='/movies' component={AnimeList}>
+        <Headerr/>
+        <AnimeList/>
         <Footer/>
       </Route>
       <Route path='*' component={NotFound}>

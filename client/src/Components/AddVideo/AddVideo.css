@@ -1,0 +1,17 @@
+.add-video-container {
+    height: 200vh;
+    background-color: white;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: flex;
+}
+
+.add-video-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-video-container input, .add-video-container textarea, .add-video-container select {
+    width: 500px;
+    margin-bottom: 10px;
+}

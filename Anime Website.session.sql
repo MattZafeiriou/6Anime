@@ -34,6 +34,10 @@ CREATE TABLE Views(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     anime_id INTEGER NOT NULL UNIQUE,
     views_count INTEGER NOT NULL,
+    today_views INTEGER NOT NULL DEFAULT 0,
+    week_views INTEGER NOT NULL DEFAULT 0,
+    month_views INTEGER NOT NULL DEFAULT 0,
+    year_views INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (anime_id) REFERENCES Anime(id)
 )
 
@@ -51,13 +55,16 @@ INSERT INTO Episode(anime_id, video_url, tracks, episode_number)
 VALUES('1', 'https://eno.tendoloads.com/_v6/04c62d67738da375aca8b1659516f077c74801fa368082aa2ebd5c4556d4a621e40149ff082d9d6b627f702d28718f4cefec91e79fa9d9f8e407df2c2424be0114f0b211b8e8eb14baff1d78eb556215114a397444824941bed9fc5f7e12ed38b17fff668113bf7e2be351ef365348a89ba0ec5cdbbc56fd9b916d6342e2f46b/master.m3u8', '["https://cc.bunnyccdn.co/ca/6e/ca6e95a207b37aa7dfff60a5fe12dd75/eng-3.vtt"]', 1)
 
 -- @block
-SELECT * FROM Views;
+SELECT * FROM Anime;
+
+-- @block
+ DELETE FROM Episode WHERE id = 4
 
 -- @block
 SHOW TABLES;
 
 -- @block
-DROP TABLE Views
+DROP TABLE Episode
 
 -- @block
 SELECT url FROM Anime WHERE title='MORE'

@@ -120,7 +120,7 @@ class Header extends Component {
                 <div className="top_left">
                     <a className="left_list" href="/"><div id="home">Home</div></a>
                     <a className="left_list" href="/about"><div id="about">About</div></a>
-                    <a className="left_list" href="/films"><div id="films">Films</div></a>
+                    <a className="left_list" href="/movies"><div id="movies">Movies</div></a>
                     <a className="left_list" href="/series"><div id="series">Series</div></a>
                     <a className="left_list" href="/recently_added"><div id="recently_added">Recently Added</div></a>
                     <a className="left_list" href="/contact"><div id="contact_us">Contact Us</div></a>

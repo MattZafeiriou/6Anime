@@ -27,9 +27,8 @@ class Playerr extends React.Component {
 
         if (id === undefined || id === null || id === "" || (splitted.length < 2 && isNaN(splitted[0])))
         {
-            alert("Invalid anime name. Return 404");
-        }
-        if (episode === undefined || episode === null || episode === "")
+            window.location.href = "/404";
+        } else if (episode === undefined || episode === null || episode === "")
         {
             let last_ep = this.getCookie("last_ep");
             if (last_ep === null)
@@ -258,7 +257,7 @@ class Playerr extends React.Component {
         // Change banner image
         for(let i = 0; i < this.state.relatedFolders.length; i++)
         {
-            const url = "get_video/?name=" + this.state.relatedFolders[i];
+            const url = "get_id/?name=" + this.state.relatedFolders[i];
             fetch("http://localhost:9000/" + url)
             .then(res => res.text())
             .then(data => {
@@ -267,7 +266,7 @@ class Playerr extends React.Component {
                 const vname = info.name;
                 const vep = info.episodes;
                 const season = info.season;
-                const vlink = "/watch/" + info.folder_name;
+                const vlink = "/watch/" + info.folder_name + "-" + info.id;
                 const raDiv = document.getElementsByClassName('related_anime_div')[0];
                 const newDiv = document.createElement('div');
                 raDiv.appendChild(newDiv);
@@ -295,7 +294,7 @@ class Playerr extends React.Component {
             const vname = info.name;
             const vep = info.episodes;
             const season = info.season;
-            const vlink = "/watch/" + info.folder_name;
+            const vlink = "/watch/" + info.folder_name + "-" + info.id;
             fetch("http://localhost:9000/get_views/?name=" + props[0])
             .then(res => res.text())
             .then(res => {

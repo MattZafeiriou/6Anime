@@ -2,7 +2,7 @@ import React from 'react';
 import './Contact.css'
 import {Form, Button, Toast, ToastContainer} from 'react-bootstrap';
 
-class Header extends React.Component {
+class Contact extends React.Component {
 
     constructor(proms)
     {
@@ -153,4 +153,4 @@ class Header extends React.Component {
     );
     };
 }
-export default Header;
+export default Contact;
