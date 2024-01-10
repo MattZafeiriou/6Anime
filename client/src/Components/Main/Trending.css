@@ -72,13 +72,8 @@
 .trending_card_play_button:hover {
     color: #ff4b2b;
     border-color: #ff4b2b;
-    width: 2.8em;
-    height: 2.8em;
-    padding-left: .88em;
-    padding-top: .45em;
-    margin-left: calc(150px - 1.4em);
-    margin-top: calc(200px - 1.4em) !important;
     transition-duration: .3s;
+    transform: scale(1.1);
 }
 
 .trending_card_addtolist:hover {

@@ -1,6 +1,6 @@
 var mysql = require("mysql2");
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "admin",
@@ -11,7 +11,7 @@ var anime = null;
 
 function connect()
 {
-    con.connect(function(err) {
+    con.getConnection(function(err) {
         if (err) throw err;
         console.log("Connected to mySQL!");
     });

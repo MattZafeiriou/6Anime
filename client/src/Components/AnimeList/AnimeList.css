@@ -1,9 +1,16 @@
 .anime-list {
-    width: 70vw;
+    width: 60vw;
     margin-left: 5vw;
     height: 100vh;
     margin-top: 3em;
     color: white;
+}
+
+/* set .anime-list width to 85vw if screen smaller than 800px */
+@media screen and (max-width: 800px) {
+    .anime-list {
+        width: 85vw;
+    }
 }
 
 .anime-list-container {
@@ -42,15 +49,79 @@
     background-color: #1f1f1f;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* set width of anime-list-filter to calc(50% - 10px); if window size smaller than 1200px */
+@media screen and (max-width: 1200px) {
+    .anime-list-header {
+        display: block;
+        justify-content: start;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-header {
+        display: block;
+        justify-content: start;
+    }
+}
+
+.anime-list-header-filters {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+    width: 75%;
+}
+
+@media screen and (max-width: 1200px) {
+    .anime-list-header-filters {
+        width: calc(100% - 10px);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-header-filters {
+        width: calc(100% - 10px);
+    }
 }
 
 .anime-list-filter {
-    width: 200px;
+    width: calc(25% - 10px);
     display: block;
+    margin-left: 10px;
 }
 
+/* set width of anime-list-filter to calc(50% - 10px); if window size smaller than 1200px */
+@media screen and (max-width: 1200px) {
+    .anime-list-filter {
+        width: calc(50% - 10px);
+    }
+}
+
+/* set width of anime-list-filter to calc(100% - 10px); if window size smaller than 800px */
+@media screen and (max-width: 800px) {
+    .anime-list-filter {
+        width: calc(100% - 10px);
+    }
+}
+
+.anime-list-filter b {
+    pointer-events: none;
+    font-size: .9em;
+}
 .anime-list-filter i {
-    margin-left: 5px;
+    pointer-events: none;
+}
+
+.anime-list-filter span {
+    pointer-events: none;
+    font-size: .9em;
+    color: rgba(255,255,255,.4);
 }
 
 .anime-list-filter button {
@@ -59,10 +130,11 @@
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
+    padding: 5px 10px 5px 10px;
+    margin: 5px 0px 5px 0px;
     cursor: pointer;
     transition: 0.3s;
+    height: 35px;
 }
 
 .anime-list-filter button:hover {
@@ -71,6 +143,7 @@
 
 .anime-list-filter-item {
     min-width: 180px;
+    max-width: 0px;
     opacity: 0;
     z-index: -1;
     position: absolute;
@@ -82,13 +155,202 @@
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+
+.anime-list-filter-item-option {
+    display: flex;
+    width: 100%;
 }
 
 .anime-list-filter-item label {
+    color: rgb(100,100,100);
+    font-size: 1em;
     margin-left: 5px;
+}
+
+.anime-list-filter-item input[type=checkbox]:checked + label {
+    color: white;
+    font-weight: 600;
+}
+
+.anime-list-filter-item input[type=radio]:checked + label {
+    color: white;
+    font-weight: 600;
 }
 
 .anime-list-filter-item-active {
     z-index: 1;
     opacity: 1;
 }
+
+.anime-list-header-search {
+    width: 25%;
+    padding-left: 10px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1200px) {
+    .anime-list-header-search {
+        width: 100%;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-header-search {
+        width: 100%;
+        display: flex;
+    }
+}
+
+.anime-list-header-search input {
+    margin-bottom: 10px;
+    height: 35px;
+    border-radius: 5px;
+    border: solid 1px rgba(255,255,255,.2);
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #1f1f1f;
+    color: white;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .anime-list-header-search input {
+        width: calc(50% - 10px);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-header-search input {
+        width: calc(100% - 10px);
+    }
+}
+
+.anime-list-header-search button {
+    transition-duration: .3s;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: #9b2727;
+    color: white;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .anime-list-header-search button {
+        width: calc(50% - 10px);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-header-search button {
+        width: calc(100% - 10px);
+    }
+}
+.anime-list-header-search button:hover {
+    background-color: #7a1f1f;
+}
+
+/* Style the checkbox and radio */
+.anime-list-filter-item input {
+    position: relative;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    margin-top: 6px;
+    margin-right: 5px;
+    background-color: rgb(50, 50, 50);
+    border: none;
+}
+
+/* Hide the browser's default checkbox */
+.anime-list-filter-item input[type=checkbox] {
+    border-radius: 5px;
+}
+
+/* Hide the browser's default radio button */
+.anime-list-filter-item input[type=radio] {
+    border-radius: 50%;
+}
+
+/* Create a custom checkbox */
+.anime-list-filter-item input[type=checkbox]:before {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Create a custom radio button */
+.anime-list-filter-item input[type=radio]:before {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Create a custom checkbox */
+.anime-list-filter-item input[type=checkbox]:checked:before {
+    display: block;
+    background-color: #9b2727;
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+}
+
+/* Create a custom radio button */
+.anime-list-filter-item input[type=radio]:checked:before {
+    display: block;
+    background-color: #9b2727;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.anime-list-filter-item input:checked:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.anime-list-filter-item input[type=checkbox]:checked:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.anime-list-filter-item input[type=checkbox]:checked:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Style the indicator (dot/circle) */
+.anime-list-filter-item input[type=radio]:checked:after {
+    left: 5px;
+    top: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+}
+
