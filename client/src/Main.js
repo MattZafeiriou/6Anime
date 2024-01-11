@@ -11,7 +11,11 @@ import Headerr from './Components/Headerr.js'
 import SubmitSuccess from './Components/Submit_Success/Submit_success.js'
 import Donate from './Components/Donate/Donate.js'
 import AddVideo from './Components/AddVideo/AddVideo.js'
-import AnimeList from './Components/AnimeList/AnimeList.js'
+import Movies from './Components/Movies/Movies.js'
+import Series from './Components/Series/Series.js'
+import Search from './Components/Search/Search.js'
+import RecentlyAdded from './Components/RecentlyAdded/RecentlyAdded.js'
+import Trending from './Components/Trending/Trending.js'
 
 const Main = () => {
   return (
@@ -49,9 +53,29 @@ const Main = () => {
       <Route exact path='/create' component={AddVideo}>
         <AddVideo/>
       </Route>
-      <Route exact path='/movies' component={AnimeList}>
+      <Route exact path='/movies' component={Movies}>
         <Headerr/>
-        <AnimeList/>
+        <Movies/>
+        <Footer/>
+      </Route>
+      <Route exact path='/recently_added' component={RecentlyAdded}>
+        <Headerr/>
+        <RecentlyAdded/>
+        <Footer/>
+      </Route>
+      <Route exact path='/trending' component={Trending}>
+        <Headerr/>
+        <Trending/>
+        <Footer/>
+      </Route>
+      <Route exact path='/series' component={Series}>
+        <Headerr/>
+        <Series/>
+        <Footer/>
+      </Route>
+      <Route exact path='/search' component={Search}>
+        <Headerr/>
+        <Search/>
         <Footer/>
       </Route>
       <Route path='*' component={NotFound}>

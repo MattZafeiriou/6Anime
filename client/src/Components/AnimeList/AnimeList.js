@@ -1,5 +1,6 @@
 import React from 'react';
 import './AnimeList.css'
+import {createRoot} from 'react-dom/client';
 
 class AnimeList extends React.Component {
 
@@ -7,21 +8,82 @@ class AnimeList extends React.Component {
     {
         super(proms);
         this.filters = {
-            genre: '',
-            country: '',
-            season: '',
-            year: '',
-            type: '',
-            status: '',
-            language: '',
-            sort: ''
         };
+        this.startOptions = proms.startOptions === undefined ? "" : proms.startOptions;
+        this.startInput = proms.startInput === undefined ? "" : proms.startInput;
         this.setCheck = [];
         this.addFilter = this.addFilter.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.removeFilter = this.removeFilter.bind(this);
         this.addRadio = this.addRadio.bind(this);
         this.filter = this.filter.bind(this);
+        this.search = this.search.bind(this);
+    }
+
+    search()
+    {
+        this.deleteAllAnime();
+        const filters = this.filters;
+        
+        const genre = (filters["Genre"] === undefined || filters["Genre"] === "") ? "" : "&genre=" + encodeURIComponent(filters["Genre"]);
+        const country = (filters["Country"] === undefined || filters["Country"] === "") ? "" : "&country=" + encodeURIComponent(filters["Country"]);
+        const season = (filters["Season"] === undefined || filters["Season"] === "") ? "" : "&season=" + encodeURIComponent(filters["Season"]);
+        const year = (filters["Year"] === undefined || filters["Year"] === "") ? "" : "&year=" + encodeURIComponent(filters["Year"]);
+        const type = (filters["Type"] === undefined || filters["Type"] === "") ? "" : "&type=" + encodeURIComponent(filters["Type"]);
+        const status = (filters["Status"] === undefined || filters["Status"] === "") ? "" : "&status=" + encodeURIComponent(filters["Status"]);
+        const language = (filters["Language"] === undefined || filters["Language"] === "") ? "" : "&language=" + encodeURIComponent(filters["Language"]);
+        const sort = (filters["Sort"] === undefined || filters["Sort"] === "") ? "" : "&sort=" + encodeURIComponent(filters["Sort"]);
+        const search = "&chars=" + encodeURIComponent(document.querySelector('.anime-list-header-search input').value);
+
+        let url = genre + country + season + year + type + status + language + sort + search;
+        url = url.replace("&", "?");
+        url = "search" + url;
+        
+        fetch("http://localhost:9000/" + url)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                this.addAnime(element)
+            });
+        })
+    }
+
+    deleteAllAnime()
+    {
+        const raDiv = document.getElementsByClassName('anime-list-container')[0];
+        while (raDiv.firstChild) {
+            raDiv.removeChild(raDiv.firstChild);
+        }
+    }
+
+    addAnime(folder_name)
+    {
+        const id = folder_name.split("-")[folder_name.split("-").length - 1];
+        const raDiv = document.getElementsByClassName('anime-list-container')[0];
+        const newDiv = document.createElement('div');
+        raDiv.appendChild(newDiv);
+        // Render the component into the new div
+        const root = createRoot(newDiv);
+        root.render(
+            <div className='anime-list-item'>
+                <a href={"/watch/" + folder_name}>
+                    <img id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g'/>
+                    <h3 id={'anime-list-item-name-' + id}></h3>
+                </a>
+            </div>
+        )
+
+        // get the folder name
+        fetch("http://localhost:9000/get_video?name=" + id)
+        .then(res => res.text())
+        .then(data => {
+            const anime = JSON.parse(data);
+            const img = document.querySelector('#anime-list-item-img-' + id);
+            img.src = anime.poster;
+            const name = document.querySelector('#anime-list-item-name-' + id);
+            name.innerHTML = anime.name;
+        })
+
     }
 
     componentDidMount()
@@ -32,6 +94,23 @@ class AnimeList extends React.Component {
             const button = document.querySelector('#' + element.split(" ")[1] + '_text');
             const name = el.split("-")[element.split("-").length - 1].replaceAll("-", " ");
             button.innerHTML = name;
+        });
+
+        const start = this.startOptions.split(",");
+        start.forEach(element => {
+            document.querySelector('#anime-list-filter-item-' + element.replaceAll(' ', '-')).click();
+        });
+
+        if (this.startInput !== undefined)
+        {
+            document.querySelector('#searchanimeinput').value = this.startInput;
+        }
+
+        document.getElementById("searchanimeinput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("searchanimebutton").click();
+            }
         });
     }
 
@@ -96,49 +175,49 @@ class AnimeList extends React.Component {
         }
     }
 
-    filter(props)
+    filter(proms)
     {
-        const items = props.options.split(',');
+        const items = proms.options.split(',');
         // toggle off when clicked outside
         document.addEventListener('click', function(e) {
-            const animeListFilterItem = document.querySelector("#" + props.id);
-            if (e.target.id !== props.id + "_button" && e.target.id !== props.id && !animeListFilterItem.contains(e.target)) {
+            const animeListFilterItem = document.querySelector("#" + proms.id);
+            if (e.target.id !== proms.id + "_button" && e.target.id !== proms.id && !animeListFilterItem.contains(e.target)) {
                 animeListFilterItem.classList.remove('anime-list-filter-item-active');
             }
         });
 
-        const rows = (100 / props.rows) + "%";
-        const maxWidth = (props.maxWidth) ? props.maxWidth : "0";
+        const rows = (100 / proms.rows) + "%";
+        const maxWidth = (proms.maxWidth) ? proms.maxWidth : "0";
         return(
         <>
             <div className='anime-list-filter'>
-                <button id={props.id + "_button"} onClick={() => {
-                    document.querySelector("#" + props.id).classList.toggle('anime-list-filter-item-active');
+                <button id={proms.id + "_button"} onClick={() => {
+                    document.querySelector("#" + proms.id).classList.toggle('anime-list-filter-item-active');
                 }}>
-                    <span>{props.name}</span> <b id={props.id + "_text"}>All</b> <i className="fa fa-angle-down" aria-hidden="true"></i>
+                    <span>{proms.name}</span> <b id={proms.id + "_text"}>All</b> <i className="fa fa-angle-down" aria-hidden="true"></i>
                 </button>
-                <div style={{maxWidth: maxWidth}} className='anime-list-filter-item' id={props.id}>
+                <div style={{maxWidth: maxWidth}} className='anime-list-filter-item' id={proms.id}>
                     {items.map((option) => {
                         return(
                             <div style={{width: rows}} className='anime-list-filter-item-option'>
                                 <input onClick={() => {
                                     const checkbox = document.querySelector('#anime-list-filter-item-' + option.replaceAll(' ', '-'));
-                                    if (props.radio)
+                                    if (proms.radio)
                                     {
                                         if (checkbox.checked) {
-                                            this.setFilter(props.name, props.id, option);
+                                            this.setFilter(proms.name, proms.id, option);
                                         } else {
-                                            this.setFilter(props.name, props.id, option);
+                                            this.setFilter(proms.name, proms.id, option);
                                         }
                                     } else
                                     {
                                         if (checkbox.checked) {
-                                            this.addFilter(props.name, props.id, option);
+                                            this.addFilter(proms.name, proms.id, option);
                                         } else {
-                                            this.removeFilter(props.name, props.id, option);
+                                            this.removeFilter(proms.name, proms.id, option);
                                         }
                                     }
-                                }} type={props.radio ? this.addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == props.selected, props.id) : 'checkbox'} id={'anime-list-filter-item-' + option.replaceAll(' ', '-')} name={'anime-list-filter-item-' + props.name} value={'anime-list-filter-item-' + option}/>
+                                }} type={proms.radio ? this.addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == proms.selected, proms.id) : 'checkbox'} id={'anime-list-filter-item-' + option.replaceAll(' ', '-')} name={'anime-list-filter-item-' + proms.name} value={'anime-list-filter-item-' + option}/>
                                 <label htmlFor={'anime-list-filter-item-' + option.replaceAll(' ', '-')}>{option}</label>
                             </div>
                         );
@@ -166,43 +245,11 @@ class AnimeList extends React.Component {
                         <this.filter name="Sort" selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date"/>
                     </div>
                     <div className='anime-list-header-search'>
-                        <input type='text' placeholder='Search...'/>
-                        <button><i className="fa fa-search" aria-hidden="true"></i> Filter</button>
+                        <input id="searchanimeinput" type='text' placeholder='Search...'/>
+                        <button id="searchanimebutton" type='submit' onClick={this.search}><i className="fa fa-search" aria-hidden="true"></i> Filter</button>
                     </div>
                 </div>
                 <div className='anime-list-container'>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 1</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 2</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 3</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 4</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 5</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 6</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 7</h3>
-                    </div>
-                    <div className='anime-list-item'>
-                        <img src='https://cdn.myanimelist.net/images/anime/9/9453.jpg' alt='anime'/>
-                        <h3>Movie 8</h3>
-                    </div>
                 </div>
             </div>
         </>

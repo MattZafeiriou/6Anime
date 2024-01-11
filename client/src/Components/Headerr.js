@@ -12,6 +12,7 @@ class Header extends Component {
       this.addTopDropdown = this.addTopDropdown.bind(this);
       this.typingTop = this.typingTop.bind(this);
       this.sendSearchTop = this.sendSearchTop.bind(this);
+      this.search = this.search.bind(this);
     }
     
     encode_utf8(s) {
@@ -36,6 +37,17 @@ class Header extends Component {
 
     }
 
+    componentDidMount()
+    {
+        document.getElementById("searchingtop").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("searchButton").click();
+            }
+        });
+    }
+
+
     removeTopDropdown()
     {
         document.getElementById("topdropdown").classList.add("inactive-dropdown");
@@ -43,7 +55,7 @@ class Header extends Component {
     
     sendSearchTop(string)
     {
-        var url = "search/?chars=" + this.encode_utf8(string);
+        var url = "search?chars=" + this.encode_utf8(string);
         var data = "";
 
         fetch("http://localhost:9000/" + url)
@@ -107,6 +119,12 @@ class Header extends Component {
     eraseCookie(name) {   
         document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
+
+    search()
+    {
+        const searchinput = document.getElementById("searchingtop").value;
+        window.location.href = "/search?search=" + searchinput;
+    }
     
     render()
     {
@@ -133,10 +151,8 @@ class Header extends Component {
                     </a>
                 </div>
                 <div className="searchtop">
-                    <form>
-                        <input type="text" autoComplete="off" id="searchingtop" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Find Anime Series, Movies and more" onInput={this.typingTop}/>
-                        <button id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
-                    </form>
+                    <input type="text" autoComplete="off" id="searchingtop" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Find Anime Series, Movies and more" onInput={this.typingTop}/>
+                    <button onClick={this.search} id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
                     <div className="dropdown-content-top inactive-dropdown" id="topdropdown" visibility="hidden"></div>
                 </div>
 

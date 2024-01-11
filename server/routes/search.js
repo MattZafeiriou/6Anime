@@ -1,57 +1,73 @@
-var express = require('express');
-var router = express.Router();
-var sqlHandler = require('./../sqlHandler.js');
-
-var names = null;
-
-function getNames() {
-    if (names == null)
-    {
-        const rawdata = sqlHandler.getAllAnime();
-        let data = rawdata;
-
-        names = [];
-        let max_numbers = Object.keys(data).length;
-        for (var i = 0; i < max_numbers; i++)
-        {
-            var name = data["" + i].folder_name + "-" + data["" + i].id;
-            names.push(name);
-        }
-    }
-    return names;
-}
-
-function search(string) {
-    const queryString = string.split("/search/")[1];
-    const urlParams = new URLSearchParams(queryString);
-
-    const finalArray = [];
-
-    const max_items = 5;
-    var item = 0;
-
-    var chars = "";
-
-    if (urlParams.get("chars"))
-        chars = urlParams.get("chars");
-
-    for (const folder of getNames())
-    {
-        if (folder.toUpperCase().indexOf(chars.toUpperCase()) > -1) {
-            finalArray.push(folder);
-            item++;
-            if (item == max_items)
-                break;
-        }
-    }
-    return finalArray;
-}
-
+const express = require('express');
+const router = express.Router();
+const sqlHandler = require('./../sqlHandler.js');
 
 /* GET search listing. */
 router.get('/', function(req, res, next) {
-    const suggestions = search(req.originalUrl);
-    res.status(200).send(suggestions);
+    const chars = decodeURI(req.query.chars || "");
+    const genre = decodeURI(req.query.genre || "");
+    const country = decodeURI(req.query.country || "");
+    const season = decodeURI(req.query.season || "");
+    const year = decodeURI(req.query.year || "");
+    const type = decodeURI(req.query.type || "");
+    const status = decodeURI(req.query.status || "");
+    const language = decodeURI(req.query.language || "");
+    let sort = decodeURI(req.query.sort || "");
+
+    const page = decodeURI(+req.query.page || 1);
+    const limit = decodeURI(+req.query.limit || 5);
+
+    const tags = genre.split(",");
+    const type_ = type.split(",");
+    const year_ = year.split(",");
+    let folders = [];
+    let query = "SELECT * FROM Anime WHERE name LIKE ?";
+    let params = ["%" + chars + "%"];
+
+    if (genre !== "") {
+        const placeholders = tags.map(tag => 'genre LIKE ?').join(' AND ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        tags.forEach(tag => params.push('%' + tag + '%'));
+    }
+
+    if (year !== "") {
+        const placeholders = year_.map(yearr => 'EXTRACT(YEAR FROM premiered) LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        year_.forEach(yearr => params.push('%' + yearr + '%'));
+    }
+
+    if (type !== "") {
+        const placeholders = type_.map(typee => 'type LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        type_.forEach(typee => params.push('%' + typee + '%'));
+    }
+
+    // sort
+    if (sort !== "" && sort !== "Default") {
+        if (sort === "Name A-Z") {
+            query += " ORDER BY name ASC";
+        } else if (sort === "Release Date") {
+            query += " ORDER BY premiered ASC";
+        } else if (sort === "Most Watched") {
+        }
+    }
+    // limit
+    query += " LIMIT " + limit;
+
+    sqlHandler.con.query(query, params, function (err, result, fields) {
+        if (err) throw err;
+        
+        for (let i = 0; i < result.length; i++) {
+            folders.push(result[i].folder_name + "-" + result[i].id);
+        }
+        res.status(200).send(folders);
+    });
 });
 
 module.exports = router;

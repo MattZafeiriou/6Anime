@@ -58,7 +58,7 @@ VALUES('1', 'https://eno.tendoloads.com/_v6/04c62d67738da375aca8b1659516f077c748
 SELECT * FROM Anime;
 
 -- @block
- DELETE FROM Episode WHERE id = 4
+ DELETE FROM Episode WHERE id = 41
 
 -- @block
 SHOW TABLES;

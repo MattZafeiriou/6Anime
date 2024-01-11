@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/search/*", searchRouter);
+app.use("/search", searchRouter);
 app.use("/getfolder/*", folderRouter);
 app.use("/get_video", getVideoRouter);
 app.use("/anime_url", animeURLRouter);

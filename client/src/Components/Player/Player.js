@@ -364,7 +364,7 @@ class Playerr extends React.Component {
                 <div className='playerr'>
                     <div className='title'>
                         <h3 style={{display: 'flex'}} id='title'>{this.state.title}<this.loading style={{width: '5em'}}/> - Episode {this.state.episode}</h3>
-                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href='../'>{this.state.type}</a> <span>&#62;</span> <a href='#'>{this.state.title}</a></h5>
+                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href={this.state.type == "Movie" ? "/movies" : "/series"}>{this.state.type}</a> <span>&#62;</span> <a href=''>{this.state.title}</a></h5>
                     </div>
                     {/* Player Section starts here */}
                     <div className="main_player">
