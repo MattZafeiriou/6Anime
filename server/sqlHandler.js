@@ -1,6 +1,6 @@
-var mysql = require("mysql2");
+const mysql = require("mysql2");
 
-var con = mysql.createPool({
+const con = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "admin",
@@ -19,6 +19,11 @@ function connect()
     con.query("SELECT * FROM Anime", function (err, result, fields) {
         if (err) throw err;
         anime = result;
+    });
+
+    con.query("SELECT name FROM Anime WHERE JSON_CONTAINS(nicknames, '\"DN\"');", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
     });
 }
 

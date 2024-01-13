@@ -21,8 +21,10 @@ router.get('/', function(req, res, next) {
     const type_ = type.split(",");
     const year_ = year.split(",");
     let folders = [];
-    let query = "SELECT * FROM Anime WHERE name LIKE ?";
-    let params = ["%" + chars + "%"];
+    // in the beginning, I knew what I was doing. Now only ChatGPT knows what this line does and I'm too afraid to ask.
+    // select all the animes that contain in their name or nicknames the chars variable
+    let query = "SELECT * FROM Anime WHERE (name LIKE ? OR EXISTS (SELECT 1 FROM JSON_TABLE(nicknames, '$[*]' COLUMNS(nickname VARCHAR(255) PATH '$')) AS nick WHERE LOWER(nick.nickname) LIKE LOWER(?)))";
+    let params = ["%" + chars + "%", "%" + chars + "%"];
 
     if (genre !== "") {
         const placeholders = tags.map(tag => 'genre LIKE ?').join(' AND ');
@@ -58,7 +60,7 @@ router.get('/', function(req, res, next) {
         }
     }
     // limit
-    query += " LIMIT " + limit;
+    //query += " LIMIT " + limit;
 
     sqlHandler.con.query(query, params, function (err, result, fields) {
         if (err) throw err;

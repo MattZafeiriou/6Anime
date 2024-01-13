@@ -1,27 +1,25 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require("cors");
-var sqlHandler = require("./sqlHandler");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require("cors");
+const sqlHandler = require("./sqlHandler");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var searchRouter = require("./routes/search");
-var folderRouter = require("./routes/getfolder");
-var getVideoRouter = require("./routes/getvideo");
-var animeURLRouter = require("./routes/anime_url");
-var sendFormRouter = require("./routes/send_form");
-var recommendationsRouter = require("./routes/recommendations");
-var addViewRouter = require("./routes/add_view");
-var getViewRouter = require("./routes/get_views");
-var getPopularRouter = require("./routes/get_popular");
-var addVideoRouter = require("./routes/addvideo");
-var addEpisodeRouter = require("./routes/addepisode");
-var getIDRouter = require("./routes/get_id");
+const searchRouter = require("./routes/search");
+const folderRouter = require("./routes/getfolder");
+const getVideoRouter = require("./routes/getvideo");
+const animeURLRouter = require("./routes/anime_url");
+const sendFormRouter = require("./routes/send_form");
+const recommendationsRouter = require("./routes/recommendations");
+const addViewRouter = require("./routes/add_view");
+const getViewRouter = require("./routes/get_views");
+const getPopularRouter = require("./routes/get_popular");
+const addVideoRouter = require("./routes/addvideo");
+const addEpisodeRouter = require("./routes/addepisode");
+const getIDRouter = require("./routes/get_id");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +32,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use("/search", searchRouter);
 app.use("/getfolder/*", folderRouter);
 app.use("/get_video", getVideoRouter);

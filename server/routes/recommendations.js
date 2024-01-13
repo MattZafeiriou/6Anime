@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const fs = require('fs');
-var router = express.Router();
+const router = express.Router();
 const path = require('path');
 
 /* GET recommendations. */
