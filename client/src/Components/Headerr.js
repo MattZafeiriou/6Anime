@@ -123,7 +123,7 @@ class Header extends Component {
     search()
     {
         const searchinput = document.getElementById("searchingtop").value;
-        window.location.href = "/search?search=" + searchinput;
+        window.location.href = "/search?search=" + encodeURI(searchinput);
     }
     
     render()

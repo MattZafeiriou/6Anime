@@ -11,7 +11,7 @@ class Search extends React.Component {
     render() {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const search = urlParams.get('search');
+        const search = decodeURI(urlParams.get('search'));
         return (
         <>
             <AnimeList startInput={search}/>

@@ -128,6 +128,10 @@ class VideoPlayer extends React.Component {
     }
 
     keyPressed(e) {
+        const inputElement = document.getElementById('searchingtop');
+        if (document.activeElement === inputElement)
+            return;
+        
         if (e.keyCode === 32) { // key space
             const player = document.getElementById('player');
             if (player.paused)
