@@ -5,6 +5,7 @@
 /server/node_modules
 /server/public/p
 /node_modules
+/client/build
 /.pnp
 .pnp.js
 

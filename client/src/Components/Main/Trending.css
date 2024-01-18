@@ -1,6 +1,7 @@
 .trending_page {
     margin-top: 5%;
     display: grid;
+    overflow: hidden;
 }
 
 .trending_header h1 {
@@ -31,10 +32,14 @@
 }
 
 .trending_list {
+    height: fit-content;
+    width: 100%;
+    touch-action: none;
+}
+
+.trending_cards {
     display: flex;
     margin-top: 1em;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .trending_card {

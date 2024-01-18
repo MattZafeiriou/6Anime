@@ -54,7 +54,9 @@ class MainP extends Component {
     Tag(props) {
         return (
             <div className='anime_tag'>
-                <p>{props.name}</p>
+                <a href={"/search?genre=" + props.name}>
+                    <p>{props.name}</p>
+                </a>
             </div>
         );
     }

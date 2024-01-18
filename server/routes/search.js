@@ -55,8 +55,12 @@ router.get('/', function(req, res, next) {
         if (sort === "Name A-Z") {
             query += " ORDER BY name ASC";
         } else if (sort === "Release Date") {
-            query += " ORDER BY premiered ASC";
+            query += " ORDER BY premiered DESC";
         } else if (sort === "Most Watched") {
+        } else if (sort === "Recently Added") {
+            query += " ORDER BY added_date DESC";
+        } else if (sort === "Recently Updated") {
+            query += " ORDER BY updated_date DESC";
         }
     }
     // limit

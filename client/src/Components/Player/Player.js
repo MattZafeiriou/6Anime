@@ -30,7 +30,7 @@ class Playerr extends React.Component {
             window.location.href = "/404";
         } else if (episode === undefined || episode === null || episode === "")
         {
-            let last_ep = this.getCookie("last_ep");
+            let last_ep = this.getCookie(id + "-last_ep");
             if (last_ep === null)
                 window.location.href = "/watch/" + window.location.href.split("/")[4] + "/ep1";
             else
@@ -248,7 +248,9 @@ class Playerr extends React.Component {
     Tag = (props) => {
         return (
             <>
-                <h5 className='anime_tag'>{props.name}</h5>
+                <a href={"/search?genre=" + props.name}>
+                    <h5 className='anime_tag'>{props.name}</h5>
+                </a>
             </>
         );
     }
@@ -350,7 +352,7 @@ class Playerr extends React.Component {
                     <div style={{display: 'block'}}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
                         <h5 className='related_anime_info'>Season {props.season} <span>&#8226;</span> {props.epsno} episodes</h5>
-                        <h5 className='related_anime_info'><span>&#8226;</span> {props.views} views</h5>
+                        <h5 className='related_anime_info'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
             </>
@@ -388,7 +390,7 @@ class Playerr extends React.Component {
                         <div className='separator'/>
                         <div className='pcontainer'>
                             <div style={{marginBottom: '1em'}}>
-                                <div style={{display: 'flex'}}>
+                                <div className='infocontainer'>
                                     <img className='anime_img' alt="" src={this.state.img}/>
                                     <div style={{display: 'block'}}>
                                         <h2 id='anime_desc'>Description</h2>

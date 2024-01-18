@@ -13,12 +13,13 @@ class Header extends React.Component {
       <>
           <div className="aboutmain">
               <h1>About Us</h1>
-              <p>We are a group of 4 students who made this project as a school final term project.</p>
-              <p>This website took us over 6 months to create and since the deployment of the website</p>
-              <p>we have been working on it to make it better and better.</p>
+              <p>We are 6Anime, we provide free entertainment to everyone.</p>
+              <p>When all the websites are unstable and people had to move from site to site, we had to create a website that would be</p>
+              <p>stable, free with good user interface and user experience. This website is not fully ready yet as we keep adding new anime every day.</p>
               <br/>
-              <p>If you want to support our work and keep the website running you may donate through our <a href='/contact'>contact page</a></p>
-              <p>Thank you for preferring us!</p>
+              <p>If you want to support our work and keep the website running you may donate through our <a href='/donate'>donate page</a></p>
+              <p>Most of the donations go to charities and fundations while we keep only the part that is essential for the website to keep working.</p>
+              <p>We, 6Anime make no profit.</p>
               <br/>
               <br/>
               <h1>Frequently Asked Questions</h1>

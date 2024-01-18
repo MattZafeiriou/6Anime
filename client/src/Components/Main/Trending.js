@@ -10,9 +10,12 @@ class Trending extends Component {
             firstCard: 1,
             lastCard: 7,
             maxCards: 7,
-            startX: 0,
         }
-        this.oof = this.oof.bind(this);
+        this.startX = 0;
+        this.offset = 0;
+        this.dragging = false;
+        this.startDragging = this.startDragging.bind(this);
+        this.stopDragging = this.stopDragging.bind(this);
         this.setPopularAnime = this.setPopularAnime.bind(this);
         this.setPopularAnimeTitle = this.setPopularAnimeTitle.bind(this);
     }
@@ -42,12 +45,46 @@ class Trending extends Component {
 
     componentDidMount() {
         this.setPopularAnime();
+
+        // Add event listener for mouse move
+        document.body.addEventListener('mousemove', (event) => {
+            const x = event.clientX;
+            let diff = this.startX - x;
+
+            if (this.dragging)
+            {
+                if (diff > 0)
+                    document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + diff + 'px)';
+                else
+                {
+                    diff = -diff;
+                    document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(' + diff + 'px)';
+                }
+            }
+        });
+
+        document.body.addEventListener('mouseup', (event) => {
+            if (this.dragging)
+            {
+                this.stopDragging(event);
+            }
+        });
     }
 
-    oof(event) {
-        alert('oof');
-        this.setState({startX: event.clientX});
-        alert(event.clientX)
+    startDragging(event) {
+        if (this.dragging) return;
+        this.startX = event.clientX + this.offset;
+        this.dragging = true;
+        document.getElementsByClassName('trending_cards')[0].style.pointerEvents = 'none';
+        event.preventDefault();
+    }
+
+    stopDragging(event) {
+        if (!this.dragging) return;
+        this.dragging = false;
+        this.offset = this.startX - event.clientX;
+        document.getElementsByClassName('trending_cards')[0].style.pointerEvents = '';
+        event.preventDefault();
     }
 
     setPopularAnimeTitle(props, cardNo)
@@ -83,7 +120,7 @@ class Trending extends Component {
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);
-                const raDiv = document.getElementsByClassName('trending_list')[0];
+                const raDiv = document.getElementsByClassName('trending_cards')[0];
                 const newDiv = document.createElement('div');
                 raDiv.appendChild(newDiv);
                 // Render the component into the new div
@@ -121,38 +158,40 @@ class Trending extends Component {
                     <h1>Trending Anime</h1>
                     <a href='/trending'>View all <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
-                <div className='trending_list' onDragStart={this.oof}>
-                    <a onClick={() => {
-                        if (this.state.firstCard == 1) return;
-                        document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
-                        document.getElementsByClassName('trending_next')[0].style.visibility = 'visible';
-                        this.setState({firstCard: this.state.firstCard - 1}, () => {
-                            if (this.state.firstCard == 1)
-                                document.getElementsByClassName('trending_back')[0].style.visibility = 'hidden';
-                        });
-                        this.setState({lastCard: this.state.lastCard - 1});
-                    }}
-                    href='javascript:void(0)'>
-                        <div className='trending_back'>
-                            <i className="fa-solid fa-less-than"></i>
-                        </div>
-                    </a>
-                    <a onClick={() => {
-                        let card = document.getElementById('card' + this.state.lastCard);
-                        if (card == null) return;
-                        card.scrollIntoView({behavior: "smooth", block: "center"});
-                        document.getElementsByClassName('trending_back')[0].style.visibility = 'visible';
-                        this.setState({firstCard: this.state.firstCard + 1});
-                        this.setState({lastCard: this.state.lastCard + 1}, () => {
-                            if (this.state.lastCard > this.state.maxCards)
-                                document.getElementsByClassName('trending_next')[0].style.visibility = 'hidden';
-                        });
-                    }} 
-                    href='javascript:void(0)'>
-                        <div className='trending_next'>
-                            <i className="fa-solid fa-greater-than"></i>
-                        </div>
-                    </a>
+                <div className='trending_list' draggable="true" onDragStart={this.startDragging} onMouseUp={this.stopDragging} onDragEnd={this.stopDragging}>
+                    <div className='trending_cards'>
+                        <a onClick={() => {
+                            if (this.state.firstCard == 1) return;
+                            document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
+                            document.getElementsByClassName('trending_next')[0].style.visibility = 'visible';
+                            this.setState({firstCard: this.state.firstCard - 1}, () => {
+                                if (this.state.firstCard == 1)
+                                    document.getElementsByClassName('trending_back')[0].style.visibility = 'hidden';
+                            });
+                            this.setState({lastCard: this.state.lastCard - 1});
+                        }}
+                        href='javascript:void(0)'>
+                            <div className='trending_back'>
+                                <i className="fa-solid fa-less-than"></i>
+                            </div>
+                        </a>
+                        <a onClick={() => {
+                            let card = document.getElementById('card' + this.state.lastCard);
+                            if (card == null) return;
+                            card.scrollIntoView({behavior: "smooth", block: "center"});
+                            document.getElementsByClassName('trending_back')[0].style.visibility = 'visible';
+                            this.setState({firstCard: this.state.firstCard + 1});
+                            this.setState({lastCard: this.state.lastCard + 1}, () => {
+                                if (this.state.lastCard > this.state.maxCards)
+                                    document.getElementsByClassName('trending_next')[0].style.visibility = 'hidden';
+                            });
+                        }} 
+                        href='javascript:void(0)'>
+                            <div className='trending_next'>
+                                <i className="fa-solid fa-greater-than"></i>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
             </>

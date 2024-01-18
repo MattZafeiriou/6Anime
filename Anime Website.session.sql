@@ -16,7 +16,9 @@ CREATE TABLE Anime(
     other_seasons_folders JSON NOT NULL,
     other_seasons_names JSON NOT NULL,
     type TEXT NOT NULL, -- Movie or Series
-    poster TEXT NOT NULL
+    poster TEXT NOT NULL,
+    update_date DATE NOT NULL,
+    added_date DATE NOT NULL
 );
 
 -- @block
@@ -68,3 +70,24 @@ DROP TABLE Episode
 
 -- @block
 SELECT url FROM Anime WHERE title='MORE'
+
+-- @block
+ALTER TABLE Anime
+ADD COLUMN added_date DATE;
+
+-- @block
+UPDATE Anime
+SET added_date = CURRENT_DATE;
+
+-- @block
+UPDATE Episode
+SET tracks = '["https://cc.bunnyccdn.co/b8/7c/b87cf50ef7f1c9737d845a3ae961431a/eng-0.vtt"]'
+WHERE id = 81;
+
+-- @block
+UPDATE Episode
+SET video_url = 'https://eno.tendoloads.com/_v6/ef70bfa1e3f4081d895f25a06ce43fc78ecf2109cc436d9d9535068ef9afccbd49933ecc7fb5c2510802ca567b6e85519c582ab4e47848e4f1265e31054cc3468b536716d02d4d9ed627b288bd9b0522f8fb944b7029ff9398cb43e9fc0149f197b4810bc7c44c198e87ac5668f7548f7ffced9cdc3e71ab68f9c5343eb36e68/master.m3u8'
+WHERE id = 81;
+
+-- @block
+SELECT * FROM Episode WHERE anime_id = 7;

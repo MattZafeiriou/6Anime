@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     const anime_type = req.query.anime_type;
     const poster = req.query.poster;
 
-    sqlHandler.con.query("INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [name, folder, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, anime_type, poster], function (err, result, fields) {
+    sqlHandler.con.query("INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, folder, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, anime_type, poster], function (err, result, fields) {
         if (err) throw err;
         res.sendStatus(200);
     });

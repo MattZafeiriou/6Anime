@@ -20,11 +20,6 @@ function connect()
         if (err) throw err;
         anime = result;
     });
-
-    con.query("SELECT name FROM Anime WHERE JSON_CONTAINS(nicknames, '\"DN\"');", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-    });
 }
 
 function getAllAnime()

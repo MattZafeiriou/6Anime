@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import './Headerr.css'
+import './Header.css'
 import logoImg from '../logo.png'
 import { Image } from 'react-bootstrap';
 
@@ -45,6 +45,17 @@ class Header extends Component {
                 document.getElementById("searchButton").click();
             }
         });
+
+        document.body.addEventListener('click', function(e) {
+            const content = document.getElementsByClassName("mobile_menu_content")[0];
+            const button = document.getElementsByClassName("mobile_menu_button")[0];
+
+            if (content.classList.contains("mobile_menu_content_active") && !content.contains(e.target) && !button.contains(e.target)) {
+                content.classList.remove("mobile_menu_content_active");
+                button.classList.remove("mobile_menu_button_active");
+            }
+
+        });
     }
 
 
@@ -76,6 +87,9 @@ class Header extends Component {
     addTopDropdown()
     {
         // document.getElementById("searchInput").
+        if (document.getElementsByClassName("mobile_menu_button_active")[0] != null)
+            this.toggleMenu();
+
         if (document.getElementById("topdropdown").innerHTML.trim()==="")
         {
             this.typingTop();
@@ -125,6 +139,12 @@ class Header extends Component {
         const searchinput = document.getElementById("searchingtop").value;
         window.location.href = "/search?search=" + encodeURI(searchinput);
     }
+
+    toggleMenu()
+    {
+        document.getElementsByClassName("mobile_menu_button")[0].classList.toggle("mobile_menu_button_active");
+        document.getElementsByClassName("mobile_menu_content")[0].classList.toggle("mobile_menu_content_active");
+    }
     
     render()
     {
@@ -150,12 +170,31 @@ class Header extends Component {
                         </div>
                     </a>
                 </div>
+
+                {/* mobile menu button */}
+                <div className='mobile_menu'>
+                    <div className='mobile_menu_button' onClick={this.toggleMenu}>
+                        <div className='mobile_menu_button_line'></div>
+                        <div className='mobile_menu_button_line'></div>
+                        <div className='mobile_menu_button_line'></div>
+                    </div>
+                    <div className='mobile_menu_content'>
+                        <div className='mobile_menu_items'>
+                            <a href="/"><div id="home">Home</div></a>
+                            <a href="/about"><div id="about">About</div></a>
+                            <a href="/movies"><div id="movies">Movies</div></a>
+                            <a href="/series"><div id="series">Series</div></a>
+                            <a href="/recently_added"><div id="recently_added">Recently Added</div></a>
+                            <a href="/contact"><div id="contact_us">Contact Us</div></a>
+                            <a href="/donate"><div id="doante">Donate</div></a>
+                        </div>
+                    </div>
+                </div>
                 <div className="searchtop">
                     <input type="text" autoComplete="off" id="searchingtop" onFocus={this.addTopDropdown} onBlur={this.removeTopDropdown} placeholder="Find Anime Series, Movies and more" onInput={this.typingTop}/>
                     <button onClick={this.search} id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
                     <div className="dropdown-content-top inactive-dropdown" id="topdropdown" visibility="hidden"></div>
                 </div>
-
             </div>
         </>
         );

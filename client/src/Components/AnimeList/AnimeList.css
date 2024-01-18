@@ -1,15 +1,18 @@
 .anime-list {
     width: 60vw;
     margin-left: 5vw;
-    height: 100vh;
     margin-top: 3em;
     color: white;
 }
-
+@media screen and (max-width: 1200px) {
+    .anime-list {
+        width: 90vw;
+    }
+}
 /* set .anime-list width to 85vw if screen smaller than 800px */
 @media screen and (max-width: 800px) {
     .anime-list {
-        width: 85vw;
+        width: 90vw;
     }
 }
 
@@ -20,12 +23,29 @@
 
 .anime-list-item {
     width: 10vw;
-    height: 30vh;
-    margin: 1em;
+    height: 15vw;
+    margin: 1em 1em 3em 1em;
     background-color: #1f1f1f;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     transition: 0.3s;
+}
+
+@media screen and (max-width: 1200px) {
+    .anime-list-item {
+        width: 20vw;
+        height: 30vw; /* 2:3 width:height */
+        margin: 2em 1.25vw;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .anime-list-item {
+        width: 40vw;
+        height: 60vw;
+        margin: 1em 2.5vw 3em 2.5vw;
+    }
 }
 
 .anime-list-item:hover {

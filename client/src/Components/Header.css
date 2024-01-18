@@ -17,7 +17,6 @@ body {
 
 .top {
     overflow: hidden;
-    max-height: 80px;
     width: 90vw;
     margin-left: 5vw;
 }
@@ -154,4 +153,95 @@ body {
 
 #searchButton {
     fill: white;
+}
+
+.mobile_menu_button {
+    opacity: 0;
+    display: none;
+    width: fit-content;
+    transition-duration: .2s;
+    margin-top: 1.5em;
+    cursor: pointer;
+    float: right;
+}
+
+.mobile_menu_button_active {
+    transform: rotate(90deg);
+}
+
+.mobile_menu_button_line {
+    transition-duration: .2s;
+    width: 30px;
+    height: 5px;
+    margin-bottom: 3px;
+    background-color: white;
+}
+
+.mobile_menu_content {
+    margin-top: 5em;
+    width: 90vw;
+    transition-duration: .1s;
+    background-color: #1F1F1F;
+    z-index: 100;
+    position: absolute;
+    opacity: 0;
+    display: none;
+    border-radius: 10px;
+}
+
+.mobile_menu_items {
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile_menu_items a {
+    transition-duration: .2s;
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    width: fit-content;
+    margin: .5em;
+}
+
+.mobile_menu_items a:hover {
+    color: #9b2727;
+}
+
+.mobile_menu_content_active {
+    opacity: 1;
+    display: block;
+}
+
+@media screen and (max-width: 1200px) {
+    .donate_button {
+        display: none;
+    }
+
+    .searchtop {
+        margin-right: 0px;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .searchtop {
+        margin-right: 1em;
+        max-width: 50vw;
+    }
+
+    .dropdown-content-top {
+        max-width: 50vw;
+    }
+
+    .left_list {
+        display: none;
+    }
+
+    .mobile_menu_button {
+        opacity: 1;
+        display: block;
+    }
 }

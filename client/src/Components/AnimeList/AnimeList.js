@@ -10,7 +10,11 @@ class AnimeList extends React.Component {
         this.filters = {
         };
         this.startOptions = proms.startOptions === undefined ? "" : proms.startOptions;
-        this.startInput = proms.startInput === undefined ? "" : proms.startInput;
+        const url = window.location.href;
+        const urlParams = new URLSearchParams(url.split("?")[1]);
+        const genre = urlParams.get('genre');
+        this.startOptions = genre === null ? this.startOptions : decodeURI(genre);
+        this.startInput = (proms.startInput === undefined || proms.startInput === "null") ? "" : proms.startInput;
         this.setCheck = [];
         this.addFilter = this.addFilter.bind(this);
         this.setFilter = this.setFilter.bind(this);

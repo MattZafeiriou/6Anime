@@ -61,7 +61,7 @@ class VideoPlayer extends React.Component {
         }
 
         if (global)
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/watch; SameSite=None; Secure";
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/watch/; SameSite=None; Secure";
         else
         {
             let name2 = window.location.href.split("/")[4];
@@ -74,7 +74,11 @@ class VideoPlayer extends React.Component {
         let currentTime = this.getCookie("currentTime");
         let currentVolume = this.getCookie("currentVolume");
 
-        this.setCookie("last_ep", this.state.episode, 7, false)
+        const name = window.location.href.split("/")[4];
+        const splitted = name.split("-");
+        const id = splitted[splitted.length - 1];
+
+        this.setCookie(id + "-last_ep", this.state.episode, 7, true)
         const player = document.getElementById('player');
 
         if (currentTime)
@@ -114,13 +118,16 @@ class VideoPlayer extends React.Component {
 
     cooldownToHide()
     {
+        const player = document.getElementById('player');
+
         document.getElementsByClassName("video-player")[0].style.cursor = null;
         const controls = document.getElementsByClassName('controls')[0];
         controls.classList.remove('hide');
         if (this.cooldown != null)
             clearTimeout(this.cooldown);
-        if (!this.mouseInside)
         this.cooldown = setTimeout(() => {
+            if (player.paused)
+                return;
             const controls = document.getElementsByClassName('controls')[0];
             controls.classList.add('hide');
             document.getElementsByClassName("video-player")[0].style.cursor = "none";
