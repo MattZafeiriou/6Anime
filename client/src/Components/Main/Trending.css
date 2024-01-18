@@ -34,7 +34,6 @@
 .trending_list {
     height: fit-content;
     width: 100%;
-    touch-action: none;
 }
 
 .trending_cards {
@@ -160,7 +159,7 @@
     padding: 2em .6em 2em .6em;
     border-radius: 5px;
     z-index: 1;
-    margin-top: 200px;
+    margin-top: -350px;
     margin-left: .5em;
     display: flex;
     flex-direction: column;
@@ -183,7 +182,7 @@
     padding: 2em .6em 2em .6em;
     border-radius: 5px;
     z-index: 1;
-    margin-top: 200px;
+    margin-top: -350px;
     margin-left: calc(90vw - .4em - 1.6em - .5em);
     display: flex;
     flex-direction: column;
@@ -205,4 +204,13 @@
         opacity: 1;
         background-color: rgba(0, 0, 0, 1);
     }
+}
+
+.fullyLeft {
+    transform: translateX(0px) !important;
+    transition-duration: .3s;
+}
+
+.fullyRight {
+    transition-duration: .3s;
 }

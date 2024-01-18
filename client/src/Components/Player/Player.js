@@ -5,7 +5,7 @@ import './videoplayer.css'
 import VideoPlayer from './videoplayer';
 import { Placeholder } from 'react-bootstrap';
 
-class Playerr extends React.Component {
+class Player extends React.Component {
 
     getCookie(name) {
         let nameEQ = name + "=";
@@ -27,14 +27,14 @@ class Playerr extends React.Component {
 
         if (id === undefined || id === null || id === "" || (splitted.length < 2 && isNaN(splitted[0])))
         {
-            window.location.href = "/404";
+            window.history.replaceState(null, '', "/404");
         } else if (episode === undefined || episode === null || episode === "")
         {
             let last_ep = this.getCookie(id + "-last_ep");
             if (last_ep === null)
-                window.location.href = "/watch/" + window.location.href.split("/")[4] + "/ep1";
+                window.history.replaceState(null, '', "/watch/" + window.location.href.split("/")[4] + "/ep1");
             else
-                window.location.href = "/watch/" + window.location.href.split("/")[4] + "/ep" + last_ep;
+            window.history.replaceState(null, '', "/watch/" + window.location.href.split("/")[4] + "/ep" + last_ep);
         }
 
         this.state = {
@@ -122,7 +122,7 @@ class Playerr extends React.Component {
             let info = JSON.parse(data);
             if (info.folder_name != animeName) // The anime name on url is different from the actual of the id's name
             {
-                window.location.href = "/watch/" + info.folder_name + "-" + id;
+                window.history.replaceState(null, '', "/watch/" + info.folder_name + "-" + id + "/ep" + this.state.episode);
             }
             this.setState({title: info.name}, () => {
                 document.title = this.state.title + " - Episode " + this.state.episode + " | 6Anime"}
@@ -431,4 +431,4 @@ class Playerr extends React.Component {
     );
     };
 }
-export default Playerr;
+export default Player;

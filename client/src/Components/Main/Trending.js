@@ -8,8 +8,8 @@ class Trending extends Component {
         super(props);
         this.state = {
             firstCard: 1,
-            lastCard: 7,
-            maxCards: 7,
+            lastCard: 10,
+            maxCards: 10,
         }
         this.startX = 0;
         this.offset = 0;
@@ -53,11 +53,22 @@ class Trending extends Component {
 
             if (this.dragging)
             {
-                if (diff > 0)
+                const lastCard = document.getElementById('card1');
+                const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+                const divWidth = window.innerWidth * .9; // 90% of window width
+                const bruh = divWidth / cardWidth;
+
+                const max = cardWidth * (this.state.maxCards - bruh);
+                if (diff < max && diff > 0)
                     document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + diff + 'px)';
-                else
+                else if (diff >= max)
                 {
-                    diff = -diff;
+                    const a = 300;
+                    diff = max + a * Math.atan((diff - max) / a); // Smooth transition i made it myself and didnt steal this code for once :)
+                    document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + diff + 'px)';
+                } else {
+                    const a = 300;
+                    diff = a * Math.atan(-diff / a); // Smooth transition i made it myself and didnt steal this code for once :)
                     document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(' + diff + 'px)';
                 }
             }
@@ -69,6 +80,77 @@ class Trending extends Component {
                 this.stopDragging(event);
             }
         });
+
+        document.body.addEventListener('mouseleave', (event) => {
+            if (this.dragging)
+            {
+                this.stopDragging(event);
+            }
+        });
+
+        // mobile support
+        const list = document.getElementsByClassName('trending_list')[0];
+
+        list.addEventListener('touchmove', (event) => {
+            const x = event.targetTouches[0].pageX;
+            if (!this.dragging)
+            {
+                this.startX = x + this.offset;
+                this.dragging = true;
+                document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
+                document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
+                document.getElementsByClassName('trending_list')[0].style.transform = '';
+            }
+            let diff = this.startX - x;
+
+            const lastCard = document.getElementById('card1');
+            const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+            const divWidth = window.innerWidth * .9; // 90% of window width
+            const bruh = divWidth / cardWidth;
+
+            const max = cardWidth * (this.state.maxCards - bruh);
+            if (diff < max && diff > 0)
+                document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + diff + 'px)';
+            else if (diff >= max)
+            {
+                const a = 200;
+                diff = max + a * Math.atan((diff - max) / a); // Smooth transition i made it myself and didnt steal this code for once :)
+                document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + diff + 'px)';
+            } else {
+                const a = 200;
+                diff = a * Math.atan(-diff / a); // Smooth transition i made it myself and didnt steal this code for once :)
+                document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(' + diff + 'px)';
+            }
+
+            event.preventDefault();
+        }, { passive: false });
+
+        list.addEventListener('touchend', (event) => {
+            if (this.dragging)
+            {
+                const x = event.changedTouches[0].pageX;
+                this.dragging = false;
+                this.offset = this.startX - x;
+        
+                if (this.offset < 0)
+                {
+                    this.offset = 0;
+                    document.getElementsByClassName('trending_list')[0].classList.add('fullyLeft');
+                }
+                const lastCard = document.getElementById('card1');
+                const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+                const divWidth = window.innerWidth * .9; // 90% of window width
+                const bruh = divWidth / cardWidth;
+        
+                const max = cardWidth * (this.state.maxCards - bruh);
+                if (this.offset > max)
+                {
+                    this.offset = max;
+                    document.getElementsByClassName('trending_list')[0].classList.add('fullyRight');
+                    document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + this.offset + 'px)';
+                }
+            }
+        });
     }
 
     startDragging(event) {
@@ -76,6 +158,9 @@ class Trending extends Component {
         this.startX = event.clientX + this.offset;
         this.dragging = true;
         document.getElementsByClassName('trending_cards')[0].style.pointerEvents = 'none';
+        document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
+        document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
+        document.getElementsByClassName('trending_list')[0].style.transform = '';
         event.preventDefault();
     }
 
@@ -84,6 +169,24 @@ class Trending extends Component {
         this.dragging = false;
         this.offset = this.startX - event.clientX;
         document.getElementsByClassName('trending_cards')[0].style.pointerEvents = '';
+
+        if (this.offset < 0)
+        {
+            this.offset = 0;
+            document.getElementsByClassName('trending_list')[0].classList.add('fullyLeft');
+        }
+        const lastCard = document.getElementById('card1');
+        const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+        const divWidth = window.innerWidth * .9; // 90% of window width
+        const bruh = divWidth / cardWidth;
+
+        const max = cardWidth * (this.state.maxCards - bruh);
+        if (this.offset > max)
+        {
+            this.offset = max;
+            document.getElementsByClassName('trending_list')[0].classList.add('fullyRight');
+            document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + this.offset + 'px)';
+        }
         event.preventDefault();
     }
 
@@ -140,7 +243,7 @@ class Trending extends Component {
 
     setPopularAnime()
     {
-        const url = "get_popular/?max=6";
+        const url = "get_popular/?max=10";
         fetch("http://localhost:9000/" + url)
         .then(res => res.text())
         .then(data => {
@@ -160,7 +263,9 @@ class Trending extends Component {
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={this.startDragging} onMouseUp={this.stopDragging} onDragEnd={this.stopDragging}>
                     <div className='trending_cards'>
-                        <a onClick={() => {
+                    </div>
+                </div>
+                <a onClick={() => {
                             if (this.state.firstCard == 1) return;
                             document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
                             document.getElementsByClassName('trending_next')[0].style.visibility = 'visible';
@@ -191,8 +296,6 @@ class Trending extends Component {
                                 <i className="fa-solid fa-greater-than"></i>
                             </div>
                         </a>
-                    </div>
-                </div>
             </div>
             </>
         );

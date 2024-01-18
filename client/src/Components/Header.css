@@ -224,6 +224,9 @@ body {
         margin-right: 0px;
         width: auto;
     }
+    .dropdown-content-top {
+        width: auto;
+    }
 }
 
 @media screen and (max-width: 900px) {
