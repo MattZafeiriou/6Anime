@@ -44,6 +44,22 @@ CREATE TABLE Views(
 )
 
 -- @block
+CREATE TABLE Form(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    text TEXT NOT NULL,
+    ip TEXT NOT NULL
+)
+
+-- @block
+SELECT * FROM Form;
+
+-- @block
+DROP TABLE Form;
+
+-- @block
 INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster)
 VALUES('Tenki No Ko', 'Tenki_No_Ko', '["Weathering with you","天気の子"]', 1, "Tokyo is currently experiencing rain showers that seem to disrupt the usual pace of everyone living there to no end. Amidst this seemingly eternal downpour arrives the runaway high school student Hodaka Morishima, who struggles to financially support himself—ending up with a job at a small-time publisher. At the same time, the orphaned Hina Amano also strives to find work to sustain herself and her younger brother. Both fates intertwine when Hodaka attempts to rescue Hina from shady men, deciding to run away together. Subsequently, Hodaka discovers that Hina has a strange yet astounding power: the ability to call out the sun whenever she prays for it. With Tokyo's unusual weather in mind, Hodaka sees the potential of this ability. He suggests that Hina should become a sunshine girl—someone who will clear the sky for people when they need it the most. Things begin looking up for them at first. However, it is common knowledge that power always comes with a hefty price...",
 '["CoMix Wave Films"]', '["Drama","Fantasy","Romance"]', 1, 114, '2019-07-19', '[]', '[]', "Movie", 'https://cdn.myanimelist.net/images/anime/1009/103147l.jpg');

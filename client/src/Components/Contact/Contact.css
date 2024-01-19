@@ -7,6 +7,14 @@
     background-color: #141414;
 }
 
+@media screen and (max-width: 800px) {
+    .container {
+        width: 90vw;
+        margin-top: 1em;
+    }
+    
+}
+
 .container h1 {
     font-family: 'PT Serif';
     color: white;
@@ -19,8 +27,21 @@
     font-size: 1em;
 }
 
-.contact_group {
+.container img {
+    width: 10vw;
+    min-width: 200px;
+}
+
+.contact_main {
     display: flex;
+    margin-top: 3em;
+}
+
+@media screen and (max-width: 800px) {
+    .contact_main {
+        display: block;
+    }
+    
 }
 
 #required {

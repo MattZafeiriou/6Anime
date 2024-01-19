@@ -5,7 +5,7 @@ class Submit_success extends React.Component {
   render() {
     return (
       <>
-          <div style={{color: 'white', margin: '10vw', marginTop: '0'}}>
+          <div style={{color: 'white', margin: '10vw', marginTop: '1em'}}>
               <h1>Form submitted succesfully!</h1>
           </div>
       </>

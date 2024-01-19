@@ -15,6 +15,12 @@
     font-weight: 300;
 }
 
+@media screen and (max-width: 800px) {
+    .aboutmain p {
+        line-height: 1.2em;
+    }
+}
+
 .accordion-button {
     background-color: hsl(0, 0%, 15%) !important;
     color: white;

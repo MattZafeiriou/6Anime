@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import './Header.css'
-import logoImg from '../logo.png'
+import logoImg from '../logo.svg'
 import { Image } from 'react-bootstrap';
 
 class Header extends Component {

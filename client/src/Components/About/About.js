@@ -23,7 +23,7 @@ class Header extends React.Component {
               <br/>
               <br/>
               <h1>Frequently Asked Questions</h1>
-            <Accordion defaultActiveKey="0">
+            <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>What is the purpose of this website?</Accordion.Header>
                 <Accordion.Body>
