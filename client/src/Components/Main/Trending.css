@@ -153,7 +153,7 @@
 }
 
 .trending_back {
-    visibility: hidden;
+    cursor: pointer;
     transition-duration: .3s;
     position: absolute;
     padding: 2em .6em 2em .6em;
@@ -177,6 +177,7 @@
 }
 
 .trending_next {
+    cursor: pointer;
     transition-duration: .3s;
     position: absolute;
     padding: 2em .6em 2em .6em;

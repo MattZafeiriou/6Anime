@@ -265,33 +265,48 @@ class Trending extends Component {
                     <div className='trending_cards'>
                     </div>
                 </div>
-                <a onClick={() => {
-                            if (this.state.firstCard == 1) return;
-                            document.getElementById('card' + (this.state.firstCard - 1 )).scrollIntoView({behavior: "smooth", block: "center"});
-                            document.getElementsByClassName('trending_next')[0].style.visibility = 'visible';
-                            this.setState({firstCard: this.state.firstCard - 1}, () => {
-                                if (this.state.firstCard == 1)
-                                    document.getElementsByClassName('trending_back')[0].style.visibility = 'hidden';
-                            });
-                            this.setState({lastCard: this.state.lastCard - 1});
+                        <a onClick={() => {
+                            const lastCard = document.getElementById('card1');
+                            const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+                            const previous = Math.ceil(this.offset / cardWidth - 1); // get previous card number (eg 3 cards)
+                            const difference = previous - (this.offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
+
+                            let card = document.getElementById('card' + (previous + 1));
+                            if (card == null) return;
+
+                            document.getElementsByClassName('trending_list')[0].style.transition = '.3s';
+                            document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + (this.offset + difference * cardWidth) + 'px)';
+                            this.offset += difference * cardWidth;
+                            setTimeout(()=> {
+                                document.getElementsByClassName('trending_list')[0].style.transition = '';
+                            }
+                            ,300);
                         }}
-                        href='javascript:void(0)'>
+                        >
                             <div className='trending_back'>
                                 <i className="fa-solid fa-less-than"></i>
                             </div>
                         </a>
                         <a onClick={() => {
-                            let card = document.getElementById('card' + this.state.lastCard);
+                            const lastCard = document.getElementById('card1');
+                            const cardWidth = lastCard.offsetWidth + 16; // 16px margin
+                            const divWidth = window.innerWidth * .9; // 90% of window width
+                            const bruh = divWidth / cardWidth; // how many cards fit inside the div (eg 2.5 cards)
+                            const next = Math.ceil(bruh + Math.ceil(this.offset / cardWidth)); // get next card number (eg 3 cards)
+                            const difference = next - (bruh + this.offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
+
+                            let card = document.getElementById('card' + next);
                             if (card == null) return;
-                            card.scrollIntoView({behavior: "smooth", block: "center"});
-                            document.getElementsByClassName('trending_back')[0].style.visibility = 'visible';
-                            this.setState({firstCard: this.state.firstCard + 1});
-                            this.setState({lastCard: this.state.lastCard + 1}, () => {
-                                if (this.state.lastCard > this.state.maxCards)
-                                    document.getElementsByClassName('trending_next')[0].style.visibility = 'hidden';
-                            });
+
+                            document.getElementsByClassName('trending_list')[0].style.transition = '.3s';
+                            document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(-' + (this.offset + difference * cardWidth) + 'px)';
+                            this.offset += difference * cardWidth;
+                            setTimeout(()=> {
+                                document.getElementsByClassName('trending_list')[0].style.transition = '';
+                            }
+                            ,300);
                         }} 
-                        href='javascript:void(0)'>
+                        >
                             <div className='trending_next'>
                                 <i className="fa-solid fa-greater-than"></i>
                             </div>

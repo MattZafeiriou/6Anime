@@ -33,6 +33,8 @@ class Header extends Component {
                 this.getNameTop(string[i]);
             }
             document.getElementById("topdropdown").classList.remove("inactive-dropdown");
+            if (string.length === 0)
+                document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>No results found</h5>";
         }
 
     }
@@ -55,6 +57,17 @@ class Header extends Component {
                 button.classList.remove("mobile_menu_button_active");
             }
 
+        });
+
+        window.addEventListener("resize", (event) => {
+            const content = document.getElementsByClassName("mobile_menu_content")[0];
+            const button = document.getElementsByClassName("mobile_menu_button")[0];
+
+            if (window.innerWidth > 900)
+            {
+                content.classList.remove("mobile_menu_content_active");
+                button.classList.remove("mobile_menu_button_active");
+            }
         });
     }
 
