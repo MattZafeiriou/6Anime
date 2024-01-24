@@ -136,13 +136,14 @@ class Trending extends Component {
                 {
                     this.offset = 0;
                     document.getElementsByClassName('trending_list')[0].classList.add('fullyLeft');
+                    document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(' + 0 + 'px)';
                 }
                 const lastCard = document.getElementById('card1');
                 const cardWidth = lastCard.offsetWidth + 16; // 16px margin
                 const divWidth = window.innerWidth * .9; // 90% of window width
                 const bruh = divWidth / cardWidth;
         
-                const max = cardWidth * (this.state.maxCards - bruh);
+                const max = cardWidth * (this.state.maxCards - bruh) - 16; // 16px margin
                 if (this.offset > max)
                 {
                     this.offset = max;
@@ -180,7 +181,7 @@ class Trending extends Component {
         const divWidth = window.innerWidth * .9; // 90% of window width
         const bruh = divWidth / cardWidth;
 
-        const max = cardWidth * (this.state.maxCards - bruh);
+        const max = cardWidth * (this.state.maxCards - bruh) - 16; // 16px margin
         if (this.offset > max)
         {
             this.offset = max;
@@ -266,6 +267,8 @@ class Trending extends Component {
                     </div>
                 </div>
                         <a onClick={() => {
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
                             const lastCard = document.getElementById('card1');
                             const cardWidth = lastCard.offsetWidth + 16; // 16px margin
                             const previous = Math.ceil(this.offset / cardWidth - 1); // get previous card number (eg 3 cards)
@@ -288,13 +291,14 @@ class Trending extends Component {
                             </div>
                         </a>
                         <a onClick={() => {
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
                             const lastCard = document.getElementById('card1');
                             const cardWidth = lastCard.offsetWidth + 16; // 16px margin
                             const divWidth = window.innerWidth * .9; // 90% of window width
                             const bruh = divWidth / cardWidth; // how many cards fit inside the div (eg 2.5 cards)
                             const next = Math.ceil(bruh + Math.ceil(this.offset / cardWidth)); // get next card number (eg 3 cards)
                             const difference = next - (bruh + this.offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
-
                             let card = document.getElementById('card' + next);
                             if (card == null) return;
 

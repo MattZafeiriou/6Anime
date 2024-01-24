@@ -10,6 +10,54 @@ class RandomVideo extends Component {
         this.state = {
             shown: false
         }
+
+        this.setRandomVideo = this.setRandomVideo.bind(this);
+    }
+
+    setRandomVideo(data)
+    {
+        document.getElementById("random_video_trailer").src = data.video;
+        document.getElementById("random_video_trailer").title = data.name;
+
+        document.getElementsByClassName("random_video_trailer_title")[0].innerHTML = data.name;
+
+        document.getElementsByClassName("random_video_trailer_desc")[0].innerHTML = data.description;
+
+        document.getElementById("watchLink").href = "/watch/" + data.folder_name;
+
+        document.getElementById("tag1link").href = "/search?genre=" + data.tags[0];
+        document.getElementById("tag2link").href = "/search?genre=" + data.tags[1];
+        document.getElementById("tag3link").href = "/search?genre=" + data.tags[2];
+
+        document.getElementById("tag1").innerHTML = data.tags[0];
+        document.getElementById("tag2").innerHTML = data.tags[1];
+        document.getElementById("tag3").innerHTML = data.tags[2];
+    }
+
+    getCookie(name) {
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(';');
+        for(let i=0;i < ca.length;i++) {
+            let c = ca[i];
+            while (c.charAt(0)===' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    eraseCookie(name) {   
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+          let date = new Date();
+          date.setTime(date.getTime() + (days*24*60*60*1000));
+          expires = "; expires=" + date.toUTCString();
+        }
+
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=None; Secure";
     }
 
     handleScroll() {
@@ -27,6 +75,18 @@ class RandomVideo extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
+        if (this.getCookie("featured") === null) {
+            const url = "/get_featured"
+            fetch("http://localhost:9000" + url)
+            .then(response => response.json())
+            .then(data => {
+                this.setRandomVideo(data);
+                this.setCookie("featured", JSON.stringify(data), 3);
+            })
+        } else {
+            const data = JSON.parse(this.getCookie("featured"));
+            this.setRandomVideo(data);
+        }
     }
 
     render() {
@@ -38,23 +98,23 @@ class RandomVideo extends Component {
                 <span className='random_video_span'/>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
-                        <iframe id="random_video_trailer" src="https://www.youtube.com/embed/Q6iK6DjV_iE" title="Weathering With You [Official Subtitled Trailer, GKIDS]" frameBorder="0" allowFullScreen></iframe>
+                        <iframe id="random_video_trailer" src="" title="" allowFullScreen></iframe>
                     </div>
                     <div className='random_video_trailer_info'>
-                        <h1 className='random_video_trailer_title'>Weathering With You</h1>
-                        <p className='random_video_trailer_desc'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <h1 className='random_video_trailer_title'></h1>
+                        <p className='random_video_trailer_desc'></p>
                         <div className='random_video_trailer_tags'>
-                            <a href="/search?genre=Action">
-                                <p>Action</p>
+                            <a id="tag1link" href="/search?genre=">
+                                <p id="tag1"></p>
                             </a>
-                            <a href="/search?genre=Adventure">
-                                <p>Adventure</p>
+                            <a id="tag2link" href="/search?genre=">
+                                <p id="tag2"></p>
                             </a>
-                            <a href="/search?genre=Drama">
-                                <p>Drama</p>
+                            <a id="tag3link" href="/search?genre=">
+                                <p id="tag3"></p>
                             </a>
                         </div>
-                        <a href="/watch/Tenki_No_Ko-1"><button className='random_video_trailer_button'>Watch Now!</button></a>
+                        <a id="watchLink" href="/watch/"><button className='random_video_trailer_button'>Watch Now!</button></a>
                         <button className='add_to_list_button'>Add to my list</button>
                     </div>
                 </div>

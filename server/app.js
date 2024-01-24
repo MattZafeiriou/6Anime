@@ -18,6 +18,7 @@ const getPopularRouter = require("./routes/get_popular");
 const addVideoRouter = require("./routes/addvideo");
 const addEpisodeRouter = require("./routes/addepisode");
 const getIDRouter = require("./routes/get_id");
+const getFeaturedRouter = require("./routes/get_featured");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/get_popular", getPopularRouter);
 app.use("/addvideo", addVideoRouter);
 app.use("/addepisode", addEpisodeRouter);
 app.use("/get_id", getIDRouter);
+app.use("/get_featured", getFeaturedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
