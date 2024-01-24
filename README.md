@@ -1,34 +1,70 @@
 # 6Anime
 
-This is a personal project that manages to stream anime videos while fetching the resources from other web databases.
+A free online anime streaming service with no ads
+
+## Installation
+
+Clone this repository
+
+```bash
+git clone https://github.com/MattZafeiriou/AnimeWebsite.git
+```
+
+, using your preferred command prompt go to client and server directories and execute npm install
+
+```bash
+cd client
+npm install
+cd ../server
+npm install
+```
+
+## Usage
+
+You must start both the server and the client in order to work well
+
+```bash
+cd client
+npm start
+```
+```bash
+cd server
+npm start
+```
 
 ## Features
+- Custom Video Player
+- Recommendation System
+- English Subtitles
+- Dynamic Content
+- User Friendly
+- Responsive Design
+- External Video Sources
 
-- English subtitles support
-- Search for any video available
-- Video fullscreen mode
-- Cross platform
-- Contact-Me availability
+# Technology Used
+- MySQL
+- React
+- React Bootstrap
+- Express.js
+- Node
+- Docker
 
-## Tech Stack
+## Screenshots
+![Main Page](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_1.jpg)
+![Main Page](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_2.jpg)
+![Most Recent](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_3.jpg)
+![Video Player](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_4.jpg)
 
-**Client:** React, Bootstrap
+## Contributing
 
-**Server:** Node, Express
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
 
-
-## Authors
-
-- [@matt_zafeiriou](https://www.github.com/MattZafeiriou)
-
+Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/LICENSE)
 
-
-## Lessons Learned
-
-Since I started creating this app I learned a lot about how to use the React Environment and some of its packages. I also learned how to use bootstrap (react).
-In the prototype I tried linking the videos to torrent files; this way I had to make a .torrent file encryptor and decryptor (not released on github yet.)
-I faced many problems in the meantime and finally made it through all of them. Some of them were which video player to use. How do I gain the video without anything saved on my local server. And many more.
+## Project status
+Finished
