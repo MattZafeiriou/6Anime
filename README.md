@@ -2,6 +2,10 @@
 
 A free online anime streaming service with no ads
 
+## Requirements
+
+![mySQL Server]("https://dev.mysql.com/downloads/mysql/") installed
+
 ## Installation
 
 Clone this repository
@@ -18,6 +22,17 @@ npm install
 cd ../server
 npm install
 ```
+
+Create mySQL Database
+```bash
+cd %your mysql server bin folder%
+mysql -u root -p
+%enter your password%
+CREATE DATABASE AnimeDb
+```
+Then go to 6Anime/Server/sqlHandler.js file and change the "user" and "password" attributes to match to your system
+
+Go to 6Anime/Anime Website.session.sql, create the tables and you may insert some examples into the tables in order for the website to work fully.
 
 ## Usage
 
