@@ -68,3 +68,20 @@ Please make sure to update tests as appropriate.
 
 ## Project status
 Finished
+
+## Disclaimer
+Disclaimer: 6Anime
+
+This website, 6Anime, is created solely for educational purposes. The content available on this platform is intended to facilitate learning, cultural exchange, and appreciation of the art form of anime.
+
+- Non-Commercial Use: Users are reminded that 6Anime is not intended for commercial purposes. All content provided on this platform is meant for educational and informational use only.
+
+- Copyright Disclaimer: 6Anime does not own the rights to the anime series and related content available on this platform. All rights belong to their respective owners, and the use of such content is in accordance with fair use principles.
+
+- Educational Intent: The streaming of anime on 6Anime is intended to enhance understanding, cultural awareness, and appreciation of Japanese animation. It is not a substitute for legal and official distribution channels.
+
+- No Endorsement: The inclusion of specific anime series or content on 6Anime does not imply endorsement or promotion by the creators, producers, or distributors of the respective anime.
+
+- Compliance with Laws: Users are expected to comply with all relevant copyright laws and regulations while using 6Anime. Any unauthorized use or reproduction of content is the sole responsibility of the user.
+
+By using 6Anime, users acknowledge and agree to abide by the terms outlined in this disclaimer. 6Anime reserves the right to update or modify this disclaimer at any time.
