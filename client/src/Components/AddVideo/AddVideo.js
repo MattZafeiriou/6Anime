@@ -1,5 +1,6 @@
 import React from 'react';
 import './AddVideo.css'
+import { API_URL } from '../../Constants';
 
 class AddVideo extends React.Component {
 
@@ -16,7 +17,7 @@ class AddVideo extends React.Component {
     }
 
     addEpisodes = (e) => {
-        fetch("http://localhost:9000/get_id?name=" + document.getElementById('_episodes').value)
+        fetch(API_URL + "/get_id?name=" + document.getElementById('_episodes').value)
         .then(res => res.json())
         .then(data => {
             if (data.length == 0)
@@ -55,8 +56,8 @@ class AddVideo extends React.Component {
         if (tracks == "[\"\"]")
             tracks = "[]";
         for (let i = 1; i <= episodes; i++) {
-            const url = "addepisode?anime_id=" + anime_id + "&video_url=" + video_url + "&tracks=" + tracks + "&episode=" + i;
-            fetch("http://localhost:9000/" + url)
+            const url = "/addepisode?anime_id=" + anime_id + "&video_url=" + video_url + "&tracks=" + tracks + "&episode=" + i;
+            fetch(API_URL + url)
             .then(res => res.arrayBuffer())
             .then(data => {
                 console.log("Added episode " + i + " for anime " + anime_id)
@@ -102,8 +103,8 @@ class AddVideo extends React.Component {
         let anime_type = eh.options[eh.selectedIndex].value;
         let poster = document.getElementById('poster').value;
 
-        const url = "addvideo?name=" + name + "&folder=" + folder + "&nicknames=" + nicknames + "&season=" + season + "&description=" + description + "&studios=" + studios + "&genre=" + genre + "&episodes=" + episodes + "&duration=" + duration + "&premiered=" + premiered + "&other_seasons_folders=" + other_seasons_folders + "&other_seasons_names=" + other_seasons_names + "&anime_type=" + anime_type + "&poster=" + poster;
-        fetch("http://localhost:9000/" + url)
+        const url = "/addvideo?name=" + name + "&folder=" + folder + "&nicknames=" + nicknames + "&season=" + season + "&description=" + description + "&studios=" + studios + "&genre=" + genre + "&episodes=" + episodes + "&duration=" + duration + "&premiered=" + premiered + "&other_seasons_folders=" + other_seasons_folders + "&other_seasons_names=" + other_seasons_names + "&anime_type=" + anime_type + "&poster=" + poster;
+        fetch(API_URL + url)
         .then(res => res.arrayBuffer())
         .then(data => {
             alert('Form submitted: ' + JSON.stringify(data))

@@ -1,6 +1,7 @@
 import {React, Component} from 'react';
 import './Trending.css'
 import {createRoot} from 'react-dom/client';
+import { API_URL } from '../../Constants';
 
 class Trending extends Component {
 
@@ -204,8 +205,8 @@ class Trending extends Component {
             return;
         }
 
-        const url = "get_video/?name=" + props[0];
-        fetch("http://localhost:9000/" + url)
+        const url = "/get_video/?name=" + props[0];
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
             const info = JSON.parse(data);
@@ -220,7 +221,7 @@ class Trending extends Component {
             const tag2 = genre[1];
             const year = premiered.split(' ')[premiered.split(' ').length - 1];
             const vlink = "/watch/" + info.folder_name + "-" + id;
-            fetch("http://localhost:9000/get_views/?name=" + props[0])
+            fetch(API_URL + "/get_views/?name=" + props[0])
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);
@@ -244,8 +245,8 @@ class Trending extends Component {
 
     setPopularAnime()
     {
-        const url = "get_popular/?max=10";
-        fetch("http://localhost:9000/" + url)
+        const url = "/get_popular/?max=10";
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
             const _info = JSON.parse(data);

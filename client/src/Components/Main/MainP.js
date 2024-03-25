@@ -3,6 +3,8 @@ import './MainP.css'
 import Trending from './Trending.js';
 import RandomVideo from './RandomVideo.js';
 import { Carousel, Image, Placeholder } from 'react-bootstrap';
+import { API_URL } from '../../Constants.js';
+import Sponsored from '../Sponsored/Sponsored.js';
 
 class MainP extends Component {
 
@@ -106,9 +108,9 @@ class MainP extends Component {
     }
 
     loadCarousel() {
-        let url = "recommendations";
+        let url = "/recommendations";
         let data;
-        fetch("http://localhost:9000/" + url)
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(res => {
             data = res;
@@ -168,6 +170,10 @@ class MainP extends Component {
                             <this.CarouselImg href={this.state.carouselItem3.href} tag1={this.state.carouselItem3.tag1} tag2={this.state.carouselItem3.tag2} tag3={this.state.carouselItem3.tag3} srcImg={this.state.carouselItem3.srcImg} name={this.state.carouselItem3.name} description={this.state.carouselItem3.description}/>
                         </Carousel.Item>
                     </Carousel>
+                </div>
+                
+                <div className='main_page_sponsor'>
+                    <Sponsored/>
                 </div>
                 <Trending/>
                 <RandomVideo/>

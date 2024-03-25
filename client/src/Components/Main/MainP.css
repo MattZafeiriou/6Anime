@@ -139,3 +139,10 @@
         margin-bottom: 5vh;
     }
 }
+
+.main_page_sponsor {
+    margin-top: 1em;
+    background-color: rgba(0,0,0,.4);
+    border-radius: 10px;
+    border: 2px solid #049CCC;
+}

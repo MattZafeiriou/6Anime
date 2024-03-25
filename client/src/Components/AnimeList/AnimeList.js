@@ -1,6 +1,7 @@
 import React from 'react';
 import './AnimeList.css'
 import {createRoot} from 'react-dom/client';
+import { API_URL } from '../../Constants';
 
 class AnimeList extends React.Component {
 
@@ -41,9 +42,9 @@ class AnimeList extends React.Component {
 
         let url = genre + country + season + year + type + status + language + sort + search;
         url = url.replace("&", "?");
-        url = "search" + url;
+        url = "/search" + url;
         
-        fetch("http://localhost:9000/" + url)
+        fetch(API_URL + url)
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
@@ -78,7 +79,7 @@ class AnimeList extends React.Component {
         )
 
         // get the folder name
-        fetch("http://localhost:9000/get_video?name=" + id)
+        fetch(API_URL + "/get_video?name=" + id)
         .then(res => res.text())
         .then(data => {
             const anime = JSON.parse(data);

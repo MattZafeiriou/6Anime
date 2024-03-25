@@ -1,6 +1,7 @@
 import React from 'react';
 import './Contact.css'
 import {Form, Button, Toast, ToastContainer} from 'react-bootstrap';
+import { API_URL } from '../../Constants';
 
 class Contact extends React.Component {
 
@@ -37,9 +38,9 @@ class Contact extends React.Component {
           event.stopPropagation();
         } else {
             event.preventDefault();
-            let url = "send_form";
+            let url = "/send_form";
 
-            fetch("http://localhost:9000/" + url, {
+            fetch(API_URL + url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

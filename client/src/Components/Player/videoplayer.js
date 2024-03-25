@@ -1,5 +1,6 @@
 import React from 'react';
 import Hls from "hls.js";
+import { API_URL } from '../../Constants';
 
 class VideoPlayer extends React.Component {
 
@@ -19,8 +20,8 @@ class VideoPlayer extends React.Component {
         this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
         // Change banner image
-        var url = "anime_url/?name=" + name + "&ep=" + this.state.episode;
-        fetch("http://localhost:9000/" + url)
+        var url = "/anime_url/?name=" + name + "&ep=" + this.state.episode;
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
             data = JSON.parse(data);
@@ -318,7 +319,7 @@ class VideoPlayer extends React.Component {
                 }}>
                     <button id="play" onClick={() => {
                         this.togglePlay();
-                    }}><i class="fa-solid fa-play"></i></button>
+                    }}><i className="fa-solid fa-play"></i></button>
                     <h5 id="currenttime">00:00</h5>
                     <div className='progress-bar'>
                         <input type="range" id="progressBar" name="progressBar" defaultValue="0" min="0" max="100" onChange={

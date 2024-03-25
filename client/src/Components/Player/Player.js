@@ -4,6 +4,8 @@ import './Player.css'
 import './videoplayer.css'
 import VideoPlayer from './videoplayer';
 import { Placeholder } from 'react-bootstrap';
+import { API_URL } from '../../Constants';
+import Sponsored from '../Sponsored/Sponsored';
 
 class Player extends React.Component {
 
@@ -63,7 +65,8 @@ class Player extends React.Component {
             height: '2.3em',
             padding: '0px',
             float: 'left',
-            marginRight: '1em',
+            marginLeft: '.5em',
+            marginRight: '.5em',
             marginBottom: '1em'
         }
 
@@ -76,7 +79,8 @@ class Player extends React.Component {
             height: '2.3em',
             padding: '0px',
             float: 'left',
-            marginRight: '1em',
+            marginLeft: '.5em',
+            marginRight: '.5em',
             marginBottom: '1em'
         }
         this.player = createRef();
@@ -113,9 +117,9 @@ class Player extends React.Component {
         const animeName = splitted.slice(0, -1).join("-");
         this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
-        let url = "get_video/?name=" + name;
+        let url = "/get_video/?name=" + name;
         let data;
-        fetch("http://localhost:9000/" + url)
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(res => {
             data = res;
@@ -146,14 +150,14 @@ class Player extends React.Component {
                 }
             });
             this.setState({img: info.poster, loaded_info: true});
-            fetch("http://localhost:9000/get_views/?name=" + name)
+            fetch(API_URL + "/get_views/?name=" + name)
             .then(res => res.text())
             .then(res => {
                 this.setState({views: parseInt(res) + 1}, () => {
                     this.setState({viewsFormatted: this.formatViews(this.state.views)});
                 });
                 
-                fetch("http://localhost:9000/add_view/?name=" + name + "&ep=" + this.state.episode)
+                fetch(API_URL + "/add_view/?name=" + name + "&ep=" + this.state.episode)
                 .then(res => res.text())
                 .then(() => {})
             })
@@ -259,8 +263,8 @@ class Player extends React.Component {
         // Change banner image
         for(let i = 0; i < this.state.relatedFolders.length; i++)
         {
-            const url = "get_id/?name=" + this.state.relatedFolders[i];
-            fetch("http://localhost:9000/" + url)
+            const url = "/get_id/?name=" + this.state.relatedFolders[i];
+            fetch(API_URL + url)
             .then(res => res.text())
             .then(data => {
                 const info = JSON.parse(data);
@@ -287,8 +291,8 @@ class Player extends React.Component {
         if (Object.keys(props).length === 0)
             return;
 
-        const url = "get_video/?name=" + props[0];
-        fetch("http://localhost:9000/" + url)
+        const url = "/get_video/?name=" + props[0];
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
             const info = JSON.parse(data);
@@ -297,7 +301,7 @@ class Player extends React.Component {
             const vep = info.episodes;
             const season = info.season;
             const vlink = "/watch/" + info.folder_name + "-" + info.id;
-            fetch("http://localhost:9000/get_views/?name=" + props[0])
+            fetch(API_URL + "/get_views/?name=" + props[0])
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);
@@ -321,8 +325,8 @@ class Player extends React.Component {
 
     setPopularAnime()
     {
-        const url = "get_popular/?max=6";
-        fetch("http://localhost:9000/" + url)
+        const url = "/get_popular/?max=6";
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
             const _info = JSON.parse(data);
@@ -375,6 +379,8 @@ class Player extends React.Component {
                             {/* Video Player */}
                             <VideoPlayer banner={this.state.img}/>
                         </div>
+                        {/* Add our sponsor */}
+                        <Sponsored />
                         {/* Rest code */}
                         <div className='separator'/>
                         <div className='pcontainer'>

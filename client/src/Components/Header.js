@@ -2,6 +2,7 @@ import React, {Component, useState} from 'react';
 import './Header.css'
 import logoImg from '../logo.svg'
 import { Image } from 'react-bootstrap';
+import { API_URL } from '../Constants';
 
 class Header extends Component {
 
@@ -79,10 +80,10 @@ class Header extends Component {
     
     sendSearchTop(string)
     {
-        var url = "search?chars=" + this.encode_utf8(string);
+        var url = "/search?chars=" + this.encode_utf8(string);
         var data = "";
 
-        fetch("http://localhost:9000/" + url)
+        fetch(API_URL + url)
         .then(res => res.text())
         .then(res => {
             data = res;
@@ -114,10 +115,10 @@ class Header extends Component {
     {
         if (this.state.foldersnames[string] == null)
         {
-            var url = "get_video/?name=" + string;
+            var url = "/get_video/?name=" + string;
             var data = "";
 
-            fetch("http://localhost:9000/" + url)
+            fetch(API_URL + url)
             .then(res => res.text())
             .then(res => {
                 data = JSON.parse(res);
@@ -179,7 +180,7 @@ class Header extends Component {
                 <div className="top_right">
                     <a href='/donate'>
                         <div className='donate_button'>
-                            <div id="donate">Donate</div>
+                            <div id="donate">Support Us</div>
                         </div>
                     </a>
                 </div>
@@ -199,7 +200,7 @@ class Header extends Component {
                             <a href="/series"><div id="series">Series</div></a>
                             <a href="/recently_added"><div id="recently_added">Recently Added</div></a>
                             <a href="/contact"><div id="contact_us">Contact Us</div></a>
-                            <a href="/donate"><div id="doante">Donate</div></a>
+                            <a href="/donate"><div id="donate">Support Us</div></a>
                         </div>
                     </div>
                 </div>

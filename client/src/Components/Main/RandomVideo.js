@@ -1,5 +1,6 @@
 import {React, Component} from 'react';
 import './RandomVideo.css'
+import { API_URL } from '../../Constants';
 
 class RandomVideo extends Component {
 
@@ -77,7 +78,7 @@ class RandomVideo extends Component {
         window.addEventListener('scroll', this.handleScroll);
         if (this.getCookie("featured") === null) {
             const url = "/get_featured"
-            fetch("http://localhost:9000" + url)
+            fetch(API_URL + url)
             .then(response => response.json())
             .then(data => {
                 this.setRandomVideo(data);

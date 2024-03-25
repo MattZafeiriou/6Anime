@@ -6,6 +6,14 @@
     float: left;
 }
 
+#episodes {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .playerr {
     float: left;
     width: calc(75vw * 0.8);
