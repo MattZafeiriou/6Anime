@@ -88,7 +88,7 @@
     font-size: 1.2em;
     margin-top: 10px;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition-duration: .5s;
 }
 
@@ -102,11 +102,11 @@
     border: none;
     color: white;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 1em;
     margin-top: 10px;
-    padding: 10px 5px;
-    border-radius: 10px;
+    padding: 8px 8px;
+    border-radius: 5px;
     transition-duration: .5s;
 }
 
@@ -134,6 +134,7 @@
     color: rgba(255,255,255,.8);
     padding: 5px;
     border-radius: 5px;
+    font-weight: bold;
 }
 
 
@@ -157,14 +158,14 @@
     }
     
     .random_video_trailer_button {
-        font-size: 1.6em;
+        font-size: 1.3em;
     }
     .add_to_list_button {
-        font-size: 1.5em;
+        font-size: 1em;
     }
     .random_video_trailer_tags p {
-        font-size: 1em;
-        padding: 10px;
+        font-size: .8em;
+        padding: 7px;
     }
     random_video_trailer_desc {
         font-size: 1.5em;

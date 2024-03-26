@@ -1,6 +1,9 @@
 .donatemain {
     margin: 3em 5% 5% 5%;
     color: white;
+    background-color: #141414;
+    padding: 1em;
+    border-radius: 10px;
 }
 
 .donatemain h1 {
@@ -33,17 +36,18 @@
 .paymentMethod button {
     transition-duration: .3s;
     margin: 0em 1em;
-    background-color: #ff4b2b;
+    background-color: #9b2727;
     border: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 200px;
     min-height: 50px;
     font-size: 1.2em;
-    font-weight: 600;
+    font-weight: 300;
+    font-family: serif;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 .paymentMethod button:hover {
-    background-color: #9b2727;
+    background-color: hsl(0, 60%, 50%);
 }

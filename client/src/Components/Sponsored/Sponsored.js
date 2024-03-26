@@ -10,11 +10,11 @@ class Sponsored extends React.Component {
   render() {
     return (
       <>
-        <div className='sponsored'>
+        <div className='spon_sored'> {/* spon_sored for adblockers */}
             <a href='https://mp3convert.tech' target='_blank' rel='noreferrer noopener'>
                 <img src={SponsorImg} alt='Sponsor Logo' />
             </a>
-            <div className='sponsored-text'>
+            <div className='spon_sored-text'>
                 <a href='https://mp3convert.tech' target='_blank' rel='noreferrer noopener'>
                     <h4>mp3convert.tech</h4>
                 </a>

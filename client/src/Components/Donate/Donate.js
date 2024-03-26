@@ -19,7 +19,7 @@ class Donate extends React.Component {
     return (
       <>
           <div className="donatemain">
-              <h1>Thank You For Preferring Us!</h1>
+              <h1>Thank You For Supporting Us!</h1>
               <h4>We accept the following payment methods</h4>
               <this.paymentMethod href="../donate_paypal" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png" text="Donate with PayPal" />
               <this.paymentMethod href="../donate_bitcoin" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/1200px-Bitcoin_logo.svg.png" text="Donate with Bitcoin" />
