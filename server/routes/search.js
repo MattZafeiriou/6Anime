@@ -60,7 +60,7 @@ router.get('/', function(req, res, next) {
         } else if (sort === "Recently Added") {
             query += " ORDER BY added_date DESC";
         } else if (sort === "Recently Updated") {
-            query += " ORDER BY updated_date DESC";
+            query += " ORDER BY update_date DESC";
         }
     }
     // limit

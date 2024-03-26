@@ -94,9 +94,9 @@ class RandomVideo extends Component {
         return (
             <>
             <div className='random_video'>
+                <span className='random_video_span'/>
                 <h1>Don't know what to watch?</h1>
                 <h3>Let us help you!</h3>
-                <span className='random_video_span'/>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
                         <iframe id="random_video_trailer" src="" title="" allowFullScreen></iframe>

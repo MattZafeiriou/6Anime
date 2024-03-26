@@ -133,13 +133,13 @@ class MainP extends Component {
                 <Image id="top_img" src={props.srcImg} fluid/>
                 <Carousel.Caption>
                     <div className='carouselCaption'>
+                        <h1>{props.name}<this.loading/></h1>
+                        <h3>{props.description}<this.loading/></h3>
                         <div className='anime_tags'>
                             <this.Tag name={props.tag1}/>
                             <this.Tag name={props.tag2}/>
                             <this.Tag name={props.tag3}/>
                         </div>
-                        <h1>{props.name}<this.loading/></h1>
-                        <h3>{props.description}<this.loading/></h3>
                         <this.WatchButton href={props.href}/>
                     </div>
                 </Carousel.Caption>

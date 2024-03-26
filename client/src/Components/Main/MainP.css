@@ -114,8 +114,12 @@
 }
 
 @media only screen and (max-width: 800px) {
+    #top_img {
+        height: 60vh;
+    }
+
     .watch_button {
-        padding: 20px 30px;
+        padding: 10px 20px;
         font-size: 1em;
         margin-top: 15px;
     }
@@ -126,13 +130,13 @@
         margin-top: 0em;
     }
     .carouselCaption h1 {
-        font-size: 2.3em;
+        font-size: 1.5em;
     }
     .carouselCaption h3 {
-        font-size: 1em;
+        font-size: .8em;
     }
     .anime_tag p {
-        font-size: 1em;
+        font-size: .7em;
     }
     .carouselCaption {
         margin-right: 0px;

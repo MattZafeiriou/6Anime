@@ -96,6 +96,8 @@ class Trending extends Component {
             const x = event.targetTouches[0].pageX;
             if (!this.dragging)
             {
+                if (window.innerWidth < 800) return;
+
                 this.startX = x + this.offset;
                 this.dragging = true;
                 document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
@@ -123,7 +125,8 @@ class Trending extends Component {
                 document.getElementsByClassName('trending_list')[0].style.transform = 'translateX(' + diff + 'px)';
             }
 
-            event.preventDefault();
+            if ((diff - this.offset) > 10)
+                event.preventDefault();
         }, { passive: false });
 
         list.addEventListener('touchend', (event) => {
@@ -156,6 +159,7 @@ class Trending extends Component {
     }
 
     startDragging(event) {
+        if (window.innerWidth < 800) return;
         if (this.dragging) return;
         this.startX = event.clientX + this.offset;
         this.dragging = true;
