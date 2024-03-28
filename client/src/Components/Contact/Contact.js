@@ -102,7 +102,7 @@ class Contact extends React.Component {
                                 <option value="technical">Technical Issues</option>
                                 <option value="streaming">Streaming Issues</option>
                                 <option value="missing_video">Missing Video</option>
-                                <option value="other">Other..</option>
+                                <option value="other">Other</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
                                 This field is required.

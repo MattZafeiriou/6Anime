@@ -16,6 +16,7 @@ import Series from './Components/Series/Series.js'
 import Search from './Components/Search/Search.js'
 import RecentlyAdded from './Components/RecentlyAdded/RecentlyAdded.js'
 import Trending from './Components/Trending/Trending.js'
+import Login from './Components/Login/Login.js'
 
 const Main = () => {
   return (
@@ -35,6 +36,7 @@ const Main = () => {
           <Route exact path='/trending' component={Trending}/>
           <Route exact path='/series' component={Series}/>
           <Route exact path='/search' component={Search}/>
+          <Route exact path='/login' component={Login}/>
           <Route path='*' component={NotFound}/>
         </Switch>
       </div> {/* This div is used to make the footer stick to the bottom of the page */}

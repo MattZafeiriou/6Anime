@@ -28,7 +28,9 @@ class Header extends Component {
         if (x==="")
         {
             document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter keywords to search</h5>";
-        
+        } else if (x.length < 3)
+        {
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter 3 or more characters</h5>";
         } else {
             for (var i=0; i<string.length; i++) {
                 this.getNameTop(string[i]);
@@ -172,15 +174,13 @@ class Header extends Component {
                 <div className="top_left">
                     <a className="left_list" href="/"><div id="home">Home</div></a>
                     <a className="left_list" href="/about"><div id="about">About</div></a>
-                    <a className="left_list" href="/movies"><div id="movies">Movies</div></a>
-                    <a className="left_list" href="/series"><div id="series">Series</div></a>
-                    <a className="left_list" href="/recently_added"><div id="recently_added">Recently Added</div></a>
                     <a className="left_list" href="/contact"><div id="contact_us">Contact Us</div></a>
+                    <a className="left_list" href="/donate"><div id="donate">Support Us</div></a>
                 </div>
                 <div className="top_right">
-                    <a href='/donate'>
-                        <div className='donate_button'>
-                            <div id="donate">Support Us</div>
+                    <a href='/login'>
+                        <div className='login_button'>
+                            <div id="login">Log In</div>
                         </div>
                     </a>
                 </div>
@@ -198,9 +198,9 @@ class Header extends Component {
                             <a href="/about"><div id="about">About</div></a>
                             <a href="/movies"><div id="movies">Movies</div></a>
                             <a href="/series"><div id="series">Series</div></a>
-                            <a href="/recently_added"><div id="recently_added">Recently Added</div></a>
                             <a href="/contact"><div id="contact_us">Contact Us</div></a>
                             <a href="/donate"><div id="donate">Support Us</div></a>
+                            <a href="/login"><div id="login">Log In</div></a>
                         </div>
                     </div>
                 </div>

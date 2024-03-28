@@ -121,7 +121,7 @@ body {
     color: #9b2727;
 }
 
-.donate_button {
+.login_button {
     transition-duration: .2s;
     font-family: 'Roboto', sans-serif;
     border-radius: 10px;
@@ -134,12 +134,12 @@ body {
     background: rgb(155,39,39);
 }
 
-.donate_button:hover {
+.login_button:hover {
     padding: 10px 32px 12px 32px;
     margin: 10px 0px 6px 4px;
 }
 
-#donate {
+#login {
     color: white;
 }
 
@@ -180,23 +180,24 @@ body {
 .mobile_menu_content {
     margin-top: 5em;
     width: 90vw;
-    transition-duration: .1s;
+    transition: opacity 0.3s;
     background-color: #1F1F1F;
     z-index: 100;
     position: absolute;
     opacity: 0;
     display: none;
     border-radius: 10px;
+
 }
 
 .mobile_menu_items {
+    transition: opacity 0.3s;
     margin: 1em;
     display: flex;
     flex-direction: column;
 }
 
 .mobile_menu_items a {
-    transition-duration: .2s;
     color: white;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
@@ -216,7 +217,7 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-    .donate_button {
+    .login_button {
         display: none;
     }
 

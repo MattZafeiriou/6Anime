@@ -1,9 +1,12 @@
 .donatemain {
-    margin: 3em 5% 5% 5%;
     color: white;
     background-color: #141414;
     padding: 1em;
     border-radius: 10px;
+    width: 50vw;
+    margin-left: 25vw;
+    margin-top: 100px;
+    padding: 20px;
 }
 
 .donatemain h1 {
@@ -20,9 +23,18 @@
 
 @media screen and (max-width: 800px)
 {
+    .donatemain {
+        width: 90vw;
+        margin-left: 5vw;
+    }
+    
     .donatemain h4 {
         line-height: 1.2em;
     }
+}
+
+.paymentMethods {
+    padding-left: 2em;
 }
 
 .paymentMethod img {
@@ -30,7 +42,7 @@
 }
 
 .paymentMethod {
-    margin: 1em 0;
+    margin: 3em 0;
 }
 
 .paymentMethod button {

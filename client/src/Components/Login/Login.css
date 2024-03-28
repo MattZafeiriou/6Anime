@@ -1,0 +1,32 @@
+.loginmain {
+    display: flex;
+    width: 30vw;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    color: white;
+    border-radius: 10px;
+}
+
+.loginmain input[type="email"], .loginmain input[type="password"]{
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255,0.5);
+    background-color: black;
+    color: white;
+    width: 500px;
+    height: 3em;
+}
+
+.loginmain ::placeholder {
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
+  
+.loginmain ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: white !important;
+}
+
+.loginmain label {
+    font-size: 1.5em;
+    margin-top: .3em;
+    margin-bottom: .3em;
+}
