@@ -1,4 +1,4 @@
-# 6Anime v1.1
+# 6Anime v1.0.0 (Latest Release)
 
 A free online anime streaming service with no ads
 
