@@ -299,31 +299,31 @@
 }
 
 /* Hide the browser's default checkbox */
-.anime-list-filter-item input[type=checkbox] {
+input[type=checkbox] {
     border-radius: 5px;
 }
 
 /* Hide the browser's default radio button */
-.anime-list-filter-item input[type=radio] {
+input[type=radio] {
     border-radius: 50%;
 }
 
 /* Create a custom checkbox */
-.anime-list-filter-item input[type=checkbox]:before {
+input[type=checkbox]:before {
     content: "";
     position: absolute;
     display: none;
 }
 
 /* Create a custom radio button */
-.anime-list-filter-item input[type=radio]:before {
+input[type=radio]:before {
     content: "";
     position: absolute;
     display: none;
 }
 
 /* Create a custom checkbox */
-.anime-list-filter-item input[type=checkbox]:checked:before {
+input[type=checkbox]:checked:before {
     display: block;
     background-color: #9b2727;
     width: 15px;
@@ -332,7 +332,7 @@
 }
 
 /* Create a custom radio button */
-.anime-list-filter-item input[type=radio]:checked:before {
+input[type=radio]:checked:before {
     display: block;
     background-color: #9b2727;
     width: 15px;
@@ -341,19 +341,19 @@
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
-.anime-list-filter-item input:checked:after {
+input:checked:after {
     content: "";
     position: absolute;
     display: none;
 }
 
 /* Show the indicator (dot/circle) when checked */
-.anime-list-filter-item input[type=checkbox]:checked:after {
+input[type=checkbox]:checked:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.anime-list-filter-item input[type=checkbox]:checked:after {
+input[type=checkbox]:checked:after {
     left: 5px;
     top: 2px;
     width: 5px;
@@ -366,7 +366,7 @@
 }
 
 /* Style the indicator (dot/circle) */
-.anime-list-filter-item input[type=radio]:checked:after {
+input[type=radio]:checked:after {
     left: 5px;
     top: 5px;
     width: 5px;

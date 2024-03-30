@@ -293,10 +293,6 @@ class VideoPlayer extends React.Component {
                     controls.classList.remove('hide');
                 }
             }}
-            onMouseOut={() => {
-                const controls = document.getElementsByClassName('controls')[0];
-                controls.classList.add('hide');
-            }}
             onMouseMove={() => {
                 this.cooldownToHide();
             }}>
