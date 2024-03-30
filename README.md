@@ -1,4 +1,4 @@
-# 6Anime
+# 6Anime v1.0.0 (Latest Release)
 
 A free online anime streaming service with no ads
 
@@ -64,7 +64,7 @@ npm start
 - Node
 - Docker
 
-## Screenshots
+## Screenshots (Outdated)
 ![Main Page](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_1.jpg)
 ![Main Page](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_2.jpg)
 ![Most Recent](https://github.com/MattZafeiriou/AnimeWebsite/blob/main/Screenshots/Screenshot_3.jpg)
