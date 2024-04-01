@@ -38,7 +38,7 @@ class Contact extends React.Component {
           event.stopPropagation();
         } else {
             event.preventDefault();
-            let url = "/send_form";
+            let url = "/sendform";
 
             fetch(API_URL + url, {
                 method: 'POST',

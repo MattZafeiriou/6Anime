@@ -108,7 +108,7 @@ class MainP extends Component {
     }
 
     loadCarousel() {
-        let url = "/recommendations";
+        let url = "/getrecommendations";
         let data;
         fetch(API_URL + url)
         .then(res => res.text())

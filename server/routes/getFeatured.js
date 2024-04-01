@@ -15,9 +15,13 @@ router.get('/', function(req, res, next) {
             featured = data;
             res.send(data);
         });
+    } else if (featured == null)
+    {
+        featured = ""; // reset variable
+        res.status(500).send("Internal server error"); // send status
     } else
     {
-        res.send(featured);
+        res.status(200).send(featured);
     }
 });
 

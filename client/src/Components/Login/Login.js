@@ -34,7 +34,7 @@ class Login extends React.Component {
                 <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">Remember me</label>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary btn-block">Submit</button>
+            <button type="submit" className="btn btn-primary btn-block">Log In</button>
             <p className="forgot-password text-right">
               Forgot <a href="#">password?</a>
             </p>

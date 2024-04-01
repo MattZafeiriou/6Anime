@@ -6,9 +6,14 @@ var sqlHandler = require('./../sqlHandler.js');
 /* GET folders listing. */
 router.get('/', function(req, res) {
     const name = req.query.name;
+    
     if (name) {
-        sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name='" + name + "';", function (err, result, fields) {
+        sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name= ? ;", [name], function (err, result, fields) {
             if (err) throw err;
+            if (result.length === 0) {
+                res.status(404).send("Anime not found.");
+                return;
+            }
             res.status(200).send(result["0"]);
         });
 

@@ -77,7 +77,7 @@ class RandomVideo extends Component {
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
         if (this.getCookie("featured") === null) {
-            const url = "/get_featured"
+            const url = "/getfeatured"
             fetch(API_URL + url)
             .then(response => response.json())
             .then(data => {

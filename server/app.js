@@ -6,19 +6,19 @@ const logger = require('morgan');
 const cors = require("cors");
 const sqlHandler = require("./sqlHandler");
 
+const testAPIRouter = require("./routes/testAPI");
 const searchRouter = require("./routes/search");
-const folderRouter = require("./routes/getfolder");
 const getVideoRouter = require("./routes/getvideo");
-const animeURLRouter = require("./routes/anime_url");
-const sendFormRouter = require("./routes/send_form");
+const animeURLRouter = require("./routes/getAnimeURL");
+const sendFormRouter = require("./routes/sendForm");
 const recommendationsRouter = require("./routes/recommendations");
-const addViewRouter = require("./routes/add_view");
-const getViewRouter = require("./routes/get_views");
-const getPopularRouter = require("./routes/get_popular");
+const addViewRouter = require("./routes/addView");
+const getViewRouter = require("./routes/getViews");
+const getPopularRouter = require("./routes/getPopular");
 const addVideoRouter = require("./routes/addvideo");
 const addEpisodeRouter = require("./routes/addepisode");
 const getIDRouter = require("./routes/get_id");
-const getFeaturedRouter = require("./routes/get_featured");
+const getFeaturedRouter = require("./routes/getFeatured");
 
 const app = express();
 
@@ -33,19 +33,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/testAPI", testAPIRouter);
 app.use("/search", searchRouter);
-app.use("/getfolder/*", folderRouter);
-app.use("/get_video", getVideoRouter);
-app.use("/anime_url", animeURLRouter);
-app.use("/send_form", sendFormRouter);
-app.use("/recommendations", recommendationsRouter);
-app.use("/add_view", addViewRouter);
-app.use("/get_views", getViewRouter);
-app.use("/get_popular", getPopularRouter);
-app.use("/addvideo", addVideoRouter);
+app.use("/sendform", sendFormRouter);
+app.use("/getvideo", getVideoRouter);
+app.use("/getanimeurl", animeURLRouter);
+app.use("/getviews", getViewRouter);
+app.use("/getpopular", getPopularRouter);
+app.use("/getid", getIDRouter);
+app.use("/getfeatured", getFeaturedRouter);
+app.use("/getrecommendations", recommendationsRouter);
+app.use("/addview", addViewRouter);
+app.use("/addvideo", addVideoRouter); 
 app.use("/addepisode", addEpisodeRouter);
-app.use("/get_id", getIDRouter);
-app.use("/get_featured", getFeaturedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

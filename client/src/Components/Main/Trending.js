@@ -29,7 +29,7 @@ class Trending extends Component {
                         <div className="trending_card_play_button">
                             <i className="fa-solid fa-play"></i>
                         </div>
-                        <a href='javascript:void(0)' className="trending_card_addtolist">
+                        <a href='' className="trending_card_addtolist">
                             <h3>Add to my list</h3>
                         </a>
                         <img src={props.img} alt='anime poster'/>
@@ -209,7 +209,7 @@ class Trending extends Component {
             return;
         }
 
-        const url = "/get_video/?name=" + props[0];
+        const url = "/getvideo/?id=" + props[0];
         fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
@@ -225,7 +225,7 @@ class Trending extends Component {
             const tag2 = genre[1];
             const year = premiered.split(' ')[premiered.split(' ').length - 1];
             const vlink = "/watch/" + info.folder_name + "-" + id;
-            fetch(API_URL + "/get_views/?name=" + props[0])
+            fetch(API_URL + "/getviews/?name=" + props[0])
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);
@@ -249,7 +249,7 @@ class Trending extends Component {
 
     setPopularAnime()
     {
-        const url = "/get_popular/?max=10";
+        const url = "/getpopular/?max=10"; // returns an array of 10 most popular anime folder_names
         fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
