@@ -225,7 +225,7 @@ class Trending extends Component {
             const tag2 = genre[1];
             const year = premiered.split(' ')[premiered.split(' ').length - 1];
             const vlink = "/watch/" + info.folder_name + "-" + id;
-            fetch(API_URL + "/getviews/?name=" + props[0])
+            fetch(API_URL + "/getviews/?id=" + props[0])
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);

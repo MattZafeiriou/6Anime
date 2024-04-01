@@ -117,7 +117,7 @@ class Player extends React.Component {
         const animeName = splitted.slice(0, -1).join("-");
         this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
-        let url = "/get_video/?name=" + name;
+        let url = "/getvideo/?id=" + id;
         let data;
         fetch(API_URL + url)
         .then(res => res.text())
@@ -150,14 +150,14 @@ class Player extends React.Component {
                 }
             });
             this.setState({img: info.poster, loaded_info: true});
-            fetch(API_URL + "/get_views/?name=" + name)
+            fetch(API_URL + "/getviews/?id=" + id )
             .then(res => res.text())
             .then(res => {
                 this.setState({views: parseInt(res) + 1}, () => {
                     this.setState({viewsFormatted: this.formatViews(this.state.views)});
                 });
                 
-                fetch(API_URL + "/add_view/?name=" + name + "&ep=" + this.state.episode)
+                fetch(API_URL + "/addview/?id=" + id + "&ep=" + this.state.episode)
                 .then(res => res.text())
                 .then(() => {})
             })
@@ -263,7 +263,7 @@ class Player extends React.Component {
         // Change banner image
         for(let i = 0; i < this.state.relatedFolders.length; i++)
         {
-            const url = "/get_id/?name=" + this.state.relatedFolders[i];
+            const url = "/getid/?name=" + this.state.relatedFolders[i];
             fetch(API_URL + url)
             .then(res => res.text())
             .then(data => {
@@ -291,7 +291,7 @@ class Player extends React.Component {
         if (Object.keys(props).length === 0)
             return;
 
-        const url = "/get_video/?name=" + props[0];
+        const url = "/getvideo/?id=" + props[0];
         fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {
@@ -301,7 +301,7 @@ class Player extends React.Component {
             const vep = info.episodes;
             const season = info.season;
             const vlink = "/watch/" + info.folder_name + "-" + info.id;
-            fetch(API_URL + "/get_views/?name=" + props[0])
+            fetch(API_URL + "/getviews/?id=" + props[0])
             .then(res => res.text())
             .then(res => {
                 const views = parseInt(res);
@@ -325,7 +325,7 @@ class Player extends React.Component {
 
     setPopularAnime()
     {
-        const url = "/get_popular/?max=6";
+        const url = "/getpopular/?max=6";
         fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {

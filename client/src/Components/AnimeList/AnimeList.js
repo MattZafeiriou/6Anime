@@ -79,7 +79,7 @@ class AnimeList extends React.Component {
         )
 
         // get the folder name
-        fetch(API_URL + "/get_video?name=" + id)
+        fetch(API_URL + "/getvideo?id=" + id)
         .then(res => res.text())
         .then(data => {
             const anime = JSON.parse(data);

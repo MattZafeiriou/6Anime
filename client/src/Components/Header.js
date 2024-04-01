@@ -97,6 +97,12 @@ class Header extends Component {
     typingTop()
     {
         var x = document.getElementById("searchingtop").value;
+        if (x.length < 3)
+        {
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter 3 or more characters</h5>";
+            document.getElementById("topdropdown").classList.remove("inactive-dropdown");
+            return;
+        }
         this.sendSearchTop(x);
     }
 
@@ -117,7 +123,7 @@ class Header extends Component {
     {
         if (this.state.foldersnames[string] == null)
         {
-            var url = "/get_video/?name=" + string;
+            var url = "/getvideo/?id=" + string.split("-")[1];
             var data = "";
 
             fetch(API_URL + url)
