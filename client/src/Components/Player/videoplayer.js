@@ -16,11 +16,11 @@ class VideoPlayer extends React.Component {
             bannerImg: ""
         }
 
-        const id = window.location.href.split("/")[4].split("-")[1];
+        const id = window.location.href.split("/")[4].split("-")[window.location.href.split("/")[4].split("-").length - 1];
         this.state.episode = window.location.href.split("/")[5].replace("ep", "");
 
         // Change banner image
-        var url = "/animeurl/?id=" + id + "&ep=" + this.state.episode;
+        var url = "/getanimeurl/?id=" + id + "&episode_number=" + this.state.episode;
         fetch(API_URL + url)
         .then(res => res.text())
         .then(data => {

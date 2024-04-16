@@ -47,8 +47,7 @@ class Player extends React.Component {
             description: "",
             genre: "",
             studios: [],
-            relatedFolders: [],
-            relatedNames: [],
+            relatedAnifyId: [],
             img: "",
             episodesno: "",
             premiered: "",
@@ -131,7 +130,7 @@ class Player extends React.Component {
             this.setState({title: info.name}, () => {
                 document.title = this.state.title + " - Episode " + this.state.episode + " | 6Anime"}
                 );
-            const date = info.premiered.split("T")[0];
+            const date = info.premiered;
             this.setState({description: info.description});
             this.setState({genre: info.genre});
             this.setState({studios: info.studios});
@@ -140,14 +139,13 @@ class Player extends React.Component {
             this.setState({premiered: date});
             this.setState({season: info.season});
             this.setState({episodesdu: info.duration + " min/ep"});
-            this.setState({relatedFolders: info.other_seasons_folders});
-            this.setState({relatedNames: info.other_seasons_names}, () => {
-                if (this.state.relatedFolders.length > 0)
-                    this.setRelatedAnime();
-                else
-                {
-                    document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
-                }
+            this.setState({relatedAnifyId: info.other_seasons_anify_ids}, () => {
+                // if (this.state.relatedAnifyId.length > 0)
+                //     //this.setRelatedAnime();
+                // else
+                // {
+                //     document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
+                // }
             });
             this.setState({img: info.poster, loaded_info: true});
             fetch(API_URL + "/getviews/?id=" + id )

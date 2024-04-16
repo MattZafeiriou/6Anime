@@ -113,6 +113,90 @@ class AddVideo extends React.Component {
         e.preventDefault();
     }
 
+    addAnify = (e) => {
+        const id = document.getElementById('anify').value;
+        const url = "https://api.anify.tv/info/" + id;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            const name = data.title.english;
+            const anify_id = data.id;
+            const folder_name = data.slug;
+            const nicknames = data.synonyms;
+            const description = data.description.replace(/<[^>]*>?/gm, '');
+            const genre = data.genres;
+            const episodes = data.totalEpisodes;
+            const duration = data.duration;
+            const premiered = data.year;
+            const season = data.season;
+            const rating = data.averageRating;
+            const relations = data.relations;
+            let other_seasons_anify_ids = [];
+            for (let i = 0; i < relations.length; i++)
+            {
+                other_seasons_anify_ids.push(relations[i].id);
+            }
+            const type = data.type;
+            const poster = data.coverImage;
+            const banner = data.bannerImage;
+            const status = data.status;
+
+            const url = "/addvideo";
+            fetch(API_URL + url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({anify_id: anify_id, name: name, folder_name: folder_name, nicknames: nicknames, season: season, description: description, genre: genre, episodes: episodes, duration: duration, premiered: premiered, rating: rating, other_seasons_anify_ids: other_seasons_anify_ids, type: type, poster: poster, banner: banner, status: status})
+            })
+            .then(res => res.text())
+            .then(data => {
+                alert('Anime Added: ' + data)
+                this.addAnifyEpisodes(e, data);
+            });
+        });
+    }
+
+    addAnifyEpisodes = (e, __id) => {
+        const id = document.getElementById('anify').value;
+        const url = "https://api.anify.tv/episodes/" + id;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            const oof = data[0];
+            const provider = oof.providerId;
+            const episodes = oof.episodes;
+            for (let i = 0; i < episodes.length; i++)
+            {
+                const _id = episodes[i].id;
+                const url = "https://api.anify.tv/sources?providerId=" + provider + "&watchId=" + _id + "?ep=74019&episodeNumber=" + (i+1) + "&id=" + id + "&subType=sub";
+                fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const sources = data.sources;
+                    let vid = "";
+                    for (let j = 0; j < sources.length; j++)
+                    {
+                        if (sources[j].quality == "auto" || sources[j].quality == "default")
+                        {
+                            vid = encodeURI(sources[j].url);
+                            break;
+                        }
+                    }
+                    const tracks = JSON.stringify(data.subtitles);
+                    const intro = JSON.stringify(data.intro);
+                    const outro = JSON.stringify(data.outro);
+                    const url = "/addepisode?anime_id=" + __id + "&video_url=" + vid + "&tracks=" + tracks + "&episode=" + (i+1) + "&intro=" + intro + "&outro=" + outro;
+                    fetch(API_URL + url)
+                    .then(res => res.arrayBuffer())
+                    .then(data => {
+                        alert("Added episode " + (i+1) + " for anime " + id)
+                    });
+                });
+            }
+        });
+    }
+
     render() {
         return (
         <>
@@ -151,6 +235,13 @@ class AddVideo extends React.Component {
                     </form>
                     <input type="button" value="Submit" onClick={this.makeEpisodes} />
 
+                </div>
+                <div className='add-video'>
+                    <h3>Add Anify Anime</h3>
+                    <form>
+                        <input type='text' id="anify" placeholder='Enter Anify Id' />
+                        <input type="button" value="Add" onClick={this.addAnify} />
+                    </form>
                 </div>
             </div>
         </>

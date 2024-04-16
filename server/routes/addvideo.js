@@ -3,25 +3,28 @@ var router = express.Router();
 var sqlHandler = require('./../sqlHandler.js');
 
 /* Add anime. */
-router.get('/', function(req, res, next) {
-    const name = req.query.name;
-    const folder = req.query.folder;
-    const nicknames = req.query.nicknames;
-    const season = +req.query.season;
-    const description = req.query.description;
-    const studios = req.query.studios;
-    const genre = req.query.genre;
-    const episodes = +req.query.episodes;
-    const duration = +req.query.duration;
-    const premiered = req.query.premiered;
-    const other_seasons_folders = req.query.other_seasons_folders;
-    const other_seasons_names = req.query.other_seasons_names;
-    const anime_type = req.query.anime_type;
-    const poster = req.query.poster;
+router.post('/', function(req, res, next) {
+    const body = req.body;
+    const anify_id = +body.anify_id;
+    const name = body.name;
+    const folder_name = body.folder_name;
+    const nicknames = JSON.stringify(decodeURI(body.nicknames).split(','));
+    const description = body.description;
+    const genre = JSON.stringify(body.genre);
+    const episodes = +body.episodes;
+    const duration = +body.duration;
+    const premiered = body.premiered;
+    const season = body.season;
+    const rating = body.rating;
+    const other_seasons_anify_ids = JSON.stringify(body.other_seasons_anify_ids);
+    const type = body.type;
+    const poster = body.poster;
+    const banner = body.banner;
+    const status = body.status;
 
-    sqlHandler.con.query("INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, folder, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, anime_type, poster], function (err, result, fields) {
+    sqlHandler.con.query("INSERT INTO Anime(anify_id, name, folder_name, nicknames, description, genre, episodes, duration, premiered, season, rating, other_seasons_anify_ids, type, poster, banner, status, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [anify_id, name, folder_name, nicknames, description, genre, episodes, duration, premiered, season, rating, other_seasons_anify_ids, type, poster, banner, status], function (err, result, fields) {
         if (err) throw err;
-        res.sendStatus(200);
+        res.send(result.insertId.toString());
     });
 
 });

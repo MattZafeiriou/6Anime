@@ -218,12 +218,12 @@ class Trending extends Component {
             const imgUrl = info.poster;
             const vname = info.name;
             const vep = info.episodes;
-            const premiered = info.premiered.split('-')[0];
+            const premiered = info.premiered;
             const duration = info.duration;
             const genre = info.genre;
             const tag1 = genre[0];
             const tag2 = genre[1];
-            const year = premiered.split(' ')[premiered.split(' ').length - 1];
+            const year = premiered;
             const vlink = "/watch/" + info.folder_name + "-" + id;
             fetch(API_URL + "/getviews/?id=" + props[0])
             .then(res => res.text())
