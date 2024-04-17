@@ -223,7 +223,7 @@ class Trending extends Component {
             const genre = info.genre;
             const tag1 = genre[0];
             const tag2 = genre[1];
-            const year = premiered;
+            const year = premiered.split('-')[0];
             const vlink = "/watch/" + info.folder_name + "-" + id;
             fetch(API_URL + "/getviews/?id=" + props[0])
             .then(res => res.text())

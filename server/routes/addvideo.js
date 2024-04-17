@@ -5,24 +5,26 @@ var sqlHandler = require('./../sqlHandler.js');
 /* Add anime. */
 router.post('/', function(req, res, next) {
     const body = req.body;
-    const anify_id = +body.anify_id;
     const name = body.name;
+    const status = body.status;
     const folder_name = body.folder_name;
-    const nicknames = JSON.stringify(decodeURI(body.nicknames).split(','));
+    const nicknames = body.nicknames;
+    const anime_season = body.anime_season;
     const description = body.description;
-    const genre = JSON.stringify(body.genre);
+    const studios = body.studios;
+    const genre = body.genre;
     const episodes = +body.episodes;
     const duration = +body.duration;
     const premiered = body.premiered;
+    const other_season_folders = body.other_season_folders;
+    const other_season_names = body.other_season_names;
+    const type = body.type;
     const season = body.season;
     const rating = body.rating;
-    const other_seasons_anify_ids = JSON.stringify(body.other_seasons_anify_ids);
-    const type = body.type;
     const poster = body.poster;
     const banner = body.banner;
-    const status = body.status;
 
-    sqlHandler.con.query("INSERT INTO Anime(anify_id, name, folder_name, nicknames, description, genre, episodes, duration, premiered, season, rating, other_seasons_anify_ids, type, poster, banner, status, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [anify_id, name, folder_name, nicknames, description, genre, episodes, duration, premiered, season, rating, other_seasons_anify_ids, type, poster, banner, status], function (err, result, fields) {
+    sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner], function (err, result, fields) {
         if (err) throw err;
         res.send(result.insertId.toString());
     });

@@ -6,7 +6,6 @@ var sqlHandler = require('./../sqlHandler');
 router.get('/', function(req, res, next) {
     const anime_id = +req.query.anime_id;
     const video_url = decodeURI(req.query.video_url);
-    console.log(video_url)
     const tracks = req.query.tracks;
     const episode_number = +req.query.episode;
     const intro = req.query.intro;

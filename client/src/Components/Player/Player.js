@@ -49,6 +49,7 @@ class Player extends React.Component {
             studios: [],
             relatedAnifyId: [],
             img: "",
+            banner: "",
             episodesno: "",
             premiered: "",
             season: "",
@@ -147,6 +148,7 @@ class Player extends React.Component {
                 //     document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
                 // }
             });
+            this.setState({banner: info.banner});
             this.setState({img: info.poster, loaded_info: true});
             fetch(API_URL + "/getviews/?id=" + id )
             .then(res => res.text())
@@ -375,7 +377,7 @@ class Player extends React.Component {
                         {/* Video Player Starts here */}
                         <div className='player'>
                             {/* Video Player */}
-                            <VideoPlayer banner={this.state.img}/>
+                            <VideoPlayer banner={this.state.banner}/>
                         </div>
                         {/* Add our sponsor */}
                         <Sponsored />

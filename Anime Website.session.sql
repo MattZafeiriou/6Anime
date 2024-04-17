@@ -3,22 +3,24 @@
 -- @block
 CREATE TABLE Anime(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    anify_id INTEGER NOT NULL UNIQUE,
     name TEXT NOT NULL,
+    status TEXT NOT NULL,
     folder_name VARCHAR(50) NOT NULL UNIQUE,
     nicknames JSON NOT NULL,
+    anime_season INTEGER NOT NULL,
     description TEXT NOT NULL,
+    studios JSON NOT NULL,
     genre JSON NOT NULL,
     episodes INTEGER NOT NULL,
     duration INTEGER NOT NULL,
-    premiered INTEGER NOT NULL,
+    premiered TEXT NOT NULL,
+    other_season_folders JSON NOT NULL,
+    other_season_names JSON NOT NULL,
+    type TEXT NOT NULL, -- Movie or Series
     season TEXT NOT NULL,
     rating TEXT NOT NULL,
-    other_seasons_anify_ids JSON NOT NULL,
-    type TEXT NOT NULL, -- Movie or Series
     poster TEXT NOT NULL,
     banner TEXT,
-    status TEXT NOT NULL,
     update_date DATE NOT NULL,
     added_date DATE NOT NULL
 );
@@ -61,7 +63,7 @@ CREATE TABLE Form(
 SELECT * FROM Form;
 
 -- @block
-DROP TABLE Anime;
+DROP TABLE Episode;
 
 -- @block
 INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster)

@@ -23,6 +23,19 @@
     margin-left: 5%;
 }
 
+.footerside {
+    display: flex;
+}
+
+.footerside h5 {
+    margin-right: 1em;
+}
+
+.footerside a {
+    color: white;
+    text-decoration: none;
+}
+
 a {
     text-decoration: none;
 }

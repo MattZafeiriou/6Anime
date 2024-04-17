@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css'
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 class Login extends React.Component {
 
@@ -30,6 +31,9 @@ class Login extends React.Component {
     }
   }
 
+  onVerifyCaptcha(token) {
+    alert("Verified: " + token);
+  }
 
   render() {
     return (
@@ -52,6 +56,7 @@ class Login extends React.Component {
                 <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">Remember me</label>
               </div>
             </div>
+            <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={this.onVerifyCaptcha}/>
             <button type="submit" className="btn btn-primary btn-block">{this.state.type == "Login" ? "Log In" : "Register"}</button>
             <p className="forgot-password text-right">
               Forgot <a href="#">password?</a>
