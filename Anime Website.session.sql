@@ -21,6 +21,7 @@ CREATE TABLE Anime(
     rating TEXT NOT NULL,
     poster TEXT NOT NULL,
     banner TEXT,
+    language TEXT NOT NULL,
     update_date DATE NOT NULL,
     added_date DATE NOT NULL
 );

@@ -104,18 +104,19 @@ class AddVideo extends React.Component {
         const eh = document.getElementById("anime_type");
         const anime_type = eh.options[eh.selectedIndex].value;
         const ehh = document.getElementById("anime_season");
-        const anime_season = ehh.options[eh.selectedIndex].value;
+        const anime_season = ehh.options[ehh.selectedIndex].value;
         const rating = document.getElementById('rating').value;
         const poster = document.getElementById('poster').value;
         const banner = document.getElementById('banner').value;
-
+        const ehhh = document.getElementById("language");
+        const language = ehhh.options[ehhh.selectedIndex].value;
         const url = "/addvideo";
         fetch(API_URL + url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: name, status: status, folder_name: folder, nicknames: nicknames, anime_season: season, description: description, studios: studios, genre: genre, episodes: episodes, duration: duration, premiered: premiered, other_season_folders: other_seasons_folders, other_season_names: other_seasons_names, type: anime_type, season: anime_season, rating: rating, poster: poster, banner: banner}),
+            body: JSON.stringify({name: name, status: status, folder_name: folder, nicknames: nicknames, anime_season: season, description: description, studios: studios, genre: genre, episodes: episodes, duration: duration, premiered: premiered, other_season_folders: other_seasons_folders, other_season_names: other_seasons_names, type: anime_type, season: anime_season, rating: rating, poster: poster, banner: banner, language: language}),
         })
         .then(res => res.arrayBuffer())
         .then(data => {
@@ -166,6 +167,10 @@ class AddVideo extends React.Component {
                         <input type='text' id="rating" placeholder='Rating' />
                         <input type='text' id="poster" placeholder='Poster' />
                         <input type='text' id="banner" placeholder='Banner' />
+                        <select id="language">
+                            <option>Sub</option>
+                            <option>Dub</option>
+                        </select>
                         <input type="button" value="Submit" onClick={this.submitForm} />
                     </form>
                 </div>

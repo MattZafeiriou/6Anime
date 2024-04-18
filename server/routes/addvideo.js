@@ -23,8 +23,9 @@ router.post('/', function(req, res, next) {
     const rating = body.rating;
     const poster = body.poster;
     const banner = body.banner;
+    const language = body.language;
 
-    sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner], function (err, result, fields) {
+    sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, anime_season, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language], function (err, result, fields) {
         if (err) throw err;
         res.send(result.insertId.toString());
     });
