@@ -35,12 +35,13 @@ class AnimeList extends React.Component {
         const season = (filters["Season"] === undefined || filters["Season"] === "") ? "" : "&season=" + encodeURIComponent(filters["Season"]);
         const year = (filters["Year"] === undefined || filters["Year"] === "") ? "" : "&year=" + encodeURIComponent(filters["Year"]);
         const type = (filters["Type"] === undefined || filters["Type"] === "") ? "" : "&type=" + encodeURIComponent(filters["Type"]);
-        const status = (filters["Status"] === undefined || filters["Status"] === "") ? "" : "&status=" + encodeURIComponent(filters["Status"]);
+        const status = (filters["Status"] === undefined || filters["Status"] === "" || filters["Status"] === "All") ? "" : "&status=" + encodeURIComponent(filters["Status"].toUpperCase());
         const language = (filters["Language"] === undefined || filters["Language"] === "") ? "" : "&language=" + encodeURIComponent(filters["Language"]);
         const sort = (filters["Sort"] === undefined || filters["Sort"] === "") ? "" : "&sort=" + encodeURIComponent(filters["Sort"]);
         const search = "&chars=" + encodeURIComponent(document.querySelector('.anime-list-header-search input').value);
+        const limit = "&limit=20";
 
-        let url = genre + country + season + year + type + status + language + sort + search;
+        let url = genre + country + season + year + type + status + language + sort + search + limit;
         url = url.replace("&", "?");
         url = "/search" + url;
         
@@ -242,11 +243,11 @@ class AnimeList extends React.Component {
                     <div className='anime-list-header-filters'>
                         <this.filter name="Genre" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire"/>
                         <this.filter name="Country" rows="1" id="countryfilter" options=""/>
-                        <this.filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Autumn,Winter"/>
-                        <this.filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001"/>
+                        <this.filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter"/>
+                        <this.filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999"/>
                         <this.filter name="Type" rows="1" id="typefilter" options="Movie,Series"/>
-                        <this.filter name="Status" selected="All" radio rows="1" id="statusfilter" options="All"/>
-                        <this.filter name="Language" rows="1" id="languagefilter" options="Subbed,Dubbed"/>
+                        <this.filter name="Status" selected="All" radio rows="1" id="statusfilter" options="All,Finished Airing,Currently Airing"/>
+                        <this.filter name="Language" rows="1" id="languagefilter" options="Sub,Dub"/>
                         <this.filter name="Sort" selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date"/>
                     </div>
                     <div className='anime-list-header-search'>

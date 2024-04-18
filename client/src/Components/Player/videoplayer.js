@@ -3,7 +3,7 @@ import Hls from "hls.js";
 import { API_URL } from '../../Constants';
 
 class VideoPlayer extends React.Component {
-
+    // TODO FIX AUDIO NOT SYNCING WITH PICTURE IN PICTURE (FIREFOX)
     constructor(props) {
         super(props);
         this.cooldown = null;
