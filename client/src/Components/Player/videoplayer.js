@@ -3,7 +3,7 @@ import Hls from "hls.js";
 import { API_URL } from '../../Constants';
 
 class VideoPlayer extends React.Component {
-    // TODO FIX AUDIO NOT SYNCING WITH PICTURE IN PICTURE (FIREFOX)
+
     constructor(props) {
         super(props);
         this.cooldown = null;
@@ -89,7 +89,7 @@ class VideoPlayer extends React.Component {
         const value = parseFloat(currentVolume);
         player.volume = value;
         document.getElementById("audioBar").value = value * 100;
-        if (value == 0)
+        if (value === 0)
             document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
         else if (value * 100 < 50)
             document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
@@ -194,6 +194,19 @@ class VideoPlayer extends React.Component {
         video.addEventListener("timeupdate", (event) => {
             document.getElementById("currenttime").innerHTML = this.toHHMMSS(video.currentTime.toFixed(2));
             document.getElementById("progressBar").value = video.currentTime;
+            if (video.muted)
+            {
+                video.volume = 0;
+                video.muted = false;
+            }
+            this.changeAudio(video.volume * 100);
+
+            if (video.paused && document.getElementById("play").innerHTML === "<i class=\"fa-solid fa-pause\"></i>")
+            {
+                this.togglePlay();
+            }
+            if (!video.paused && document.getElementById("play").innerHTML === "<i class=\"fa-solid fa-play\"></i>")
+                this.togglePlay();
 
             const currentPercentage = (video.currentTime / video.duration) * 100;
             const progressBar = document.getElementById("progressBar");
@@ -223,7 +236,7 @@ class VideoPlayer extends React.Component {
     toggleMute()
     {
         const player = document.getElementById('player');
-        if (this.state.lastVolume == 0)
+        if (this.state.lastVolume === 0)
         {
             this.state.lastVolume = player.volume;
             player.volume = 0;
@@ -279,6 +292,23 @@ class VideoPlayer extends React.Component {
             this.setPlay();
             document.getElementsByClassName("play-button")[0].classList.remove("hidebutton");
         }
+    }
+
+    changeAudio(value)
+    {
+        const player = this.player;
+        player.volume = value / 100;
+        if (value === 0)
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
+        else if (value < 50)
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
+        else
+            document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
+
+                                    
+        const currentPercentage = value;
+        const audioBar = document.getElementById("audioBar");
+        audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
     }
 
     render() {
@@ -337,29 +367,15 @@ class VideoPlayer extends React.Component {
 
                     }}><i class="fa-solid fa-volume-high"></i></button>
                     <div className='audio-bar'>
-                        <input type="range" id="audioBar" name="audioBar" defaultValue="0" min="0" max="100" onChange={
-                            () => {
-                                const player = this.player;
-                                const value = document.getElementById("audioBar").value;
-                                player.volume = value / 100;
-                                if (value == 0)
-                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-mute'></i>";
-                                else if (value < 50)
-                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-low'></i>";
-                                else
-                                    document.getElementById("audioIcon").innerHTML = "<i class='fa-solid fa-volume-high'></i>";
-
-                                                            
-                                const currentPercentage = value;
-                                const audioBar = document.getElementById("audioBar");
-                                audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
-                            }
-                        }></input>
+                        <input type="range" id="audioBar" name="audioBar" defaultValue="0" min="0" max="100" onChange={() => {
+                            const value = document.getElementById("audioBar").value;
+                            this.changeAudio(value);
+                            }}></input>
                     </div>
                     <button id="captionsIcon" onClick={() => {
                         const player = document.getElementsByClassName('video-player')[0];
                         const captions = document.getElementById('captions');
-                        if (captions.track.mode == "showing")
+                        if (captions.track.mode === "showing")
                         {
                             captions.track.mode = "hidden";
                             document.getElementById("captionsIcon").innerHTML = "<i class='fa-regular fa-closed-captioning'></i>";
