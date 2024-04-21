@@ -272,11 +272,12 @@ class Trending extends Component {
                     </div>
                 </div>
                         <a onClick={() => {
-                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
-                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
                             const lastCard = document.getElementById('card1');
                             const cardWidth = lastCard.offsetWidth + 16; // 16px margin
                             const previous = Math.ceil(this.offset / cardWidth - 1); // get previous card number (eg 3 cards)
+                            if (previous < 0) return;
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyLeft');
+                            document.getElementsByClassName('trending_list')[0].classList.remove('fullyRight');
                             const difference = previous - (this.offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
 
                             let card = document.getElementById('card' + (previous + 1));

@@ -373,7 +373,6 @@ class VideoPlayer extends React.Component {
                             }}></input>
                     </div>
                     <button id="captionsIcon" onClick={() => {
-                        const player = document.getElementsByClassName('video-player')[0];
                         const captions = document.getElementById('captions');
                         if (captions.track.mode === "showing")
                         {
