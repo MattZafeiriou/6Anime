@@ -66,64 +66,80 @@ class AddVideo extends React.Component {
         e.preventDefault();
     }
 
+    // submitForm = (e) => {
+    //     const name = document.getElementById('name').value;
+    //     const oof = document.getElementById("anime_status");
+    //     const status = oof.options[oof.selectedIndex].value;
+    //     const folder = document.getElementById('folder').value;
+    //     let nicknames = JSON.stringify(document.getElementById('nicknames').value.split(',').map(function(item) {
+    //         return item.trim();
+    //       }));
+    //     if (nicknames == "[\"\"]")
+    //         nicknames = "[]";
+    //     const season = document.getElementById('season').value;
+    //     const description = document.getElementById('description').value;
+    //     let studios = JSON.stringify(document.getElementById('studios').value.split(',').map(function(item) {
+    //         return item.trim();
+    //       }));
+    //     if (studios == "[\"\"]")
+    //         studios = "[]";
+    //     let genre = JSON.stringify(document.getElementById('genre').value.split(',').map(function(item) {
+    //         return item.trim();
+    //       }));
+    //     if (genre == "[\"\"]")
+    //         genre = "[]";
+    //     const episodes = document.getElementById('episodes').value;
+    //     const duration = document.getElementById('duration').value;
+    //     const premiered = document.getElementById('premiered').value;
+    //     let other_seasons_folders = JSON.stringify(document.getElementById('other_seasons_folders').value.split(',').map(function(item) {
+    //         return item.trim();
+    //       }));
+    //     if (other_seasons_folders == "[\"\"]")
+    //         other_seasons_folders = "[]";
+    //     let other_seasons_names = JSON.stringify(document.getElementById('other_seasons_names').value.split(',').map(function(item) {
+    //         return item.trim();
+    //       }));
+    //     if (other_seasons_names == "[\"\"]")
+    //         other_seasons_names = "[]";
+    //     const eh = document.getElementById("anime_type");
+    //     const anime_type = eh.options[eh.selectedIndex].value;
+    //     const ehh = document.getElementById("anime_season");
+    //     const anime_season = ehh.options[ehh.selectedIndex].value;
+    //     const rating = document.getElementById('rating').value;
+    //     const poster = document.getElementById('poster').value;
+    //     const banner = document.getElementById('banner').value;
+    //     const ehhh = document.getElementById("language");
+    //     const language = ehhh.options[ehhh.selectedIndex].value;
+    //     const url = "/addvideo";
+    //     fetch(API_URL + url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({name: name, status: status, folder_name: folder, nicknames: nicknames, anime_season: season, description: description, studios: studios, genre: genre, episodes: episodes, duration: duration, premiered: premiered, other_season_folders: other_seasons_folders, other_season_names: other_seasons_names, type: anime_type, season: anime_season, rating: rating, poster: poster, banner: banner, language: language}),
+    //     })
+    //     .then(res => res.arrayBuffer())
+    //     .then(data => {
+    //         alert('Form submitted: ' + JSON.stringify(data))
+
+    //     })
+    //     e.preventDefault();
+    // }
+
     submitForm = (e) => {
-        const name = document.getElementById('name').value;
-        const oof = document.getElementById("anime_status");
-        const status = oof.options[oof.selectedIndex].value;
-        const folder = document.getElementById('folder').value;
-        let nicknames = JSON.stringify(document.getElementById('nicknames').value.split(',').map(function(item) {
-            return item.trim();
-          }));
-        if (nicknames == "[\"\"]")
-            nicknames = "[]";
-        const season = document.getElementById('season').value;
-        const description = document.getElementById('description').value;
-        let studios = JSON.stringify(document.getElementById('studios').value.split(',').map(function(item) {
-            return item.trim();
-          }));
-        if (studios == "[\"\"]")
-            studios = "[]";
-        let genre = JSON.stringify(document.getElementById('genre').value.split(',').map(function(item) {
-            return item.trim();
-          }));
-        if (genre == "[\"\"]")
-            genre = "[]";
-        const episodes = document.getElementById('episodes').value;
-        const duration = document.getElementById('duration').value;
-        const premiered = document.getElementById('premiered').value;
-        let other_seasons_folders = JSON.stringify(document.getElementById('other_seasons_folders').value.split(',').map(function(item) {
-            return item.trim();
-          }));
-        if (other_seasons_folders == "[\"\"]")
-            other_seasons_folders = "[]";
-        let other_seasons_names = JSON.stringify(document.getElementById('other_seasons_names').value.split(',').map(function(item) {
-            return item.trim();
-          }));
-        if (other_seasons_names == "[\"\"]")
-            other_seasons_names = "[]";
-        const eh = document.getElementById("anime_type");
-        const anime_type = eh.options[eh.selectedIndex].value;
-        const ehh = document.getElementById("anime_season");
-        const anime_season = ehh.options[ehh.selectedIndex].value;
-        const rating = document.getElementById('rating').value;
-        const poster = document.getElementById('poster').value;
-        const banner = document.getElementById('banner').value;
-        const ehhh = document.getElementById("language");
-        const language = ehhh.options[ehhh.selectedIndex].value;
+        const id = document.getElementById('name').value;
         const url = "/addvideo";
         fetch(API_URL + url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name: name, status: status, folder_name: folder, nicknames: nicknames, anime_season: season, description: description, studios: studios, genre: genre, episodes: episodes, duration: duration, premiered: premiered, other_season_folders: other_seasons_folders, other_season_names: other_seasons_names, type: anime_type, season: anime_season, rating: rating, poster: poster, banner: banner, language: language}),
+            body: JSON.stringify({id: id}),
         })
-        .then(res => res.arrayBuffer())
+        .then(res => res.text())
         .then(data => {
-            alert('Form submitted: ' + JSON.stringify(data))
-
+            alert(data)
         })
-        e.preventDefault();
     }
 
     render() {
@@ -132,7 +148,7 @@ class AddVideo extends React.Component {
             <div className='add-video-container'>
                 <div className='add-video'>
                     <h3>Add Anime</h3>
-                    <form>
+                    {/* <form>
                         <input type='text' id="name" placeholder='Anime Name' />
                         <select id="anime_status">
                             <option>FINISHED AIRING</option>
@@ -172,9 +188,13 @@ class AddVideo extends React.Component {
                             <option>Dub</option>
                         </select>
                         <input type="button" value="Submit" onClick={this.submitForm} />
-                    </form>
+                    </form>*/}
                 </div>
-                <div className='add-video'>
+                <form>
+                    <input type='text' id="name" placeholder='Anime Id' />
+                    <input type="button" value="Submit" onClick={this.submitForm} />
+                </form>
+                {/* <div className='add-video'>
                     <h3>Add Episodes</h3>
                     <form>
                         <input type='text' id="_episodes" placeholder='Enter Anime Folder Name' />
@@ -184,7 +204,7 @@ class AddVideo extends React.Component {
                     </form>
                     <input type="button" value="Submit" onClick={this.makeEpisodes} />
 
-                </div>
+                </div> */}
             </div>
         </>
     );

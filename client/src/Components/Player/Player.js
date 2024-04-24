@@ -47,7 +47,8 @@ class Player extends React.Component {
             description: "",
             genre: "",
             studios: [],
-            relatedAnifyId: [],
+            other_season_folders: [],
+            other_season_names: [],
             img: "",
             banner: "",
             episodesno: "",
@@ -140,13 +141,13 @@ class Player extends React.Component {
             this.setState({premiered: date});
             this.setState({season: info.season});
             this.setState({episodesdu: info.duration + " min/ep"});
-            this.setState({relatedAnifyId: info.other_seasons_anify_ids}, () => {
-                // if (this.state.relatedAnifyId.length > 0)
-                //     //this.setRelatedAnime();
-                // else
-                // {
-                //     document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
-                // }
+            this.setState({other_season_folders: info.other_season_folders, other_season_names: info.other_season_names}, () => {
+                if (this.state.other_season_folders.length > 0)
+                    this.setRelatedAnime();
+                else
+                {
+                    document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
+                }
             });
             this.setState({banner: info.banner});
             this.setState({img: info.poster, loaded_info: true});
@@ -261,9 +262,9 @@ class Player extends React.Component {
 
     setRelatedAnime() {
         // Change banner image
-        for(let i = 0; i < this.state.relatedFolders.length; i++)
+        for(let i = 0; i < this.state.other_season_folders.length; i++)
         {
-            const url = "/getid/?name=" + this.state.relatedFolders[i];
+            const url = "/getid/?name=" + this.state.other_season_folders[i];
             fetch(API_URL + url)
             .then(res => res.text())
             .then(data => {

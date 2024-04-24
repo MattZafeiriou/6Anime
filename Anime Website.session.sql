@@ -7,7 +7,6 @@ CREATE TABLE Anime(
     status TEXT NOT NULL,
     folder_name VARCHAR(50) NOT NULL UNIQUE,
     nicknames JSON NOT NULL,
-    anime_season INTEGER NOT NULL,
     description TEXT NOT NULL,
     studios JSON NOT NULL,
     genre JSON NOT NULL,
@@ -22,6 +21,9 @@ CREATE TABLE Anime(
     poster TEXT NOT NULL,
     banner TEXT,
     language TEXT NOT NULL,
+    country TEXT NOT NULL,
+    api_id INTEGER NOT NULL,
+    api_episode TEXT NOT NULL,
     update_date DATE NOT NULL,
     added_date DATE NOT NULL
 );
@@ -64,7 +66,7 @@ CREATE TABLE Form(
 SELECT * FROM Form;
 
 -- @block
-DROP TABLE Episode;
+DROP TABLE Anime;
 
 -- @block
 INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster)

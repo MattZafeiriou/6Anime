@@ -26,7 +26,11 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:9000"],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -46,6 +50,8 @@ app.use("/getrecommendations", recommendationsRouter);
 app.use("/addview", addViewRouter);
 app.use("/addvideo", addVideoRouter); 
 app.use("/addepisode", addEpisodeRouter);
+// Auth
+app.use("/login", require("./routes/Auth/login"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

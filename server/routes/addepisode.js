@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var sqlHandler = require('./../sqlHandler');
+const addEpisode = require('./../utils/addEpisode');
 
 /* Add anime. */
 router.get('/', function(req, res, next) {
@@ -11,10 +12,39 @@ router.get('/', function(req, res, next) {
     const intro = req.query.intro;
     const outro = req.query.outro;
 
-    sqlHandler.con.query("INSERT INTO Episode(anime_id, video_url, tracks, episode_number, intro, outro) VALUES(?, ?, ?, ?, ?, ?);", [anime_id, video_url, tracks, episode_number, intro, outro], function (err, result, fields) {
-        if (err) throw err;
-        res.sendStatus(200);
-    });
+    if (!anime_id) {
+        res.status(400).send("Missing param: anime_id");
+        return;
+    }
+    if (isNaN(anime_id)) {
+        res.status(400).send("Invalid anime_id.");
+        return;
+    }
+    if (!video_url) {
+        res.status(400).send("Missing param: video_url");
+        return;
+    }
+    if (!tracks) {
+        res.status(400).send("Missing param: tracks");
+        return;
+    }
+    if (!episode_number) {
+        res.status(400).send("Missing param: episode");
+        return;
+    }
+    if (isNaN(episode_number)) {
+        res.status(400).send("Invalid episode number.");
+        return;
+    }
+    if (!intro) {
+        res.status(400).send("Missing param: intro");
+        return;
+    }
+    if (!outro) {
+        res.status(400).send("Missing param: outro");
+        return;
+    }
+    addEpisode(anime_id, video_url, tracks, episode_number, intro, outro, res);
 
 });
 

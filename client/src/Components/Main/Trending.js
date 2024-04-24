@@ -29,9 +29,12 @@ class Trending extends Component {
                         <div className="trending_card_play_button">
                             <i className="fa-solid fa-play"></i>
                         </div>
-                        <a href='' className="trending_card_addtolist">
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            alert("Im gonna touch you lil nigga");
+                        }} className="trending_card_addtolist">
                             <h3>Add to my list</h3>
-                        </a>
+                        </button>
                         <img src={props.img} alt='anime poster'/>
                     </a>
                 </div>

@@ -365,7 +365,7 @@ class VideoPlayer extends React.Component {
                     <button id="audioIcon" onClick={() => {
                         this.toggleMute();
 
-                    }}><i class="fa-solid fa-volume-high"></i></button>
+                    }}><i className="fa-solid fa-volume-high"></i></button>
                     <div className='audio-bar'>
                         <input type="range" id="audioBar" name="audioBar" defaultValue="0" min="0" max="100" onChange={() => {
                             const value = document.getElementById("audioBar").value;
@@ -383,7 +383,7 @@ class VideoPlayer extends React.Component {
                             captions.track.mode = "showing";
                             document.getElementById("captionsIcon").innerHTML = "<i class='fa-solid fa-closed-captioning'></i>";
                         }
-                    }}><i class="fa-solid fa-closed-captioning"></i></button>
+                    }}><i className="fa-solid fa-closed-captioning"></i></button>
 
                     <button id="fullscreen" onClick={() => {
                         const player = document.getElementsByClassName('video-player')[0];
@@ -395,7 +395,7 @@ class VideoPlayer extends React.Component {
                             player.requestFullscreen();
                             this.setExitFullscreen();
                         }
-                    }}><i class="fa-solid fa-expand"></i></button>
+                    }}><i className="fa-solid fa-expand"></i></button>
                 </div>
                 <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
                     ref={player => (this.player = player)}
