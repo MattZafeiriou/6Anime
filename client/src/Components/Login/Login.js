@@ -32,7 +32,7 @@ class Login extends React.Component {
   }
 
   onVerifyCaptcha(token) {
-    alert("Verified: " + token);
+    //alert("Verified: " + token);
   }
 
   render() {

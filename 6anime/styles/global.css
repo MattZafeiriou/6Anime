@@ -1,0 +1,19 @@
+html {
+  margin: 0;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+body {
+  /* background-image: url("test-background.jpg"); */
+  background: rgb(25,7,7);
+  background: linear-gradient(180deg, rgba(25,7,7,1) 0vh, rgba(155,39,39,1) 50vh, rgba(25,7,7,1) 95vh);
+  overflow-x: hidden;
+}

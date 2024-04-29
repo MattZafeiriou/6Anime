@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:9000';
+export const API_URL = 'https://www.6anime.tv/api';//'http://localhost:9000/api';

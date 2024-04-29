@@ -31,7 +31,7 @@ class Trending extends Component {
                         </div>
                         <button onClick={(e) => {
                             e.preventDefault();
-                            alert("Im gonna touch you lil nigga");
+                            //alert("Im gonna touch you lil nigga");
                         }} className="trending_card_addtolist">
                             <h3>Add to my list</h3>
                         </button>

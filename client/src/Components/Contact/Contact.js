@@ -2,6 +2,7 @@ import React from 'react';
 import './Contact.css'
 import {Form, Button, Toast, ToastContainer} from 'react-bootstrap';
 import { API_URL } from '../../Constants';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 class Contact extends React.Component {
 
@@ -117,6 +118,7 @@ class Contact extends React.Component {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br/>
+                        <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={this.onVerifyCaptcha}/>
                         <Button variant="dark" type="submit">Submit</Button>
                     </Form>
                 </div>

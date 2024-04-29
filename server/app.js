@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:9000"],
+  origin: /*["https://6anime.tv", "https://www.6anime.tv"],*/["http://localhost:3000", "http://localhost:9000"],
   methods: ["GET", "POST"],
   credentials: true
 }));
@@ -35,27 +35,35 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/testAPI", testAPIRouter);
-app.use("/search", searchRouter);
-app.use("/sendform", sendFormRouter);
-app.use("/getvideo", getVideoRouter);
-app.use("/getanimeurl", animeURLRouter);
-app.use("/getviews", getViewRouter);
-app.use("/getpopular", getPopularRouter);
-app.use("/getid", getIDRouter);
-app.use("/getfeatured", getFeaturedRouter);
-app.use("/getrecommendations", recommendationsRouter);
-app.use("/addview", addViewRouter);
-app.use("/addvideo", addVideoRouter); 
-app.use("/addepisode", addEpisodeRouter);
+app.use(express.static(path.join(__dirname, './build')));
+
+const pages = ["/watch", "/watch/*", "/search", "/about", "/donate", "/contact", "/404", "/trending", "/series", "/movies", "/trending"];
+
+app.get(pages, (req, res) => {
+  res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+
+app.use("/api/testAPI", testAPIRouter);
+app.use("/api/search", searchRouter);
+app.use("/api/sendform", sendFormRouter);
+app.use("/api/getvideo", getVideoRouter);
+app.use("/api/getanimeurl", animeURLRouter);
+app.use("/api/getviews", getViewRouter);
+app.use("/api/getpopular", getPopularRouter);
+app.use("/api/getid", getIDRouter);
+app.use("/api/getfeatured", getFeaturedRouter);
+app.use("/api/getrecommendations", recommendationsRouter);
+app.use("/api/addview", addViewRouter);
+app.use("/api/addvideo", addVideoRouter); 
+app.use("/api/addepisode", addEpisodeRouter);
 // Auth
-app.use("/login", require("./routes/Auth/login"));
+app.use("/api/login", require("./routes/Auth/login"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  res.redirect("/404");
+  //next(createError(404));
 });
 
 // error handler

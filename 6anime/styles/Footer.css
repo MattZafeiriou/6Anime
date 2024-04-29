@@ -1,0 +1,41 @@
+.footer {
+    margin-top: 1em;
+    background-color: #141414;
+    height: 100px;
+    max-height: 100px;
+}
+
+.mainpage
+{
+    min-height: calc(100vh - 200px - 1em);
+}
+
+.footer h5 {
+    font-size: 0.8em;
+    line-height: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.footertext {
+    width: 90%;
+    color: white;
+    padding: 30px 0px 0px 0px;
+    margin-left: 5%;
+}
+
+.footerside {
+    display: flex;
+}
+
+.footerside h5 {
+    margin-right: 1em;
+}
+
+.footerside a {
+    color: white;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}

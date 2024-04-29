@@ -22,7 +22,13 @@ router.get('/', function(req, res, next) {
             res.status(404).send("Anime not found.");
             return;
         }
-        res.status(200).send(result["0"]);
+        let result_ = result["0"];
+        result_.nicknames = JSON.parse(result_.nicknames);
+        result_.studios = JSON.parse(result_.studios);
+        result_.genre = JSON.parse(result_.genre);
+        result_.other_season_folders = JSON.parse(result_.other_season_folders);
+        result_.other_season_names = JSON.parse(result_.other_season_names);
+        res.status(200).send(result_);
     });
 });
 

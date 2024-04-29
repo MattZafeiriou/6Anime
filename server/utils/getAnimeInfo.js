@@ -1,14 +1,15 @@
-const { META } = require('@consumet/extensions');
+const { META, ANIME} = require('@consumet/extensions');
 
 async function getAnimeInfo(id) {
-    const anilist = new META.Anilist();
+    let anilist = new META.Anilist();
+    if (!(typeof id === 'number'))
+        anilist = new ANIME.Gogoanime();
     try {
         // Asynchronously fetch anime info using await
         const animeInfo = await anilist.fetchAnimeInfo(id);
         return animeInfo;
     } catch (error) {
         // Handle errors if the fetch operation fails
-        console.error(`Error fetching anime information for ID ${id}`);
         return null;
     }
 }

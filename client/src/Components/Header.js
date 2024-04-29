@@ -8,7 +8,7 @@ class Header extends Component {
 
     constructor(props) {
       super(props);
-      this.state = { apiResponse: "", foldersnames: [] };
+      this.state = { foldersnames: [] };
 
       this.addTopDropdown = this.addTopDropdown.bind(this);
       this.typingTop = this.typingTop.bind(this);

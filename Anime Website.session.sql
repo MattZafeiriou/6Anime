@@ -22,7 +22,7 @@ CREATE TABLE Anime(
     banner TEXT,
     language TEXT NOT NULL,
     country TEXT NOT NULL,
-    api_id INTEGER NOT NULL,
+    api_id TEXT NOT NULL,
     api_episode TEXT NOT NULL,
     update_date DATE NOT NULL,
     added_date DATE NOT NULL

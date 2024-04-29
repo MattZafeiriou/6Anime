@@ -268,18 +268,25 @@ class Player extends React.Component {
             fetch(API_URL + url)
             .then(res => res.text())
             .then(data => {
+                if (data == "Anime not found.") return;
                 const info = JSON.parse(data);
                 const imgUrl = info.poster;
                 const vname = info.name;
                 const vep = info.episodes;
-                const season = info.season;
+                const type = info.type;
                 const vlink = "/watch/" + info.folder_name + "-" + info.id;
-                const raDiv = document.getElementsByClassName('related_anime_div')[0];
-                const newDiv = document.createElement('div');
-                raDiv.appendChild(newDiv);
-                // Render the component into the new div
-                const root = createRoot(newDiv);
-                root.render(<this.RelatedAnime title={vname} link={vlink} season={season} img={imgUrl} epsno={vep}/>)
+                fetch(API_URL + "/getviews/?id=" + info.id)
+                .then(res => res.text())
+                .then(res => {
+                    const views = parseInt(res);
+
+                    const raDiv = document.getElementsByClassName('related_anime_div')[0];
+                    const newDiv = document.createElement('div');
+                    raDiv.appendChild(newDiv);
+                    // Render the component into the new div
+                    const root = createRoot(newDiv);
+                    root.render(<this.RelatedAnime title={vname} link={vlink} type={type} img={imgUrl} views={views} epsno={vep}/>)
+                });
             })
             .catch(error => {
                 console.error('Error fetching image:', error);
@@ -289,39 +296,34 @@ class Player extends React.Component {
 
     setPopularAnimeTitle(props)
     {
-        if (Object.keys(props).length === 0)
-            return;
-
-        const url = "/getvideo/?id=" + props[0];
-        fetch(API_URL + url)
-        .then(res => res.text())
-        .then(data => {
-            const info = JSON.parse(data);
-            const imgUrl = info.poster;
-            const vname = info.name;
-            const vep = info.episodes;
-            const season = info.season;
-            const vlink = "/watch/" + info.folder_name + "-" + info.id;
-            fetch(API_URL + "/getviews/?id=" + props[0])
+        for (let i = 0; i < props.length; i++)
+        {
+            const url = "/getvideo/?id=" + props[i];
+            fetch(API_URL + url)
             .then(res => res.text())
-            .then(res => {
-                const views = parseInt(res);
-                const raDiv = document.getElementsByClassName('popular_anime_div')[0];
-                const newDiv = document.createElement('div');
-                raDiv.appendChild(newDiv);
-                // Render the component into the new div
-                const root = createRoot(newDiv);
-                root.render(<this.PopularAnime title={vname} link={vlink} season={season} img={imgUrl} epsno={vep} views={views}/>)
-
-                // Remove first element from array
-                props.shift();
-                // Call function again
-                this.setPopularAnimeTitle(props);
+            .then(data => {
+                const info = JSON.parse(data);
+                const imgUrl = info.poster;
+                const vname = info.name;
+                const vep = info.episodes;
+                const type = info.type;
+                const vlink = "/watch/" + info.folder_name + "-" + info.id;
+                fetch(API_URL + "/getviews/?id=" + props[i])
+                .then(res => res.text())
+                .then(res => {
+                    const views = parseInt(res);
+                    const raDiv = document.getElementsByClassName('popular_anime_div')[0];
+                    const newDiv = document.createElement('div');
+                    raDiv.appendChild(newDiv);
+                    // Render the component into the new div
+                    const root = createRoot(newDiv);
+                    root.render(<this.PopularAnime title={vname} link={vlink} type={type} img={imgUrl} epsno={vep} views={views}/>)
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching image:', error);
             });
-        })
-        .catch(error => {
-            console.error('Error fetching image:', error);
-        });
+        }
     }
 
     setPopularAnime()
@@ -342,7 +344,8 @@ class Player extends React.Component {
                     <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img}/></a>
                     <div style={{display: 'block'}}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
-                        <h5 className='related_anime_info'>Season {props.season} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
             </>
@@ -356,7 +359,7 @@ class Player extends React.Component {
                     <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img}/></a>
                     <div style={{display: 'block'}}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
-                        <h5 className='related_anime_info'>Season {props.season} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} episodes</h5>
                         <h5 className='related_anime_info'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
@@ -411,7 +414,6 @@ class Player extends React.Component {
                             <div className='separator'/>
                             <div style={{marginTop: '1em'}}>
                                 <div className='anime_info'>
-                                    <this.Info name='Season' text={this.state.season}/>
                                     <this.Info name='Publisher' text={this.state.studios}/>
                                     <this.Info name='Episodes' text={this.state.episodesno}/>
                                     <this.Info name='Duration' text={this.state.episodesdu}/>

@@ -4,7 +4,7 @@ const con = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "admin",
-    database: "animeDb"
+    database: "AnimeDb"
 });
 
 var anime = null;

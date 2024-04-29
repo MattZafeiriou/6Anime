@@ -119,14 +119,13 @@ body {
     }
 
     .watch_button {
-        padding: 10px 20px;
-        font-size: 1em;
-        margin-top: 15px;
+        padding: 13px 25px;
+        font-size: .8em;
+        margin-top: 9px;
     }
     .watch_button:hover {
         margin-bottom: 5px;
-        padding: 25px 35px;
-        font-size: 1.2em;
+        padding: 15px 30px;
         margin-top: 0em;
     }
     .carouselCaption h1 {

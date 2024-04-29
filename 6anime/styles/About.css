@@ -1,0 +1,56 @@
+.aboutmain {
+    margin: 3em 5% 5% 5%;
+    color: white;
+}
+
+.aboutmain h1 {
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 600;
+}
+
+.aboutmain p {
+    line-height: .5em;
+    color: white;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 800px) {
+    .aboutmain p {
+        line-height: 1.2em;
+    }
+}
+
+button {
+    box-shadow: none !important;
+}
+
+.accordion-body {
+    background-color: hsl(0, 0%, 15%) !important;
+    color: white;
+}
+
+.accordion-button {
+    background-color: hsl(0, 0%, 15%) !important;
+    color: white;
+}
+
+.accordion-item button{
+    background-color:hsl(0, 0%, 15%) !important;
+    color: white !important;
+}
+
+.accordion-button::after {
+    background-image: none !important;
+}
+
+.accordion-button button:focus {
+    box-shadow: none !important;
+    color: white;
+    background-color: hsl(0, 0%, 10%) !important;
+}
+
+.accordion-button:not(.collapsed) {
+color: white !important;
+background-color: hsl(0, 0%, 10%) !important;
+}

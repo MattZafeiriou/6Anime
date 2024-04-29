@@ -28,6 +28,13 @@
     align-content: center;
 }
 
+@media screen and (max-width: 1200px) {
+    .playerdiv {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .playerdiv {
         margin-left: 0%;
@@ -49,6 +56,12 @@
     padding-top: 2.3em;
     padding-left: 1em;
     width: 25%;
+}
+
+@media screen and (max-width: 1200px) {
+    .right_side {
+        width: 40%;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -84,12 +97,17 @@
     color: rgb(200,200,200);
 }
 
+.related_anime_title {
+    margin-bottom: .2em;
+}
+
 .related_anime_info {
-    line-height: .5em;
+    line-height: 1em;
     font-family: 'Roboto';
     font-weight: 300;
     font-size: .9em;
     color: rgb(100,100,100);
+    margin-bottom: .2em;
 }
 
 .section_title {

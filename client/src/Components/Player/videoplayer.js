@@ -183,6 +183,16 @@ class VideoPlayer extends React.Component {
             player.currentTime += 5;
         }
     }
+    setPlay()
+    {
+        const button = document.getElementById("play");
+        button.innerHTML = "<i class='fa-solid fa-play'></i>";
+    }
+    setPause()
+    {
+        const button = document.getElementById("play");
+        button.innerHTML = "<i class='fa-solid fa-pause'></i>";
+    }
 
     componentDidUpdate() {
         const video = this.player;
@@ -203,15 +213,23 @@ class VideoPlayer extends React.Component {
 
             if (video.paused && document.getElementById("play").innerHTML === "<i class=\"fa-solid fa-pause\"></i>")
             {
-                this.togglePlay();
+                this.setPause();
             }
             if (!video.paused && document.getElementById("play").innerHTML === "<i class=\"fa-solid fa-play\"></i>")
-                this.togglePlay();
+                this.setPlay();
 
             const currentPercentage = (video.currentTime / video.duration) * 100;
             const progressBar = document.getElementById("progressBar");
             progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
         });
+
+        document.addEventListener("visibilitychange", (e) => {
+            if (document.visibilityState === 'hidden') {
+                video.pause();
+                this.setPause();
+            }
+        });
+
         video.addEventListener("loadeddata", (event) => {
             document.getElementById("progressBar").max = video.duration;
             document.getElementById("duration").innerHTML = this.toHHMMSS(video.duration.toFixed(2));
@@ -225,9 +243,9 @@ class VideoPlayer extends React.Component {
             var availableLevels = hls.levels;
   
             // Log the available resolutions
-            availableLevels.forEach(function (level, index) {
-              console.log('Resolution ' + index + ': ' + level.width + 'x' + level.height);
-            });
+            // availableLevels.forEach(function (level, index) {
+            //   console.log('Resolution ' + index + ': ' + level.width + 'x' + level.height);
+            // });
             video.loadSource();
             hls.attachMedia(video)
         });
@@ -256,16 +274,6 @@ class VideoPlayer extends React.Component {
         audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
     }
 
-    setPlay()
-    {
-        const button = document.getElementById("play");
-        button.innerHTML = "<i class='fa-solid fa-play'></i>";
-    }
-    setPause()
-    {
-        const button = document.getElementById("play");
-        button.innerHTML = "<i class='fa-solid fa-pause'></i>";
-    }
     setFullscreen()
     {
         const button = document.getElementById("fullscreen");

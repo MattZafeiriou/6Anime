@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
     let folders = [];
     // in the beginning, I knew what I was doing. Now only ChatGPT knows what this line does and I'm too afraid to ask.
     // select all the animes that contain in their name or nicknames the chars variable
-    let query = "SELECT * FROM Anime" + ((sort === "Most Watched") ? " RIGHT JOIN Views ON Anime.id = Views.anime_id" : "") + " WHERE (name LIKE ? OR EXISTS (SELECT 1 FROM JSON_TABLE(nicknames, '$[*]' COLUMNS(nickname VARCHAR(255) PATH '$')) AS nick WHERE LOWER(nick.nickname) LIKE LOWER(?)))";
+    let query = "SELECT * FROM Anime" + ((sort === "Most Watched") ? " RIGHT JOIN Views ON Anime.id = Views.anime_id" : "") + " WHERE (name LIKE ? OR JSON_SEARCH(LOWER(nicknames), 'one', LOWER(?), NULL, '$') IS NOT NULL)";
     let params = ["%" + chars + "%", "%" + chars + "%"];
 
     if (genre !== "") {
