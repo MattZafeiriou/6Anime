@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
+import Head from 'next/head'
 
 export default function About({ data }) {
     useEffect(() => {
@@ -9,6 +10,9 @@ export default function About({ data }) {
 
     return (
         <>
+        <Head>
+            <title>6Anime - About</title>
+        </Head>
         <div className="aboutmain">
             <h1>About Us</h1>
             <p>We are 6Anime, we provide free entertainment to everyone.</p>

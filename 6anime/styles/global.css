@@ -17,3 +17,9 @@ body {
   background: linear-gradient(180deg, rgba(25,7,7,1) 0vh, rgba(155,39,39,1) 50vh, rgba(25,7,7,1) 95vh);
   overflow-x: hidden;
 }
+
+/* 404 page */
+.NotFound {
+  color: white;
+  padding-top: 20vh;
+}

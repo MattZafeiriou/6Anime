@@ -7,7 +7,7 @@
 
 .mainpage
 {
-    min-height: calc(100vh - 200px - 1em);
+    min-height: calc(100vh - 100px - 1em);
 }
 
 .footer h5 {

@@ -3,6 +3,7 @@ import { Carousel, Image, Placeholder } from 'react-bootstrap';
 import Sponsored from '../components/Sponsored';
 import Trending from '../components/Trending';
 import RandomVideo from '../components/RandomVideo';
+import Head from 'next/head'
 
 function Tag(props) {
   return (
@@ -77,6 +78,9 @@ export default function Page({ data }) {
 
   return (
       <>
+      <Head>
+          <title>6Anime - Watch free anime</title>
+      </Head>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
       <div className='main_page'>
           <div className='main_page_content'>

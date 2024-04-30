@@ -1,0 +1,105 @@
+const sqlHandler = require('./../sqlHandler.js');
+
+/* GET search listing. */
+function get(req, res) {
+    const chars = decodeURI(req.query.chars || "");
+    const genre = decodeURI(req.query.genre || "");
+    const country = decodeURI(req.query.country || "");
+    const season = decodeURI(req.query.season || "");
+    const year = decodeURI(req.query.year || "");
+    const type = decodeURI(req.query.type || "");
+    const status = decodeURI(req.query.status || "");
+    const language = decodeURI(req.query.language || "");
+    let sort = decodeURI(req.query.sort || "");
+
+    const page = decodeURI(+req.query.page || 1);
+    const limit = decodeURI(+req.query.limit || 10);
+
+    const tags = genre.split(",");
+    const language_ = language.split(",");
+    const season_ = season.split(",");
+    const type_ = type.split(",");
+    const year_ = year.split(",");
+    let folders = [];
+    // in the beginning, I knew what I was doing. Now only ChatGPT knows what this line does and I'm too afraid to ask.
+    // select all the animes that contain in their name or nicknames the chars variable
+    let query = "SELECT * FROM Anime" + ((sort === "Most Watched") ? " RIGHT JOIN Views ON Anime.id = Views.anime_id" : "") + " WHERE (name LIKE ? OR JSON_SEARCH(LOWER(nicknames), 'one', LOWER(?), NULL, '$') IS NOT NULL)";
+    let params = ["%" + chars + "%", "%" + chars + "%"];
+
+    if (genre !== "") {
+        const placeholders = tags.map(tag => 'genre LIKE ?').join(' AND ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        tags.forEach(tag => params.push('%' + tag + '%'));
+    }
+
+    if (year !== "") {
+        const placeholders = year_.map(yearr => 'EXTRACT(YEAR FROM premiered) LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        year_.forEach(yearr => params.push('%' + yearr + '%'));
+    }
+
+    if (type !== "") {
+        const placeholders = type_.map(typee => 'type LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        type_.forEach(typee => params.push('%' + typee + '%'));
+    }
+
+    if (language !== "") {
+        const placeholders = language_.map(typee => 'language LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        language_.forEach(languagee => params.push('%' + languagee + '%'));
+    }
+
+    if (season !== "") {
+        const placeholders = season_.map(typee => 'season LIKE ?').join(' OR ');
+        query += " AND (" + placeholders + ")";
+    
+        // Add each element separately to the params array
+        season_.forEach(seasonn => params.push('%' + seasonn + '%'));
+    }
+
+    if (status !== "") {
+        const placeholders = 'status LIKE ?';
+        query += " AND (" + placeholders + ")";
+    
+        params.push('%' + status + '%');
+    }
+
+    // sort
+    if (sort !== "" && sort !== "Default") {
+        if (sort === "Name A-Z") {
+            query += " ORDER BY name ASC";
+        } else if (sort === "Release Date") {
+            query += " ORDER BY premiered DESC";
+        } else if (sort === "Most Watched") {
+            query += " ORDER BY Views.views_count DESC"
+        } else if (sort === "Recently Added") {
+            query += " ORDER BY added_date DESC";
+        } else if (sort === "Recently Updated") {
+            query += " ORDER BY update_date DESC";
+        } else if (sort === "Score" ) {
+            query += " ORDER BY rating DESC";
+        }
+    }
+    // limit
+    query += " LIMIT " + limit;
+
+    sqlHandler.con.query(query, params, function (err, result, fields) {
+        if (err) throw err;
+        
+        for (let i = 0; i < result.length; i++) {
+            folders.push(result[i].folder_name + "-" + result[i].id);
+        }
+        res.status(200).send(folders);
+    });
+};
+
+module.exports = get;
