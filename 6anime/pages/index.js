@@ -41,7 +41,7 @@ function CarouselImg(props) {
   );
 }
 
-export default function Page({ data }) {
+export default function Page({ data, trendingdata }) {
   
   useEffect(() => {
     document.title = "6Anime";
@@ -100,20 +100,72 @@ export default function Page({ data }) {
           <div className='main_page_sponsor'>
               <Sponsored/>
           </div>
-          <Trending/>
+          <Trending data={trendingdata}/>
           <RandomVideo/>
       </div>
       </>
   );
 }
 
-export async function getServerSideProps(){
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getrecommendations');
-  const data = await res.json();
+async function getAnimeInfo(data)
+{
+    let animeInfo = [];
+    for (let i = 0; i < data.length; i++)
+    {
+        const url = "/getvideo/?id=" + data[i];
+        await fetch(process.env.NEXT_PUBLIC_SS_API_URL + url)
+        .then(res => res.text())
+        .then(async (data) => {
+            const info = JSON.parse(data);
+            const id = info.id;
+            const imgUrl = info.poster;
+            const vname = info.name;
+            const vep = info.episodes;
+            const premiered = info.premiered;
+            const duration = info.duration;
+            const genre = info.genre;
+            const tag1 = genre[0];
+            const tag2 = genre[1];
+            const year = premiered.split('-')[0];
+            const vlink = "/watch/" + info.folder_name + "-" + id;
+            animeInfo.push({
+                id: id,
+                imgUrl: imgUrl,
+                vname: vname,
+                vep: vep,
+                year: year,
+                duration: duration,
+                tag1: tag1,
+                tag2: tag2,
+                vlink: vlink
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching image:', error);
+        });
+    }
+    return animeInfo;
+}
+let info = [];
+let recommendations = [];
 
+export async function getServerSideProps(){
+  if (recommendations.length === 0) {
+    const res = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getrecommendations');
+    const data = await res.json();
+    recommendations = data;
+  }
+
+  if (info.length === 0) {
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getpopular?max=10');
+    const data_ = await res_.json();
+    const animeInfo = await getAnimeInfo(data_);
+    info = animeInfo;
+  }
   return {
     props: {
-      data
+      data: recommendations,
+      trendingdata: info
     }
   }
 }

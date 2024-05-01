@@ -10,18 +10,86 @@ const getid = require('../../lib/routes/get_id');
 const addview = require('../../lib/routes/addView');
 const addepisode = require('../../lib/routes/addepisode');
 const sendform = require('../../lib/routes/sendForm');
+const cors = require('cors');
+const crypto = require('crypto');
+const sqlHandler = require('../../lib/sqlHandler');
 
-export default function handler(req, res) {
+// Enable CORS
+const cors_ = cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+});
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}
+
+function generateHash(input) {
+  const hash = crypto.createHash('sha256'); // You can choose a different algorithm if needed
+  hash.update(input);
+  return hash.digest('hex'); // Get the hexadecimal digest
+}
+
+let visitors = [];
+
+function handleVisitors(req, res)
+{
+  const ip = req.headers['x-real-ip'] || req.socket.remoteAddress;
+  if (ip === '::ffff:127.0.0.1') return;
+  // hash the ip address
+  const hash = generateHash(ip);
+
+  // check if the hash is in the database
+  if (visitors.includes(hash))
+  {
+    sqlHandler.con.query(`UPDATE Visitors SET last_visit = CURRENT_DATE, requests = (requests + 1) WHERE ip = '${hash}'`, (err, result) => {
+      if (err) throw err;
+    });
+  } else {
+    sqlHandler.con.query(`SELECT * FROM Visitors WHERE ip = '${hash}'`, (err, result) => {
+      if (err) throw err;
+      visitors.push(hash);
+      if (result.length === 0)
+      {
+        // add the hash to the database
+        sqlHandler.con.query(`INSERT INTO Visitors (ip, first_visit, last_visit, requests) VALUES ('${hash}', CURRENT_DATE, CURRENT_DATE, 1)`, (err, result) => {
+          if (err) throw err;
+        });
+      } else {
+        // update the last visit and increment the visit count
+        sqlHandler.con.query(`UPDATE Visitors SET last_visit = CURRENT_DATE, requests = (requests + 1) WHERE ip = '${hash}'`, (err, result) => {
+          if (err) throw err;
+        });
+      }
+    });
+  }
+
+}
+
+export default async function handler(req, res) {
+    await runMiddleware(req, res, cors_)
+    
     const { path } = req.query;
     const apiPath = Array.isArray(path) ? path.join('/') : path;
   
     // Handle case insensitivity by converting the path to lowercase
     const request = apiPath.toLowerCase();
-  
+    handleVisitors(req, res);
+
     if (req.method === 'GET')
     {
       if (request === 'testapi') {
-        res.status(200).send('Hello World!');
+        res.status(200).json({ message: 'API route works.' });
       } else if (request === 'getvideo') {
         getvideo(req, res);
       } else if (request === 'search') {

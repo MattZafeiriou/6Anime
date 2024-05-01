@@ -50,15 +50,11 @@
     justify-content: center;
 }
 .anime_tag {
-    background-color: #9b2727;
     color: white;
     width: fit-content;
     height: fit-content;
-    padding: 5px;
-    border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
-    font-size: 1em;
 }
 .anime_tag p {
     margin-bottom: 0px;

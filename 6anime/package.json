@@ -2,17 +2,21 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
-    "start": "next start"
+    "dev": "next dev -p 9000",
+    "start": "next start -p 9000"
   },
   "dependencies": {
     "@consumet/extensions": "^1.5.6",
     "@hcaptcha/react-hcaptcha": "^1.10.1",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "hls.js": "^1.5.8",
     "mysql2": "^3.9.7",
     "next": "latest",
+    "nextjs-cors": "^2.2.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "18.2.0"

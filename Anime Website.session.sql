@@ -1,6 +1,15 @@
 -- This file is for development and testing purposes only. It is not meant to be used in production.
 
 -- @block
+CREATE TABLE Visitors(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    ip TEXT NOT NULL,
+    first_visit DATE NOT NULL,
+    last_visit DATE NOT NULL,
+    requests INTEGER NOT NULL
+);
+
+-- @block
 CREATE TABLE Anime(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,
@@ -66,7 +75,7 @@ CREATE TABLE Form(
 SELECT * FROM Form;
 
 -- @block
-DROP TABLE Anime;
+DROP TABLE visitors;
 
 -- @block
 INSERT INTO Anime(name, folder_name, nicknames, season, description, studios, genre, episodes, duration, premiered, other_seasons_folders, other_seasons_names, type, poster)

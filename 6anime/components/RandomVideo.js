@@ -29,9 +29,9 @@ export default function RandomVideo({ data }) {
         document.getElementById("tag2link").href = "/search?genre=" + data.tags[1];
         document.getElementById("tag3link").href = "/search?genre=" + data.tags[2];
 
-        document.getElementById("tag1").innerHTML = data.tags[0];
-        document.getElementById("tag2").innerHTML = data.tags[1];
-        document.getElementById("tag3").innerHTML = data.tags[2];
+        document.getElementById("rd_tag1").innerHTML = data.tags[0];
+        document.getElementById("rd_tag2").innerHTML = data.tags[1];
+        document.getElementById("rd_tag3").innerHTML = data.tags[2];
     }
 
     function getCookie(name) {
@@ -91,13 +91,13 @@ export default function RandomVideo({ data }) {
                     <p className='random_video_trailer_desc'></p>
                     <div className='random_video_trailer_tags'>
                         <a id="tag1link" href="/search?genre=">
-                            <p id="tag1"></p>
+                            <p id="rd_tag1"></p>
                         </a>
                         <a id="tag2link" href="/search?genre=">
-                            <p id="tag2"></p>
+                            <p id="rd_tag2"></p>
                         </a>
                         <a id="tag3link" href="/search?genre=">
-                            <p id="tag3"></p>
+                            <p id="rd_tag3"></p>
                         </a>
                     </div>
                     <a id="watchLink" href="/watch/"><button className='random_video_trailer_button'>Watch Now!</button></a>
