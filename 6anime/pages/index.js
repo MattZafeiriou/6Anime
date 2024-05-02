@@ -41,7 +41,7 @@ function CarouselImg(props) {
   );
 }
 
-export default function Page({ data, trendingdata }) {
+export default function Page({ data, trendingdata, genredata, latestdata }) {
   
   useEffect(() => {
     document.title = "6Anime";
@@ -100,7 +100,9 @@ export default function Page({ data, trendingdata }) {
           <div className='main_page_sponsor'>
               <Sponsored/>
           </div>
-          <Trending data={trendingdata}/>
+          <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata}/>
+          <Trending title="Action" link="/search?genre=Action" id="1" data={genredata}/>
+          <Trending title="Latest Releases" link="/search?" id="2" data={latestdata}/>
           <RandomVideo/>
       </div>
       </>
@@ -146,6 +148,8 @@ async function getAnimeInfo(data)
     }
     return animeInfo;
 }
+let genre = [];
+let latest = [];
 let info = [];
 let recommendations = [];
 
@@ -162,10 +166,36 @@ export async function getServerSideProps(){
     const animeInfo = await getAnimeInfo(data_);
     info = animeInfo;
   }
+
+  if (genre.length === 0) {
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?genre=Action&sort=Score&chars=&limit=20');
+    const data_ = await res_.json();
+    let _data = [];
+    for (let i = 0; i < data_.length; i++)
+    {
+        _data.push(Number(data_[i].split("-")[data_[i].split("-").length - 1]));
+    }
+    const animeInfo = await getAnimeInfo(_data);
+    genre = animeInfo;
+  }
+
+  if (latest.length === 0) {
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?sort=Release%20Date&chars=&limit=20');
+    const data_ = await res_.json();
+    let _data = [];
+    for (let i = 0; i < data_.length; i++)
+    {
+        _data.push(Number(data_[i].split("-")[data_[i].split("-").length - 1]));
+    }
+    const animeInfo = await getAnimeInfo(_data);
+    latest = animeInfo;
+  }
   return {
     props: {
       data: recommendations,
-      trendingdata: info
+      trendingdata: info,
+      genredata: genre,
+      latestdata: latest
     }
   }
 }

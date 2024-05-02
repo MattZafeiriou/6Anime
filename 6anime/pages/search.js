@@ -16,7 +16,7 @@ export default function Search({ data }) {
     return (
         <>
         <Head>
-            <title>6Anime - Search: {search}</title>
+            <title>6Anime - Search: {(search === 'null') ? "" : search}</title>
         </Head>
             <AnimeList startInput={search}/>
         </>

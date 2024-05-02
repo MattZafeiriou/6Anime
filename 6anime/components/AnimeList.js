@@ -13,7 +13,7 @@ export default function AnimeList({ startInput="", startOptions="" }) {
 
     function search()
     {
-        deleteAllAnime();        
+        deleteAllAnime();
         const genre = (filters["Genre"] === undefined || filters["Genre"] === "") ? "" : "&genre=" + encodeURIComponent(filters["Genre"]);
         const country = (filters["Country"] === undefined || filters["Country"] === "") ? "" : "&country=" + encodeURIComponent(filters["Country"]);
         const season = (filters["Season"] === undefined || filters["Season"] === "") ? "" : "&season=" + encodeURIComponent(filters["Season"]);
