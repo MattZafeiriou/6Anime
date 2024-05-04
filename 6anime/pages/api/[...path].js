@@ -123,7 +123,7 @@ export default async function handler(req, res) {
       } else if (request === 'addepisode') {
         addepisode(req, res);
       } else {
-        res.status(404).json({ message: 'API route not found.' });
+        res.status(404).send('API route not found.');
       }
     } else if (req.method === 'POST') {
       if (request === 'addvideo') {
@@ -131,7 +131,7 @@ export default async function handler(req, res) {
       } else if (request === "sendform") {
         sendform(req, res);
       } else {
-        res.status(404).json({ message: 'API route not found.' });
+        res.status(404).send('API route not found.');
       }
     }
 }

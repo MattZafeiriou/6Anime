@@ -77,6 +77,10 @@ export default function Contact({ data }) {
               name="description"
               content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
             />
+            <meta
+              name="keywords"
+              content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
+            />
         </Head>
             <div className="contact_main">
                 <div className='container'>

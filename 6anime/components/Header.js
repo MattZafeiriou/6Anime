@@ -148,7 +148,7 @@ export default function Header () {
             <div className="top">
                 
                 <a id="logo" href="/">
-                    <Image src={'/logo.svg'}/>
+                    <Image alt='Logo Image' src={'/logo.svg'}/>
                 </a>
                 <div className="top_left">
                     <a className="left_list" href="/"><div id="home">Home</div></a>

@@ -25,6 +25,14 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
             <>
                 <Head>
                     <title>{`Watch ${oof2} on 6Anime for free! - Free HD Anime Online - Fast Secure No Ads!`}</title>
+                    <meta
+                    name="keywords"
+                    content={`anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english, watch ${oof2} online subtitle, watch ${oof2} online dub, watch ${oof2} online english sub, watch ${oof2} online english dub, watch ${oof2} online english subbed, watch ${oof2} online english dubbed, watch ${oof2} online english subbed and dubbed, watch ${oof2} online english subbed hd`}
+                    />
+                    <meta
+                    property="og:description"
+                    content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+                    />
                 </Head>
                 <div>
                 <h1>loading...</h1>
@@ -404,6 +412,10 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                 <meta
                 name="description"
                 content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+                />
+                <meta
+                name="keywords"
+                content={`anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english, watch ${oof2} online subtitle, watch ${oof2} online dub, watch ${oof2} online english sub, watch ${oof2} online english dub, watch ${oof2} online english subbed, watch ${oof2} online english dubbed, watch ${oof2} online english subbed and dubbed, watch ${oof2} online english subbed hd`}
                 />
             </Head>
                 <div className='playerdiv'>

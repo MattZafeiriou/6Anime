@@ -24,7 +24,7 @@ function WatchButton(props) {
 function CarouselImg(props) {
   return (
       <>
-          <Image id="top_img" src={props.srcImg} fluid/>
+          <Image id="top_img" src={props.srcImg} alt="Carousel Image" fluid/>
           <Carousel.Caption>
               <div className='carouselCaption'>
                   <h1>{props.name}<loading/></h1>
@@ -89,6 +89,10 @@ export default function Page({ data, trendingdata, genredata, latestdata }) {
             name="description"
             content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
           />
+          <meta
+              name="keywords"
+              content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
+            />
       </Head>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
       <div className='main_page'>
