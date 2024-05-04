@@ -68,6 +68,15 @@ export default function Contact({ data }) {
         <>
         <Head>
             <title>6Anime - Contact Us</title>
+            <meta property="og:title" content="6Anime - Contact Us" />
+            <meta
+              property="og:description"
+              content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+            />
+            <meta
+              name="description"
+              content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+            />
         </Head>
             <div className="contact_main">
                 <div className='container'>

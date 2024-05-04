@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Hls from "hls.js";
+import {isMobile} from 'react-device-detect';
 
 export default function VideoPlayer({ banner }) {
     let cooldown = null;
@@ -14,6 +15,13 @@ export default function VideoPlayer({ banner }) {
 
     useEffect(async () => {
         player = document.getElementById('player');
+
+        if (isMobile)
+        {
+            document.getElementsByClassName("audio-bar")[0].style.display = "none";
+            document.getElementById("audioIcon").style.display = "none";
+            player.volume = 1;
+        }
 
         const id = window.location.href.split("/")[4].split("-")[window.location.href.split("/")[4].split("-").length - 1];
         state.episode = window.location.href.split("/")[5].replace("ep", "");
@@ -60,12 +68,15 @@ export default function VideoPlayer({ banner }) {
             progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
         });
 
-        document.addEventListener("visibilitychange", (e) => {
-            if (document.visibilityState === 'hidden') {
-                video.pause();
-                setPause();
-            }
-        });
+        if (isMobile)
+        {
+            document.addEventListener("visibilitychange", (e) => {
+                if (document.visibilityState === 'hidden') {
+                    video.pause();
+                    setPause();
+                }
+            });
+        }
 
         video.addEventListener("loadeddata", (event) => {
             document.getElementById("progressBar").max = video.duration;

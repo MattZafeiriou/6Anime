@@ -6,7 +6,8 @@ CREATE TABLE Visitors(
     ip TEXT NOT NULL,
     first_visit DATE NOT NULL,
     last_visit DATE NOT NULL,
-    requests INTEGER NOT NULL
+    requests INTEGER NOT NULL,
+    videos_watched INTEGER NOT NULL
 );
 
 -- @block

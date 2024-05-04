@@ -6,7 +6,7 @@ import {createRoot} from 'react-dom/client';
 import VideoPlayer from '../../components/VideoPlayer';
 import Head from 'next/head'
 
-export default function Watch({titleseg,epsegment}) {
+export default function Watch({titleseg,epsegment, animeinfo, other_season_ids}) {
     const router = useRouter()
     const { segments } = router.query
     if (typeof window === 'undefined') 
@@ -14,6 +14,8 @@ export default function Watch({titleseg,epsegment}) {
         let oof = (titleseg.replaceAll("_", " ")).split("-")[0];
         let oof2 = oof.split(" ");
         //capitalize every first letter
+        const max = JSON.parse(animeinfo).episodes > 50 ? 50 : JSON.parse(animeinfo).episodes;
+        const episodes = Array.from({ length: max }, (_, index) => index + 1);
         for (let i = 0; i < oof2.length; i++)
         {
             oof2[i] = oof2[i].charAt(0).toUpperCase() + oof2[i].slice(1);
@@ -26,7 +28,21 @@ export default function Watch({titleseg,epsegment}) {
                 </Head>
                 <div>
                 <h1>loading...</h1>
-
+                <div className='related_anime_del'>
+                    {other_season_ids.map((item, index) => (
+                        <a href={"/watch/" + item}>{item}</a>
+                    ))}
+                </div>
+                <div className='genre'>
+                {JSON.parse(animeinfo).genre.map((item, index) => (
+                        <a href={"/search?genre" + item}>{item}</a>
+                    ))}
+                </div>
+                <div className='episodes'>
+                {episodes.map((number) => (
+                        <a href={"/watch/" + titleseg + "/ep" + number}>{number}</a>
+                    ))}
+                </div>
                 </div>
             </>
         );
@@ -148,12 +164,7 @@ export default function Watch({titleseg,epsegment}) {
         const id = splitted[splitted.length - 1];
         const animeName = splitted.slice(0, -1).join("-");
 
-        let url = "/getvideo/?id=" + id;
-        let data;
-        await fetch(process.env.NEXT_PUBLIC_API_URL + url)
-        .then(res => res.text())
-        .then(async (res) => {
-            data = res;
+            const data = animeinfo;
             let info = JSON.parse(data);
             if (info.folder_name != animeName) // The anime name on url is different from the actual of the id's name
             {
@@ -248,10 +259,8 @@ export default function Watch({titleseg,epsegment}) {
                 {
                     root.render(<Button text={i} customStyle={customSelectedStyle}/>)
                 }else
-                    root.render(<Button text={i} link={"ep" + i} customStyle={customStyle}/>)
+                    root.render(<Button text={i} link={"/watch/" + titleseg + "/ep" + i} customStyle={customStyle}/>)
             }
-            
-        });
     }
 
     function setPopularAnimeTitle(props)
@@ -299,6 +308,7 @@ export default function Watch({titleseg,epsegment}) {
 
     function setRelatedAnime(other_season_folders) {
         // Change banner image
+        let added = 0;
         for(let i = 0; i < other_season_folders.length; i++)
         {
             const url = "/getid/?name=" + other_season_folders[i];
@@ -306,6 +316,7 @@ export default function Watch({titleseg,epsegment}) {
             .then(res => res.text())
             .then(data => {
                 if (data == "Anime not found.") return;
+                added++;
                 const info = JSON.parse(data);
                 const imgUrl = info.poster;
                 const vname = info.name;
@@ -329,9 +340,14 @@ export default function Watch({titleseg,epsegment}) {
                 console.error('Error fetching image:', error);
             });
         }
+        if (added == 0)
+        {
+            document.getElementsByClassName('related_anime_div')[0].style.display = 'none';
+        }
     }
 
     useEffect(() =>{
+        document.getElementsByClassName('related_anime_del')[0].style.display = 'none';
         getVideoInfo();
     }, []);
 
@@ -380,6 +396,15 @@ export default function Watch({titleseg,epsegment}) {
             <>
             <Head>
                 <title>{`6Anime - ${title} - Episode ${episode}`}</title>
+                <meta property="og:title" content={`6Anime - Watch ${title} - Episode ${episode}`} />
+                <meta
+                property="og:description"
+                content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+                />
+                <meta
+                name="description"
+                content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+                />
             </Head>
                 <div className='playerdiv'>
                     <div className='playerr'>
@@ -439,7 +464,12 @@ export default function Watch({titleseg,epsegment}) {
                     <div className='right_side'>
                         <div className='section related_anime_div'>
                             <h3 className='section_title'>Related Anime</h3>
-                                
+                            <div className='related_anime_del'>
+                                {other_season_ids.map((item, index) => (
+                                    <a href={"/watch/" + item}>{item}</a>
+                                ))}
+                            </div>
+
                         </div>
                         <div className='section popular_anime_div'>
                             <h3 className='section_title'>Popular Anime</h3>
@@ -450,18 +480,58 @@ export default function Watch({titleseg,epsegment}) {
             </>
     )
 }
+
+let cachedData = {};
+let cachedIds = {};
 export async function getServerSideProps(context) {
     // Get the segments from the context
     const { segments } = context.query;
     // Extract the last segment
     const lastSegment = segments && segments.length > 1 ? segments[1] : "ep1";
     const prelastSegment = segments && segments.length > 0 ? segments[0] : null;
+
+    const id = prelastSegment.split("-").pop();
+
+    let animeInfo = [];
+    if (cachedData[id] !== undefined)
+    {
+        animeInfo = cachedData[id];
+    } else {
+        animeInfo = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + "/getvideo/?id=" + id)
+        .then(res => res.text())
+        .then(res => {
+            return res;
+        });
+        cachedData[id] = animeInfo;
+    }
+
+    let other_season_ids = [];
+    const other_season_folders = JSON.parse(animeInfo).other_season_folders;
+    for (let i = 0; i < other_season_folders.length; i++)
+    {
+        if (cachedIds[other_season_folders[i]] !== undefined)
+        {
+            other_season_ids.push(cachedIds[other_season_folders[i]]);
+        } else {
+            let data = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + "/getid/?name=" + other_season_folders[i])
+            .then(res => res.text())
+            .then(res => {
+                return res;
+            });
+            if (data == "Anime not found.") continue;
+            data = JSON.parse(data).folder_name + "-" + JSON.parse(data).id;
+            cachedIds[other_season_folders[i]] = data;
+            other_season_ids.push(data);
+        }
+    }
   
     // Return the segment as props
     return {
       props: {
         titleseg: prelastSegment,
-        epsegment: lastSegment
+        epsegment: lastSegment,
+        animeinfo: animeInfo,
+        other_season_ids: other_season_ids
       }
     };
-  }
+}

@@ -18,6 +18,15 @@ export default function Donate({ data }) {
         <>
         <Head>
             <title>6Anime - Donate</title>
+            <meta property="og:title" content="6Anime - Donate" />
+            <meta
+              property="og:description"
+              content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+            />
+            <meta
+              name="description"
+              content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+            />
         </Head>
             <div className="donatemain">
                 <h1>Thank You For Supporting Us!</h1>

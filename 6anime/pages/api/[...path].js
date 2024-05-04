@@ -16,7 +16,7 @@ const sqlHandler = require('../../lib/sqlHandler');
 
 // Enable CORS
 const cors_ = cors({
-  origin: '*',
+  origin: ['https://6anime.tv', 'https://www.6anime.tv', 'https://yt2mp3.tv', 'https://www.yt2mp3.tv'],
   methods: ['GET', 'POST'],
 });
 
@@ -62,7 +62,7 @@ function handleVisitors(req, res)
       if (result.length === 0)
       {
         // add the hash to the database
-        sqlHandler.con.query(`INSERT INTO Visitors (ip, first_visit, last_visit, requests) VALUES ('${hash}', CURRENT_DATE, CURRENT_DATE, 1)`, (err, result) => {
+        sqlHandler.con.query(`INSERT INTO Visitors (ip, first_visit, last_visit, requests, videos_watched) VALUES ('${hash}', CURRENT_DATE, CURRENT_DATE, 1, 0)`, (err, result) => {
           if (err) throw err;
         });
       } else {
@@ -73,7 +73,18 @@ function handleVisitors(req, res)
       }
     });
   }
+}
 
+function addView(req, res)
+{
+  const ip = req.headers['x-real-ip'] || req.socket.remoteAddress;
+  //if (ip === '::ffff:127.0.0.1') return;
+  // hash the ip address
+  const hash = generateHash(ip);
+
+  sqlHandler.con.query(`UPDATE Visitors SET videos_watched = (videos_watched + 1) WHERE ip = '${hash}'`, (err, result) => {
+    if (err) throw err;
+  });
 }
 
 export default async function handler(req, res) {
@@ -103,6 +114,7 @@ export default async function handler(req, res) {
       } else if (request === 'getfeatured') {
         getfeatured(req, res);
       } else if (request === 'getanimeurl') {
+        addView(req, res);
         getanimeurl(req, res);
       } else if (request === 'getid') {
         getid(req, res);

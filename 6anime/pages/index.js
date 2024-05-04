@@ -80,6 +80,15 @@ export default function Page({ data, trendingdata, genredata, latestdata }) {
       <>
       <Head>
           <title>6Anime - Watch free anime</title>
+          <meta property="og:title" content="6Anime - Watch free anime" />
+          <meta
+            property="og:description"
+            content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+          />
+          <meta
+            name="description"
+            content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+          />
       </Head>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
       <div className='main_page'>

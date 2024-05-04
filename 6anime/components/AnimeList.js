@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import Head from "next/head";
 
 export default function AnimeList({ startInput="", startOptions="" }) {
     const proms = {"startInput":startInput, "startOptions": startOptions};
@@ -217,6 +218,17 @@ export default function AnimeList({ startInput="", startOptions="" }) {
 
     return (
         <>
+        <Head>
+            <meta property="og:title" content="6Anime - Search" />
+            <meta
+              property="og:description"
+              content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
+            />
+            <meta
+              name="description"
+              content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
+            />
+        </Head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
         <div className='anime-list'>
             <div className='anime-list-header'>
