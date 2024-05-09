@@ -17,6 +17,7 @@
     "mysql2": "^3.9.7",
     "next": "latest",
     "nextjs-cors": "^2.2.0",
+    "node-schedule": "^2.1.1",
     "react": "18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-device-detect": "^2.2.3",

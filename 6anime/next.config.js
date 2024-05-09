@@ -1,8 +1,14 @@
 const sqlHandler = require("./lib/sqlHandler");
+const repeatTasks = require("./lib/repeatTasks");
 
 module.exports = async (phase, { defaultConfig }) => {
     // Connect to SQL database
     sqlHandler.connect();
+    // Repeat tasks
+    repeatTasks.repeatDaily();
+    repeatTasks.repeatWeekly();
+    repeatTasks.repeatMonthly();
+    repeatTasks.repeatYearly();
 
     // Define custom headers
     const customHeaders = [
