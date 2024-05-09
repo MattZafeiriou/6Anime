@@ -1,6 +1,13 @@
 const sqlHandler = require("./lib/sqlHandler");
 const repeatTasks = require("./lib/repeatTasks");
 
+// const withPWA = require("next-pwa")({
+//     dest: "public", // Destination directory for the PWA files
+//     disable: process.env.NODE_ENV === "development", // Disable PWA in development mode
+//     register: true, // Register the PWA service worker
+//     skipWaiting: true, // Skip waiting for service worker activation
+//   });
+
 module.exports = async (phase, { defaultConfig }) => {
     // Connect to SQL database
     sqlHandler.connect();

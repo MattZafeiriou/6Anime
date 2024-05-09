@@ -1,16 +1,19 @@
 {
-    "short_name": "6Anime",
     "name": "6Anime",
-    "description": "Watch Anime Online Free",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#9b2727",
+    "short_name": "6Anime",
     "theme_color": "#9b2727",
+    "background_color": "#9b2727",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
     "icons": [
       {
-        "src": "/logo.png",
+        "src": "logo.png",
         "sizes": "600x600",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable any"
       }
-    ]
+    ],
+    "splash_pages": null
   }
