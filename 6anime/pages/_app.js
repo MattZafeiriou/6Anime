@@ -15,8 +15,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
+import { useEffect } from 'react';
 
 export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then((reg) => console.log('Service Worker registered'))
+        .catch((err) => console.error('Service Worker registration failed', err));
+    }
+  }, []);
+
+
   return (
     <>
     <Head>
