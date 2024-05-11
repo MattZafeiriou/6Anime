@@ -1,0 +1,105 @@
+.loginbg {
+    background: rgba(0, 0, 0, .8) url("https://miro.medium.com/v2/resize:fit:7680/0*xZtR_0ziLWduCRhX.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: overlay;
+    backdrop-filter: blur(5px);
+}
+
+.loginmain {
+    display: flex;
+    width: 30vw;
+    margin-left: 5vw;
+    margin-top: 18vh;
+    color: white;
+    border-radius: 10px;
+    height: 100vh;
+}
+
+.loginmain input[type="email"], .loginmain input[type="password"], .loginmain input[type="text"]{
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255,0.5);
+    background-color: black;
+    color: white;
+    width: 500px;
+    height: 3em;
+}
+.loginmain textarea:focus, .loginmain input:focus, .loginmain input[type]:focus {   
+    border-color: hsl(0, 60%, 50%);
+    box-shadow: 0 0 10px hsl(0, 60%, 50%);
+    outline: 0 none;
+}
+
+#clickable {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.minW {
+    display: inline-block;
+    min-width: 145px;
+}
+
+.loginmain ::placeholder {
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
+
+.loginmain ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: white !important;
+}
+
+.loginmain h1 {
+    font-size: 3em;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none
+}
+
+.loginmain label {
+    font-size: 1.5em;
+    margin-top: .3em;
+    margin-bottom: .3em;
+}
+
+#remembermebutton {
+    font-size: 1em;
+    margin-left: 3px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.loginmain button {
+    background-color: hsl(0, 60%, 50%);
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 3px;
+}
+
+.loginmain button:hover {
+    background-color: hsl(0, 60%, 40%);
+}
+
+.loginmain input[type="checkbox"] {
+    position: relative;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    background-color: rgb(50, 50, 50);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}

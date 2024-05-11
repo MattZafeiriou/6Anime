@@ -11,6 +11,17 @@ CREATE TABLE Visitors(
 );
 
 -- @block
+CREATE TABLE Users(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    username TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL,
+    avatar TEXT NOT NULL,
+    created_at DATE NOT NULL
+);
+
+-- @block
 CREATE TABLE Anime(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,

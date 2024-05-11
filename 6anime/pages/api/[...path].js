@@ -10,6 +10,8 @@ const getid = require('../../lib/routes/get_id');
 const addview = require('../../lib/routes/addView');
 const addepisode = require('../../lib/routes/addepisode');
 const sendform = require('../../lib/routes/sendForm');
+const login = require('../../lib/routes/Auth/login');
+const register = require('../../lib/routes/Auth/register');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
@@ -130,6 +132,10 @@ export default async function handler(req, res) {
         addvideo(req, res);
       } else if (request === "sendform") {
         sendform(req, res);
+      }else if (request === 'login') {
+          login(req, res);
+      } else if (request === 'register') {
+          register(req, res);
       } else {
         res.status(404).send('API route not found.');
       }
