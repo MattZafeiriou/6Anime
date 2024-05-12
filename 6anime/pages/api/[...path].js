@@ -15,11 +15,19 @@ const register = require('../../lib/routes/Auth/register');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
+const rateLimit = require("express-rate-limit");
 
 // Enable CORS
 const cors_ = cors({
   origin: ['https://6anime.tv', 'https://www.6anime.tv', 'https://yt2mp3.tv', 'https://www.yt2mp3.tv'],
   methods: ['GET', 'POST'],
+});
+
+// Rate limiter for login and register routes
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 10, // limit each IP to 10 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
 });
 
 // Helper method to wait for a middleware to execute before continuing
@@ -30,7 +38,6 @@ function runMiddleware(req, res, fn) {
       if (result instanceof Error) {
         return reject(result)
       }
-
       return resolve(result)
     })
   })
@@ -133,8 +140,10 @@ export default async function handler(req, res) {
       } else if (request === "sendform") {
         sendform(req, res);
       }else if (request === 'login') {
-          login(req, res);
+        await runMiddleware(req, res, limiter)
+        login(req, res);
       } else if (request === 'register') {
+        await runMiddleware(req, res, limiter)
           register(req, res);
       } else {
         res.status(404).send('API route not found.');

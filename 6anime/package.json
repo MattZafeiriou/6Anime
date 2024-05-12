@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "email-validator": "^2.0.4",
+    "express-rate-limit": "^7.2.0",
     "hls.js": "^1.5.8",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.7",
