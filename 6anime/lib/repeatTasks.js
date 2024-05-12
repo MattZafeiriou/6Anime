@@ -1,14 +1,15 @@
 const schedule = require('node-schedule')
 const sqlHandler = require('./sqlHandler')
 const backupHandler = require("./utils/backupHandler");
+const getAnimeInfo = require('./utils/getAnimeInfo.js');
 
 /*
     This was done with the help of https://crontab.guru
 */
 let todayTag = 'Adventure';
-function getAnimeInfo(anime_id) {
+function getAnimeInfo_(anime_id) {
   return new Promise((resolve, reject) => {
-    sqlHandler.con.query(`SELECT * FROM Anime WHERE id = ${anime_id}`, (err, result) => {
+    sqlHandler.con.query(`SELECT * FROM Anime WHERE id = ${anime_id};`, (err, result) => {
       if (err) reject(err);
       resolve(result[0]);
     });
@@ -17,7 +18,16 @@ function getAnimeInfo(anime_id) {
 
 function getTodayViews() {
   return new Promise((resolve, reject) => {
-    sqlHandler.con.query('SELECT * FROM Views WHERE today_views > 0', (err, results) => {
+    sqlHandler.con.query('SELECT * FROM Views WHERE today_views > 0;', (err, results) => {
+      if (err) reject(err);
+      resolve(results);
+    });
+  });
+}
+
+function getAnimeAiring() {
+  return new Promise((resolve, reject) => {
+    sqlHandler.con.query('SELECT * FROM Anime WHERE status = "CURRENTLY AIRING";', (err, results) => {
       if (err) reject(err);
       resolve(results);
     });
@@ -30,7 +40,7 @@ async function getTodayMostUsedTag() {
   let tags = {};
   for (let i = 0; i < results.length; i++) {
     const anime_id = results[i].anime_id;
-    const anime = await getAnimeInfo(anime_id);
+    const anime = await getAnimeInfo_(anime_id);
     const genre = JSON.parse(anime.genre);
     for (let j = 0; j < genre.length; j++) {
       if (tags[genre[j]] === undefined) {
@@ -102,4 +112,38 @@ function repeatYearly() {
   })
 }
 
-module.exports = { repeatDaily, repeatWeekly, repeatMonthly, repeatYearly, todayTag };
+async function updateAnime()
+{
+  schedule.scheduleJob('0 0/12 * * *', async() => {
+    const results = await getAnimeAiring();
+    for (let i = 0; i < results.length; i++) {
+      const anime = results[i];
+      let id = anime.api_id;
+      const year = anime.premiered.split('-')[0];
+      if (Number(year) < 2020) continue;
+      if (Number(anime.api_id) !== NaN)
+        id = Number(anime.api_id);
+      const data = await getAnimeInfo(id);
+      const currentEpisode = data.totalEpisodes;
+      let status = data.status;
+      if (status == "Completed")
+          status = "FINISHED AIRING";
+      else if (status == "Ongoing")
+          status = "CURRENTLY AIRING";
+      else
+          status = "NOT YET AIRED";
+
+      const totalEpisodes = anime.episodes;
+
+      if (currentEpisode > totalEpisodes) {
+
+        // update episodes and status
+        sqlHandler.con.query(`UPDATE Anime SET episodes = ${currentEpisode}, status = "${status}", update_date = CURRENT_DATE WHERE id = ${anime.id};`, (err, result) => {
+          if (err) throw err
+        })
+      }
+    }
+  }) // every 12 hours
+}
+
+module.exports = { repeatDaily, repeatWeekly, repeatMonthly, repeatYearly, todayTag, updateAnime };

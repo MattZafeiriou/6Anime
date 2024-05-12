@@ -12,6 +12,7 @@ module.exports = async (phase, { defaultConfig }) => {
     // Connect to SQL database
     sqlHandler.connect();
     // Repeat tasks
+    repeatTasks.updateAnime();
     repeatTasks.repeatDaily();
     repeatTasks.repeatWeekly();
     repeatTasks.repeatMonthly();
