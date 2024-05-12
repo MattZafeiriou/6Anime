@@ -1,9 +1,10 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect} from 'react';
 import { Carousel, Image, Placeholder } from 'react-bootstrap';
 import Sponsored from '../components/Sponsored';
 import Trending from '../components/Trending';
 import RandomVideo from '../components/RandomVideo';
 import Head from 'next/head'
+import repeatTasks from '../lib/repeatTasks';
 
 function Tag(props) {
   return (
@@ -41,7 +42,7 @@ function CarouselImg(props) {
   );
 }
 
-export default function Page({ data, trendingdata, genredata, latestdata }) {
+export default function Page({ data, trendingdata, genredata, tag, latestdata }) {
   
   useEffect(() => {
     document.title = "6Anime";
@@ -114,7 +115,7 @@ export default function Page({ data, trendingdata, genredata, latestdata }) {
               <Sponsored/>
           </div>
           <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata}/>
-          <Trending title="Action" link="/search?genre=Action" id="1" data={genredata}/>
+          <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata}/>
           <Trending title="Latest Releases" link="/search?" id="2" data={latestdata}/>
           <RandomVideo/>
       </div>
@@ -165,8 +166,20 @@ let genre = [];
 let latest = [];
 let info = [];
 let recommendations = [];
+const date = new Date();
+let lastUpdate = date.getDate();
 
 export async function getServerSideProps(){
+  const tag = repeatTasks.todayTag;
+  if (lastUpdate !== date.getDate()) // Update every day
+  {
+    genre = [];
+    latest = [];
+    info = [];
+    recommendations = [];
+    lastUpdate = date.getDate();
+  }
+
   if (recommendations.length === 0) {
     const res = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getrecommendations');
     const data = await res.json();
@@ -181,7 +194,7 @@ export async function getServerSideProps(){
   }
 
   if (genre.length === 0) {
-    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?genre=Action&sort=Score&chars=&limit=20');
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?genre=' + tag + '&sort=Score&chars=&limit=20');
     const data_ = await res_.json();
     let _data = [];
     for (let i = 0; i < data_.length; i++)
@@ -208,6 +221,7 @@ export async function getServerSideProps(){
       data: recommendations,
       trendingdata: info,
       genredata: genre,
+      tag: tag,
       latestdata: latest
     }
   }
