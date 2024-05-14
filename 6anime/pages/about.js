@@ -24,44 +24,44 @@ export default function About({ data }) {
         </Head>
         <div className="aboutmain">
             <h1>About Us</h1>
-            <p>We are 6Anime, we provide free entertainment to everyone.</p>
-            <p>When all the websites are unstable and people had to move from site to site, we had to create a website that would be</p>
-            <p>stable, free with good user interface and user experience. This website is not fully ready yet as we keep adding new anime every day.</p>
             <br/>
-            <p>If you want to support our work and keep the website running you may donate through our <a href='/donate'>donate page</a></p>
-            <p>Most of the donations go to charities and fundations while we keep only the part that is essential for the website to keep working.</p>
-            <p>We, 6Anime make no profit.</p>
-            <br/>
+            <p>6Anime is a free service that provides a platform for users to watch Anime series and movies. We provide a wide range of Anime series and movies for free. We do not own any of the content on this website, all of the content is owned by their respective owners.</p>
+            <p>Our goal is to provide a free and easy way to watch Anime series and movies. We are constantly updating our website with new content to provide the best experience for our users.</p>
+            <p>If you have any questions or concerns, please feel free to contact us through our <a href='/contact'>contact page</a>.</p>
             <br/>
             <h1>Frequently Asked Questions</h1>
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>What is the purpose of this website?</Accordion.Header>
               <Accordion.Body>
-                The purpose of this website is to provide a free and easy way to watch Anime series and movies.
-                We are not the creators of the content on this website, we are just a platform that provides the content.
-                <br/>
-                We do not own any of the content on this website, all of the content is owned by their respective owners.
+                The purpose of this website is to provide a free and easy way to watch Anime series and movies. We do not own any of the content on this website, all of the content is owned by their respective owners.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
-              <Accordion.Header>I am a creator and I want to get my content off of this website. What do I do?</Accordion.Header>
+              <Accordion.Header>How do I watch Anime on this website?</Accordion.Header>
               <Accordion.Body>
-                We are sorry to hear that you want to get your content off of this website. All you have to do is contact us through our <a href='/contact'>contact page</a> and we will get back to you as soon as possible.
+                To watch Anime on this website, simply search for the Anime series or movie you want to watch and click on the episode or movie you want to watch. You can also browse through our collection of Anime series and movies to find something to watch.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
-              <Accordion.Header>How can I upload my own Anime series/movie here as its creator?</Accordion.Header>
+              <Accordion.Header>Is this website free to use?</Accordion.Header>
               <Accordion.Body>
-                We are sorry to inform you that we do not accept any content from creators. We only provide the content that is already available on the internet.
+                Yes, this website is completely free to use. We do not charge any fees for watching Anime on this website.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="3">
-              <Accordion.Header>Is this website for sale?</Accordion.Header>
+              <Accordion.Header>Do I need to create an account to watch Anime on this website?</Accordion.Header>
               <Accordion.Body>
-                Yes, this website is for sale. If you are interested in buying this website please contact us through our <a href='/contact'>contact page</a>.
+                No, you do not need to create an account to watch Anime on this website. You can watch Anime on this website without creating an account.
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="4">
+              <Accordion.Header>How do I contact the website admin?</Accordion.Header>
+              <Accordion.Body>
+                If you have any questions or concerns, please feel free to contact us through our <a href='/contact'>contact page</a>.
+              </Accordion.Body>
+            </Accordion.Item>
+            
           </Accordion>
         </div>
     </>

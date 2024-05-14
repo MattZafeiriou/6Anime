@@ -59,6 +59,8 @@ async function getTodayMostUsedTag() {
       mostUsedTagCount = tags[tag];
     }
   }
+  if (mostUsedTagCount < 1)
+    mostUsedTag = 'Adventure';
   todayTag = mostUsedTag;
 }
 

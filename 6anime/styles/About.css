@@ -1,6 +1,12 @@
 .aboutmain {
+    background-color: hsl(0, 0%, 10%);
+    border-radius: 10px;
+    width: 90vw;
+    margin-left: 5vw;
     margin: 3em 5% 5% 5%;
     color: white;
+    padding: 20px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .5);
 }
 
 .aboutmain h1 {
@@ -10,7 +16,6 @@
 }
 
 .aboutmain p {
-    line-height: .5em;
     color: white;
     font-weight: 300;
 }
