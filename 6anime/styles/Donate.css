@@ -115,6 +115,20 @@
     
 }
 
+@media screen and (max-width: 500px)
+{
+    .popupcontent {
+        width: 90vw;
+        margin-left: 5vw;
+    }
+    
+    .paymentMethods {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
 .popupcontent button {
     transition-duration: .3s;
     margin: 1em 0em;
