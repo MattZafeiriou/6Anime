@@ -29,6 +29,7 @@ export default function Donate({ data }) {
 
   useEffect(() => {
     document.getElementById('donate').classList.add('active');
+    document.getElementById('donatem').classList.add('active');
   });
 
     return (

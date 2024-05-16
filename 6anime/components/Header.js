@@ -173,13 +173,13 @@ export default function Header () {
                     </div>
                     <div className='mobile_menu_content'>
                         <div className='mobile_menu_items'>
-                            <a href="/"><div id="home">Home</div></a>
-                            <a href="/about"><div id="about">About</div></a>
+                            <a href="/"><div id="homem">Home</div></a>
+                            <a href="/about"><div id="aboutm">About</div></a>
                             <a href="/movies"><div id="movies">Movies</div></a>
                             <a href="/series"><div id="series">Series</div></a>
-                            <a href="/contact"><div id="contact_us">Contact Us</div></a>
-                            <a href="/donate"><div id="donate">Buy us a Coffee</div></a>
-                            <a href="/login"><div id="login">Log In</div></a>
+                            <a href="/contact"><div id="contact_usm">Contact Us</div></a>
+                            <a href="/donate"><div id="donatem">Buy us a Coffee</div></a>
+                            <a href="/login"><div id="loginm">Log In</div></a>
                         </div>
                     </div>
                 </div>

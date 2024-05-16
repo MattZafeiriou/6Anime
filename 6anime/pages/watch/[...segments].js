@@ -95,29 +95,30 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
     const [viewsFormatted, setViewsFormatted] = useState("");
 
     let customStyle = {
-        backgroundColor: 'hsl(0, 60%, 30%)',
+        fontFamily: 'Roboto',
+        backgroundColor: 'rgb(80, 80, 80, 1)',
         color: 'white',
-        border: '3px #9b2727 solid',
-        width: '2.3em',
-        height: '2.3em',
+        border: 'none',
+        width: '2.5em',
+        height: '1.8em',
         padding: '0px',
         float: 'left',
-        marginLeft: '.5em',
-        marginRight: '.5em',
-        marginBottom: '1em'
+        marginLeft: '.3em',
+        marginRight: '.3em',
+        marginBottom: '.5em'
     };
     let customSelectedStyle = {
+        fontFamily: 'Roboto',
         backgroundColor: 'hsl(0, 60%, 30%)',
         color: 'white',
-        border: '3px hsl(0, 60%, 70%) solid',
-        boxShadow: '0px 0px 3px hsl(0, 60%, 70%)',
-        width: '2.3em',
-        height: '2.3em',
+        border: 'none',
+        width: '2.5em',
+        height: '1.8em',
         padding: '0px',
         float: 'left',
-        marginLeft: '.5em',
-        marginRight: '.5em',
-        marginBottom: '1em'
+        marginLeft: '.3em',
+        marginRight: '.3em',
+        marginBottom: '.5em'
     };
 
     function formatViews(views) {
@@ -136,12 +137,24 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
         return (
             <>
                 <a className='button' type='button' href={props.link} style={props.customStyle}>
-                    <div style={{textAlign: 'center', lineHeight: '1.9em'}}>
+                    <div style={{textAlign: 'center', fontSize: '.9em', lineHeight: '2em'}}>
                         {props.text}
                     </div>
                 </a>
             </>
         );
+    }
+
+    function Episodes(props) {
+        return (
+            <h3 onClick={(e) => {
+                if (e.target.id === "") {
+                    createEpisodes(props.min, props.max, episode);
+                }
+                document.getElementById("active_episode_100").id = "";
+                e.target.id = "active_episode_100";
+            }} id={props.active === undefined ? "" : "active_episode_100"}>{`${props.min === 1 ? "001" : props.min}-${props.max}`}</h3>
+        )
     }
     
     function Tag(props) {
@@ -256,8 +269,51 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
             }
             // Create anime episode buttons
             const epsDiv = document.getElementById('episodes');
+            const hundredsDiv = document.getElementsByClassName('episode_100s')[0];
             if (info.episodes > 1)
-            for (let i = 1; i <= info.episodes; i++)
+            {
+                const eps = info.episodes;
+                const hundreds = Math.floor(eps / 100);
+                if (hundreds > 0)
+                {
+                    for (let i = 0; i < hundreds; i++)
+                    {
+
+                        const newDiv = document.createElement('div');
+                        hundredsDiv.appendChild(newDiv);
+                        // Render the component into the new div
+                        const root = createRoot(newDiv);
+                        if (episode >= i * 100 + 1 && episode <= i * 100 + 100)
+                        {
+                            root.render(<Episodes min={i * 100 + 1} max={i * 100 + 100} active/>)
+                            createEpisodes(i * 100 + 1, i * 100 + 100, episode);
+                        } else
+                            root.render(<Episodes min={i * 100 + 1} max={i * 100 + 100}/>)
+                    }
+                }
+                const remaining = eps % 100;
+                if (remaining > 0)
+                {
+                    const newDiv = document.createElement('div');
+                    hundredsDiv.appendChild(newDiv);
+                    // Render the component into the new div
+                    const root = createRoot(newDiv);
+                    if (episode >= hundreds * 100 + 1 && episode <= hundreds * 100 + remaining)
+                    {
+                        root.render(<Episodes min={hundreds * 100 + 1} max={hundreds * 100 + remaining} active/>)
+                        createEpisodes(hundreds * 100 + 1, hundreds * 100 + remaining, episode);
+                    } else
+                        root.render(<Episodes min={hundreds * 100 + 1} max={hundreds * 100 + remaining}/>)
+                }
+            } else
+                epsDiv.style.display = 'none';
+
+    }
+
+    function createEpisodes(min, max, episode = 1) {
+        const epsDiv = document.getElementById('episodes');
+        epsDiv.innerHTML = "";
+        for (let i = min; i <= max; i++)
             {
                 const newDiv = document.createElement('div');
                 epsDiv.appendChild(newDiv);
@@ -437,12 +493,15 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                             <div className='separator'/>
                             <div className='pcontainer'>
                                 <div id="previous_ep">
-                                    <Button id="previous_ep" text="Previous Episode" customStyle={{backgroundColor: '#9b2727', color: 'white', width: '35%', float: 'left'}}/>
+                                    <Button id="previous_ep" text="Previous Episode" customStyle={{padding: '.5em', backgroundColor: '#9b2727', color: 'white', minWidth: '45%', height: '3em', float: 'left', lineHeight: '1em'}}/>
                                 </div>
                                 <div id="next_ep">
-                                    <Button id="next_ep" text="Next Episode" customStyle={{backgroundColor: '#9b2727', color: 'white', width: '35%', float: 'right'}}/>
+                                    <Button id="next_ep" text="Next Episode" customStyle={{padding: '.5em', backgroundColor: '#9b2727', color: 'white', minWidth: '45%', height: '3em', float: 'right', lineHeight: '1em'}}/>
                                 </div>
                             </div>
+                            <div className='episode_100s pcontainer'>
+                            </div>
+
                             <div id="episodes" className='pcontainer'>
                             </div>
                             <div className='separator'/>

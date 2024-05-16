@@ -6,6 +6,7 @@ import Head from 'next/head'
 export default function Contact({ data }) {
     useEffect(() => {
         document.getElementById("contact_us").classList.add("active");
+        document.getElementById("contact_usm").classList.add("active");
         fetch('https://geolocation-db.com/json/')
         .then(response => response.json())
         .then(data => state.ipAddress = data.IPv4)

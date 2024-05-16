@@ -6,6 +6,7 @@ export default function About({ data }) {
     useEffect(() => {
         document.title = "6Anime - About";
         document.getElementById("about").classList.add("active");
+        document.getElementById("aboutm").classList.add("active");
     }, []);
 
     return (
