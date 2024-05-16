@@ -1,3 +1,4 @@
+const testAPI = require('../../lib/routes/testAPI');
 const getvideo = require('../../lib/routes/getvideo');
 const addvideo = require('../../lib/routes/addvideo');
 const search = require('../../lib/routes/search');
@@ -109,7 +110,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET')
     {
       if (request === 'testapi') {
-        res.status(200).json({ message: 'API route works.' });
+        testAPI(req, res);
       } else if (request === 'getvideo') {
         getvideo(req, res);
       } else if (request === 'search') {

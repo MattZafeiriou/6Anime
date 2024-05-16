@@ -143,3 +143,11 @@
     font-family: 'Roboto', sans-serif;
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
+
+.popupcontent p {
+    word-wrap: break-word;
+    font-size: 1.2em;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
+}
