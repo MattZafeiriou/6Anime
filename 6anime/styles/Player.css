@@ -23,10 +23,17 @@
 
 .episode_100s #active_episode_100 {
     cursor: default;
-    background-color: #9b2727;
+    background-color: var(--main);
 }
 
 .episode_100s h3 {
+    transition-duration: .2s;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    
     cursor: pointer;
     font-family: 'Roboto';
     background-color: rgb(80,80,80);
@@ -37,10 +44,11 @@
     font-family: 'Roboto';
     font-weight: 400;
     font-size: 1em;
+    white-space: nowrap;
 }
 
 .episode_100s h3:hover {
-    background-color: #9b2727;
+    background-color: var(--mainhover);
 }
 
 .playerr {
@@ -183,7 +191,7 @@
     transition-duration: 200ms;
     padding: .8em;
     background-color: #222228;
-    border: solid #9b2727 1px;
+    border: solid var(--main) 1px;
     font-family: serif;
     font-size: 1.2em;
     border-radius: 5px;
@@ -192,7 +200,7 @@
 @media screen and (max-width: 800px) {
     .button, .button_disabled {
         background-color: #222228;
-        border: solid #9b2727 1px;
+        border: solid var(--main) 1px;
         font-size: 1em;
         border-radius: 5px;
         padding: .5em;
@@ -208,7 +216,7 @@
 }
 
 .button:hover {
-    background-color: hsl(0, 60%, 50%) !important;
+    background-color: var(--maindark) !important;
     color: white;
 }
 
@@ -270,7 +278,7 @@
 }
 
 .anime_tag {
-    background-color: rgb(99, 17, 17);
+    background-color: var(--maindark);
     font-size: .9em;
     padding: 6px;
     color: white;

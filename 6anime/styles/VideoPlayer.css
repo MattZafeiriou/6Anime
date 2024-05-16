@@ -38,7 +38,7 @@
     color: white;
     width: 50px;
     height: 50px;
-    background-color: #9b2727;
+    background-color: var(--main);
     border-radius: 50%;
     transition: 0.1s ease-in-out;
     opacity: 1;
@@ -179,8 +179,8 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; /* Remove default styles in WebKit browsers */
     width: 9px; /* Set a specific thumb width */
     height: 9px; /* Set a specific thumb height */
-    background: #9b2727; /* Green thumb color */
-    border: solid #9b2727 1px;
+    background: var(--main); /* Green thumb color */
+    border: solid var(--main) 1px;
     border-radius: 50%; /* Round the thumb */
     cursor: pointer; /* Add a pointer cursor on hover */
     opacity: 0;
@@ -190,8 +190,8 @@ input[type="range"]::-moz-range-thumb {
     transition-duration: .2s;
     width: 9px; /* Set a specific thumb width for Firefox */
     height: 9px; /* Set a specific thumb height for Firefox */
-    background: #9b2727; /* Green thumb color for Firefox */
-    border: solid #9b2727 1px;
+    background: var(--main); /* Green thumb color for Firefox */
+    border: solid var(--main) 1px;
     border-radius: 50%; /* Round the thumb for Firefox */
     cursor: pointer; /* Add a pointer cursor on hover for Firefox */
     opacity: 0;

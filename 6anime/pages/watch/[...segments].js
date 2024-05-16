@@ -109,7 +109,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
     };
     let customSelectedStyle = {
         fontFamily: 'Roboto',
-        backgroundColor: 'hsl(0, 60%, 30%)',
+        backgroundColor: 'var(--mainhover)',
         color: 'white',
         border: 'none',
         width: '2.5em',
@@ -146,6 +146,11 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
     }
 
     function Episodes(props) {
+        let max = props.max;
+        if (max < 10)
+            max = "00" + max;
+        else if (max < 100)
+            max = "0" + max;
         return (
             <h3 onClick={(e) => {
                 if (e.target.id === "") {
@@ -153,7 +158,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                 }
                 document.getElementById("active_episode_100").id = "";
                 e.target.id = "active_episode_100";
-            }} id={props.active === undefined ? "" : "active_episode_100"}>{`${props.min === 1 ? "001" : props.min}-${props.max}`}</h3>
+            }} id={props.active === undefined ? "" : "active_episode_100"}>{`${props.min === 1 ? "001" : props.min}-${max}`}</h3>
         )
     }
     
@@ -493,15 +498,15 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                             <div className='separator'/>
                             <div className='pcontainer'>
                                 <div id="previous_ep">
-                                    <Button id="previous_ep" text="Previous Episode" customStyle={{padding: '.5em', backgroundColor: '#9b2727', color: 'white', minWidth: '45%', height: '3em', float: 'left', lineHeight: '1em'}}/>
+                                    <Button id="previous_ep" text="Previous Episode" customStyle={{padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'left', lineHeight: '1em'}}/>
                                 </div>
                                 <div id="next_ep">
-                                    <Button id="next_ep" text="Next Episode" customStyle={{padding: '.5em', backgroundColor: '#9b2727', color: 'white', minWidth: '45%', height: '3em', float: 'right', lineHeight: '1em'}}/>
+                                    <Button id="next_ep" text="Next Episode" customStyle={{padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'right', lineHeight: '1em'}}/>
                                 </div>
                             </div>
                             <div className='episode_100s pcontainer'>
                             </div>
-
+                            
                             <div id="episodes" className='pcontainer'>
                             </div>
                             <div className='separator'/>

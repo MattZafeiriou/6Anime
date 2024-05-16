@@ -114,6 +114,20 @@ function repeatYearly() {
   })
 }
 
+async function addAnimeToDatabase(anime) {
+  return new Promise((resolve, reject) => {
+    sqlHandler.con.query(`INSERT INTO Anime (api_id, title, episodes, status, premiered, update_date) VALUES (${anime.id}, "${anime.title}", ${anime.episodes}, "${anime.status}", "${anime.premiered}", CURRENT_DATE);`, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+}
+
+async function addAnime() {
+  schedule.scheduleJob('0 0/12 * * *', async () => {
+  }) // every 12 hours
+}
+
 async function updateAnime()
 {
   schedule.scheduleJob('0 0/12 * * *', async() => {

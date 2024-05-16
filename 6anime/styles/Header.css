@@ -22,7 +22,7 @@ body {
 }
 
 .active {
-    color: #9b2727;
+    color: var(--main);
 }
 
 .searchtop {
@@ -47,7 +47,7 @@ body {
     transition-duration: .1s;
 }
 .searchtop:focus-within {
-    border-color: #9b2727;
+    border-color: var(--main);
 }
 
 .searchtop button {
@@ -86,7 +86,7 @@ body {
 }
 
 .dropdown-content-top a:hover {
-    color: #9b2727;
+    color: var(--main);
 }
 
 #enterkeywords {
@@ -118,7 +118,7 @@ body {
 }
 
 .left_list:hover {
-    color: #9b2727;
+    color: var(--main);
 }
 
 .login_button {
@@ -131,7 +131,7 @@ body {
     margin: 15px 2px 6px 6px;
     float: right;
     font-size: .9em;
-    background: rgb(155,39,39);
+    background: var(--main);
 }
 
 .login_button:hover {

@@ -65,7 +65,7 @@ export default function VideoPlayer({ banner }) {
 
             const currentPercentage = (video.currentTime / video.duration) * 100;
             const progressBar = document.getElementById("progressBar");
-            progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+            progressBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
         });
 
         if (isMobile)
@@ -128,7 +128,7 @@ export default function VideoPlayer({ banner }) {
 
         const currentPercentage = value * 100;
         const audioBar = document.getElementById("audioBar");
-        audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+        audioBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
         // Save current time and volume every second
         setInterval(() =>{
             setCookie("currentTime", player.currentTime, 7, false);
@@ -204,7 +204,7 @@ export default function VideoPlayer({ banner }) {
         }
         const currentPercentage = player.volume * 100;
         const audioBar = document.getElementById("audioBar");
-        audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+        audioBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
     }
 
     function togglePlay()
@@ -238,7 +238,7 @@ export default function VideoPlayer({ banner }) {
                                     
         const currentPercentage = value;
         const audioBar = document.getElementById("audioBar");
-        audioBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+        audioBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
     }
 
     function setExitFullscreen()
@@ -371,7 +371,7 @@ export default function VideoPlayer({ banner }) {
                             
                             const currentPercentage = (player.currentTime / player.duration) * 100;
                             const progressBar = document.getElementById("progressBar");
-                            progressBar.style.background = `linear-gradient(to right, #f44336 0%, #f44336 ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+                            progressBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
                         }
                     }></input>
                 </div>

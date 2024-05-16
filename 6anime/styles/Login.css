@@ -27,8 +27,8 @@
     height: 3em;
 }
 .loginmain textarea:focus, .loginmain input:focus, .loginmain input[type]:focus {   
-    border-color: hsl(0, 60%, 50%);
-    box-shadow: 0 0 10px hsl(0, 60%, 50%);
+    border-color: var(--main);
+    box-shadow: 0 0 10px var(--main);
     outline: 0 none;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .loginmain button {
-    background-color: hsl(0, 60%, 50%);
+    background-color: var(--main);
     color: white;
     padding: 10px 15px;
     margin: 8px 0;
@@ -87,7 +87,7 @@
 }
 
 .loginmain button:hover {
-    background-color: hsl(0, 60%, 40%);
+    background-color: var(--mainhover);
 }
 
 .loginmain input[type="checkbox"] {

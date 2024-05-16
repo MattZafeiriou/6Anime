@@ -17,9 +17,20 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
 
+let theme = 1;
+const themes = [0, 50, 100, 150, 200, 255]
+function switchThemes(e) {
+  const r = document.querySelector(':root');
+  r.style.setProperty('--color', themes[theme]);
+  theme++;
+  if (theme >= themes.length) theme = 0;
+}
+
 export default function App({ Component, pageProps }) {
   return (
     <>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
+    <i id="changeTheme" onClick={switchThemes} class="fa-solid fa-circle-half-stroke"></i>
     <Head>
       <meta name="theme-color" content="#9b2727" />
       <meta property="og:image" content="/logo.png" />

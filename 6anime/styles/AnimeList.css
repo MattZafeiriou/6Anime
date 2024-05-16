@@ -261,7 +261,7 @@
     height: 35px;
     border: none;
     border-radius: 5px;
-    background-color: #9b2727;
+    background-color: var(--main);
     color: white;
     margin-right: 10px;
 }
@@ -278,7 +278,7 @@
     }
 }
 .anime-list-header-search button:hover {
-    background-color: #7a1f1f;
+    background-color: var(--mainhover);
 }
 
 /* Style the checkbox and radio */
@@ -325,7 +325,7 @@ input[type=radio]:before {
 /* Create a custom checkbox */
 input[type=checkbox]:checked:before {
     display: block;
-    background-color: #9b2727;
+    background-color: var(--main);
     width: 15px;
     height: 15px;
     border-radius: 5px;
@@ -334,7 +334,7 @@ input[type=checkbox]:checked:before {
 /* Create a custom radio button */
 input[type=radio]:checked:before {
     display: block;
-    background-color: #9b2727;
+    background-color: var(--main);
     width: 15px;
     height: 15px;
     border-radius: 50%;

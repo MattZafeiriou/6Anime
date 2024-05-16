@@ -24,7 +24,7 @@
 }
 
 .trending_header a:hover {
-    color: #ff4b2b;
+    color: var(--mainhover);
 }
 
 .trending_header {
@@ -90,14 +90,14 @@
 }
 
 .trending_card_play_button:hover {
-    color: #ff4b2b;
-    border-color: #ff4b2b;
+    color: var(--mainhover);
+    border-color: var(--mainhover);
     transition-duration: .3s;
     transform: scale(1.1);
 }
 
 .trending_card_addtolist:hover {
-    background-color: #ff4b2b;
+    background-color: var(--mainhover);
 }
 
 .trending_card a {
@@ -165,7 +165,7 @@
 
 .trending_back:hover {
     opacity: 1;
-    background-color: #ff4b2b;
+    background-color: var(--mainhover);
 }
 
 .trending_back {
@@ -189,7 +189,7 @@
 }
 .trending_next:hover {
     opacity: 1;
-    background-color: #ff4b2b;
+    background-color: var(--mainhover);
 }
 
 .trending_next {

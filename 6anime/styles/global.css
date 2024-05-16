@@ -1,3 +1,12 @@
+:root {
+  --color: 0;
+  --main: hsl(var(--color), 60%, 38%);
+  --mainhover: hsl(var(--color), 60%, 30%);
+  --maindark: hsl(var(--color), 60%, 23%);
+  --bar: hsl(var(--color), 90%, 58%);
+  --background: hsl(var(--color), 56%, 6%);
+}
+
 html {
   margin: 0;
 }
@@ -14,7 +23,7 @@ textarea:focus, input:focus{
 body {
   /* background-image: url("test-background.jpg"); */
   background: rgb(25,7,7);
-  background: linear-gradient(180deg, rgba(25,7,7,1) 0vh, rgba(155,39,39,1) 50vh, rgba(25,7,7,1) 95vh);
+  background: linear-gradient(180deg, var(--background) 0vh, var(--main) 50vh, var(--background) 95vh);
   overflow-x: hidden;
 }
 
@@ -22,4 +31,15 @@ body {
 .NotFound {
   color: white;
   padding-top: 20vh;
+}
+
+#changeTheme {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 50%;
+  background-color: var(--main);
 }

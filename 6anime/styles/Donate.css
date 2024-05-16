@@ -57,7 +57,7 @@
 .paymentMethod button {
     transition-duration: .3s;
     margin: 1em 0em;
-    background-color: #9b2727;
+    background-color: var(--main);
     border: none;
     color: white;
     border-radius: 5px;
@@ -71,7 +71,7 @@
 }
 
 .paymentMethod button:hover {
-    background-color: hsl(0, 60%, 50%);
+    background-color: var(--mainhover);
 }
 
 .popupdonate {
@@ -133,7 +133,7 @@
 .popupcontent button {
     transition-duration: .3s;
     margin: 1em 0em;
-    background-color: #9b2727;
+    background-color: var(--main);
     border: none;
     color: white;
     border-radius: 5px;

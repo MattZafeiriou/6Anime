@@ -80,7 +80,7 @@
 }
 
 .random_video_trailer_button {
-    background-color: rgba(155, 39, 39, .7);
+    background-color: var(--mainhover);
     border: none;
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -94,7 +94,7 @@
 
 .random_video_trailer_button:hover {
     padding: 10px 60px;
-    background-color: #9b2727;
+    background-color: var(--main);
 }
 
 .add_to_list_button {
@@ -112,7 +112,7 @@
 
 .add_to_list_button:hover {
     padding: 10px 30px;
-    background-color: #9b2727;
+    background-color: var(--main);
 }
 
 .random_video_trailer_info_shown {
@@ -130,7 +130,7 @@
 .random_video_trailer_tags p {
     margin-right: 1em;
     cursor: pointer;
-    background-color: rgba(155, 39, 39, .5);
+    background-color: var(--maindark);
     color: rgba(255,255,255,.8);
     padding: 5px;
     border-radius: 5px;
