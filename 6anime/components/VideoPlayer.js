@@ -209,6 +209,10 @@ export default function VideoPlayer({ banner }) {
 
     function togglePlay()
     {
+        if (isMobile){
+        document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.add("fa-play");
+        document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.remove("fa-pause");
+        }
         const player = document.getElementById('player');
         if (player.paused)
         {
@@ -315,7 +319,8 @@ export default function VideoPlayer({ banner }) {
 
         document.getElementsByClassName("video-player")[0].style.cursor = null;
         const controls = document.getElementsByClassName('controls')[0];
-        controls.classList.remove('hide');
+        if (!isMobile)
+            controls.classList.remove('hide');
         if (cooldown != null)
             clearTimeout(cooldown);
         cooldown = setTimeout(() => {
@@ -323,6 +328,17 @@ export default function VideoPlayer({ banner }) {
                 return;
             const controls = document.getElementsByClassName('controls')[0];
             controls.classList.add('hide');
+            if (isMobile)
+            {
+                document.getElementsByClassName("play-button")[0].classList.add("hidebutton");
+
+                setTimeout(() => {
+                    if (!mouseInside){
+                    document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.remove("fa-pause");
+                    document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.add("fa-play");}
+                }, 300);
+            }
+
             document.getElementsByClassName("video-player")[0].style.cursor = "none";
         }, 1000);
     }
@@ -415,17 +431,51 @@ export default function VideoPlayer({ banner }) {
             <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
                 ref={player => (player = player)}
                 onClick={() => {
-                    togglePlay();
+                    if (isMobile)
+                    {
+                        const controls = document.getElementsByClassName('controls')[0];
+                        if (controls.classList.contains('hide'))
+                        {
+                            controls.classList.remove('hide');
+                            document.getElementsByClassName("play-button")[0].classList.remove("hidebutton");
+                            document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.remove("fa-play");
+                            document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.add("fa-pause");
+                        } else
+                        {
+                             togglePlay();
+                        }
+                    } else
+                    {
+                        togglePlay();
+                    }
                 }}
-                onDoubleClick={() => {
+                onDoubleClick={(e) => {
                     const player = document.getElementsByClassName('video-player')[0];
-                    // toggle fullscreen
-                    if (document.fullscreenElement) {
-                        document.exitFullscreen();
-                        setFullscreen();
+                    if (isMobile)
+                    {
+                        e.preventDefault();
+                        // get position of the click
+                        const x = e.clientX - e.target.getBoundingClientRect().left;
+                        const width = e.target.clientWidth;
+
+                        const percentage = x / width;
+                        if (percentage < 0.5)
+                        {
+                            document.getElementById('player').currentTime -= 5;
+                        }else
+                        {
+                            document.getElementById('player').currentTime += 5;
+                        }
                     } else {
-                        player.requestFullscreen();
-                        setExitFullscreen();
+                        e.preventDefault();
+                        // toggle fullscreen
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                            setFullscreen();
+                        } else {
+                            player.requestFullscreen();
+                            setExitFullscreen();
+                        }
                     }
                 }}
                 >

@@ -51,6 +51,13 @@
     transition: 0.1s ease-in-out;
 }
 
+@media screen and (max-width: 1000px) {
+    .play-button h1 {
+        margin-left: .1em;
+        margin-top: .6em;
+    }
+}
+
 .hidebutton {
     transition: 0.4s ease-in-out;
     opacity: 0;

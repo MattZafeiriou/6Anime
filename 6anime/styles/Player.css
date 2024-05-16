@@ -24,6 +24,7 @@
 .episode_100s #active_episode_100 {
     cursor: default;
     background-color: var(--main);
+    color: white;
 }
 
 .episode_100s h3 {
@@ -36,8 +37,7 @@
     
     cursor: pointer;
     font-family: 'Roboto';
-    background-color: rgb(80,80,80);
-    color: white;
+    color: rgb(180,180,180);
     border-radius: 5px;
     padding: .3em;
     margin-right: .5em;
@@ -49,6 +49,7 @@
 
 .episode_100s h3:hover {
     background-color: var(--mainhover);
+    color: white;
 }
 
 .playerr {
