@@ -122,7 +122,6 @@ async function updateAnime()
       const anime = results[i];
       let id = anime.api_id;
       const year = anime.premiered.split('-')[0];
-      if (Number(year) < 2020) continue;
       if (Number(anime.api_id) !== NaN)
         id = Number(anime.api_id);
       const data = await getAnimeInfo(id);
