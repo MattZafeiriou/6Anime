@@ -327,6 +327,8 @@ export default function VideoPlayer({ banner }) {
             if (player.paused)
                 return;
             const controls = document.getElementsByClassName('controls')[0];
+            if (mouseInside)
+                return;
             controls.classList.add('hide');
             if (isMobile)
             {
@@ -336,7 +338,7 @@ export default function VideoPlayer({ banner }) {
                     if (!mouseInside){
                     document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.remove("fa-pause");
                     document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.add("fa-play");}
-                }, 300);
+                }, 500);
             }
 
             document.getElementsByClassName("video-player")[0].style.cursor = "none";
@@ -364,15 +366,23 @@ export default function VideoPlayer({ banner }) {
                 <img src={banner} alt="banner" />
             </div>
             <div className='controls' onMouseEnter={() => {
+                if (isMobile)
+                    return;
                 const controls = document.getElementsByClassName('controls')[0];
                 controls.classList.remove('hide');
                 mouseInside = true;
             }} onMouseLeave={() => {
                 mouseInside = false;
+                cooldownToHide();
             }} onMouseMove={() => {
+                if (isMobile)
+                    return;
                 const controls = document.getElementsByClassName('controls')[0];
                 controls.classList.remove('hide');
                 mouseInside = true;
+            }} onTouchEndCapture={() => {
+                mouseInside = false;
+                cooldownToHide();
             }}>
                 <button id="play" onClick={() => {
                     togglePlay();
@@ -381,6 +391,7 @@ export default function VideoPlayer({ banner }) {
                 <div className='progress-bar'>
                     <input type="range" id="progressBar" name="progressBar" defaultValue="0" min="0" max="100" onChange={
                         () => {
+                            mouseInside = true;
                             const player = document.getElementById('player');
                             player.currentTime = document.getElementById("progressBar").value;
                             document.getElementById("currenttime").innerHTML = toHHMMSS(player.currentTime.toFixed(2));
@@ -389,7 +400,10 @@ export default function VideoPlayer({ banner }) {
                             const progressBar = document.getElementById("progressBar");
                             progressBar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
                         }
-                    }></input>
+                    } onTouchEndCapture={() => {
+                        mouseInside = false;
+                        cooldownToHide();
+                        }}></input>
                 </div>
 
                 <h5 id="duration">00:00:00</h5>
@@ -426,6 +440,7 @@ export default function VideoPlayer({ banner }) {
                         player.requestFullscreen();
                         setExitFullscreen();
                     }
+
                 }}><i className="fa-solid fa-expand"></i></button>
             </div>
             <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
@@ -442,7 +457,8 @@ export default function VideoPlayer({ banner }) {
                             document.getElementsByClassName("play-button")[0].firstChild.firstChild.classList.add("fa-pause");
                         } else
                         {
-                             togglePlay();
+                            cooldownToHide();
+                            togglePlay();
                         }
                     } else
                     {
