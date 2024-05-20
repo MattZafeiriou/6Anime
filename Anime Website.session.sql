@@ -19,7 +19,8 @@ CREATE TABLE Users(
     role TEXT NOT NULL,
     avatar TEXT NOT NULL,
     created_at DATE NOT NULL,
-    verified BOOLEAN NOT NULL DEFAULT 0
+    verified BOOLEAN NOT NULL DEFAULT 0,
+    verification_code TEXT NOT NULL
 );
 
 -- @block

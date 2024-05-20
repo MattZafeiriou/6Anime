@@ -1,6 +1,7 @@
 const EmailValidator = require("email-validator");
 const sqlHandler = require("../../../lib/sqlHandler");
 const bcrypt = require("bcrypt");
+const EmailService = require("../../../components/EmailService");
 
 function post(req, res, next) {
     const body = req.body;
@@ -63,13 +64,28 @@ function post(req, res, next) {
             // Hash the password
             bcrypt.hash(password, 10, (err, hash) => {
                 if (err) throw err;
+
+                const verification_code = makecode(64);
                 // Insert the user into the database
-                sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, created_at) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', CURRENT_DATE)`, (err, result) => {
+                sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, created_at, verified, verification_code) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', CURRENT_DATE, 0, '${verification_code}')`, (err, result) => {
                     if (err) throw err;
+                    EmailService.sendVerificationEmail(email, verification_code);
                     res.status(200).send("Account created successfully");
                 });
             });
         });
     });
+}
+
+function makecode(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }
 module.exports = post;

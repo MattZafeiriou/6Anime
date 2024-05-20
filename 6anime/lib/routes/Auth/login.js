@@ -33,7 +33,7 @@ function post(req, res, next) {
 
             // Password is correct
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-            setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: true })
+            setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true})
             res.status(200).send("Login successful");
         });
     });

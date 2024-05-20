@@ -5,6 +5,7 @@ const search = require('../../lib/routes/search');
 const recommendations = require('../../lib/routes/recommendations');
 const getviews = require('../../lib/routes/getViews');
 const getpopular = require('../../lib/routes/getPopular');
+const getprofilepic = require('../../lib/routes/Auth/getprofilepic');
 const getfeatured = require('../../lib/routes/getFeatured');
 const getanimeurl = require('../../lib/routes/getAnimeURL');
 const getid = require('../../lib/routes/get_id');
@@ -12,6 +13,7 @@ const addview = require('../../lib/routes/addView');
 const addepisode = require('../../lib/routes/addepisode');
 const sendform = require('../../lib/routes/sendForm');
 const login = require('../../lib/routes/Auth/login');
+const verify = require('../../lib/routes/Auth/verify');
 const register = require('../../lib/routes/Auth/register');
 const cors = require('cors');
 const crypto = require('crypto');
@@ -130,6 +132,8 @@ export default async function handler(req, res) {
         getid(req, res);
       } else if (request === 'addview') {
         addview(req, res);
+      } else if (request === 'getprofilepic') {
+        getprofilepic(req, res);
       } else if (request === 'addepisode') {
         addepisode(req, res);
       } else {
@@ -146,6 +150,9 @@ export default async function handler(req, res) {
       } else if (request === 'register') {
         await runMiddleware(req, res, limiter)
           register(req, res);
+      } else if (request === 'verify') {
+        await runMiddleware(req, res, limiter)
+          verify(req, res);
       } else {
         res.status(404).send('API route not found.');
       }

@@ -28,7 +28,7 @@ body {
 .searchtop {
     width: 310px;
     margin-top: 15px;
-    margin-right: 20px;
+    margin-right: 10px;
     float: right;
     border: solid rgba(255,255,255,.2) 1px;
     border-radius: 10px;
@@ -134,6 +134,28 @@ body {
     background: var(--main);
 }
 
+.profile {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 50%;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 15px 2px 6px 6px;
+    float: right;
+    font-size: .9em;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+}
+
 .login_button:hover {
     padding: 10px 32px 12px 32px;
     margin: 10px 0px 6px 4px;
@@ -143,7 +165,7 @@ body {
     color: white;
 }
 
-.top img {
+#logo img {
     border-radius: 3px;
     margin-top: 15px;
     margin-right: 1em;
@@ -217,10 +239,6 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-    .login_button {
-        display: none;
-    }
-
     .searchtop {
         margin-right: 0px;
         width: auto;
