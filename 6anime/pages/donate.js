@@ -17,10 +17,10 @@ function PaymentMethod(props)
 {
   return (
     <div className="paymentMethod">
-      <a href={props.href}>
+      <a href={props.href} target="_blank">
         <img src={props.src} alt={props.text} />
       </a>
-      <a href={props.href}><button onClick={props.onClick}>{props.text}</button></a>
+      <a href={props.href} target="_blank"><button onClick={props.onClick}>{props.text}</button></a>
     </div>
   );
 }

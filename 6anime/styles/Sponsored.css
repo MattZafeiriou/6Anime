@@ -1,17 +1,17 @@
-.spon_sored {
+.sponsored {
     color: white;
     padding: 1em;
     display: flex;
     position: relative;
 }
 
-.spon_sored img {
+.sponsored img {
     width: 3em;
     height: 3em;
     margin-right: 1em;
 }
 
-.spon_sored h3 {
+.sponsored h3 {
     position: absolute;
     right: .5em;
     bottom: .5em;
@@ -21,12 +21,12 @@
 }
 
 @media only screen and (max-width: 1600px) {
-    .spon_sored-text {
+    .sponsored-text {
         margin-bottom: .5em;
     }
 }
 
-.spon_sored-text {
+.sponsored-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,18 +34,18 @@
     user-select: none;
 }
 
-.spon_sored-text a {
+.sponsored-text a {
     color: white;
     text-decoration: none;
 }
 
-.spon_sored-text h4 {
+.sponsored-text h4 {
     margin: 0;
     font-size: 1.3em;
     margin-bottom: 5px;
 }
 
-.spon_sored-text h5 {
+.sponsored-text h5 {
     margin: 0;
     font-size: 1em;
 }

@@ -35,3 +35,5 @@ function sendVerifyEmail(email, token)
         }
     });
 }
+
+module.exports = { sendVerifyEmail };

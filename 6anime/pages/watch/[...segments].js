@@ -89,6 +89,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
     const [banner, setBanner] = useState("");
     const [episodesno, setEpisodesno] = useState("");
     const [premiered, setPremiered] = useState("");
+    const [updated, setUpdated] = useState("");
     const [season, setSeason] = useState("");
     const [episodesdu, setEpisodesdu] = useState("");
     const [views, setViews] = useState(0);
@@ -198,6 +199,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
             }
             setTitle(info.name);
             const date = info.premiered;
+            const date_ = info.update_date.substring(0, 10);
             setDescription(info.description);
             setGenre(info.genre);
             setStudios(info.studios);
@@ -205,6 +207,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
             setEpisodesno(info.episodes);
             setType(info.type);
             setPremiered(date);
+            setUpdated(date_);
             setSeason(info.season);
             setEpisodesdu(info.duration + " min/ep");
             setOtherSeasonFolders(info.other_season_folders);
@@ -517,7 +520,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                                         <div style={{display: 'block'}}>
                                             <h2 id='anime_desc'>Description</h2>
                                             <div className='separator'/>
-                                            <p style={{marginTop: '1em'}} id='anime_description'>{description}<loading/><loading/><loading/><loading/><loading/></p>
+                                            <p style={{marginTop: '1em'}} id='anime_description'>{description}</p>
                                             <div id='tags' className='tags'>
                                             </div>
                                         </div>
@@ -530,6 +533,7 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
                                         <Info name='Episodes' text={episodesno}/>
                                         <Info name='Duration' text={episodesdu}/>
                                         <Info name='Premiered' text={premiered}/>
+                                        <Info name='Last Updated' text={updated}/>
                                         <Info name='Views' text={viewsFormatted}/>
                                     </div>
                                 </div>

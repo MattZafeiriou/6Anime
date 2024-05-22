@@ -11,6 +11,8 @@ import '../styles/Donate.css'
 import '../styles/AnimeList.css'
 import '../styles/VideoPlayer.css'
 import '../styles/Player.css'
+import '../styles/Disclaimer.css'
+import '../styles/Tos.css'
 import '../styles/Login.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';

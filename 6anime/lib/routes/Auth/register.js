@@ -69,7 +69,7 @@ function post(req, res, next) {
                 // Insert the user into the database
                 sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, created_at, verified, verification_code) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', CURRENT_DATE, 0, '${verification_code}')`, (err, result) => {
                     if (err) throw err;
-                    EmailService.sendVerificationEmail(email, verification_code);
+                    EmailService.sendVerifyEmail(email, verification_code);
                     res.status(200).send("Account created successfully");
                 });
             });
