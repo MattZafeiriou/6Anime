@@ -557,7 +557,6 @@ export default function Watch({titleseg,epsegment, animeinfo, other_season_ids})
     )
 }
 
-let cachedData = {};
 let cachedIds = {};
 export async function getServerSideProps(context) {
     // Get the segments from the context
@@ -568,18 +567,11 @@ export async function getServerSideProps(context) {
 
     const id = prelastSegment.split("-").pop();
 
-    let animeInfo = [];
-    if (cachedData[id] !== undefined)
-    {
-        animeInfo = cachedData[id];
-    } else {
-        animeInfo = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + "/getvideo/?id=" + id)
+    let animeInfo = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + "/getvideo/?id=" + id)
         .then(res => res.text())
         .then(res => {
             return res;
         });
-        cachedData[id] = animeInfo;
-    }
 
     let other_season_ids = [];
     const other_season_folders = JSON.parse(animeInfo).other_season_folders;

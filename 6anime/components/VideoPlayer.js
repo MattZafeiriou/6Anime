@@ -8,8 +8,7 @@ export default function VideoPlayer({ banner }) {
     let state = {
         video_url: "",
         episode: "",
-        lastVolume: 0,
-        bannerImg: ""
+        lastVolume: 0
     }
     let player;
 
@@ -443,7 +442,7 @@ export default function VideoPlayer({ banner }) {
 
                 }}><i className="fa-solid fa-expand"></i></button>
             </div>
-            <video controls={false} id="player" playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
+            <video controls={false} id="player" poster={banner} playsInline crossOrigin='anonymous' style={{width: '100%', height: '100%'}}
                 ref={player => (player = player)}
                 onClick={() => {
                     if (isMobile)
