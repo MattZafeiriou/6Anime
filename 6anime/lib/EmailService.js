@@ -23,7 +23,7 @@ function sendVerifyEmail(email, token)
         to: email,
         subject: 'Verification Email',
         // html: htmlContent // HTML content from the file
-        content: `Click the link below to verify your account: https://www.6anime.tv/verify?token=${token}`
+        text: `Click the link below to verify your account: https://www.6anime.tv/verify?token=${token}`
     };
 
     // Send email
