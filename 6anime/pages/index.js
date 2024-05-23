@@ -45,7 +45,6 @@ function CarouselImg(props) {
 export default function Page({ data, trendingdata, genredata, tag, latestdata }) {
   
   useEffect(() => {
-    document.title = "6Anime";
     document.getElementById("home").classList.add("active");
     document.getElementById("homem").classList.add("active");
   }, []);

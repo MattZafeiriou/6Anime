@@ -2,7 +2,7 @@ const sqlHandler = require('../../sqlHandler');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const EmailValidator = require("email-validator");
-import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 
 function post(req, res, next) {
     const body = req.body;

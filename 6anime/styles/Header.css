@@ -262,6 +262,10 @@ body {
         display: none;
     }
 
+    .login_button {
+        display: none;
+    }
+
     .mobile_menu_button {
         opacity: 1;
         display: block;

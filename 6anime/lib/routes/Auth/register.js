@@ -1,7 +1,9 @@
 const EmailValidator = require("email-validator");
 const sqlHandler = require("../../../lib/sqlHandler");
 const bcrypt = require("bcrypt");
-const EmailService = require("../../../components/EmailService");
+const EmailService = require("../../../lib/EmailService");
+const jwt = require("jsonwebtoken");
+import { setCookie } from 'cookies-next';
 
 function post(req, res, next) {
     const body = req.body;
@@ -70,6 +72,10 @@ function post(req, res, next) {
                 sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, created_at, verified, verification_code) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', CURRENT_DATE, 0, '${verification_code}')`, (err, result) => {
                     if (err) throw err;
                     EmailService.sendVerifyEmail(email, verification_code);
+
+                    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+                    setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true, domain: ".6anime.tv"})
+
                     res.status(200).send("Account created successfully");
                 });
             });
