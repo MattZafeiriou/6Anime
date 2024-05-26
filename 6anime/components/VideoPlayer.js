@@ -170,10 +170,18 @@ export default function VideoPlayer({ banner }) {
         }
         if (e.keyCode === 37) { // key left
             const player = document.getElementById('player');
+            document.getElementsByClassName("backward-div")[0].style.animation = "none";
+            document.getElementsByClassName("backward-div")[0].offsetHeight;
+            document.getElementsByClassName("backward-div")[0].style.animation = "forward .5s";
+
             player.currentTime -= 5;
         }
         if (e.keyCode === 39) { // key right
             const player = document.getElementById('player');
+            document.getElementsByClassName("forward-div")[0].style.animation = "none";
+            document.getElementsByClassName("forward-div")[0].offsetHeight;
+            document.getElementsByClassName("forward-div")[0].style.animation = "forward .5s";
+
             player.currentTime += 5;
         }
     }
@@ -342,6 +350,15 @@ export default function VideoPlayer({ banner }) {
                 <div className='play-button'>
                     <h1><i className="fa-solid fa-play"></i></h1>
                 </div>
+                <div className="forward-div">
+                    <div className="forward-icon">5s <i className="fa-solid fa-forward fa-beat-fade"></i>
+                    </div>
+                </div>
+                <div className="backward-div">
+                    <div className="backward-icon"><i className="fa-solid fa-backward fa-beat-fade"></i> 5s
+                    </div>
+                </div>
+
                 <div className='banner'>
                     <img src={banner} alt="banner" />
                 </div>
@@ -449,8 +466,14 @@ export default function VideoPlayer({ banner }) {
 
                             const percentage = x / width;
                             if (percentage < 0.5) {
+                                document.getElementsByClassName("backward-div")[0].style.animation = "none";
+                                document.getElementsByClassName("backward-div")[0].offsetHeight;
+                                document.getElementsByClassName("backward-div")[0].style.animation = "forward .5s";
                                 document.getElementById('player').currentTime -= 5;
                             } else {
+                                document.getElementsByClassName("forward-div")[0].style.animation = "none";
+                                document.getElementsByClassName("forward-div")[0].offsetHeight;
+                                document.getElementsByClassName("forward-div")[0].style.animation = "forward .5s";
                                 document.getElementById('player').currentTime += 5;
                             }
                         } else {
