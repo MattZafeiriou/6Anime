@@ -8,7 +8,7 @@ export default function RecentlyAdded({ data }) {
     }, []);
     return (
         <>
-            <AnimeList startOptions="Recently-Added"/>
+            <AnimeList startOptions="Recently-Added" />
         </>
     );
 }

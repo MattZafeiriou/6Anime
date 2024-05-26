@@ -9,9 +9,8 @@ const con = mysql.createPool({
 
 var anime = null;
 
-function connect()
-{
-    con.getConnection(function(err) {
+function connect() {
+    con.getConnection(function (err) {
         if (err) throw err;
         console.log("Connected to mySQL!");
     });
@@ -22,8 +21,7 @@ function connect()
     });
 }
 
-function getAllAnime()
-{
+function getAllAnime() {
     return anime;
 }
 

@@ -9,7 +9,7 @@ export default function Series({ data }) {
     }, []);
     return (
         <>
-            <AnimeList startOptions="Series"/>
+            <AnimeList startOptions="Series" />
         </>
     );
 }

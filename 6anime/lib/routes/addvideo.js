@@ -8,21 +8,17 @@ function post(req, res, next) {
 
     sqlHandler.con.query("SELECT * FROM Anime WHERE api_id = ?;", [id], async function (err, result, fields) {
         if (err) throw err;
-        if (result.length > 0)
-        {
+        if (result.length > 0) {
             res.status(409).send("Anime already exists");
-        } else
-        {
+        } else {
             const data = await getAnimeInfo(id);
-            if (data == null)
-            {
+            if (data == null) {
                 res.status(404).send("Anime not found");
                 return;
             }
 
-            
-            if (!(typeof id === 'number'))
-            {
+
+            if (!(typeof id === 'number')) {
                 let name = data.title;
                 let status = data.status;
                 if (status == "Completed")
@@ -41,8 +37,7 @@ function post(req, res, next) {
                 let exists = false;
                 sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name = ?;", [folder_name], async function (err, result, fields) {
                     if (err) throw err;
-                    if (result.length > 0)
-                    {
+                    if (result.length > 0) {
                         res.status(409).send("Anime already exists");
                         exists = true;
                         return;
@@ -57,7 +52,7 @@ function post(req, res, next) {
                     const premiered = data.releaseDate + "-01-01";
                     let other_season_folders = "[]";
                     let other_season_names = "[]";
-    
+
                     let type = data.type;
                     if (type == "TV")
                         type = "TV Series";
@@ -71,7 +66,7 @@ function post(req, res, next) {
                         type = "ONA";
                     else if (type == "MUSIC")
                         type = "Music";
-    
+
                     let season = "";
                     const rating = 0;
                     const poster = data.image;
@@ -84,7 +79,7 @@ function post(req, res, next) {
                     sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode], function (err, result, fields) {
                         if (err) throw err;
                         res.status(200).send("Anime added successfully");
-        
+
                         // Set views to 0
                         sqlHandler.con.query("INSERT INTO Views(id, anime_id, views_count) VALUES (?, ?, ?);", [result.insertId, result.insertId, 0], function (err, result, fields) {
                             if (err) throw err;
@@ -93,7 +88,7 @@ function post(req, res, next) {
                 });
             } else {
 
-                
+
                 let name = data.title.english;
                 if (data.title.romaji != null)
                     name = data.title.romaji;
@@ -132,8 +127,7 @@ function post(req, res, next) {
                 let other_season_names = [];
                 const relations = data.relations;
 
-                for (let i = 0; i < relations.length; i++)
-                {
+                for (let i = 0; i < relations.length; i++) {
                     let name_ = relations[i].title.english;
                     if (relations[i].title.romaji != null)
                         name_ = relations[i].title.romaji;
@@ -142,7 +136,7 @@ function post(req, res, next) {
                     let folder_name_ = name_.replaceAll("-", "").replaceAll(" ", "_").toLowerCase();
                     if (folder_name_.length > 50)
                         folder_name_ = folder_name_.substring(0, 50);
-                    
+
                     other_season_folders.push(folder_name_);
                     other_season_names.push(name_);
                 }
@@ -165,7 +159,7 @@ function post(req, res, next) {
                 let season = "";
                 if (data.season != null)
                     season = data.season;
-                
+
                 const rating = +data.rating / 10;
                 const poster = data.image;
                 const banner = data.cover;
@@ -173,8 +167,7 @@ function post(req, res, next) {
                 language = language.charAt(0).toUpperCase() + language.slice(1);
                 const country = data.countryOfOrigin;
                 const api_id = +data.id;
-                if (data.episodes.length == 0)
-                {
+                if (data.episodes.length == 0) {
                     res.status(404).send("Anime not found");
                     return;
                 }

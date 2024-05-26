@@ -8,7 +8,7 @@ export default function Trending({ data }) {
     }, []);
     return (
         <>
-            <AnimeList startOptions="Most-Watched"/>
+            <AnimeList startOptions="Most-Watched" />
         </>
     );
 }

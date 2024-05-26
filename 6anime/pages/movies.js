@@ -9,7 +9,7 @@ export default function Movies({ data }) {
     }, []);
     return (
         <>
-            <AnimeList startOptions="Movie"/>
+            <AnimeList startOptions="Movie" />
         </>
     );
 }

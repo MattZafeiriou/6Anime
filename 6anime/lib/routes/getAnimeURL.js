@@ -36,7 +36,7 @@ function get(req, res, next) {
                 }
                 const api_episode = result["0"].api_episode + "-episode-" + ep;
                 const src = await getAnimeEpisode(api_episode);
-                const data = {"video_url": src, "tracks": []};
+                const data = { "video_url": src, "tracks": [] };
                 res.status(200).send(JSON.stringify(data));
                 addEpisode(anime_id, src, "[]", ep, "[]", "[]", null);
             });

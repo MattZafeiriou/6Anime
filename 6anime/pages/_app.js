@@ -31,19 +31,19 @@ function switchThemes(e) {
 export default function App({ Component, pageProps }) {
   return (
     <>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
-    <i id="changeTheme" onClick={switchThemes} class="fa-solid fa-circle-half-stroke"></i>
-    <Head>
-      <meta name="theme-color" content="#9b2727" />
-      <meta property="og:image" content="/logo.png" />
-      <link href="/manifest.json" rel="manifest"/>
-    </Head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
+      <i id="changeTheme" onClick={switchThemes} class="fa-solid fa-circle-half-stroke"></i>
+      <Head>
+        <meta name="theme-color" content="#9b2727" />
+        <meta property="og:image" content="/logo.png" />
+        <link href="/manifest.json" rel="manifest" />
+      </Head>
 
-    <div className='mainpage'>
-      <Header/>
-      <Component {...pageProps} />
-    </div>
-    <Footer/>
+      <div className='mainpage'>
+        <Header />
+        <Component {...pageProps} />
+      </div>
+      <Footer />
     </>
-);
+  );
 }

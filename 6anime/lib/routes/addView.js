@@ -23,7 +23,7 @@ function get(req, res, next) {
                     res.status(404).send("Anime not found.");
                     return;
                 }
-                sqlHandler.con.query("INSERT INTO Views (id, anime_id, views_count) VALUES (?, ?, ?)", [id , id, 1], function (err, result, fields) {
+                sqlHandler.con.query("INSERT INTO Views (id, anime_id, views_count) VALUES (?, ?, ?)", [id, id, 1], function (err, result, fields) {
                     if (err) throw err;
                     res.send(200);
                 });

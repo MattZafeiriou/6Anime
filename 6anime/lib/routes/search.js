@@ -29,7 +29,7 @@ function get(req, res) {
     if (genre !== "") {
         const placeholders = tags.map(tag => 'genre LIKE ?').join(' AND ');
         query += " AND (" + placeholders + ")";
-    
+
         // Add each element separately to the params array
         tags.forEach(tag => params.push('%' + tag + '%'));
     }
@@ -37,7 +37,7 @@ function get(req, res) {
     if (year !== "") {
         const placeholders = year_.map(yearr => 'EXTRACT(YEAR FROM premiered) LIKE ?').join(' OR ');
         query += " AND (" + placeholders + ")";
-    
+
         // Add each element separately to the params array
         year_.forEach(yearr => params.push('%' + yearr + '%'));
     }
@@ -45,7 +45,7 @@ function get(req, res) {
     if (type !== "") {
         const placeholders = type_.map(typee => 'type LIKE ?').join(' OR ');
         query += " AND (" + placeholders + ")";
-    
+
         // Add each element separately to the params array
         type_.forEach(typee => params.push('%' + typee + '%'));
     }
@@ -53,7 +53,7 @@ function get(req, res) {
     if (language !== "") {
         const placeholders = language_.map(typee => 'language LIKE ?').join(' OR ');
         query += " AND (" + placeholders + ")";
-    
+
         // Add each element separately to the params array
         language_.forEach(languagee => params.push('%' + languagee + '%'));
     }
@@ -61,7 +61,7 @@ function get(req, res) {
     if (season !== "") {
         const placeholders = season_.map(typee => 'season LIKE ?').join(' OR ');
         query += " AND (" + placeholders + ")";
-    
+
         // Add each element separately to the params array
         season_.forEach(seasonn => params.push('%' + seasonn + '%'));
     }
@@ -69,7 +69,7 @@ function get(req, res) {
     if (status !== "") {
         const placeholders = 'status LIKE ?';
         query += " AND (" + placeholders + ")";
-    
+
         params.push('%' + status + '%');
     }
 
@@ -85,7 +85,7 @@ function get(req, res) {
             query += " ORDER BY added_date DESC";
         } else if (sort === "Recently Updated") {
             query += " ORDER BY update_date DESC";
-        } else if (sort === "Score" ) {
+        } else if (sort === "Score") {
             query += " ORDER BY rating DESC";
         }
     }
@@ -94,7 +94,7 @@ function get(req, res) {
 
     sqlHandler.con.query(query, params, function (err, result, fields) {
         if (err) throw err;
-        
+
         for (let i = 0; i < result.length; i++) {
             folders.push(result[i].folder_name + "-" + result[i].id);
         }

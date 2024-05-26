@@ -65,40 +65,40 @@ async function getTodayMostUsedTag() {
 }
 
 // This task repeats every day at 00:00
-function repeatDaily () {
+function repeatDaily() {
   schedule.scheduleJob('0 0 * * *', async () => {
     // Delete all daily views
     await getTodayMostUsedTag();
     sqlHandler.con.query('UPDATE Views SET today_views = 0 WHERE today_views > 0;', (err, result) => {
-        if (err) throw err
-        console.log('Daily views reset')
+      if (err) throw err
+      console.log('Daily views reset')
     })
   })
 }
 
 // This task repeats every Monday at 00:00
-function repeatWeekly () {
+function repeatWeekly() {
   schedule.scheduleJob('0 0 * * 1', async () => {
     // Create a backup of the database
     backupHandler.backup();
     console.log('Database backup created');
-    
-    
+
+
     // Delete all weekly views
     sqlHandler.con.query('UPDATE Views SET week_views = 0 WHERE week_views > 0;', (err, result) => {
-        if (err) throw err
-        console.log('Week views reset')
+      if (err) throw err
+      console.log('Week views reset')
     })
   })
 }
 
 // This task repeats every 1st of month at 00:00
-function repeatMonthly () {
+function repeatMonthly() {
   schedule.scheduleJob('0 0 1 * *', async () => {
     // Delete all monthly views
     sqlHandler.con.query('UPDATE Views SET month_views = 0 WHERE month_views > 0;', (err, result) => {
-        if (err) throw err
-        console.log('Month views reset')
+      if (err) throw err
+      console.log('Month views reset')
     })
   })
 }
@@ -108,8 +108,8 @@ function repeatYearly() {
   schedule.scheduleJob('0 0 1 * *', async () => {
     // Delete all yearly views
     sqlHandler.con.query('UPDATE Views SET yearly_views = 0 WHERE yearly_views > 0;', (err, result) => {
-        if (err) throw err
-        console.log('Year views reset')
+      if (err) throw err
+      console.log('Year views reset')
     })
   })
 }
@@ -128,9 +128,8 @@ async function addAnime() {
   }) // every 12 hours
 }
 
-async function updateAnime()
-{
-  schedule.scheduleJob('0 0/12 * * *', async() => {
+async function updateAnime() {
+  schedule.scheduleJob('0 0/12 * * *', async () => {
     const results = await getAnimeAiring();
     for (let i = 0; i < results.length; i++) {
       const anime = results[i];
@@ -142,11 +141,11 @@ async function updateAnime()
       const currentEpisode = data.currentEpisode;
       let status = data.status;
       if (status == "Completed")
-          status = "FINISHED AIRING";
+        status = "FINISHED AIRING";
       else if (status == "Ongoing")
-          status = "CURRENTLY AIRING";
+        status = "CURRENTLY AIRING";
       else
-          status = "NOT YET AIRED";
+        status = "NOT YET AIRED";
 
       const totalEpisodes = anime.episodes;
 

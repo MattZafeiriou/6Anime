@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 
-function sendVerifyEmail(email, token)
-{
+function sendVerifyEmail(email, token) {
     // Read the HTML file
     //const htmlContent = fs.readFileSync('email.html', 'utf8');
 

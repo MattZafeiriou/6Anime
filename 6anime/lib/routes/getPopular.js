@@ -8,8 +8,7 @@ function get(req, res) {
 
     const urlParams = new URLSearchParams(queryString);
     let max = +urlParams.get("max");
-    if (isNaN(max))
-    {
+    if (isNaN(max)) {
         res.status(400).send("Invalid max parameter.");
         return;
     }

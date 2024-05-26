@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import Head from "next/head";
 
-export default function AnimeList({ startInput="", startOptions="" }) {
-    const proms = {"startInput":startInput, "startOptions": startOptions};
+export default function AnimeList({ startInput = "", startOptions = "" }) {
+    const proms = { "startInput": startInput, "startOptions": startOptions };
 
     let setCheck = [];
     let filters = {};
@@ -12,8 +12,7 @@ export default function AnimeList({ startInput="", startOptions="" }) {
 
     startInput = (proms.startInput === undefined || proms.startInput === "null") ? "" : proms.startInput;
 
-    function search()
-    {
+    function search() {
         deleteAllAnime();
         const genre = (filters["Genre"] === undefined || filters["Genre"] === "") ? "" : "&genre=" + encodeURIComponent(filters["Genre"]);
         const country = (filters["Country"] === undefined || filters["Country"] === "") ? "" : "&country=" + encodeURIComponent(filters["Country"]);
@@ -29,18 +28,17 @@ export default function AnimeList({ startInput="", startOptions="" }) {
         let url = genre + country + season + year + type + status + language + sort + search + limit;
         url = url.replace("&", "?");
         url = "/search" + url;
-        
+
         fetch(process.env.NEXT_PUBLIC_API_URL + url)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(element => {
-                addAnime(element)
-            });
-        })
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(element => {
+                    addAnime(element)
+                });
+            })
     }
 
-    function addAnime(folder_name)
-    {
+    function addAnime(folder_name) {
         const id = folder_name.split("-")[folder_name.split("-").length - 1];
         const raDiv = document.getElementsByClassName('anime-list-container')[0];
         const newDiv = document.createElement('div');
@@ -50,7 +48,7 @@ export default function AnimeList({ startInput="", startOptions="" }) {
         root.render(
             <div className='anime-list-item'>
                 <a href={"/watch/" + folder_name}>
-                    <img id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g'/>
+                    <img id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g' />
                     <h3 id={'anime-list-item-name-' + id}></h3>
                 </a>
             </div>
@@ -58,50 +56,44 @@ export default function AnimeList({ startInput="", startOptions="" }) {
 
         // get the folder name
         fetch(process.env.NEXT_PUBLIC_API_URL + "/getvideo?id=" + id)
-        .then(res => res.text())
-        .then(data => {
-            const anime = JSON.parse(data);
-            const img = document.querySelector('#anime-list-item-img-' + id);
-            img.src = anime.poster;
-            const name = document.querySelector('#anime-list-item-name-' + id);
-            name.innerHTML = anime.name;
-        })
+            .then(res => res.text())
+            .then(data => {
+                const anime = JSON.parse(data);
+                const img = document.querySelector('#anime-list-item-img-' + id);
+                img.src = anime.poster;
+                const name = document.querySelector('#anime-list-item-name-' + id);
+                name.innerHTML = anime.name;
+            })
 
     }
 
-    function addRadio(id, checked, buttonid)
-    {
-        if (checked)setCheck.push(id + " " + buttonid);
+    function addRadio(id, checked, buttonid) {
+        if (checked) setCheck.push(id + " " + buttonid);
         return "radio";
     }
 
-    function addFilter(name, id, value)
-    {
+    function addFilter(name, id, value) {
         const button = document.querySelector('#' + id + '_text');
 
         if (filters[name] === undefined || filters[name] === "")
             filters[name] = value;
-        else 
+        else
             filters[name] += "," + value;
         const filter = filters[name].split(',');
 
-        if (filter.length == 1)
-        {
+        if (filter.length == 1) {
             button.innerHTML = filter[0];
-        } else
-        {
+        } else {
             button.innerHTML = filter.length + ' selected';
         }
     }
 
-    function Filter(proms)
-    {
+    function Filter(proms) {
         const items = proms.options.split(',');
 
         // toggle off when clicked outside
-        if (typeof document !== 'undefined' && document !== null)
-        {
-            document.addEventListener('click', function(e) {
+        if (typeof document !== 'undefined' && document !== null) {
+            document.addEventListener('click', function (e) {
                 const animeListFilterItem = document.querySelector("#" + proms.id);
                 if (e.target.id !== proms.id + "_button" && e.target.id !== proms.id && !animeListFilterItem.contains(e.target)) {
                     animeListFilterItem.classList.remove('anime-list-filter-item-active');
@@ -110,70 +102,63 @@ export default function AnimeList({ startInput="", startOptions="" }) {
         }
         const rows = (100 / proms.rows) + "%";
         const maxWidth = (proms.maxWidth) ? proms.maxWidth : "0";
-        return(
-        <>
-            <div className='anime-list-filter'>
-                <button id={proms.id + "_button"} onClick={() => {
-                    document.querySelector("#" + proms.id).classList.toggle('anime-list-filter-item-active');
-                }}>
-                    <span>{proms.name}</span> <b id={proms.id + "_text"}>All</b> <i className="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <div style={{maxWidth: maxWidth}} className='anime-list-filter-item' id={proms.id}>
-                    {items.map((option) => {
-                        return(
-                            <div style={{width: rows}} className='anime-list-filter-item-option'>
-                                <input onClick={() => {
-                                    const checkbox = document.querySelector('#anime-list-filter-item-' + option.replaceAll(' ', '-'));
-                                    if (proms.radio)
-                                    {
-                                        if (checkbox.checked) {
-                                            setFilter(proms.name, proms.id, option);
+        return (
+            <>
+                <div className='anime-list-filter'>
+                    <button id={proms.id + "_button"} onClick={() => {
+                        document.querySelector("#" + proms.id).classList.toggle('anime-list-filter-item-active');
+                    }}>
+                        <span>{proms.name}</span> <b id={proms.id + "_text"}>All</b> <i className="fa fa-angle-down" aria-hidden="true"></i>
+                    </button>
+                    <div style={{ maxWidth: maxWidth }} className='anime-list-filter-item' id={proms.id}>
+                        {items.map((option) => {
+                            return (
+                                <div style={{ width: rows }} className='anime-list-filter-item-option'>
+                                    <input onClick={() => {
+                                        const checkbox = document.querySelector('#anime-list-filter-item-' + option.replaceAll(' ', '-'));
+                                        if (proms.radio) {
+                                            if (checkbox.checked) {
+                                                setFilter(proms.name, proms.id, option);
+                                            } else {
+                                                setFilter(proms.name, proms.id, option);
+                                            }
                                         } else {
-                                            setFilter(proms.name, proms.id, option);
+                                            if (checkbox.checked) {
+                                                addFilter(proms.name, proms.id, option);
+                                            } else {
+                                                removeFilter(proms.name, proms.id, option);
+                                            }
                                         }
-                                    } else
-                                    {
-                                        if (checkbox.checked) {
-                                            addFilter(proms.name, proms.id, option);
-                                        } else {
-                                            removeFilter(proms.name, proms.id, option);
-                                        }
-                                    }
-                                }} type={proms.radio ? addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == proms.selected, proms.id) : 'checkbox'} id={'anime-list-filter-item-' + option.replaceAll(' ', '-')} name={'anime-list-filter-item-' + proms.name} value={'anime-list-filter-item-' + option}/>
-                                <label htmlFor={'anime-list-filter-item-' + option.replaceAll(' ', '-')}>{option}</label>
-                            </div>
-                        );
-                    })}
+                                    }} type={proms.radio ? addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == proms.selected, proms.id) : 'checkbox'} id={'anime-list-filter-item-' + option.replaceAll(' ', '-')} name={'anime-list-filter-item-' + proms.name} value={'anime-list-filter-item-' + option} />
+                                    <label htmlFor={'anime-list-filter-item-' + option.replaceAll(' ', '-')}>{option}</label>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
-        </>
+            </>
         );
     }
 
-    function removeFilter(name, id, value)
-    {
+    function removeFilter(name, id, value) {
         const button = document.querySelector('#' + id + '_text');
 
         if (filters[name] === undefined)
             filters[name] = "";
-        else 
+        else
             filters[name] = filters[name].split(',').filter(genre => genre !== value).join(',');
 
-            const filter = filters[name].split(',');
-        if (filters[name].length == 0)
-        {
+        const filter = filters[name].split(',');
+        if (filters[name].length == 0) {
             button.innerHTML = "All";
-        } else if (filter.length == 1)
-        {
+        } else if (filter.length == 1) {
             button.innerHTML = filter[0];
-        } else
-        {
+        } else {
             button.innerHTML = filter.length + ' selected';
         }
     }
 
-    function setFilter(name, id, value)
-    {
+    function setFilter(name, id, value) {
         const button = document.querySelector('#' + id + '_text');
 
         filters[name] = value;
@@ -181,8 +166,7 @@ export default function AnimeList({ startInput="", startOptions="" }) {
         button.innerHTML = filters[name];
     }
 
-    function deleteAllAnime()
-    {
+    function deleteAllAnime() {
         const raDiv = document.getElementsByClassName('anime-list-container')[0];
         while (raDiv.firstChild) {
             raDiv.removeChild(raDiv.firstChild);
@@ -203,12 +187,11 @@ export default function AnimeList({ startInput="", startOptions="" }) {
             document.querySelector('#anime-list-filter-item-' + element.replaceAll(' ', '-')).click();
         });
 
-        if (startInput !== undefined)
-        {
+        if (startInput !== undefined) {
             document.querySelector('#searchanimeinput').value = startInput;
         }
 
-        document.getElementById("searchanimeinput").addEventListener("keyup", function(event) {
+        document.getElementById("searchanimeinput").addEventListener("keyup", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
                 document.getElementById("searchanimebutton").click();
@@ -218,42 +201,42 @@ export default function AnimeList({ startInput="", startOptions="" }) {
 
     return (
         <>
-        <Head>
-            <meta property="og:title" content="6Anime - Search" />
-            <meta
-              property="og:description"
-              content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
-            />
-            <meta
-              name="keywords"
-              content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
-            />
-            <meta
-              name="description"
-              content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
-            />
-        </Head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        <div className='anime-list'>
-            <div className='anime-list-header'>
-                <div className='anime-list-header-filters'>
-                    <Filter name="Genre" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire"/>
-                    <Filter name="Country" rows="1" id="countryfilter" options=""/>
-                    <Filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter"/>
-                    <Filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999"/>
-                    <Filter name="Type" rows="1" id="typefilter" options="Movie,Series"/>
-                    <Filter name="Status" selected="All" radio rows="1" id="statusfilter" options="All,Finished Airing,Currently Airing"/>
-                    <Filter name="Language" rows="1" id="languagefilter" options="Sub,Dub"/>
-                    <Filter name="Sort" selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date"/>
+            <Head>
+                <meta property="og:title" content="6Anime - Search" />
+                <meta
+                    property="og:description"
+                    content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
+                />
+                <meta
+                    name="keywords"
+                    content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
+                />
+                <meta
+                    name="description"
+                    content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
+                />
+            </Head>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+            <div className='anime-list'>
+                <div className='anime-list-header'>
+                    <div className='anime-list-header-filters'>
+                        <Filter name="Genre" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
+                        <Filter name="Country" rows="1" id="countryfilter" options="" />
+                        <Filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
+                        <Filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
+                        <Filter name="Type" rows="1" id="typefilter" options="Movie,Series" />
+                        <Filter name="Status" selected="All" radio rows="1" id="statusfilter" options="All,Finished Airing,Currently Airing" />
+                        <Filter name="Language" rows="1" id="languagefilter" options="Sub,Dub" />
+                        <Filter name="Sort" selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date" />
+                    </div>
+                    <div className='anime-list-header-search'>
+                        <input id="searchanimeinput" type='text' placeholder='Search...' />
+                        <button id="searchanimebutton" type='submit' onClick={search}><i className="fa fa-search" aria-hidden="true"></i> Filter</button>
+                    </div>
                 </div>
-                <div className='anime-list-header-search'>
-                    <input id="searchanimeinput" type='text' placeholder='Search...'/>
-                    <button id="searchanimebutton" type='submit' onClick={search}><i className="fa fa-search" aria-hidden="true"></i> Filter</button>
+                <div className='anime-list-container'>
                 </div>
             </div>
-            <div className='anime-list-container'>
-            </div>
-        </div>
-    </>
+        </>
     );
 }

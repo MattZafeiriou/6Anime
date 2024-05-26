@@ -3,10 +3,8 @@ const fs = require('fs');
 
 const backupPath = 'backups';
 
-function backup()
-{
-    if (!fs.existsSync(backupPath))
-    {
+function backup() {
+    if (!fs.existsSync(backupPath)) {
         fs.mkdirSync(backupPath);
     }
     var exec = require('child_process').exec;

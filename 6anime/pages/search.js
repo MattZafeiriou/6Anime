@@ -7,7 +7,7 @@ export default function Search({ data }) {
     useEffect(() => {
         document.getElementById("searchanimebutton").click();
     }, []);
-    let search="";
+    let search = "";
     if (typeof window !== "undefined") {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -15,10 +15,10 @@ export default function Search({ data }) {
     }
     return (
         <>
-        <Head>
-            <title>6Anime - Search: {(search === 'null') ? "" : search}</title>
-        </Head>
-            <AnimeList startInput={search}/>
+            <Head>
+                <title>6Anime - Search: {(search === 'null') ? "" : search}</title>
+            </Head>
+            <AnimeList startInput={search} />
         </>
     );
 }

@@ -1,4 +1,4 @@
-const { META, ANIME} = require('@consumet/extensions');
+const { META, ANIME } = require('@consumet/extensions');
 
 async function getAnimeInfo(id) {
     let anilist = new META.Anilist();
