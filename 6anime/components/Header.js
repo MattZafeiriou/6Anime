@@ -171,45 +171,50 @@ export default function Header() {
     }
 
     const foldersnames = [];
-    useEffect(async () => {
-        // check if user is logged in
-        const token = getCookie('token');
-        if (token) {
-            //alert('You are logged in');
-            document.getElementsByClassName("top_right")[0].innerHTML = '';
-            document.getElementById("loginm").innerHTML = 'Profile';
-            document.getElementById("loginm").parentElement.href = '/profile';
+    useEffect( () => {
+        async function oof () {
+            // check if user is logged in
+            const token = getCookie('token');
+            if (token) {
+                //alert('You are logged in');
+                document.getElementsByClassName("top_right")[0].innerHTML = '';
+                document.getElementById("loginm").innerHTML = 'Profile';
+                document.getElementById("loginm").parentElement.href = '/profile';
 
-            const raDiv = document.getElementsByClassName('top_right')[0];
-            const newDiv = document.createElement('div');
-            raDiv.appendChild(newDiv);
-            // Render the component into the new div
-            const root = createRoot(newDiv);
-            root.render(<Profile />)
+                const raDiv = document.getElementsByClassName('top_right')[0];
+                const newDiv = document.createElement('div');
+                raDiv.appendChild(newDiv);
+                // Render the component into the new div
+                const root = createRoot(newDiv);
+                root.render(<Profile />)
 
 
-            // const base64img = localStorage.getItem('profilepic');
-            // if (base64img)
-            // {
-            //     const res = await fetch(base64img);
-            //     const blob = await res.blob();
-            //     document.getElementById("profilepic").src = URL.createObjectURL(blob);
-            // } else {
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
-            const data = await response.blob();
-            const url = URL.createObjectURL(data);
-            document.getElementById("profilepic").src = url;
+                // const base64img = localStorage.getItem('profilepic');
+                // if (base64img)
+                // {
+                //     const res = await fetch(base64img);
+                //     const blob = await res.blob();
+                //     document.getElementById("profilepic").src = URL.createObjectURL(blob);
+                // } else {
+                const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
+                const data = await response.blob();
+                const url = URL.createObjectURL(data);
+                document.getElementById("profilepic").src = url;
 
-            //     // save to local storage
-            //     const img = convertBlobToBase64(data);
-            //     localStorage.setItem('profilepic', img);
-            // }
-        } else {
-            //alert('You are not logged in');
+                //     // save to local storage
+                //     const img = convertBlobToBase64(data);
+                //     localStorage.setItem('profilepic', img);
+                // }
+            } else {
+                //alert('You are not logged in');
+            }
+
+            onload();
         }
 
-        onload();
+        oof();
     }, []);
+
     return (
         <>
             <div className="top">

@@ -2,7 +2,7 @@ import AnimeList from '../components/AnimeList';
 import { useEffect } from 'react';
 import Head from 'next/head'
 
-export default function Search({ data }) {
+export default function Search() {
 
     useEffect(() => {
         document.getElementById("searchanimebutton").click();
@@ -13,6 +13,7 @@ export default function Search({ data }) {
         const urlParams = new URLSearchParams(queryString);
         search = decodeURI(urlParams.get('search'));
     }
+
     return (
         <>
             <Head>

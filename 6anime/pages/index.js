@@ -76,6 +76,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
     name: data[3].name,
     description: data[3].description
   };
+  console.log("oof")
 
   return (
     <>

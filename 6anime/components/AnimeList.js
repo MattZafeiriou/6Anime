@@ -1,3 +1,4 @@
+'use client'
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import Head from "next/head";
@@ -5,12 +6,16 @@ import Head from "next/head";
 export default function AnimeList({ startInput = "", startOptions = "" }) {
     const proms = { "startInput": startInput, "startOptions": startOptions };
 
+    startInput = (proms.startInput === undefined || proms.startInput === "null") ? "" : proms.startInput;
+
+    if (startInput !== "") {
+        document.querySelector('#searchanimeinput').value = startInput;
+    }
+
     let setCheck = [];
     let filters = {};
     if (proms !== undefined && proms.startOptions !== undefined)
         startOptions = proms.startOptions;
-
-    startInput = (proms.startInput === undefined || proms.startInput === "null") ? "" : proms.startInput;
 
     function search() {
         deleteAllAnime();
@@ -174,29 +179,25 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
     }
 
     useEffect(() => {
-        setCheck.forEach(element => {
-            const el = element.split(" ")[0];
-            document.querySelector('#' + el).checked = true;
-            const button = document.querySelector('#' + element.split(" ")[1] + '_text');
-            const name = el.split("-")[element.split("-").length - 1].replaceAll("-", " ");
-            button.innerHTML = name;
-        });
-
-        const start = startOptions.split(",");
-        start.forEach(element => {
-            document.querySelector('#anime-list-filter-item-' + element.replaceAll(' ', '-')).click();
-        });
-
-        if (startInput !== undefined) {
-            document.querySelector('#searchanimeinput').value = startInput;
-        }
-
-        document.getElementById("searchanimeinput").addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("searchanimebutton").click();
-            }
-        });
+            const url = window.location.href;
+            const urlParams = new URLSearchParams(url.split('?')[1]);
+            const genre = urlParams.get('genre') === null ? "" : urlParams.get('genre');
+            const country = urlParams.get('country') === null ? "" : urlParams.get('country');
+            const season = urlParams.get('season') === null ? "" : urlParams.get('season');
+            const year = urlParams.get('year') === null ? "" : urlParams.get('year');
+            const type = urlParams.get('type') === null ? "" : urlParams.get('type');
+            const status = urlParams.get('status') === null ? "" : urlParams.get('status');
+            const language = urlParams.get('language') === null ? "" : urlParams.get('language');
+            const sort = urlParams.get('sort') === null ? "" : urlParams.get('sort');
+    
+            addFilter("Genre", "genrefilter", genre);
+            filters["Country"] = country;
+            filters["Season"] = season;
+            filters["Year"] = year;
+            filters["Type"] = type;
+            filters["Status"] = status;
+            filters["Language"] = language;
+            filters["Sort"] = sort;
     }, []);
 
     return (
@@ -216,11 +217,10 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                     content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
                 />
             </Head>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
             <div className='anime-list'>
                 <div className='anime-list-header'>
                     <div className='anime-list-header-filters'>
-                        <Filter name="Genre" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
+                        <Filter name="Genre" selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
                         <Filter name="Country" rows="1" id="countryfilter" options="" />
                         <Filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
                         <Filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
