@@ -53,9 +53,9 @@ export default function Donate({ data }) {
         <p>6Anime is a free service that relies on ads to keep the site running. If you enjoy the site, please consider supporting us by disabling your adblocker or donating to us. We greatly appreciate your support!</p>
         <h3>Donation methods</h3>
         <div className='paymentMethods'>
-          <PaymentMethod href="https://www.patreon.com/6AnimeOfficial" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Patreon_logo.svg/2048px-Patreon_logo.svg.png" text="Donate through Patreon" />
-          <PaymentMethod href="" onClick={addBitcoinPopup} src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" text="Donate with Bitcoin" />
-          <PaymentMethod href="" onClick={addEthereumPopup} src="https://cryptologos.cc/logos/ethereum-eth-logo.png" text="Donate with Ethereum" />
+          <PaymentMethod href="https://www.patreon.com/6AnimeOfficial" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Patreon_logo.svg/2048px-Patreon_logo.svg.png" text="Patreon" />
+          <PaymentMethod href="" onClick={addBitcoinPopup} src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" text="Bitcoin" />
+          <PaymentMethod href="" onClick={addEthereumPopup} src="https://cryptologos.cc/logos/ethereum-eth-logo.png" text="Ethereum" />
         </div>
       </div>
       <div id="bitcoinaddress" className='popupdonate'>

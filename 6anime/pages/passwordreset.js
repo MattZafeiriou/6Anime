@@ -9,15 +9,12 @@ export default function Login({ data }) {
   // Change the background color of the body
   useEffect(() => {
     document.body.classList.add('loginbg');
-    document.getElementsByClassName('login_button')[0].children[0].innerHTML = 'Register';
-    document.getElementsByClassName('login_button')[0].parentElement.href = '/register';
   });
 
   function submit(e) {
     e.preventDefault();
     let pass = true;
     let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
     let emailError = document.getElementById("emailError");
 
     document.getElementById("unexpectedError").classList.add("hidden");
@@ -36,19 +33,17 @@ export default function Login({ data }) {
     }
 
     if (pass) {
-      fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/login', {
+      fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/passwordreset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email, password: password })
+        body: JSON.stringify({ email: email })
       }).then(res => {
         if (res.ok) {
-          window.location.href = "/";
+          window.location.href = "/login";
         } else {
-          document.getElementById("email").classList.add("is-invalid");
-          document.getElementById("password").classList.add("is-invalid");
-          document.getElementById("invalidCredentials").classList.remove("hidden");
+          document.getElementById("unexpectedError").classList.remove("hidden");
         }
       })
     }
@@ -58,17 +53,11 @@ export default function Login({ data }) {
     let email = e.target.value;
     let emailError = document.getElementById("emailError");
     document.getElementById("email").classList.remove("is-invalid");
-    document.getElementById("takenEmail").classList.add("hidden");
     if (!EmailValidator.validate(email)) {
       emailError.classList.remove("hidden");
     } else {
       emailError.classList.add("hidden");
     }
-  }
-
-  function passwordInput(e) {
-    document.getElementById("password").classList.remove("is-invalid");
-    document.getElementById("repeatpassword").classList.remove("is-invalid");
   }
 
   function onVerifyCaptcha(token) {
@@ -79,37 +68,20 @@ export default function Login({ data }) {
   return (
     <>
       <Head>
-        <title>{`6Anime - Login`}</title>
+        <title>{`6Anime - Reset Password`}</title>
       </Head>
       <div className="loginmain">
         <form>
-          <h1 id="login_h"><span className='minW'><b>Log In</b></span></h1>
+          <h1 id="login_h"><span className='minW'><b>Reset Your Password</b></span></h1>
           <div className="form-group">
             <label for="email">Email address</label>
             <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="Enter email" required />
             <div id="emailError" className='text-danger hidden'>Please enter a valid email address.</div>
           </div>
-          <div className="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder="Enter password" required />
-          </div>
-          <div className="form-group">
-            <div className="custom-control custom-checkbox">
-              <input type="checkbox" className="custom-control-input" id="rememberme" />
-              <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">Remember me</label>
-            </div>
-          </div>
           <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
           <div id="completecaptcha" className='text-danger hidden'>Please complete the captcha.</div>
-          <div id="invalidCredentials" className='text-danger hidden'>The email or password is incorrect.</div>
           <div id="unexpectedError" className='text-danger hidden'>An unexpected error occurred. Please try again later.</div>
-          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Login</button>
-          <p className="forgot-password text-right">
-            Forgot <a href="/passwordreset">password?</a>
-          </p>
-          <p className="register text-right">
-            Don't have an account? <a href="/register">Register</a>
-          </p>
+          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Reset Password</button>
         </form>
       </div>
     </>

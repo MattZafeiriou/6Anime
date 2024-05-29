@@ -15,6 +15,7 @@ const sendform = require('../../lib/routes/sendForm');
 const login = require('../../lib/routes/Auth/login');
 const verify = require('../../lib/routes/Auth/verify');
 const register = require('../../lib/routes/Auth/register');
+const passwordreset = require('../../lib/routes/Auth/passwordreset');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
@@ -30,6 +31,12 @@ const cors_ = cors({
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 10, // limit each IP to 10 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+});
+
+const viewlimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 1, // limit each IP to 10 requests per windowMs
   message: 'Too many requests from this IP, please try again later.',
 });
 
@@ -126,6 +133,7 @@ export default async function handler(req, res) {
     } else if (request === 'getid') {
       getid(req, res);
     } else if (request === 'addview') {
+      await runMiddleware(req, res, viewlimiter)
       addview(req, res);
     } else if (request === 'getprofilepic') {
       getprofilepic(req, res);
@@ -148,6 +156,9 @@ export default async function handler(req, res) {
     } else if (request === 'verify') {
       await runMiddleware(req, res, limiter)
       verify(req, res);
+    } else if (request === 'passwordreset') {
+      await runMiddleware(req, res, limiter)
+      passwordreset(req, res);
     } else {
       res.status(404).send('API route not found.');
     }

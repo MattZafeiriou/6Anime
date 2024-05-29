@@ -68,6 +68,14 @@
     opacity: 1;
 }
 
+@media only screen and (max-height: 800px) {
+    .trending_card img {
+        width: 200px;
+        height: 300px;
+    }
+
+}
+
 @media only screen and (max-width: 800px) {
     .trending_card {
         margin-right: 0;

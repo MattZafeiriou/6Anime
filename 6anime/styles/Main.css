@@ -27,6 +27,14 @@
     margin-right: 60%;
     margin-bottom: 10vh;
 }
+
+@media screen and (max-height: 800px) {
+    .carouselCaption {
+        margin-right: 0px;
+        margin-bottom: 0px !important;
+    }
+}
+
 .carouselCaption h1 {
     font-size: 3em;
     font-weight: 600;

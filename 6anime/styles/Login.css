@@ -90,6 +90,10 @@
     background-color: var(--mainhover);
 }
 
+.loginmain button:active {
+    background-color: var(--maindark) !important;
+}
+
 .loginmain input[type="checkbox"] {
     position: relative;
     cursor: pointer;
