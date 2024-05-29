@@ -107,3 +107,15 @@
     background-color: rgb(50, 50, 50);
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
+
+#invalidtoken {
+    color: red;
+    font-size: 1.5em;
+    margin-top: 2em;
+}
+
+#passwordresetsuccess {
+    color: white;
+    font-size: 1.5em;
+    margin-top: 2em;
+}

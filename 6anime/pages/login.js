@@ -58,7 +58,6 @@ export default function Login({ data }) {
     let email = e.target.value;
     let emailError = document.getElementById("emailError");
     document.getElementById("email").classList.remove("is-invalid");
-    document.getElementById("takenEmail").classList.add("hidden");
     if (!EmailValidator.validate(email)) {
       emailError.classList.remove("hidden");
     } else {
@@ -68,7 +67,6 @@ export default function Login({ data }) {
 
   function passwordInput(e) {
     document.getElementById("password").classList.remove("is-invalid");
-    document.getElementById("repeatpassword").classList.remove("is-invalid");
   }
 
   function onVerifyCaptcha(token) {
