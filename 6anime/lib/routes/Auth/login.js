@@ -33,8 +33,8 @@ function post(req, res, next) {
 
             // Password is correct
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-            setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true, domain: "*.6anime.tv" })
-            res.status(200).send("Login successful");
+            //setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true, domain: "*.6anime.tv" })
+            res.status(200).send(token);
         });
     });
 

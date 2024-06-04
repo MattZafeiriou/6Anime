@@ -114,7 +114,10 @@ export default function Login({ data }) {
         body: JSON.stringify({ email: email, password: password, username: username })
       }).then(res => {
         if (res.ok) {
-          window.location.href = "/";
+          res.text().then(token => {
+            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=Lax; Secure; domain=.6anime.tv`;
+            window.location.href = "/";
+          });
         } else {
           res.text().then(text => {
             if (text === 'Account with this username already exists.') {

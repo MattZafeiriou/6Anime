@@ -44,7 +44,10 @@ export default function Login({ data }) {
         body: JSON.stringify({ email: email, password: password })
       }).then(res => {
         if (res.ok) {
-          window.location.href = "/";
+          res.text().then(token => {
+            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=Lax; Secure; domain=.6anime.tv`;
+            window.location.href = "/";
+          });
         } else {
           document.getElementById("email").classList.add("is-invalid");
           document.getElementById("password").classList.add("is-invalid");
@@ -83,12 +86,12 @@ export default function Login({ data }) {
         <form>
           <h1 id="login_h"><span className='minW'><b>Log In</b></span></h1>
           <div className="form-group">
-            <label for="email">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="Enter email" required />
             <div id="emailError" className='text-danger hidden'>Please enter a valid email address.</div>
           </div>
           <div className="form-group">
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder="Enter password" required />
           </div>
           <div className="form-group">

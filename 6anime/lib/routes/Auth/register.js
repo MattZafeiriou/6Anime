@@ -74,9 +74,9 @@ function post(req, res, next) {
                     EmailService.sendVerifyEmail(email, verification_code);
 
                     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-                    setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true, domain: ".6anime.tv" })
+                    //setCookie("token", token, { req, res, maxAge: 60 * 60 * 24 * 7, httpOnly: false, secure: true, domain: ".6anime.tv" })
 
-                    res.status(200).send("Account created successfully");
+                    res.status(200).send(token);
                 });
             });
         });
