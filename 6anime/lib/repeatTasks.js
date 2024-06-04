@@ -2,7 +2,8 @@ const schedule = require('node-schedule')
 const sqlHandler = require('./sqlHandler')
 const backupHandler = require("./utils/backupHandler");
 const getAnimeInfo = require('./utils/getAnimeInfo.js');
-
+const addvideo = require('./routes/addvideo.js');
+import { META } from "@consumet/extensions"
 /*
     This was done with the help of https://crontab.guru
 */
@@ -78,8 +79,10 @@ function repeatDaily() {
 
 // This task repeats every Monday at 00:00
 function repeatWeekly() {
+  autoAddAnime();
   schedule.scheduleJob('0 0 * * 1', async () => {
     // Create a backup of the database
+    autoAddAnime();
     backupHandler.backup();
     console.log('Database backup created');
 
@@ -123,11 +126,6 @@ async function addAnimeToDatabase(anime) {
   });
 }
 
-async function addAnime() {
-  schedule.scheduleJob('0 0/12 * * *', async () => {
-  }) // every 12 hours
-}
-
 async function updateAnime() {
   schedule.scheduleJob('0 0/12 * * *', async () => {
     const results = await getAnimeAiring();
@@ -160,4 +158,43 @@ async function updateAnime() {
   }) // every 12 hours
 }
 
-module.exports = { repeatDaily, repeatWeekly, repeatMonthly, repeatYearly, todayTag, updateAnime };
+async function autoAddAnime() {
+  const anilist = new META.Anilist();
+  const today = new Date();
+  const now = today.getTime().toString().slice(0, -3)
+  const week = 604800;
+  let page = 1;
+  let hasNextPage = true;
+
+  while (hasNextPage){
+    await anilist.fetchAiringSchedule(page, 20, Number(now), Number(now) + week, true).then(data => {
+      hasNextPage = data.hasNextPage;
+      page++;
+
+      const results = data.results;
+      const time = data.airingAt - now;
+      for (let i = 0; i < results.length; i++)
+        {
+          setTimeout(async () => {
+            const anime = results[i];
+            const anime_id = anime.id;
+            const animeInfo = await getAnimeInfo_(anime_id);
+            if (animeInfo === undefined)
+              {
+                addvideo.addAnime(anime_id)
+              } else {
+                const episode = anime.episode;
+                sqlHandler.con.query(`UPDATE Anime SET episodes = ${episode}, update_date = CURRENT_DATE WHERE id = ${animeInfo.id};`, (err, result) => {
+                  if (err) throw err
+                })
+              }
+
+          }, 1000 * (time + 60)); // add 60 seconds to the time
+        }
+    }).catch(e => {
+      console.log(e);
+    });
+  }
+}
+
+module.exports = { repeatDaily, repeatWeekly, repeatMonthly, repeatYearly, todayTag, updateAnime, autoAddAnime };
