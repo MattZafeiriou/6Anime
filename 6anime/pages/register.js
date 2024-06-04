@@ -115,7 +115,7 @@ export default function Login({ data }) {
       }).then(res => {
         if (res.ok) {
           res.text().then(token => {
-            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=Lax; Secure; domain=.6anime.tv`;
+            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=None; Secure; Domain=6anime.tv`;
             window.location.href = "/";
           });
         } else {
