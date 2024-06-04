@@ -147,12 +147,12 @@ export default function Header() {
     }
 
 
-    function Profile() {
+    function Profile(props) {
 
         return (
             <a href="/profile">
                 <div className='profile'>
-                    <img id="profilepic" alt="P" />
+                    <img id="profilepic" alt="P" src={props.src} />
                 </div>
             </a>
         );
@@ -186,25 +186,26 @@ export default function Header() {
                 raDiv.appendChild(newDiv);
                 // Render the component into the new div
                 const root = createRoot(newDiv);
-                root.render(<Profile />)
 
+                const img = sessionStorage.getItem('profilepic');
+                if (img) {
+                    const url = img;
+                    root.render(<Profile src={url} />)
+                } else {
+                    root.render(<Profile />)
+                    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
+                    const data = await response.blob();
+                    const url = URL.createObjectURL(data);
+                    document.getElementById("profilepic").src = url;
 
-                // const base64img = localStorage.getItem('profilepic');
-                // if (base64img)
-                // {
-                //     const res = await fetch(base64img);
-                //     const blob = await res.blob();
-                //     document.getElementById("profilepic").src = URL.createObjectURL(blob);
-                // } else {
-                const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
-                const data = await response.blob();
-                const url = URL.createObjectURL(data);
-                document.getElementById("profilepic").src = url;
-
-                //     // save to local storage
-                //     const img = convertBlobToBase64(data);
-                //     localStorage.setItem('profilepic', img);
-                // }
+                    // save image to local storage
+                    const reader = new FileReader();
+                    reader.readAsDataURL(data);
+                    reader.onloadend = function () {
+                        const base64data = reader.result;
+                        sessionStorage.setItem('profilepic', base64data);
+                    }
+                }
             } else {
                 //alert('You are not logged in');
             }
@@ -214,7 +215,6 @@ export default function Header() {
 
         oof();
     }, []);
-
     return (
         <>
             <div className="top">

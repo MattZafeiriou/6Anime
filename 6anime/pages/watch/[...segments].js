@@ -443,8 +443,8 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
     return (
         <>
             <Head>
-                <title>{`6Anime - ${title} - Episode ${episode}`}</title>
-                <meta property="og:title" content={`6Anime - Watch ${title} - Episode ${episode}`} />
+                {JSON.parse(animeinfo).type == "Movie" ? <title>{`6Anime - ${title}`}</title> : <title>{`6Anime - ${title} - Episode ${episode}`}</title>}
+                {JSON.parse(animeinfo).type == "Movie" ? <meta property="og:title" content={`6Anime - Watch ${title}`} /> : <meta property="og:title" content={`6Anime - Watch ${title} - Episode ${episode}`} />}
                 <meta
                     property="og:description"
                     content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
@@ -461,8 +461,8 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
             <div className='playerdiv'>
                 <div className='playerr'>
                     <div className='title'>
-                        <h3 style={{ display: 'flex' }} id='title'>{title} - Episode {episode}</h3>
-                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href={type == "Movie" ? "/movies" : "/series"}>{type}</a> <span>&#62;</span> <span id="animename">{title}</span></h5>
+                        {JSON.parse(animeinfo).type == "Movie" ? <h3 style={{ display: 'flex' }} id='title'>{title}</h3> : <h3 style={{ display: 'flex' }} id='title'>{title} - Episode {episode}</h3>}
+                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href={type == "Movie" ? "/movies" : "/series"}>{type == "Movie" ? "Movie" : "Series"}</a> <span>&#62;</span> <span id="animename">{title}</span></h5>
                     </div>
                     {/* Player Section starts here */}
                     <div className="main_player">

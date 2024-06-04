@@ -78,7 +78,7 @@
     width: 100%;
     height: 80vh;
     object-fit: cover;
-    filter: brightness(40%);
+    filter: brightness(20%);
 }
 
 .carousel-item {
