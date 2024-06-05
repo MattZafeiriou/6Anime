@@ -221,7 +221,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 <div className='anime-list-header'>
                     <div className='anime-list-header-filters'>
                         <Filter name="Genre" selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
-                        <Filter name="Country" rows="1" id="countryfilter" options="" />
+                        <Filter name="Country" rows="1" id="countryfilter" options="JP,KO,CH" />
                         <Filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
                         <Filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
                         <Filter name="Type" rows="1" id="typefilter" options="Movie,Series" />

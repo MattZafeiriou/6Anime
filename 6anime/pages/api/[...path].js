@@ -144,7 +144,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'POST') {
     if (request === 'addvideo') {
-      addvideo(req, res);
+      addvideo.post(req, res);
     } else if (request === "sendform") {
       sendform(req, res);
     } else if (request === 'login') {

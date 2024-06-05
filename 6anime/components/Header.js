@@ -52,7 +52,7 @@ export default function Header() {
     }
 
     function sendSearchTop(string) {
-        var url = "/search?chars=" + encode_utf8(string);
+        var url = "/search?chars=" + encode_utf8(string) + "&limit=7";
         var data = "";
 
         fetch(process.env.NEXT_PUBLIC_API_URL + url)
@@ -156,18 +156,6 @@ export default function Header() {
                 </div>
             </a>
         );
-    }
-
-    async function convertBlobToBase64(blob) {
-        var reader = new FileReader();
-        let res;
-        reader.readAsDataURL(blob);
-        reader.onloadend = function () {
-            var base64data = reader.result;
-            res = base64data;
-            return;
-        }
-        return res;
     }
 
     const foldersnames = [];
