@@ -168,12 +168,11 @@ function addAnime(id, res = null) {
                 language = language.charAt(0).toUpperCase() + language.slice(1);
                 const country = data.countryOfOrigin;
                 const api_id = +data.id;
-                if (data.episodes.length == 0) {
-                    if (res)
-                    res.status(404).send("Anime not found");
-                    return;
-                }
-                const api_episode = data.episodes[0].id.replace("-episode-1", "");
+                let api_episode;
+                if (data.episodes.length == 0)
+                    api_episode = id;
+                else
+                    api_episode = data.episodes[0].id.replace("-episode-1", "");
 
                 sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode], function (err, result, fields) {
                     if (err) throw err;
