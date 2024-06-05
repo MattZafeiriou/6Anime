@@ -25,7 +25,7 @@ function WatchButton(props) {
 function CarouselImg(props) {
   return (
     <>
-      <Image id="top_img" src={props.srcImg} alt="Carousel Image" fluid />
+      <Image id="top_img" loading='lazy' src={props.srcImg} alt="Carousel Image" fluid />
       <Carousel.Caption>
         <div className='carouselCaption'>
           <h1>{props.name}<loading /></h1>

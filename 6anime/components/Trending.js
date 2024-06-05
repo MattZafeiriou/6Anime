@@ -36,7 +36,7 @@ export default function Trending({ id, data, title, link }) {
                         }} className="trending_card_addtolist">
                             <h3>Add to my list</h3>
                         </button>
-                        <img id="img" src={props.img} alt='anime poster' />
+                        <img id="img" loading="lazy" src={props.img} alt='anime poster' />
                     </a>
                 </div>
                 <div className='trending_card_info'>
@@ -178,7 +178,6 @@ export default function Trending({ id, data, title, link }) {
 
     return (
         <>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></link>
             <div className='trending_page'>
                 <div className='trending_header'>
                     <h1>{title}</h1>
