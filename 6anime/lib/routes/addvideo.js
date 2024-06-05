@@ -1,14 +1,17 @@
 var sqlHandler = require('./../sqlHandler.js');
 const getAnimeInfo = require('./../utils/getAnimeInfo.js');
 
-function addAnime(id) {
+function addAnime(id, res = null) {
     sqlHandler.con.query("SELECT * FROM Anime WHERE api_id = ?;", [id], async function (err, result, fields) {
         if (err) throw err;
         if (result.length > 0) {
-            res.status(409).send("Anime already exists");
+            if (res)
+                res.status(409).send("Anime already exists");
+            return;
         } else {
             const data = await getAnimeInfo(id);
             if (data == null) {
+                if (res)
                 res.status(404).send("Anime not found");
                 return;
             }
@@ -34,6 +37,7 @@ function addAnime(id) {
                 sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name = ?;", [folder_name], async function (err, result, fields) {
                     if (err) throw err;
                     if (result.length > 0) {
+                        if (res)
                         res.status(409).send("Anime already exists");
                         exists = true;
                         return;
@@ -74,6 +78,7 @@ function addAnime(id) {
                     const api_episode = data.id;
                     sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode], function (err, result, fields) {
                         if (err) throw err;
+                        if (res)
                         res.status(200).send("Anime added successfully");
 
                         // Set views to 0
@@ -164,6 +169,7 @@ function addAnime(id) {
                 const country = data.countryOfOrigin;
                 const api_id = +data.id;
                 if (data.episodes.length == 0) {
+                    if (res)
                     res.status(404).send("Anime not found");
                     return;
                 }
@@ -171,6 +177,7 @@ function addAnime(id) {
 
                 sqlHandler.con.query("INSERT INTO Anime(name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode, update_date, added_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE);", [name, status, folder_name, nicknames, description, studios, genre, episodes, duration, premiered, other_season_folders, other_season_names, type, season, rating, poster, banner, language, country, api_id, api_episode], function (err, result, fields) {
                     if (err) throw err;
+                    if (res)
                     res.status(200).send("Anime added successfully");
 
                     // Set views to 0
@@ -188,7 +195,7 @@ function post(req, res, next) {
     const body = req.body;
     const id = body.id;
 
-    addAnime(id);
+    addAnime(id, res);
 };
 
 module.exports = {post, addAnime};

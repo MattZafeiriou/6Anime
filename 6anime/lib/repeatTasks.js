@@ -17,6 +17,15 @@ function getAnimeInfo_(anime_id) {
   });
 }
 
+function getAnimeInfoByApiId(anime_id) {
+  return new Promise((resolve, reject) => {
+    sqlHandler.con.query(`SELECT * FROM Anime WHERE api_id = ${anime_id};`, (err, result) => {
+      if (err) reject(err);
+      resolve(result[0]);
+    });
+  });
+}
+
 function getTodayViews() {
   return new Promise((resolve, reject) => {
     sqlHandler.con.query('SELECT * FROM Views WHERE today_views > 0;', (err, results) => {
@@ -177,7 +186,7 @@ async function autoAddAnime(page = 1) {
       setTimeout(async () => {
         const anime = results[i];
         const anime_id = anime.id;
-        const animeInfo = await getAnimeInfo_(anime_id);
+        const animeInfo = await getAnimeInfoByApiId(anime_id);
         if (animeInfo === undefined) {
           addvideo.addAnime(anime_id)
         } else {
