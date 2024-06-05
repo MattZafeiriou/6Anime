@@ -105,11 +105,10 @@ body {
 }
 
 .left_list {
-    transition-duration: .2s;
+    transition-duration: .1s;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     color: #EDECE5;
-    text-decoration: none;
     padding: 4px;
     margin: 10px;
     margin-top: 25px;
