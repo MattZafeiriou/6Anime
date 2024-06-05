@@ -9,6 +9,18 @@ export default function RandomVideo({ data }) {
         }
         sectionTop = document.getElementsByClassName("random_video_trailer")[0].offsetTop;
         if (windowBottom > sectionTop) {
+            if (getCookie("featured") === null) {
+                const url = "/getfeatured"
+                fetch(process.env.NEXT_PUBLIC_API_URL + url)
+                    .then(response => response.json())
+                    .then(data => {
+                        setRandomVideo(data);
+                        setCookie("featured", JSON.stringify(data), 3);
+                    })
+            } else {
+                const data = JSON.parse(getCookie("featured"));
+                setRandomVideo(data);
+            }
             document.getElementsByClassName("random_video_trailer")[0].classList.add("random_video_trailer_shown");
             document.getElementsByClassName("random_video_trailer_info")[0].classList.add("random_video_trailer_info_shown");
         }
@@ -61,18 +73,6 @@ export default function RandomVideo({ data }) {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        if (getCookie("featured") === null) {
-            const url = "/getfeatured"
-            fetch(process.env.NEXT_PUBLIC_API_URL + url)
-                .then(response => response.json())
-                .then(data => {
-                    setRandomVideo(data);
-                    setCookie("featured", JSON.stringify(data), 3);
-                })
-        } else {
-            const data = JSON.parse(getCookie("featured"));
-            setRandomVideo(data);
-        }
     }, []);
 
     return (
