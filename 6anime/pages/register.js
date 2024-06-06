@@ -24,6 +24,7 @@ export default function Login({ data }) {
     let passwordMaxLengthError = document.getElementById("passwordMaxLengthError");
     let passwordCapitalError = document.getElementById("passwordCapitalError");
     let repeatPassword = document.getElementById("repeatpassword").value;
+    let rememberme = document.getElementById("rememberme").checked;
 
     document.getElementById("unexpectedError").classList.add("hidden");
 
@@ -115,7 +116,7 @@ export default function Login({ data }) {
       }).then(res => {
         if (res.ok) {
           res.text().then(token => {
-            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=None; Secure; Domain=6anime.tv`;
+            document.cookie = `token=${token}; path=/; ` + (rememberme ? `max-age=604800;` : ``) + ` SameSite=None; Secure; Domain=6anime.tv`;
             window.location.href = "/";
           });
         } else {

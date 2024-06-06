@@ -1,0 +1,10 @@
+.profilesection {
+    width: 90vw;
+    margin-top: 2em;
+    margin-left: 5vw;
+    min-height: 70vh;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}

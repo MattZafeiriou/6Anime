@@ -19,6 +19,7 @@ export default function Login({ data }) {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let emailError = document.getElementById("emailError");
+    let rememberme = document.getElementById("rememberme").checked;
 
     document.getElementById("unexpectedError").classList.add("hidden");
 
@@ -45,7 +46,7 @@ export default function Login({ data }) {
       }).then(res => {
         if (res.ok) {
           res.text().then(token => {
-            document.cookie = `token=${token}; path=/; max-age=604800; SameSite=None; Secure; Domain=6anime.tv`;
+            document.cookie = `token=${token}; path=/; ` + (rememberme ? `max-age=604800;` : ``) + ` SameSite=None; Secure; Domain=6anime.tv`;
             window.location.href = "/";
           });
         } else {

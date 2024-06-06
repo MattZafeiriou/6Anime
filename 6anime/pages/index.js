@@ -81,18 +81,18 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
     <>
       <Head>
         <title>6Anime - Watch free anime</title>
-        <meta property="og:title" content="6Anime - Watch over 1000+ anime for free" />
+        <meta property="og:title" content="6Anime - Watch free anime" />
         <meta
           property="og:description"
-          content="6Anime: Watch free anime online. No virus, no ads, no hassle. Just pure anime streaming. Enjoy free, competitive streaming with access to any anime you desire."
+          content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
         />
         <meta
           name="description"
-          content="6Anime: Watch free anime online. No virus, no ads, no hassle. Just pure anime streaming. Enjoy free, competitive streaming with access to any anime you desire."
+          content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
         />
         <meta
           name="keywords"
-          content="6anime, 9anime, anime, 6 anime, naruto, one piece, watch anime, safe, no ads, free anime, streaming, 6anime.tv, 9anime.tv, aniwave, animeflix, animepahe, animekisa, animeheaven, animefreak, animeultima, animevibe, animefever, animedao, animeflv, animeblix, animebros, netflix, disney plus"
+          content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
         />
       </Head>
       <div className='main_page'>
