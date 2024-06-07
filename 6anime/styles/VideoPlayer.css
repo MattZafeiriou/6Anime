@@ -41,10 +41,10 @@
     background-color: var(--main);
     border-radius: 50%;
     transition: 0.1s ease-in-out;
-    opacity: .8;
+    opacity: .9;
 }
 
-.play-button h1 {
+.play-button h5 {
     font-size: 1.2em;
     margin-left: 4px;
     margin-top: 7px;
@@ -52,7 +52,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .play-button h1 {
+    .play-button h5 {
         margin-left: .1em;
         margin-top: .6em;
     }

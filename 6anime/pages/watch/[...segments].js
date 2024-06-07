@@ -33,7 +33,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                     />
                 </Head>
                 <div>
-                    <h1>loading...</h1>
+                    <h1>{oof2}</h1>
                     <div className='related_anime_del'>
                         {other_season_ids.map((item, index) => (
                             <a href={"/watch/" + item}>{item}</a>

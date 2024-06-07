@@ -348,7 +348,7 @@ export default function VideoPlayer({ banner }) {
                     cooldownToHide();
                 }}>
                 <div className='play-button'>
-                    <h1><i className="fa-solid fa-play"></i></h1>
+                    <h5><i className="fa-solid fa-play"></i></h5>
                 </div>
                 <div className="forward-div">
                     <div className="forward-icon">5s <i className="fa-solid fa-forward fa-beat-fade"></i>
