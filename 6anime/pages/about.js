@@ -21,29 +21,26 @@ export default function About({ data }) {
       </Head>
       <div className="aboutmain">
         <h1>About Us</h1>
+        <p>6Anime is an anime streaming service that is safe and easy to use. It provides a wide range of anime series, movies, and OVAs such as Naruto, One Piece, Dragon Ball, Attack on Titan, My Hero Academia, and many more. 6Anime is a free website that allows you to watch anime without any restrictions. You can watch anime on 6Anime without creating an account. 6Anime is the best place to watch anime online for free. We update our website regularly with the latest anime series and movies. You can watch anime on 6Anime on any device, including your PC, laptop, tablet, and smartphone. 6Anime is the ultimate anime destination for all anime lovers. Enjoy free, competitive streaming with access to any anime you desire.</p>
         <br />
-        <p>6Anime is a free service that provides a platform for users to watch Anime series and movies. We provide a wide range of Anime series and movies for free. We do not own any of the content on this website, all of the content is owned by their respective owners.</p>
-        <p>Our goal is to provide a free and easy way to watch Anime series and movies. We are constantly updating our website with new content to provide the best experience for our users.</p>
-        <p>If you have any questions or concerns, please feel free to contact us through our <a href='/contact'>contact page</a>.</p>
-        <br />
-        <h1>Frequently Asked Questions</h1>
+        <h2>Frequently Asked Questions</h2>
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>What is the purpose of this website?</Accordion.Header>
+            <Accordion.Header>Is 6Anime.tv safe to use?</Accordion.Header>
             <Accordion.Body>
-              The purpose of this website is to provide a free and easy way to watch Anime series and movies. We do not own any of the content on this website, all of the content is owned by their respective owners.
+              Yes, 6Anime.tv is a safe website. It does not contain any malware or viruses. You can watch anime on 6Anime without any worries.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
-            <Accordion.Header>How do I watch Anime on this website?</Accordion.Header>
+            <Accordion.Header>Does 6Anime.tv have advertisemenets?</Accordion.Header>
             <Accordion.Body>
-              To watch Anime on this website, simply search for the Anime series or movie you want to watch and click on the episode or movie you want to watch. You can also browse through our collection of Anime series and movies to find something to watch.
+              No, 6Anime.tv does not have any advertisements. You can watch anime on 6Anime without any interruptions.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
-            <Accordion.Header>Is this website free to use?</Accordion.Header>
+            <Accordion.Header>What anime can I watch on 6Anime.tv?</Accordion.Header>
             <Accordion.Body>
-              Yes, this website is completely free to use. We do not charge any fees for watching Anime on this website.
+              You can watch a wide range of anime series, movies, and OVAs on 6Anime.tv. Some of the popular anime series available on 6Anime.tv include Naruto, One Piece, Dragon Ball, Attack on Titan, My Hero Academia, and many more.
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
@@ -53,9 +50,9 @@ export default function About({ data }) {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="4">
-            <Accordion.Header>How do I contact the website admin?</Accordion.Header>
+            <Accordion.Header>Why should I prefer 6Anime.tv?</Accordion.Header>
             <Accordion.Body>
-              If you have any questions or concerns, please feel free to contact us through our <a href='/contact'>contact page</a>.
+              6Anime.tv is a website that has no advertisements, it is safe to use, and you can watch a wide range of anime series, movies, and OVAs on this website. You can watch anime on 6Anime.tv without any restrictions. 6Anime.tv is the best place to watch anime online for free.
             </Accordion.Body>
           </Accordion.Item>
 
