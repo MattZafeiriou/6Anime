@@ -203,14 +203,11 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
     return (
         <>
             <Head>
+                <title>6Anime - Search</title>
                 <meta property="og:title" content="6Anime - Search" />
                 <meta
                     property="og:description"
                     content="6Anime: Search any anime you want. Over 10000s of anime available for free streaming."
-                />
-                <meta
-                    name="keywords"
-                    content="anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english"
                 />
                 <meta
                     name="description"

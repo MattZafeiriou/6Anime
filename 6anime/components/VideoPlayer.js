@@ -336,7 +336,6 @@ export default function VideoPlayer({ banner }) {
 
     return (
         <>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></link>
             <div className="video-player" onMouseEnter={() => {
                 const player = document.getElementsByClassName('video-player')[0];
                 if (!player.paused) {

@@ -71,6 +71,10 @@ export default function App({ Component, pageProps }) {
         <meta name="theme-color" content="#9b2727" />
         <meta property="og:image" content="/logo.png" />
         <link href="/manifest.json" rel="manifest" />
+        <meta
+          name="keywords"
+          content="anime, free anime, attack on titan, naruto, one piece, 6anime.tv, 6anime, hd anime, watch anime, movies, series"
+        />
       </Head>
 
       <div className='mainpage'>

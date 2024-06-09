@@ -21,7 +21,6 @@ textarea:focus, input:focus{
 }
 
 body {
-  /* background-image: url("test-background.jpg"); */
   background: rgb(25,7,7);
   background: linear-gradient(180deg, var(--background) 0vh, var(--main) 50vh, var(--background) 95vh);
   overflow-x: hidden;
