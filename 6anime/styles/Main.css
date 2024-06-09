@@ -35,9 +35,9 @@
     }
 }
 
-.carouselCaption h1 {
+.carouselCaption h2 {
     font-size: 3em;
-    font-weight: 600;
+    font-weight: 400;
     color: white;
     font-family: 'Roboto', sans-serif;
 }
@@ -96,7 +96,7 @@
         padding: 15px 30px;
         margin-top: 0em;
     }
-    .carouselCaption h1 {
+    .carouselCaption h2 {
         font-size: 2em;
     }
     .carouselCaption h3 {
@@ -125,7 +125,7 @@
         padding: 15px 30px;
         margin-top: 0em;
     }
-    .carouselCaption h1 {
+    .carouselCaption h2 {
         font-size: 1.5em;
     }
     .carouselCaption h3 {

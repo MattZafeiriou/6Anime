@@ -28,7 +28,7 @@ function CarouselImg(props) {
       <Image id="top_img" loading='lazy' src={props.srcImg} alt="Carousel Image" fluid />
       <Carousel.Caption>
         <div className='carouselCaption'>
-          <h1>{props.name}<loading /></h1>
+          <h2>{props.name}<loading /></h2>
           <h3>{props.description}<loading /></h3>
           <div className='anime_tags'>
             <Tag name={props.tag1} />
@@ -96,6 +96,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
         />
       </Head>
       <div className='main_page'>
+        <h1 style={{display: 'none'}}>6Anime.tv Main Page</h1>
         <div className='main_page_content'>
           <Carousel className='carouselItems'>
             <Carousel.Item>
@@ -109,7 +110,6 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
             </Carousel.Item>
           </Carousel>
         </div>
-
         <div className='main_page_sponsor'>
           <Sponsored />
         </div>

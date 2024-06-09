@@ -79,14 +79,14 @@ export default function RandomVideo({ data }) {
         <>
             <div className='random_video'>
                 <span className='random_video_span' />
-                <h1>Don't know what to watch?</h1>
+                <h2>Don't know what to watch?</h2>
                 <h3>Let us help you!</h3>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
                         <iframe id="random_video_trailer" src="" title="" allowFullScreen></iframe>
                     </div>
                     <div className='random_video_trailer_info'>
-                        <h1 className='random_video_trailer_title'></h1>
+                        <h2 className='random_video_trailer_title'></h2>
                         <p className='random_video_trailer_desc'></p>
                         <div className='random_video_trailer_tags'>
                             <a id="tag1link" href="/search?genre=">

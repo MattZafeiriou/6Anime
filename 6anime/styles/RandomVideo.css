@@ -2,7 +2,7 @@
     margin-top: 3em;
 }
 
-.random_video h1 {
+.random_video h2 {
     transition-duration: .5s;
     font-size: 2em;
     font-weight: 600;
@@ -28,7 +28,7 @@
     opacity: 0;
 }
 
-.video_headtitle_shown h1 {
+.video_headtitle_shown h2 {
     opacity: 1 !important;
 }
 

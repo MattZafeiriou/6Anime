@@ -53,7 +53,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
         root.render(
             <div className='anime-list-item'>
                 <a href={"/watch/" + folder_name}>
-                    <img id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g' />
+                    <img alt={`Watch ${folder_name} image`} id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g' />
                     <h3 id={'anime-list-item-name-' + id}></h3>
                 </a>
             </div>
@@ -218,6 +218,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 />
             </Head>
             <div className='anime-list'>
+                <h1>Search on 6Anime.tv</h1><hr/>
                 <div className='anime-list-header'>
                     <div className='anime-list-header-filters'>
                         <Filter name="Genre" selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />

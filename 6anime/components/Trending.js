@@ -180,7 +180,7 @@ export default function Trending({ id, data, title, link }) {
         <>
             <div className='trending_page'>
                 <div className='trending_header'>
-                    <h1>{title}</h1>
+                    <h2>{title}</h2>
                     <a href={link}>View all <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={startDragging} onMouseUp={stopDragging} onDragEnd={stopDragging}>
