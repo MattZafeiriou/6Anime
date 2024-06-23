@@ -6,8 +6,16 @@ export default function Profile({ data }) {
     useEffect(() => {
         const img = sessionStorage.getItem('profilepic');
         document.getElementById('profileimg').src = img;
+        if (!img) {
+            fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic')
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('profileimg').src = url;
+                });
+        }
 
-        fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getbackground')
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/getbackground')
         .then(res => res.blob())
         .then(blob => {
             const url = URL.createObjectURL(blob);
@@ -33,7 +41,7 @@ export default function Profile({ data }) {
     return (
         <>
             <div className='profilesection'>
-                <img id="backgroundimg" src='https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630' alt='background profile image' />
+                <img id="backgroundimg" src='' alt='background profile image' />
                 <div className='profile'>
                     <div className="profile_img">
                         <img id="profileimg" src="" alt='profile image' />
