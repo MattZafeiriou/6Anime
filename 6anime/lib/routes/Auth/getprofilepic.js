@@ -5,8 +5,23 @@ import path from 'path'
 
 /* GET folders listing. */
 function get(req, res) {
-    const accountId = getAccountId.getAccountId(req, res);
-    if (!accountId) return res.status(401).send('Unauthorized');
+    let id = req.query.id;
+
+    // check if user is logged in
+    if (!id)
+        id = getAccountId.getAccountId(req, res);
+
+    if (!id) {
+        res.status(400).send('Missing param: id');
+        return;
+    }
+
+    if (isNaN(id)) {
+        res.status(400).send('Invalid param: id');
+        return;
+    }
+
+    const accountId = id;
     sqlHandler.con.query(`SELECT avatar FROM Users WHERE id = ${accountId}`, function (err, result) {
         if (err) return res.status(500).send('Internal Server Error');
         if (result.length === 0) return res.status(404).send('Not Found');
