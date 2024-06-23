@@ -7,7 +7,7 @@ function get(req, res) {
 
     // check if user is logged in
     if (!id)
-        id = getAccountId(req, res);
+        id = getAccountId.getAccountId(req, res);
 
     if (!id) {
         res.status(400).send('Missing param: id');
