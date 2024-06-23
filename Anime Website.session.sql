@@ -18,6 +18,7 @@ CREATE TABLE Users(
     password TEXT NOT NULL,
     role TEXT NOT NULL,
     avatar TEXT NOT NULL,
+    background TEXT NOT NULL,
     created_at DATE NOT NULL,
     verified BOOLEAN NOT NULL DEFAULT 0,
     verification_code TEXT NOT NULL

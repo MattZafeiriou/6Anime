@@ -131,7 +131,7 @@ body {
     background: var(--main);
 }
 
-.profile {
+.top_right .profile {
     font-family: 'Roboto', sans-serif;
     border-radius: 50%;
     font-weight: 600;

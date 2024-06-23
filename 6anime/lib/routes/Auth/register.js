@@ -69,7 +69,7 @@ function post(req, res, next) {
 
                 const verification_code = makecode(64);
                 // Insert the user into the database
-                sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, created_at, verified, verification_code) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', CURRENT_DATE, 0, '${verification_code}')`, (err, result) => {
+                sqlHandler.con.query(`INSERT INTO Users (username, email, password, role, avatar, background, created_at, verified, verification_code) VALUES ('${username}', '${email}', '${hash}', 'user', 'default', 'default', CURRENT_DATE, 0, '${verification_code}')`, (err, result) => {
                     if (err) throw err;
                     EmailService.sendVerifyEmail(email, verification_code);
 

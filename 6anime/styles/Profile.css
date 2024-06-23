@@ -3,8 +3,97 @@
     margin-top: 2em;
     margin-left: 5vw;
     min-height: 70vh;
-    background-color: #fafafa;
+    background-color: var(--background);
     border-radius: 10px;
-    padding: 1em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    color: white;
+    position: relative;
+}
+
+.profilesection #backgroundimg {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    filter: brightness(50%);
+}
+
+.profilesection #backgroundimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profilesection .profile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.changeprofileimg:hover {
+    opacity: 1;
+}
+
+.changeprofileimg input {
+    display: none;
+}
+
+.changeprofileimg {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.1s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profilesection .profile h1 {
+    font-size: 2.5em;
+}
+
+.profilesection .profile h2 {
+    font-size: 1.5em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.profilesection .profile_img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    z-index: 1;
+}
+
+.profilesection #profileimg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--background);
+    z-index: 1;
+}
+
+.buttons {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background-color: var(--background);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
 }

@@ -19,8 +19,8 @@ function get(req, res) {
         return;
     }
 
-    let sql = `SELECT * FROM users WHERE id = ${id}`;
-    sqlHandler.query(sql, function (err, result) {
+    let sql = `SELECT id, username, avatar, role FROM users WHERE id = ${id}`;
+    sqlHandler.con.query(sql, function (err, result) {
         if (err) {
             res.status(500).send('Internal server error');
             return;

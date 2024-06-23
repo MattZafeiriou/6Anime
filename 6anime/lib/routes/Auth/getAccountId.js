@@ -10,4 +10,12 @@ function getAccountId(req, res)
     return decoded.id.toString();
 }
 
-module.exports = getAccountId;
+function getIdByToken(token)
+{
+    const jwt = require("jsonwebtoken");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded) return null;
+    return decoded.id.toString();
+}
+
+module.exports = {getAccountId, getIdByToken};

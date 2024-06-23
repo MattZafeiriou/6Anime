@@ -6,6 +6,7 @@ const recommendations = require('../../lib/routes/recommendations');
 const getviews = require('../../lib/routes/getViews');
 const getpopular = require('../../lib/routes/getPopular');
 const getprofilepic = require('../../lib/routes/Auth/getprofilepic');
+const getbackground = require('../../lib/routes/Auth/getbackground');
 const getfeatured = require('../../lib/routes/getFeatured');
 const getanimeurl = require('../../lib/routes/getAnimeURL');
 const getid = require('../../lib/routes/get_id');
@@ -16,6 +17,7 @@ const login = require('../../lib/routes/Auth/login');
 const verify = require('../../lib/routes/Auth/verify');
 const register = require('../../lib/routes/Auth/register');
 const passwordreset = require('../../lib/routes/Auth/passwordreset');
+const getuserinfo = require('../../lib/routes/getuserinfo');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
@@ -137,8 +139,12 @@ export default async function handler(req, res) {
       addview(req, res);
     } else if (request === 'getprofilepic') {
       getprofilepic(req, res);
+    } else if (request === 'getbackground') {
+      getbackground(req, res);
     } else if (request === 'addepisode') {
       addepisode(req, res);
+    } else if (request === 'getuserinfo') {
+      getuserinfo(req, res);
     } else {
       res.status(404).send('API route not found.');
     }

@@ -8,6 +8,10 @@ export default function Login({ data }) {
   let ver = false;
   // Change the background color of the body
   useEffect(() => {
+    if (document.cookie.includes('token=')) {
+      window.location.href = '/profile';
+      return;
+    }
     document.body.classList.add('loginbg');
     document.getElementsByClassName('login_button')[0].children[0].innerHTML = 'Register';
     document.getElementsByClassName('login_button')[0].parentElement.href = '/register';
