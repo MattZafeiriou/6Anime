@@ -152,7 +152,7 @@ export default function Profile({ data }) {
                 <div className="buttons">
                     <div className="signout">
                         <button className="btn btn-danger" onClick={() => {
-                            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure; Domain=6anime.tv";
                             window.location.href = '/';
                         }}>Sign Out <i className="fa fa-sign-out" aria-hidden="true"></i></button>
                     </div>
