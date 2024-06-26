@@ -171,28 +171,34 @@ export default function Profile({ data }) {
                 </div>
             </div>
             <div className="cropdiv">
-                <div className="croppfp">
-                    <i className="closebutton fas fa-times" onClick={() => {
-                        document.querySelector('.cropdiv').style.display = 'none';
-                    }}></i>
-                    <h2>Crop Profile Picture</h2>
-                    {imgType === 'profilepic' && <h3>Max Image Size: 320x320</h3>}
-                    {imgType === 'background' && <h3>Max Image Size: 1584x396</h3>}
-                    <div className="crop_div">
-                        <Cropper
-                            image={image}
-                            crop={crop}
-                            zoom={zoom}
-                            aspect={ratio}
-                            onCropChange={setCrop}
-                            onZoomChange={setZoom}
-                            onCropComplete={setCroppedArea}
-                        />
+                <div className="backgrounddrop">
+                    <div className="croppfp">
+                        <i className="closebutton fas fa-times" onClick={() => {
+                            document.querySelector('.cropdiv').style.display = 'none';
+                        }}></i>
+                        <h2>Crop Profile Picture</h2>
+                        {imgType === 'profilepic' && <h3>Max Image Size: 320x320</h3>}
+                        {imgType === 'background' && <h3>Max Image Size: 1584x396</h3>}
+                        <div className="crop_div">
+                            <Cropper
+                                image={image}
+                                crop={crop}
+                                zoom={zoom}
+                                aspect={ratio}
+                                onCropChange={setCrop}
+                                onZoomChange={setZoom}
+                                onCropComplete={setCroppedArea}
+                            />
+
+                        </div>
+                        <button className="btn btn-success" onClick={(e) => {
+                            e.preventDefault();
+                            uploadImage();
+                        }}>Submit</button>
+                        <button className="btn btn-danger" onClick={() => {
+                            document.querySelector('.cropdiv').style.display = 'none';
+                        }}>Cancel</button>
                     </div>
-                    <button className="btn btn-success" onClick={(e) => {
-                        e.preventDefault();
-                        uploadImage();
-                    }}>Submit</button>
                 </div>
             </div>
         </>
