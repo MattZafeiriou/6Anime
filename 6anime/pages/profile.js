@@ -39,13 +39,24 @@ export default function Profile({ data }) {
                 });
         }
 
-        fetch(process.env.NEXT_PUBLIC_API_URL + '/getbackground')
-            .then(res => res.blob())
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                document.getElementById('backgroundimg').src = url;
-            });
+        const bg = sessionStorage.getItem('bg');
+        document.getElementById('backgroundimg').src = bg;
+        if (!bg) {
+            fetch(process.env.NEXT_PUBLIC_API_URL + '/getbackground')
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('backgroundimg').src = url;
 
+                    // save image to local storage
+                    const reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function () {
+                        const base64data = reader.result;
+                        sessionStorage.setItem('bg', base64data);
+                    }
+                });
+        }
     });
 
     function changePfp() {
@@ -111,6 +122,7 @@ export default function Profile({ data }) {
                     if (res.status === 200) {
                         if (imgType === 'background') {
                             document.getElementById('backgroundimg').src = img;
+                            sessionStorage.setItem('bg', img);
                         } else {
                             sessionStorage.setItem('profilepic', img);
                             document.getElementById('profileimg').src = img;
@@ -164,7 +176,8 @@ export default function Profile({ data }) {
                         document.querySelector('.cropdiv').style.display = 'none';
                     }}></i>
                     <h2>Crop Profile Picture</h2>
-                    <h3>Max Image Size: 320x320</h3>
+                    {imgType === 'profilepic' && <h3>Max Image Size: 320x320</h3>}
+                    {imgType === 'background' && <h3>Max Image Size: 1584x396</h3>}
                     <div className="crop_div">
                         <Cropper
                             image={image}
