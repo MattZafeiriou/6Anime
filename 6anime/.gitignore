@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# oof
+/static
+/static/
+
 # testing
 /coverage
 

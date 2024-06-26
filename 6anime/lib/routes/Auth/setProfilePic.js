@@ -35,13 +35,15 @@ function post(req, res, next) {
                     return res.status(500).send("Internal Server Error");
                 }
                 if (result[0].avatar) {
-                    const fs = require('fs');
-                    fs.unlink('./static/profile_photos/' + result[0].avatar + ".jpg", (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).send("Internal Server Error");
-                        }
-                    });
+                    if (result[0].avatar !== 'default' || result[0].avatar !== 'default_2') {
+                        const fs = require('fs');
+                        fs.unlink('./static/profile_photos/' + result[0].avatar + ".jpg", (err) => {
+                            if (err) {
+                                console.error(err);
+                                return res.status(500).send("Internal Server Error");
+                            }
+                        });
+                    }
                 }
 
                 sqlHandler.con.query(`UPDATE Users SET avatar = '${name}' WHERE id = ${user_id}`, (err, result) => {
