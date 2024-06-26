@@ -26,9 +26,12 @@ function get(req, res) {
         if (err) return res.status(500).send('Internal Server Error');
         if (result.length === 0) return res.status(404).send('Not Found');
 
-        const filePath = path.resolve('./static/background_photos/' + result[0].background + '.jpg')
+        let filePath = path.resolve('./static/background_photos/' + result[0].background + '.jpg')
+        if (!fs.existsSync(filePath)) {
+            filePath = path.resolve('./static/background_photos/default.jpg')
+        }
         const imageBuffer = fs.readFileSync(filePath)
-    
+
         res.setHeader('Content-Type', 'image/jpg')
         res.send(imageBuffer);
     });
