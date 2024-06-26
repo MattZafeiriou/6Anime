@@ -57,6 +57,25 @@ export default function Profile({ data }) {
                 const img = reader.result;
 
                 document.querySelector('.cropdiv').style.display = 'block';
+                setRatio(1);
+                setImgType('profilepic');
+                setImage(img);
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function changeBg() {
+        document.getElementById('file').click();
+        document.getElementById('file').addEventListener('change', function () {
+            const file = document.getElementById('file').files[0];
+            const reader = new FileReader();
+            reader.onload = function () {
+                const img = reader.result;
+
+                document.querySelector('.cropdiv').style.display = 'block';
+                setRatio(4);
+                setImgType('background');
                 setImage(img);
             }
             reader.readAsDataURL(file);
@@ -76,7 +95,12 @@ export default function Profile({ data }) {
 
             img = cropImage(img, croppedAreaPixels);
 
-            fetch(process.env.NEXT_PUBLIC_API_URL + '/setprofilepic', {
+            let url = '/setprofilepic';
+            if (imgType === 'background') {
+                url = '/setbackground';
+            }
+
+            fetch(process.env.NEXT_PUBLIC_API_URL + url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,8 +109,12 @@ export default function Profile({ data }) {
             })
                 .then(res => {
                     if (res.status === 200) {
-                        sessionStorage.setItem('profilepic', img);
-                        document.getElementById('profileimg').src = img;
+                        if (imgType === 'background') {
+                            document.getElementById('backgroundimg').src = img;
+                        } else {
+                            sessionStorage.setItem('profilepic', img);
+                            document.getElementById('profileimg').src = img;
+                        }
                     }
                 });
         }
@@ -96,11 +124,19 @@ export default function Profile({ data }) {
     const [zoom, setZoom] = useState(1)
     const [image, setImage] = useState(null)
     const [croppedArea, setCroppedArea_] = useState(null)
+    const [imgType, setImgType] = useState('profilepic');
+    const [ratio, setRatio] = useState(1);
 
     return (
         <>
             <div className='profilesection'>
-                <img id="backgroundimg" src='' alt='background profile image' />
+                <div className='backgroundimg'>
+                    <img id="backgroundimg" src='' alt='background profile image' />
+                    <div onClick={changeBg} className="changeprofilebg">
+                        <input type="file" accept="image/*" id="file" style={{ opacity: '0' }} />
+                        <i className="fas fa-camera"></i>
+                    </div>
+                </div>
                 <div className='profile'>
                     <div className="profile_img">
                         <img id="profileimg" src="" alt='profile image' />
@@ -134,7 +170,7 @@ export default function Profile({ data }) {
                             image={image}
                             crop={crop}
                             zoom={zoom}
-                            aspect={1}
+                            aspect={ratio}
                             onCropChange={setCrop}
                             onZoomChange={setZoom}
                             onCropComplete={setCroppedArea}

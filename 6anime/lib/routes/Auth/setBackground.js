@@ -22,22 +22,22 @@ function post(req, res, next) {
     const sharp = require('sharp');
 
     sharp(Buffer.from(base64Data, 'base64'))
-        .resize(320, 320)
-        .toFile('./static/profile_photos/' + filename, (err, info) => {
+        .resize(1584, 396)
+        .toFile('./static/background_photos/' + filename, (err, info) => {
             if (err) {
                 console.error(err);
                 return res.status(500).send("Internal Server Error");
             }
 
-            sqlHandler.con.query(`SELECT avatar FROM Users WHERE id = ${user_id}`, (err, result) => {
+            sqlHandler.con.query(`SELECT background FROM Users WHERE id = ${user_id}`, (err, result) => {
                 if (err) {
                     console.error(err);
                     return res.status(500).send("Internal Server Error");
                 }
                 if (result[0].avatar) {
-                    if (result[0].avatar !== 'default' || result[0].avatar !== 'default_2') {
+                    if (result[0].avatar !== 'default') {
                         const fs = require('fs');
-                        fs.unlink('./static/profile_photos/' + result[0].avatar + ".jpg", (err) => {
+                        fs.unlink('./static/background_photos/' + result[0].avatar + ".jpg", (err) => {
                             if (err) {
                                 console.error(err);
                             }
@@ -45,7 +45,7 @@ function post(req, res, next) {
                     }
                 }
 
-                sqlHandler.con.query(`UPDATE Users SET avatar = '${name}' WHERE id = ${user_id}`, (err, result) => {
+                sqlHandler.con.query(`UPDATE Users SET background = '${name}' WHERE id = ${user_id}`, (err, result) => {
                     if (err) {
                         console.error(err);
                         return res.status(500).send("Internal Server Error");

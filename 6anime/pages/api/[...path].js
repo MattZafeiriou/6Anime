@@ -19,6 +19,7 @@ const register = require('../../lib/routes/Auth/register');
 const passwordreset = require('../../lib/routes/Auth/passwordreset');
 const getuserinfo = require('../../lib/routes/getuserinfo');
 const setProfilePic = require('../../lib/routes/Auth/setProfilePic');
+const setBackground = require('../../lib/routes/Auth/setBackground');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
@@ -156,6 +157,8 @@ export default async function handler(req, res) {
       sendform(req, res);
     } else if (request === 'setprofilepic') {
       setProfilePic(req, res);
+    } else if (request === 'setbackground') {
+      setBackground(req, res);
     } else if (request === 'login') {
       await runMiddleware(req, res, limiter)
       login(req, res);
