@@ -21,7 +21,9 @@ export default function User({ data }) {
     return (
         <>
             <div className='profilesection'>
-                <img id="backgroundimg" src='' alt='background profile image' />
+            <div className='backgroundimg'>
+                    <img id="backgroundimg" src='' alt='background profile image' />
+                </div>
                 <div className='profile'>
                     <div className='profile'>
                         <div className="profile_img">

@@ -34,10 +34,10 @@ function post(req, res, next) {
                     console.error(err);
                     return res.status(500).send("Internal Server Error");
                 }
-                if (result[0].avatar) {
-                    if (result[0].avatar !== 'default') {
+                if (result[0].background) {
+                    if (result[0].background !== 'default') {
                         const fs = require('fs');
-                        fs.unlink('./static/background_photos/' + result[0].avatar + ".jpg", (err) => {
+                        fs.unlink('./static/background_photos/' + result[0].background + ".jpg", (err) => {
                             if (err) {
                                 console.error(err);
                             }
