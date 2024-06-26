@@ -1,10 +1,10 @@
 :root {
   --color: 0;
-  --main: hsl(var(--color), 60%, 38%);
-  --mainhover: hsl(var(--color), 60%, 30%);
-  --maindark: hsl(var(--color), 60%, 23%);
+  --main: hsl(var(--color), 60%, 30%);
+  --mainhover: hsl(var(--color), 60%, 20%);
+  --maindark: hsl(var(--color), 60%, 15%);
   --bar: hsl(var(--color), 90%, 58%);
-  --background: hsl(var(--color), 56%, 6%);
+  --background: hsl(var(--color), 56%, 3%);
 }
 
 html {
@@ -21,8 +21,7 @@ textarea:focus, input:focus{
 }
 
 body {
-  background: rgb(25,7,7);
-  background: linear-gradient(180deg, var(--background) 0vh, var(--main) 50vh, var(--background) 95vh);
+  background-color: var(--background) !important;
   overflow-x: hidden;
 }
 
@@ -30,6 +29,11 @@ body {
 .NotFound {
   color: white;
   padding-top: 20vh;
+}
+
+.NotFound h1, .NotFound h3 {
+  font: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
 #changeTheme {

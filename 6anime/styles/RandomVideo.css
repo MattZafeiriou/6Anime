@@ -7,7 +7,7 @@
     font-size: 2em;
     font-weight: 600;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 0.5em;
     opacity: 0;
 }
@@ -23,7 +23,7 @@
     font-size: 1.2em;
     font-weight: 600;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 0.5em;
     opacity: 0;
 }
@@ -75,7 +75,7 @@
     font-size: 1.2em;
     font-weight: 300;
     color: rgba(255,255,255,.7);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 0.5em;
 }
 
@@ -83,7 +83,7 @@
     background-color: var(--mainhover);
     border: none;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 1.2em;
     margin-top: 10px;
@@ -101,7 +101,7 @@
     background-color: rgba(255,255,255,0.1);
     border: none;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 1em;
     margin-top: 10px;

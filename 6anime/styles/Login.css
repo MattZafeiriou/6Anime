@@ -1,5 +1,6 @@
 .loginbg {
     background: rgba(0, 0, 0, .8) url("https://miro.medium.com/v2/resize:fit:7680/0*xZtR_0ziLWduCRhX.jpg");
+    background-color: rgba(0,0,0,.85) !important;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

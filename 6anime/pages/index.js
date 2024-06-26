@@ -18,7 +18,7 @@ function Tag(props) {
 
 function WatchButton(props) {
   return (
-    <a href={props.href}><button className='watch_button'>Watch Now!</button></a>
+    <a href={props.href}><button className='watch_button'>Watch Now</button></a>
   );
 }
 
@@ -92,9 +92,11 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
         />
       </Head>
       <div className='main_page'>
-        <h1 style={{display: 'none'}}>6Anime.tv Main Page</h1>
+        <h1 style={{ display: 'none' }}>6Anime.tv Main Page</h1>
         <div className='main_page_content'>
-          <Carousel className='carouselItems'>
+          <div className='main_page_fade'></div>
+          <div className='main_page_fade2'></div>
+          <Carousel className='carouselItems' interval={3000} controls={false} indicators={false}>
             <Carousel.Item>
               <CarouselImg href={carouselItem1.href} tag1={carouselItem1.tag1} tag2={carouselItem1.tag2} tag3={carouselItem1.tag3} srcImg={carouselItem1.srcImg} name={carouselItem1.name} description={carouselItem1.description} />
             </Carousel.Item>
@@ -106,13 +108,15 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
             </Carousel.Item>
           </Carousel>
         </div>
-        <div className='main_page_sponsor'>
-          <Sponsored />
+        <div className='main_page_fit'>
+          <div className='main_page_sponsor'>
+            <Sponsored />
+          </div>
+          <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata} />
+          <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
+          <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
+          <RandomVideo />
         </div>
-        <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata} />
-        <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
-        <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
-        <RandomVideo />
       </div>
     </>
   );

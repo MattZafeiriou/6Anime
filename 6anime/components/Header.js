@@ -212,14 +212,14 @@ export default function Header() {
                 </a>
                 <div className="top_left">
                     <a className="left_list" href="/"><div id="home">Home</div></a>
-                    <a className="left_list" href="/about"><div id="about">About</div></a>
-                    <a className="left_list" href="/contact"><div id="contact_us">Contact Us</div></a>
-                    <a className="left_list" href="/donate"><div id="donate">Buy us a Coffee</div></a>
+                    <a className="left_list" href="/list"><div id="about">Anime List</div></a>
+                    <a className="left_list" href="/schedule"><div id="contact_us">Schedule</div></a>
+                    <a className="left_list" href="/donate"><div id="donate">Donate</div></a>
                 </div>
                 <div className="top_right">
                     <a href='/login'>
                         <div className='login_button'>
-                            <div id="login">Log In</div>
+                            <div id="login">Log in</div>
                         </div>
                     </a>
                 </div>
@@ -239,7 +239,7 @@ export default function Header() {
                             <a href="/series"><div id="series">Series</div></a>
                             <a href="/contact"><div id="contact_usm">Contact Us</div></a>
                             <a href="/donate"><div id="donatem">Buy us a Coffee</div></a>
-                            <a href="/login"><div id="loginm">Log In</div></a>
+                            <a href="/login"><div id="loginm">Log in</div></a>
                         </div>
                     </div>
                 </div>
