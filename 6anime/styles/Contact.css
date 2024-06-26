@@ -4,7 +4,7 @@
     padding: 2em !important;
     border-radius: 5px;
     margin-left: 5% !important;
-    background-color: #141414;
+    background-color: var(--background);
 }
 
 @media screen and (max-width: 800px) {

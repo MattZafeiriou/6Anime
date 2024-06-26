@@ -27,7 +27,9 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-device-detect": "^2.2.3",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-easy-crop": "^5.0.7",
+    "sharp": "^0.33.4"
   },
   "engines": {
     "node": ">=18"

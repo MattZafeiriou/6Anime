@@ -1,7 +1,31 @@
 import { useEffect } from "react";
+import { useState } from "react";
 import getAccountId from "../lib/routes/Auth/getAccountId";
+import Cropper from 'react-easy-crop'
 
 export default function Profile({ data }) {
+
+    function cropImage(image, croppedAreaPixels) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = croppedAreaPixels.width;
+        canvas.height = croppedAreaPixels.height;
+        ctx.drawImage(
+            image,
+            croppedAreaPixels.x * scaleX,
+            croppedAreaPixels.y * scaleY,
+            croppedAreaPixels.width * scaleX,
+            croppedAreaPixels.height * scaleY,
+            0,
+            0,
+            croppedAreaPixels.width,
+            croppedAreaPixels.height
+        );
+
+        return canvas.toDataURL('image/jpeg');
+    }
 
     useEffect(() => {
         const img = sessionStorage.getItem('profilepic');
@@ -16,11 +40,11 @@ export default function Profile({ data }) {
         }
 
         fetch(process.env.NEXT_PUBLIC_API_URL + '/getbackground')
-        .then(res => res.blob())
-        .then(blob => {
-            const url = URL.createObjectURL(blob);
-            document.getElementById('backgroundimg').src = url;
-        });
+            .then(res => res.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                document.getElementById('backgroundimg').src = url;
+            });
 
     });
 
@@ -31,12 +55,47 @@ export default function Profile({ data }) {
             const reader = new FileReader();
             reader.onload = function () {
                 const img = reader.result;
-                document.getElementById('profileimg').src = img;
-                sessionStorage.setItem('profilepic', img);
+
+                document.querySelector('.cropdiv').style.display = 'block';
+                setImage(img);
             }
             reader.readAsDataURL(file);
         });
     }
+
+    function setCroppedArea(croppedArea, croppedAreaPixels) {
+        setCroppedArea_(croppedAreaPixels);
+    }
+
+    function uploadImage() {
+        let img = new Image();
+        img.src = image;
+        img.onload = () => {
+            const croppedAreaPixels = croppedArea;
+            document.querySelector('.cropdiv').style.display = 'none';
+
+            img = cropImage(img, croppedAreaPixels);
+
+            fetch(process.env.NEXT_PUBLIC_API_URL + '/setprofilepic', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: img }),
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        sessionStorage.setItem('profilepic', img);
+                        document.getElementById('profileimg').src = img;
+                    }
+                });
+        }
+    }
+
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+    const [image, setImage] = useState(null)
+    const [croppedArea, setCroppedArea_] = useState(null)
 
     return (
         <>
@@ -61,9 +120,30 @@ export default function Profile({ data }) {
                             window.location.href = '/';
                         }}>Sign Out <i className="fa fa-sign-out" aria-hidden="true"></i></button>
                     </div>
-                    <div className="applychanges">
-                        <button className="btn btn-primary">Apply Changes <i class="fas fa-save"></i></button>
+                </div>
+            </div>
+            <div className="cropdiv">
+                <div className="croppfp">
+                    <i className="closebutton fas fa-times" onClick={() => {
+                        document.querySelector('.cropdiv').style.display = 'none';
+                    }}></i>
+                    <h2>Crop Profile Picture</h2>
+                    <h3>Max Image Size: 320x320</h3>
+                    <div className="crop_div">
+                        <Cropper
+                            image={image}
+                            crop={crop}
+                            zoom={zoom}
+                            aspect={1}
+                            onCropChange={setCrop}
+                            onZoomChange={setZoom}
+                            onCropComplete={setCroppedArea}
+                        />
                     </div>
+                    <button className="btn btn-success" onClick={(e) => {
+                        e.preventDefault();
+                        uploadImage();
+                    }}>Submit</button>
                 </div>
             </div>
         </>

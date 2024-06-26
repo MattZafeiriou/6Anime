@@ -1,5 +1,5 @@
 .aboutmain {
-    background-color: hsl(0, 0%, 10%);
+    background-color: var(--background);
     border-radius: 10px;
     width: 90vw;
     margin-left: 5vw;

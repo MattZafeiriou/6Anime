@@ -1,6 +1,6 @@
 .donatemain {
     color: white;
-    background-color: #141414;
+    background-color: var(--background);
     padding: 1em;
     border-radius: 10px;
     width: 50vw;

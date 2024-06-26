@@ -12,7 +12,6 @@ async function post(req, res, next) {
         else {
             if (!passwordResetLib.validateToken(body.token)) { return res.status(400).send("Invalid token"); }
             else {
-                console.log('ooooooooooooooof')
                 // Reset the password
                 const email = passwordResetLib.getEmail(body.token);
                 const password = body.password;
@@ -33,8 +32,6 @@ async function post(req, res, next) {
                 if (!/[!@#$%^&*]/.test(password)) {
                     return res.status(400).send("Password must contain at least one special character");
                 }
-
-                console.log('testt')
 
                 // Check if email is valid
                 sqlHandler.con.query(`SELECT id FROM Users WHERE email = ?`, [email], (err, result) => {

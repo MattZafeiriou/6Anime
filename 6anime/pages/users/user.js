@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 
 export default function User({ data }) {
     useEffect(() => {
-        fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getprofilepic?id=' + data.id)
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic?id=' + data.id)
             .then(res => res.blob())
             .then(blob => {
                 const url = URL.createObjectURL(blob);
                 document.getElementById('profileimg').src = url;
             });
 
-            fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getbackground?id=' + data.id)
+            fetch(process.env.NEXT_PUBLIC_API_URL + '/getbackground?id=' + data.id)
             .then(res => res.blob())
             .then(blob => {
                 const url = URL.createObjectURL(blob);
@@ -21,7 +21,7 @@ export default function User({ data }) {
     return (
         <>
             <div className='profilesection'>
-                <img id="backgroundimg" src='https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630' alt='background profile image' />
+                <img id="backgroundimg" src='' alt='background profile image' />
                 <div className='profile'>
                     <div className='profile'>
                         <div className="profile_img">
