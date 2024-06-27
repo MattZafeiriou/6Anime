@@ -91,7 +91,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
     const [viewsFormatted, setViewsFormatted] = useState("");
 
     let customStyle = {
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
         backgroundColor: 'rgb(80, 80, 80, 1)',
         color: 'white',
         border: 'none',
@@ -104,7 +104,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         marginBottom: '.5em'
     };
     let customSelectedStyle = {
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
         backgroundColor: 'var(--mainhover)',
         color: 'white',
         border: 'none',

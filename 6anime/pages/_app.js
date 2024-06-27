@@ -15,6 +15,7 @@ import '../styles/Disclaimer.css'
 import '../styles/Tos.css'
 import '../styles/Login.css'
 import '../styles/Profile.css'
+import '../styles/pace.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -65,6 +66,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+      <link rel="icon" href="/favicon.ico" />
       <i id="changeTheme" onClick={switchThemes} className="fa-solid fa-circle-half-stroke"></i>
       <Head>
         <meta httpEquiv='content-language' content='en' />
