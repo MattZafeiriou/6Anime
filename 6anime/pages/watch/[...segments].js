@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import Sponsored from '../../components/Sponsored';
-import { Placeholder } from 'react-bootstrap';
 import { createRoot } from 'react-dom/client';
 import VideoPlayer from '../../components/VideoPlayer';
 import Head from 'next/head'
@@ -31,9 +30,10 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                         property="og:description"
                         content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
                     />
+                    <link rel="canonical" href={`https://6anime.tv/watch/${titleseg}/ep1`} />
                 </Head>
                 <div>
-                    <h1>{oof2}</h1>
+                    <h1>{`Watch ${oof2} Episode ${epsegment.replace("ep", "")}`}</h1>
                     <div className='related_anime_del'>
                         {other_season_ids.map((item, index) => (
                             <a href={"/watch/" + item}>{item}</a>
@@ -457,6 +457,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                     name="keywords"
                     content={`anime, free anime, 6anime, 9anime, anime streaming, anime online, anime hd, anime free, anime website, anime site, anime watch, anime watch online, anime watch free, anime watch hd, anime watch online free, anime watch online hd, anime watch free online, anime watch free hd, anime watch free online hd, anime watch free online english sub, anime watch free online english dub, anime watch free online english subbed, anime watch free online english dubbed, anime watch free online english subbed and dubbed, anime watch free online english subbed hd, anime watch free online english, watch ${title} online subtitle, watch ${title} online dub, watch ${title} online english sub, watch ${title} online english dub, watch ${title} online english subbed, watch ${title} online english dubbed, watch ${title} online english subbed and dubbed, watch ${title} online english subbed hd`}
                 />
+                <link rel="canonical" href={`https://6anime.tv/watch/${titleseg}/ep1`} />
             </Head>
             <div className='playerdiv'>
                 <div className='playerr'>
