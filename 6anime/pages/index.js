@@ -86,6 +86,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
           property="og:description"
           content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
         />
+        <meta name="6a97888e-site-verification" content="9e546de5dabc0ef6e7fe0048a624cd82"/>
         <meta
           name="description"
           content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
@@ -113,10 +114,12 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
             <Sponsored />
           </div>
           <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata} />
+          <Sponsored />
           <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
           <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
           <RandomVideo />
         </div>
+        <ins class="eas6a97888e6" data-zoneid="5391318"></ins>
       </div>
     </>
   );

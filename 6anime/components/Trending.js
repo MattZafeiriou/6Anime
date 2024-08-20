@@ -7,8 +7,8 @@ export default function Trending({ id, data, title, link }) {
     let dragging = false;
     let state = {
         firstCard: 1,
-        lastCard: 10,
-        maxCards: 10,
+        lastCard: 11,
+        maxCards: 11,
     };
     function startDragging(event) {
         if (window.innerWidth < 800) return;
@@ -190,6 +190,7 @@ export default function Trending({ id, data, title, link }) {
                         <Card id={"card3"} img={data[2].imgUrl} href={data[2].vlink} title={data[2].vname} year={data[2].year} time={data[2].duration + " mins/ep"} tag1={data[2].tag1} tag2={data[2].tag2} episodes={data[2].vep} />
                         <Card id={"card4"} img={data[3].imgUrl} href={data[3].vlink} title={data[3].vname} year={data[3].year} time={data[3].duration + " mins/ep"} tag1={data[3].tag1} tag2={data[3].tag2} episodes={data[3].vep} />
                         <Card id={"card5"} img={data[4].imgUrl} href={data[4].vlink} title={data[4].vname} year={data[4].year} time={data[4].duration + " mins/ep"} tag1={data[4].tag1} tag2={data[4].tag2} episodes={data[4].vep} />
+                        <ins className="eas6a97888e2" data-zoneid="5391284"></ins>
                         <Card id={"card6"} img={data[5].imgUrl} href={data[5].vlink} title={data[5].vname} year={data[5].year} time={data[5].duration + " mins/ep"} tag1={data[5].tag1} tag2={data[5].tag2} episodes={data[5].vep} />
                         <Card id={"card7"} img={data[6].imgUrl} href={data[6].vlink} title={data[6].vname} year={data[6].year} time={data[6].duration + " mins/ep"} tag1={data[6].tag1} tag2={data[6].tag2} episodes={data[6].vep} />
                         <Card id={"card8"} img={data[7].imgUrl} href={data[7].vlink} title={data[7].vname} year={data[7].year} time={data[7].duration + " mins/ep"} tag1={data[7].tag1} tag2={data[7].tag2} episodes={data[7].vep} />

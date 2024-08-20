@@ -61,6 +61,10 @@ export default function App({ Component, pageProps }) {
       theme = parseInt(getCookie('theme'));
       switchThemes();
     }
+
+    setInterval(() => {
+      (AdProvider = window.AdProvider || []).push({"serve": {}});
+    }, 100);
   });
   
   return (
@@ -79,6 +83,7 @@ export default function App({ Component, pageProps }) {
           content="anime, free anime, attack on titan, naruto, one piece, 6anime.tv, 6anime, hd anime, watch anime, movies, series"
         />
       </Head>
+      <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>
 
       <div className='mainpage'>
         <Header />

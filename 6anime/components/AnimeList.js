@@ -234,6 +234,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 </div>
                 <div className='anime-list-container'>
                 </div>
+                <ins className="eas6a97888e2" data-zoneid="5391284"></ins>
             </div>
         </>
     );
