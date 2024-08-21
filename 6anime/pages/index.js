@@ -119,7 +119,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
           <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
           <RandomVideo />
         </div>
-        <ins class="eas6a97888e6" data-zoneid="5391318"></ins>
+        {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
       </div>
     </>
   );

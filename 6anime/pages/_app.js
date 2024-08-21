@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }) {
     }
 
     setInterval(() => {
-      (AdProvider = window.AdProvider || []).push({"serve": {}});
+      //(AdProvider = window.AdProvider || []).push({"serve": {}});
     }, 100);
   });
   
