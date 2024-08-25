@@ -5,6 +5,7 @@ import Trending from '../components/Trending';
 import RandomVideo from '../components/RandomVideo';
 import Head from 'next/head'
 import repeatTasks from '../lib/repeatTasks';
+import Toasts from '../components/Toasts';
 
 function Tag(props) {
   return (
@@ -120,6 +121,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
         </div>
         {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
       </div>
+      <Toasts />
     </>
   );
 }
