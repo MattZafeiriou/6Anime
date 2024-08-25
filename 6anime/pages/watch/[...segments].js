@@ -418,7 +418,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                     <div style={{ display: 'block' }}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
                         <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} episodes</h5>
-                        <h5 className='related_anime_info'><i className="fa-solid fa-eye"></i> {props.views}</h5>
+                        <h5 className='related_anime_info watch-eye'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
             </>

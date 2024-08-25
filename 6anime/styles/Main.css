@@ -62,6 +62,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4; /* number of lines to show */
+    line-clamp: 4;
 }
 .anime_tags {
     display: flex;
@@ -158,6 +159,7 @@
 }
 
 .donate_toast {
+    transition-duration: .3s;
     position: fixed;
     width: 100vw;
     bottom: 20px;
@@ -167,6 +169,11 @@
     justify-content: center;
     z-index: 100;
     pointer-events: none;
+}
+
+.donate_toast_disable {
+    bottom: 10px;
+    opacity: 0;
 }
 
 .donate_toast_text {

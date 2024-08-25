@@ -167,6 +167,7 @@ body {
     margin-right: 1em;
     width: 50px;
     float: left;
+    fill: none;
 }
 
 #searchButton {

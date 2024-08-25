@@ -351,3 +351,12 @@
 .share_social #reddit {
     color: #ff4500;
 }
+
+.related_anime_info {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.related_anime_info:hover {
+    color: var(--main);
+}

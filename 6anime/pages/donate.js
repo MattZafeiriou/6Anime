@@ -14,10 +14,10 @@ function addEthereumPopup(e) {
 function PaymentMethod(props) {
   return (
     <div className="paymentMethod">
-      <a href={props.href} target="_blank">
+      <a href={props.href} rel="noreferrer nofollow" target="_blank">
         <img src={props.src} alt={props.text} />
       </a>
-      <a href={props.href} target="_blank"><button onClick={props.onClick}>{props.text}</button></a>
+      <a href={props.href} rel="noreferrer nofollow" target="_blank"><button onClick={props.onClick}>{props.text}</button></a>
     </div>
   );
 }
@@ -44,14 +44,16 @@ export default function Donate({ data }) {
         />
       </Head>
       <div className="donatemain">
-        <h1>Buy us a coffee</h1>
-        <h5>Help us keep the site running</h5>
-        <p>6Anime is a free service that relies on ads to keep the site running. If you enjoy the site, please consider supporting us by disabling your adblocker or donating to us. We greatly appreciate your support!</p>
-        <h3>Donation methods</h3>
+        <h1>Thank You</h1>
+        <h4>for helping us keep the site running.</h4>
+        <br/>
+        <p>6Anime is a free service that relies on donates only.</p>
+        <p>Donations are used to pay for server costs, domain costs, and other expenses.</p>
         <div className='paymentMethods'>
           <PaymentMethod href="https://www.patreon.com/6AnimeOfficial" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Patreon_logo.svg/2048px-Patreon_logo.svg.png" text="Patreon" />
           <PaymentMethod href="" onClick={addBitcoinPopup} src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" text="Bitcoin" />
           <PaymentMethod href="" onClick={addEthereumPopup} src="https://cryptologos.cc/logos/ethereum-eth-logo.png" text="Ethereum" />
+          <PaymentMethod href="https://paypal.me/6anime" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2048px-PayPal.svg.png" text="PayPal" />
         </div>
       </div>
       <div id="bitcoinaddress" className='popupdonate'>

@@ -18,6 +18,7 @@ import '../styles/Profile.css'
 import '../styles/pace.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
+import Toasts from '../components/Toasts';
 import Footer from '../components/Footer';
 import Head from "next/head";
 import { useEffect } from 'react';
@@ -89,6 +90,7 @@ export default function App({ Component, pageProps }) {
         <Header />
         <Component {...pageProps} />
       </div>
+      <Toasts />
       <Footer />
     </>
   );

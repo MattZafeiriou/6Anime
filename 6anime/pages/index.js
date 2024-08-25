@@ -121,7 +121,6 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
         </div>
         {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
       </div>
-      <Toasts />
     </>
   );
 }

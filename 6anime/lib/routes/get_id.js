@@ -2,7 +2,7 @@ var sqlHandler = require('./../sqlHandler.js');
 
 /* GET folders listing. */
 function get(req, res) {
-    const name = req.query.name;
+    const name = decodeURI(req.query.name);
 
     if (name) {
         sqlHandler.con.query("SELECT * FROM Anime WHERE folder_name= ? ;", [name], function (err, result, fields) {
