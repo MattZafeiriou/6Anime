@@ -519,7 +519,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                             <div className='share_social'>
                                 <h2><i className='fa-solid fa-share'></i> Share this anime</h2>
                                 <div className='social_icons'>
-                                    <a id="fb" href={`https://www.facebook.com/sharer/sharer.php?u=6anime.tv`} target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook"></i></a>
+                                    <a id="fb" href={`https://www.facebook.com/sharer/sharer.php?u=6anime.tv&t=${encodeURI("I just watched " + title + " on 6Anime.tv")}`} target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook"></i></a>
                                     <a id="x" href={`https://twitter.com/intent/tweet?text=${"I just watched " + title + " on 6Anime.tv"}`} target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
                                     <a id="reddit" href={`https://www.reddit.com/submit?url=6anime.tv&title=${"I just watched " + title + " on 6Anime.tv"}`} target="_blank" rel="noreferrer"><i className="fa-brands fa-reddit"></i></a>
                                 </div>

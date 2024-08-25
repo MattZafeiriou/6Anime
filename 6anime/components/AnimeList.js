@@ -28,7 +28,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
         const language = (filters["Language"] === undefined || filters["Language"] === "") ? "" : "&language=" + encodeURIComponent(filters["Language"]);
         const sort = (filters["Sort"] === undefined || filters["Sort"] === "") ? "" : "&sort=" + encodeURIComponent(filters["Sort"]);
         const search = "&chars=" + encodeURIComponent(document.querySelector('.anime-list-header-search input').value);
-        const limit = "&limit=20";
+        const limit = "&limit=50";
 
         let url = genre + country + season + year + type + status + language + sort + search + limit;
         url = url.replace("&", "?");
@@ -53,7 +53,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
         root.render(
             <div className='anime-list-item'>
                 <a href={"/watch/" + folder_name}>
-                    <img alt={`Watch ${folder_name} image`} id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g' />
+                    <img loading="lazy" alt={`Watch ${folder_name} image`} id={'anime-list-item-img-' + id} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b952nax7rrdq9hygozntkwjelge6fizv2gunp4r3xgoj&ep=v1_gifs_search&rid=200w.gif&ct=g' />
                     <h3 id={'anime-list-item-name-' + id}></h3>
                 </a>
             </div>

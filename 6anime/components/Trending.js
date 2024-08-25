@@ -32,7 +32,6 @@ export default function Trending({ id, data, title, link }) {
                         </div>
                         <button onClick={(e) => {
                             e.preventDefault();
-                            //alert("Im gonna touch you lil nigga");
                         }} className="trending_card_addtolist">
                             <h3>Add to my list</h3>
                         </button>
