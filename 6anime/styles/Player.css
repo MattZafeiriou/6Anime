@@ -322,3 +322,32 @@
     }
     
 }
+
+.share_social {
+    margin-top: 1em;
+}
+
+.share_social h2 {
+    color: white;
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
+.share_social a {
+    color: white;
+    font-size: 1.5em;
+    margin-right: .5em;
+}
+
+.share_social #fb {
+    color: #3b5998 !important;
+}
+
+.share_social #x {
+    color: #00acee;
+}
+
+.share_social #reddit {
+    color: #ff4500;
+}

@@ -304,10 +304,6 @@ var adConfig = {
         return null;
     }
 
-    function eraseCookie(name) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-
     function setCookie(name, value, days, global) {
         let expires = "";
         if (days) {
@@ -389,6 +385,8 @@ var adConfig = {
                     controls.classList.remove('hide');
                     mouseInside = true;
                 }} onMouseLeave={() => {
+                    if (isMobile)
+                        return;
                     mouseInside = false;
                     cooldownToHide();
                 }} onMouseMove={() => {

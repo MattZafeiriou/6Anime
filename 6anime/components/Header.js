@@ -238,7 +238,7 @@ export default function Header() {
                             <a href="/movies"><div id="movies">Movies</div></a>
                             <a href="/series"><div id="series">Series</div></a>
                             <a href="/contact"><div id="contact_usm">Contact Us</div></a>
-                            <a href="/donate"><div id="donatem">Buy us a Coffee</div></a>
+                            <a href="/donate"><div id="donatem">Donate</div></a>
                             <a href="/login"><div id="loginm">Log in</div></a>
                         </div>
                     </div>

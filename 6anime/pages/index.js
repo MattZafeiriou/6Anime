@@ -18,7 +18,7 @@ function Tag(props) {
 
 function WatchButton(props) {
   return (
-    <a href={props.href}><button className='watch_button'>Watch Now</button></a>
+    <a href={props.href} className='watch_button'>WATCH NOW</a>
   );
 }
 
@@ -28,8 +28,8 @@ function CarouselImg(props) {
       <Image id="top_img" loading='lazy' src={props.srcImg} alt="Carousel Image" fluid />
       <Carousel.Caption>
         <div className='carouselCaption'>
-          <h2>{props.name}<loading /></h2>
-          <h3>{props.description}<loading /></h3>
+          <h2>{props.name}</h2>
+          <h3>{props.description}</h3>
           <div className='anime_tags'>
             <Tag name={props.tag1} />
             <Tag name={props.tag2} />
@@ -114,7 +114,6 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
             <Sponsored />
           </div>
           <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata} />
-          <Sponsored />
           <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
           <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
           <RandomVideo />

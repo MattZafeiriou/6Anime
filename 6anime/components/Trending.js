@@ -7,8 +7,8 @@ export default function Trending({ id, data, title, link }) {
     let dragging = false;
     let state = {
         firstCard: 1,
-        lastCard: 11,
-        maxCards: 11,
+        lastCard: 10,
+        maxCards: 10,
     };
     function startDragging(event) {
         if (window.innerWidth < 800) return;
@@ -198,56 +198,6 @@ export default function Trending({ id, data, title, link }) {
                         <Card id={"card10"} img={data[9].imgUrl} href={data[9].vlink} title={data[9].vname} year={data[9].year} time={data[9].duration + " mins/ep"} tag1={data[9].tag1} tag2={data[9].tag2} episodes={data[9].vep} />
                     </div>
                 </div>
-                <a onClick={() => {
-                    const lastCard = document.getElementById('card1');
-                    const cardWidth = lastCard.offsetWidth + 16; // 16px margin
-                    const previous = Math.ceil(offset / cardWidth - 1); // get previous card number (eg 3 cards)
-                    if (previous < 0) return;
-                    document.getElementsByClassName('trending_list')[id].classList.remove('fullyLeft');
-                    document.getElementsByClassName('trending_list')[id].classList.remove('fullyRight');
-                    const difference = previous - (offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
-
-                    let card = document.getElementById('card' + (previous + 1));
-                    if (card == null) return;
-
-                    document.getElementsByClassName('trending_list')[id].style.transition = '.3s';
-                    document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + (offset + difference * cardWidth) + 'px)';
-                    offset += difference * cardWidth;
-                    setTimeout(() => {
-                        document.getElementsByClassName('trending_list')[id].style.transition = '';
-                    }
-                        , 300);
-                }}
-                >
-                    <div className='trending_back'>
-                        <i className="fa-solid fa-less-than"></i>
-                    </div>
-                </a>
-                <a onClick={() => {
-                    document.getElementsByClassName('trending_list')[id].classList.remove('fullyLeft');
-                    document.getElementsByClassName('trending_list')[id].classList.remove('fullyRight');
-                    const lastCard = document.getElementById('card1');
-                    const cardWidth = lastCard.offsetWidth + 16; // 16px margin
-                    const divWidth = window.innerWidth * .9; // 90% of window width
-                    const bruh = divWidth / cardWidth; // how many cards fit inside the div (eg 2.5 cards)
-                    const next = Math.ceil(bruh + Math.ceil(offset / cardWidth)); // get next card number (eg 3 cards)
-                    const difference = next - (bruh + offset / cardWidth); // how much of the next card is visible (eg 0.5 cards)
-                    let card = document.getElementById('card' + next);
-                    if (card == null) return;
-
-                    document.getElementsByClassName('trending_list')[id].style.transition = '.3s';
-                    document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + (offset + difference * cardWidth) + 'px)';
-                    offset += difference * cardWidth;
-                    setTimeout(() => {
-                        document.getElementsByClassName('trending_list')[id].style.transition = '';
-                    }
-                        , 300);
-                }}
-                >
-                    <div className='trending_next'>
-                        <i className="fa-solid fa-greater-than"></i>
-                    </div>
-                </a>
             </div>
         </>
     );

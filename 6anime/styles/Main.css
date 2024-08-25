@@ -9,21 +9,24 @@
 }
 
 .watch_button {
-    transition-duration: .2s;
-    padding: 13px 25px;
-    border-radius: 8px;
-    background-color: var(--main);
+    transition-duration: .3s;
     border: none;
     color: white;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 1em;
-    margin-top: 9px;
-    box-shadow: 10px 10px 9px 5px rgba(0,0,0,1);
+    font-weight: 600;
+    font-size: 2em;
+    margin-top: 15px;
+    text-decoration: underline solid var(--main) 2px !important;
+    text-underline-offset: 5px;
+    cursor: pointer;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 50%, var(--main) 50%) right;
+    background-color: rgba(0, 0, 0, 0);
+    background-size: 200%;
 }
 
 .watch_button:hover {
-    background-color: var(--mainhover);
+    background-position: left;
+    color: white;
 }
 
 .carouselCaption {
@@ -112,12 +115,6 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .watch_button {
-        padding: 13px 25px;
-        font-size: .8em;
-        margin-top: 9px;
-    }
-
     .carouselCaption h2 {
         font-size: 2em;
     }
@@ -133,19 +130,12 @@
 }
 
 @media only screen and (max-width: 800px) {
-    #top_img {
-        height: 60vh;
+    .watch_button {
+        font-size: 1.5em;
     }
 
-    .watch_button {
-        padding: 13px 25px;
-        font-size: .8em;
-        margin-top: 9px;
-    }
-    .watch_button:hover {
-        margin-bottom: 5px;
-        padding: 15px 30px;
-        margin-top: 0em;
+    #top_img {
+        height: 60vh;
     }
     .carouselCaption h2 {
         font-size: 1.5em;

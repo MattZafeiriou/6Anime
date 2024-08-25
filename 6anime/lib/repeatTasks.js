@@ -7,7 +7,7 @@ const { META } = require("@consumet/extensions");
 /*
     This was done with the help of https://crontab.guru
 */
-let todayTag = 'Adventure';
+let todayTag = 'Action';
 function getAnimeInfo_(anime_id) {
   return new Promise((resolve, reject) => {
     sqlHandler.con.query(`SELECT * FROM Anime WHERE id = ${anime_id};`, (err, result) => {
