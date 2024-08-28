@@ -28,7 +28,7 @@ const rateLimit = require("express-rate-limit");
 // Enable CORS
 const cors_ = cors({
   origin: ['https://6anime.tv', 'https://www.6anime.tv', 'https://yt2mp3.tv', 'https://www.yt2mp3.tv'],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'OPTIONS'],
 });
 
 // Rate limiter for login and register routes

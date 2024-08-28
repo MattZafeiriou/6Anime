@@ -12,7 +12,7 @@ function Toasts() {
         setTimeout(() =>
         {
             document.querySelector('.donate_toast').classList.remove('donate_toast_disable');
-        }, 10000);
+        }, 1000);
     }, []);
 
     return (
