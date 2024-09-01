@@ -1,6 +1,10 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function RandomVideo({ data }) {
+
+    const { t } = useTranslation();
+
     function handleScroll() {
         let windowBottom = document.documentElement.scrollTop + window.innerHeight;
         let sectionTop = document.getElementsByClassName("random_video_span")[0].offsetTop;
@@ -79,8 +83,8 @@ export default function RandomVideo({ data }) {
         <>
             <div className='random_video'>
                 <span className='random_video_span' />
-                <h2>Don't know what to watch?</h2>
-                <h3>Let us help you!</h3>
+                <h2>{t('dkwtw')}</h2>
+                <h3>{t('helptxt')}</h3>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
                         <iframe id="random_video_trailer" src="" title="" allowFullScreen></iframe>
@@ -99,8 +103,8 @@ export default function RandomVideo({ data }) {
                                 <p id="rd_tag3"></p>
                             </a>
                         </div>
-                        <a id="watchLink" href="/watch/"><button className='random_video_trailer_button'>Watch Now!</button></a>
-                        <button className='add_to_list_button'>Add to my list</button>
+                        <a id="watchLink" href="/watch/"><button className='random_video_trailer_button'>{t('watch_now')}!</button></a>
+                        <button className='add_to_list_button'>{t('add_to_list')}</button>
                     </div>
                 </div>
             </div>

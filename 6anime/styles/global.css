@@ -39,6 +39,17 @@ body {
 #changeTheme {
   position: fixed;
   bottom: 1em;
+  right: 4em;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 50%;
+  background-color: var(--main);
+}
+
+#changeLang {
+  position: fixed;
+  bottom: 1em;
   right: 1em;
   padding: 10px;
   cursor: pointer;

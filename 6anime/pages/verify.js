@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Verify() {
     useEffect(() => {
@@ -59,4 +60,14 @@ export default function Verify() {
             </div>
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    const languageHandler = require('../lib/languageHandler');
+
+    return {
+        props: {
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+        }
+    }
 }

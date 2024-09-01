@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function User({ data }) {
     useEffect(() => {
@@ -15,7 +16,6 @@ export default function User({ data }) {
                 const url = URL.createObjectURL(blob);
                 document.getElementById('backgroundimg').src = url;
             });
-    
     });
 
     return (
@@ -37,7 +37,7 @@ export default function User({ data }) {
     );
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps(context, { req, res }) {
     const id = req.url.split('=')[1];
     if (!id) {
         res.writeHead(302, { Location: '/404' });
@@ -51,9 +51,11 @@ export async function getServerSideProps({ req, res }) {
         return { props: {} };
     }
     const data = await res_.json();
+    const languageHandler = require('../lib/languageHandler');
     return {
         props: {
             data,
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
         },
     };
 }

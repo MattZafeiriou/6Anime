@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Disclaimer({ data }) {
 
@@ -54,3 +55,13 @@ export default function Disclaimer({ data }) {
         </>
     );
 }
+
+export async function getServerSideProps(context) {
+    const languageHandler = require('../lib/languageHandler');
+  
+    return {
+        props: {
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+        }
+    }
+  }

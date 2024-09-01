@@ -5,7 +5,8 @@ import Trending from '../components/Trending';
 import RandomVideo from '../components/RandomVideo';
 import Head from 'next/head'
 import repeatTasks from '../lib/repeatTasks';
-import Toasts from '../components/Toasts';
+import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function Tag(props) {
   return (
@@ -18,8 +19,10 @@ function Tag(props) {
 }
 
 function WatchButton(props) {
+  const { t } = useTranslation();
+
   return (
-    <a href={props.href} className='watch_button'>WATCH NOW</a>
+    <a href={props.href} className='watch_button'>{t('watch_now').toUpperCase()}</a>
   );
 }
 
@@ -44,7 +47,6 @@ function CarouselImg(props) {
 }
 
 export default function Page({ data, trendingdata, genredata, tag, latestdata }) {
-
   useEffect(() => {
     document.getElementById("home").classList.add("active");
     document.getElementById("homem").classList.add("active");
@@ -77,6 +79,7 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
     name: data[3].name,
     description: data[3].description
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -114,9 +117,9 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
           <div className='main_page_sponsor'>
             <Sponsored />
           </div>
-          <Trending title="Trending Anime" link="/trending" id="0" data={trendingdata} />
-          <Trending title={`Genre: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
-          <Trending title="Latest Releases" link="/search?" id="2" data={latestdata} />
+          <Trending title={t('trending_anime')} link="/trending" id="0" data={trendingdata} />
+          <Trending title={t('genre') + `: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
+          <Trending title={t('latest_releases')} link="/search?" id="2" data={latestdata} />
           <RandomVideo />
         </div>
         {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
@@ -169,7 +172,7 @@ let recommendations = [];
 const date = new Date();
 let lastUpdate = date.getDate();
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const tag = repeatTasks.todayTag;
   if (lastUpdate !== date.getDate()) // Update every day
   {
@@ -214,13 +217,17 @@ export async function getServerSideProps() {
     const animeInfo = await getAnimeInfo(_data);
     latest = animeInfo;
   }
+
+  const languageHandler = require('../lib/languageHandler');
+
   return {
     props: {
       data: recommendations,
       trendingdata: info,
       genredata: genre,
       tag: tag,
-      latestdata: latest
+      latestdata: latest,
+      ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
     }
   }
 }

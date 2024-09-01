@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Head from 'next/head'
 import EmailValidator from 'email-validator';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Login({ data }) {
 
@@ -274,4 +275,14 @@ export default function Login({ data }) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const languageHandler = require('../lib/languageHandler');
+
+  return {
+      props: {
+          ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+      }
+  }
 }

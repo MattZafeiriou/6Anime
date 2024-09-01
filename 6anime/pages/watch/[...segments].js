@@ -581,6 +581,7 @@ export async function getServerSideProps(context) {
             other_season_ids.push(data);
         }
     }
+    const languageHandler = require('../lib/languageHandler');
 
     // Return the segment as props
     return {
@@ -588,7 +589,9 @@ export async function getServerSideProps(context) {
             titleseg: prelastSegment,
             epsegment: lastSegment,
             animeinfo: animeInfo,
-            other_season_ids: other_season_ids
+            other_season_ids: other_season_ids,
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+
         }
     };
 }

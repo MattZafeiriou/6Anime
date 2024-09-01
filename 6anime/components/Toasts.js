@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 function Toasts() {
+    const {t, i18n } = useTranslation();
     // css is at main.css
     function removeToast() {
         document.querySelector('.donate_toast').classList.add("donate_toast_disable");
@@ -19,8 +21,8 @@ function Toasts() {
         <>
             <div className='donate_toast donate_toast_disable'>
                 <div className='donate_toast_text'>
-                    <p>Support 6Anime by donating via <a href="https://paypal.me/6anime" rel="noreferrer nofollow" target="_blank">PayPal</a></p>
-                    <button onClick={removeToast}><i class="fa-solid fa-xmark"></i></button>
+                    {i18n.language === 'en' ? <p>{t('support')} <a href="https://paypal.me/6anime" rel="noreferrer nofollow" target="_blank">PayPal</a></p> : <p><a href="https://paypal.me/6anime" rel="noreferrer nofollow" target="_blank">PayPal</a>{t('support')}</p>}
+                    <button onClick={removeToast}><i className="fa-solid fa-xmark"></i></button>
                 </div>
             </div >
         </>

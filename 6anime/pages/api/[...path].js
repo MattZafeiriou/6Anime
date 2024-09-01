@@ -20,6 +20,7 @@ const passwordreset = require('../../lib/routes/Auth/passwordreset');
 const getuserinfo = require('../../lib/routes/getuserinfo');
 const setProfilePic = require('../../lib/routes/Auth/setProfilePic');
 const setBackground = require('../../lib/routes/Auth/setBackground');
+const isAdmin = require('../../lib/routes/Auth/isAdmin');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
@@ -147,6 +148,8 @@ export default async function handler(req, res) {
       addepisode(req, res);
     } else if (request === 'getuserinfo') {
       getuserinfo(req, res);
+    } else if (request === 'isadmin') {
+      isAdmin(req, res);
     } else {
       res.status(404).send('API route not found.');
     }

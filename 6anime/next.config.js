@@ -1,44 +1,36 @@
 const sqlHandler = require("./lib/sqlHandler");
 const repeatTasks = require("./lib/repeatTasks");
-
-// const withPWA = require("next-pwa")({
-//     dest: "public", // Destination directory for the PWA files
-//     disable: process.env.NODE_ENV === "development", // Disable PWA in development mode
-//     register: true, // Register the PWA service worker
-//     skipWaiting: true, // Skip waiting for service worker activation
-//   });
+const { i18n } = require('./next-i18next.config');
 
 module.exports = async (phase, { defaultConfig }) => {
-    // Connect to SQL database
-    sqlHandler.connect();
-    // Repeat tasks
-    repeatTasks.updateAnime();
-    repeatTasks.repeatDaily();
-    repeatTasks.repeatWeekly();
-    repeatTasks.repeatMonthly();
-    repeatTasks.repeatYearly();
+    // Perform your asynchronous tasks (SQL connection, repeated tasks)
+    await sqlHandler.connect();
+    await repeatTasks.updateAnime();
+    await repeatTasks.repeatDaily();
+    await repeatTasks.repeatWeekly();
+    await repeatTasks.repeatMonthly();
+    await repeatTasks.repeatYearly();
 
     // Define custom headers
     const customHeaders = [
         {
-            // Set Referrer-Policy header to "origin"
             source: '/(.*)',
             headers: [
                 {
                     key: 'Referrer-Policy',
                     value: 'origin'
                 }
-            ]
+            ],
         }
-        // Add more custom headers if needed
     ];
 
+    // Return the merged configuration
     return {
-        // Merge default config with custom headers
         ...defaultConfig,
-        // Apply custom headers
+        i18n, // Properly include the i18n configuration
+        reactStrictMode: false,
         async headers() {
             return customHeaders;
-        }
+        },
     };
 };

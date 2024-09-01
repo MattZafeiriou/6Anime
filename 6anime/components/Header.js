@@ -1,9 +1,11 @@
 import { Image } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
 
+    const { t, i18n } = useTranslation();
     function toggleMenu() {
         document.getElementsByClassName("mobile_menu_button")[0].classList.toggle("mobile_menu_button_active");
         document.getElementsByClassName("mobile_menu_content")[0].classList.toggle("mobile_menu_content_active");
@@ -14,16 +16,16 @@ export default function Header() {
         var x = document.getElementById("searchingtop").value;
         document.getElementById("topdropdown").innerHTML = "";
         if (x === "") {
-            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter keywords to search</h5>";
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>" + t('search_more_char') + "</h5>";
         } else if (x.length < 3) {
-            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter 3 or more characters</h5>";
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>" + t('search_more_char') + "</h5>";
         } else {
             for (var i = 0; i < string.length; i++) {
                 getNameTop(string[i]);
             }
             document.getElementById("topdropdown").classList.remove("inactive-dropdown");
             if (string.length === 0)
-                document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>No results found</h5>";
+                document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>" + t('no_results') + "</h5>";
         }
     }
 
@@ -83,7 +85,7 @@ export default function Header() {
     function typingTop() {
         var x = document.getElementById("searchingtop").value;
         if (x.length < 3) {
-            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>Enter 3 or more characters</h5>";
+            document.getElementById("topdropdown").innerHTML = "<h5 id='enterkeywords'>" + t('search_more_char') + "</h5>";
             document.getElementById("topdropdown").classList.remove("inactive-dropdown");
             return;
         }
@@ -159,14 +161,14 @@ export default function Header() {
     }
 
     const foldersnames = [];
-    useEffect( () => {
-        async function oof () {
+    useEffect(() => {
+        async function oof() {
             // check if user is logged in
             const token = getCookie('token');
             if (token) {
                 //alert('You are logged in');
                 document.getElementsByClassName("top_right")[0].innerHTML = '';
-                document.getElementById("loginm").innerHTML = 'Profile';
+                document.getElementById("loginm").innerHTML = t('profile');
                 document.getElementById("loginm").parentElement.href = '/profile';
 
                 const raDiv = document.getElementsByClassName('top_right')[0];
@@ -203,23 +205,32 @@ export default function Header() {
 
         oof();
     }, []);
+
     return (
         <>
             <div className="top">
-
                 <a id="logo" href="/">
                     <Image alt='Logo Image' src={'/logo.svg'} />
                 </a>
                 <div className="top_left">
-                    <a className="left_list" href="/"><div id="home">Home</div></a>
-                    <a className="left_list" href="/series"><div id="about">Series</div></a>
-                    <a className="left_list" href="/movies"><div id="contact_us">Movies</div></a>
-                    <a className="left_list" href="/donate"><div id="donate">Donate</div></a>
+                    <a className="left_list" href="/"><div id="home">{t('home')}</div></a>
+                    <a className="left_list" href="/series"><div id="series">{t('series')}</div></a>
+                    <a className="left_list" href="/movies"><div id="movies">{t('movies')}</div></a>
+                    <a className="left_list" href="/donate"><div id="donate">{t('donate')}</div></a>
+                    <a className="left_list" onClick={
+                        () => {
+                            if (getCookie('lang') === 'ja')
+                                setCookie('lang', 'en', 365);
+                            else
+                                setCookie('lang', 'ja', 365);
+                            window.location.reload();
+                        }
+                    }><div id="lang">{t('lang')}</div></a>
                 </div>
                 <div className="top_right">
                     <a href='/login'>
                         <div className='login_button'>
-                            <div id="login">Log in</div>
+                            <div id="login">{t('login')}</div>
                         </div>
                     </a>
                 </div>
@@ -233,18 +244,27 @@ export default function Header() {
                     </div>
                     <div className='mobile_menu_content'>
                         <div className='mobile_menu_items'>
-                            <a href="/"><div id="homem">Home</div></a>
-                            <a href="/about"><div id="aboutm">About</div></a>
-                            <a href="/movies"><div id="movies">Movies</div></a>
-                            <a href="/series"><div id="series">Series</div></a>
-                            <a href="/contact"><div id="contact_usm">Contact Us</div></a>
-                            <a href="/donate"><div id="donatem">Donate</div></a>
-                            <a href="/login"><div id="loginm">Log in</div></a>
+                            <a href="/"><div id="homem">{t('home')}</div></a>
+                            <a href="/about"><div id="aboutm">{t('about')}</div></a>
+                            <a href="/movies"><div id="moviesm">{t('movies')}</div></a>
+                            <a href="/series"><div id="seriesm">{t('series')}</div></a>
+                            <a href="/contact"><div id="contact_usm">{t('contactus')}</div></a>
+                            <a href="/donate"><div id="donatem">{t('donate')}</div></a>
+                            <a href="/login"><div id="loginm">{t('login')}</div></a>
+                            <a onClick={
+                                () => {
+                                    if (getCookie('lang') === 'ja')
+                                        setCookie('lang', 'en', 365);
+                                    else
+                                        setCookie('lang', 'ja', 365);
+                                    window.location.reload();
+                                }
+                            }><div id="langm">{t('lang')}</div></a>
                         </div>
                     </div>
                 </div>
                 <div className="searchtop">
-                    <input type="text" autoComplete="off" id="searchingtop" onFocus={addTopDropdown} onBlur={removeTopDropdown} placeholder="Search on 6Anime.tv" onInput={typingTop} />
+                    <input type="text" autoComplete="off" id="searchingtop" onFocus={addTopDropdown} onBlur={removeTopDropdown} placeholder={t('search_placeholder')} onInput={typingTop} />
                     <button onClick={search} id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
                     <div className="dropdown-content-top inactive-dropdown" id="topdropdown"></div>
                 </div>

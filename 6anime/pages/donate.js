@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 function addBitcoinPopup(e) {
   e.preventDefault();
@@ -24,6 +26,8 @@ function PaymentMethod(props) {
 
 export default function Donate({ data }) {
 
+  const {t} = useTranslation('common');
+
   useEffect(() => {
     document.getElementById('donate').classList.add('active');
     document.getElementById('donatem').classList.add('active');
@@ -44,11 +48,11 @@ export default function Donate({ data }) {
         />
       </Head>
       <div className="donatemain">
-        <h1>Thank You</h1>
-        <h4>for helping us keep the site running.</h4>
+        <h1>{t("donate_txt1")}</h1>
+        <h4>{t("donate_txt2")}</h4>
         <br/>
-        <p>6Anime is a free service that relies on donates only.</p>
-        <p>Donations are used to pay for server costs, domain costs, and other expenses.</p>
+        <p>{t("donate_txt3")}</p>
+        <p>{t("donate_txt4")}</p>
         <div className='paymentMethods'>
           <PaymentMethod href="https://www.patreon.com/6AnimeOfficial" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Patreon_logo.svg/2048px-Patreon_logo.svg.png" text="Patreon" />
           <PaymentMethod href="" onClick={addBitcoinPopup} src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" text="Bitcoin" />
@@ -61,7 +65,7 @@ export default function Donate({ data }) {
           <h2>Bitcoin wallet address</h2>
           <p>bc1q69cavjjkydv63pd3xq00v2du5327sgcshw06yt</p>
           <img src={'./bitcoin.png'} alt='Bitcoin QR code' />
-          <button onClick={() => document.getElementById('bitcoinaddress').style.display = 'none'}>Close</button>
+          <button onClick={() => document.getElementById('bitcoinaddress').style.display = 'none'}>{t("close")}</button>
         </div>
       </div>
       <div id="ethereumaddress" className='popupdonate'>
@@ -69,11 +73,21 @@ export default function Donate({ data }) {
           <h2>Ethereum wallet address</h2>
           <p>0x07e2867D516F83B43ea9fb9F0637A81D94f467B5</p>
           <img src={'./ethereum.png'} alt='Ethreum QR code' />
-          <button onClick={() => document.getElementById('ethereumaddress').style.display = 'none'}>Close</button>
+          <button onClick={() => document.getElementById('ethereumaddress').style.display = 'none'}>{t("close")}</button>
         </div>
       </div>
 
     </>
 
   );
+}
+
+export async function getServerSideProps(context) {
+  const languageHandler = require('../lib/languageHandler');
+
+  return {
+      props: {
+          ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+      }
+  }
 }

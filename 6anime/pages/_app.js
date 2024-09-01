@@ -16,12 +16,16 @@ import '../styles/Tos.css'
 import '../styles/Login.css'
 import '../styles/Profile.css'
 import '../styles/pace.css'
+import '../styles/Admin.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
 import Toasts from '../components/Toasts';
 import Footer from '../components/Footer';
 import Head from "next/head";
 import { useEffect } from 'react';
+import { appWithTranslation } from 'next-i18next';
+import nextI18NextConfig, { i18n } from '../next-i18next.config.js';
+import { useTranslation } from 'react-i18next';
 
 let theme = 1;
 const themes = [0, 50, 100, 150, 200, 255]
@@ -54,7 +58,7 @@ function getCookie(name) {
   return null;
 }
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps, data }) {
   useEffect(() => {
     if (getCookie('theme') === null) {
       setCookie('theme', '0', 365);
@@ -67,13 +71,22 @@ export default function App({ Component, pageProps }) {
       //(AdProvider = window.AdProvider || []).push({"serve": {}});
     }, 100);
   });
-  
+
   return (
     <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></link>
       <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
       <link rel="icon" href="/favicon.ico" />
       <i id="changeTheme" onClick={switchThemes} className="fa-solid fa-circle-half-stroke"></i>
+      <i id="changeLang" onClick={
+        () => {
+          if (getCookie('lang') === 'ja')
+            setCookie('lang', 'en', 365);
+          else
+            setCookie('lang', 'ja', 365);
+          window.location.reload();
+        }
+      } className="fa-solid fa-language"></i>
       <Head>
         <meta httpEquiv='content-language' content='en' />
         <meta name="theme-color" content="#9b2727" />
@@ -84,7 +97,7 @@ export default function App({ Component, pageProps }) {
           content="anime, free anime, attack on titan, naruto, one piece, 6anime.tv, 6anime, hd anime, watch anime, movies, series"
         />
       </Head>
-      <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>
+      {/* <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> */}
 
       <div className='mainpage'>
         <Header />
@@ -95,3 +108,5 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+export default appWithTranslation(App, nextI18NextConfig);

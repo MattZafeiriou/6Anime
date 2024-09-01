@@ -268,3 +268,12 @@ body {
         display: block;
     }
 }
+
+.left_list #lang {
+    cursor: pointer;
+}
+
+#langm {
+    cursor: pointer;
+    color: white;
+}

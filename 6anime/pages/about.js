@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Accordion } from 'react-bootstrap';
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function About({ data }) {
   useEffect(() => {
@@ -60,4 +61,14 @@ export default function About({ data }) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const languageHandler = require('../lib/languageHandler');
+
+  return {
+      props: {
+          ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+      }
+  }
 }

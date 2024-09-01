@@ -1,5 +1,6 @@
 import AnimeList from '../components/AnimeList';
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Trending({ data }) {
 
@@ -11,4 +12,14 @@ export default function Trending({ data }) {
             <AnimeList startOptions="Most-Watched" />
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    const languageHandler = require('../lib/languageHandler');
+
+    return {
+        props: {
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+        }
+    }
 }

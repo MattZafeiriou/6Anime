@@ -1,5 +1,6 @@
 import AnimeList from '../components/AnimeList';
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Movies({ data }) {
 
@@ -13,3 +14,13 @@ export default function Movies({ data }) {
         </>
     );
 }
+
+export async function getServerSideProps(context) {
+    const languageHandler = require('../lib/languageHandler');
+  
+    return {
+        props: {
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
+        }
+    }
+  }

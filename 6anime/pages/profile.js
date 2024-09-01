@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import getAccountId from "../lib/routes/Auth/getAccountId";
 import Cropper from 'react-easy-crop'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function Profile({ data }) {
 
@@ -205,7 +206,7 @@ export default function Profile({ data }) {
     );
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps(context, { req, res }) {
     const id = getAccountId.getAccountId(req, res);
     if (!id) {
         res.writeHead(302, { Location: '/login' });
@@ -214,9 +215,11 @@ export async function getServerSideProps({ req, res }) {
     }
     const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getuserinfo?id=' + id);
     const data = await res_.json();
+    const languageHandler = require('../lib/languageHandler');
     return {
         props: {
             data,
+            ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
         },
     };
 }

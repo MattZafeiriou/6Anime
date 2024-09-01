@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import Head from "next/head";
+import { useTranslation } from "next-i18next";
 
 export default function AnimeList({ startInput = "", startOptions = "" }) {
     const proms = { "startInput": startInput, "startOptions": startOptions };
@@ -199,6 +200,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
             filters["Language"] = language;
             filters["Sort"] = sort;
     }, []);
+    const {t} = useTranslation('common');
 
     return (
         <>
@@ -218,18 +220,18 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 <h1>Search on 6Anime.tv</h1><hr/>
                 <div className='anime-list-header'>
                     <div className='anime-list-header-filters'>
-                        <Filter name="Genre" selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
-                        <Filter name="Country" rows="1" id="countryfilter" options="JP,KO,CH" />
-                        <Filter name="Season" rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
-                        <Filter name="Year" rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
-                        <Filter name="Type" rows="1" id="typefilter" options="Movie,Series" />
-                        <Filter name="Status" selected="All" radio rows="1" id="statusfilter" options="All,Finished Airing,Currently Airing" />
-                        <Filter name="Language" rows="1" id="languagefilter" options="Sub,Dub" />
-                        <Filter name="Sort" selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date" />
+                        <Filter name={t('genre')} selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
+                        <Filter name={t('country')} rows="1" id="countryfilter" options="JP,KO,CH" />
+                        <Filter name={t('season')} rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
+                        <Filter name={t('year')} rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
+                        <Filter name={t('type')} rows="1" id="typefilter" options="Movie,Series" />
+                        <Filter name={t('status')} selected="All" radio rows="1" id="statusfilter" options="All,Finished Airing,Currently Airing" />
+                        <Filter name={t('language')} rows="1" id="languagefilter" options="Sub,Dub" />
+                        <Filter name={t('sort')} selected="Default" radio rows="1" id="sortfilter" options="Default,Recently Updated,Recently Added,Name A-Z,Most Watched,Score,Release Date" />
                     </div>
                     <div className='anime-list-header-search'>
-                        <input id="searchanimeinput" type='text' placeholder='Search...' />
-                        <button id="searchanimebutton" type='submit' onClick={search}><i className="fa fa-search" aria-hidden="true"></i> Filter</button>
+                        <input id="searchanimeinput" type='text' placeholder={t('search') + ".."} />
+                        <button id="searchanimebutton" type='submit' onClick={search}><i className="fa fa-search" aria-hidden="true"></i> {t('filter')}</button>
                     </div>
                 </div>
                 <div className='anime-list-container'>

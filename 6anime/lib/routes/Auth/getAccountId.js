@@ -5,9 +5,13 @@ function getAccountId(req, res)
     const token = cookies.split(";").find(c => c.trim().startsWith("token="));
     if (!token) return null;
     const jwt = require("jsonwebtoken");
+    try {
     const decoded = jwt.verify(token.split("=")[1], process.env.JWT_SECRET);
     if (!decoded) return null;
-    return decoded.id.toString();
+        return decoded.id.toString();
+    } catch (e) {
+        return null;
+    }
 }
 
 function getIdByToken(token)

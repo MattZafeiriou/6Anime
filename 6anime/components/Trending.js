@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { createRoot } from 'react-dom/client';
+import { useTranslation } from 'react-i18next';
 
 export default function Trending({ id, data, title, link }) {
+    const { t } = useTranslation();
     let offset = 0;
     let startX = 0;
     let dragging = false;
@@ -33,14 +34,14 @@ export default function Trending({ id, data, title, link }) {
                         <button onClick={(e) => {
                             e.preventDefault();
                         }} className="trending_card_addtolist">
-                            <h3>Add to my list</h3>
+                            <h3>{t('add_to_list')}</h3>
                         </button>
                         <img id="img" loading="lazy" src={props.img} alt='anime poster' />
                     </a>
                 </div>
                 <div className='trending_card_info'>
                     <h3><a href={props.href} id="title">{props.title}</a></h3>
-                    <p><span id="year">{props.year}</span> <span>&#183;</span> <span id="time">{props.time}</span> <span>&#183;</span> <span id="card_episodes">{props.episodes}</span> episodes</p>
+                    <p><span id="year">{props.year}</span> <span>&#183;</span> <span id="time">{props.time} {t('minsep')}</span> <span>&#183;</span> <span id="card_episodes">{props.episodes}</span> {t('episodes')}</p>
                     <p><span id="tag1">{props.tag1}</span> <span>&#183;</span> <span id="tag2">{props.tag2}</span></p>
                 </div>
             </div>
@@ -180,21 +181,21 @@ export default function Trending({ id, data, title, link }) {
             <div className='trending_page'>
                 <div className='trending_header'>
                     <h2>{title}</h2>
-                    <a href={link}>View all <i className="fa-solid fa-arrow-right"></i></a>
+                    <a href={link}>{t('view_all')} <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={startDragging} onMouseUp={stopDragging} onDragEnd={stopDragging}>
                     <div className='trending_cards'>
-                        <Card id={"card1"} img={data[0].imgUrl} href={data[0].vlink} title={data[0].vname} year={data[0].year} time={data[0].duration + " mins/ep"} tag1={data[0].tag1} tag2={data[0].tag2} episodes={data[0].vep} />
-                        <Card id={"card2"} img={data[1].imgUrl} href={data[1].vlink} title={data[1].vname} year={data[1].year} time={data[1].duration + " mins/ep"} tag1={data[1].tag1} tag2={data[1].tag2} episodes={data[1].vep} />
-                        <Card id={"card3"} img={data[2].imgUrl} href={data[2].vlink} title={data[2].vname} year={data[2].year} time={data[2].duration + " mins/ep"} tag1={data[2].tag1} tag2={data[2].tag2} episodes={data[2].vep} />
-                        <Card id={"card4"} img={data[3].imgUrl} href={data[3].vlink} title={data[3].vname} year={data[3].year} time={data[3].duration + " mins/ep"} tag1={data[3].tag1} tag2={data[3].tag2} episodes={data[3].vep} />
-                        <Card id={"card5"} img={data[4].imgUrl} href={data[4].vlink} title={data[4].vname} year={data[4].year} time={data[4].duration + " mins/ep"} tag1={data[4].tag1} tag2={data[4].tag2} episodes={data[4].vep} />
+                        <Card id={"card1"} img={data[0].imgUrl} href={data[0].vlink} title={data[0].vname} year={data[0].year} time={data[0].duration} tag1={data[0].tag1} tag2={data[0].tag2} episodes={data[0].vep} />
+                        <Card id={"card2"} img={data[1].imgUrl} href={data[1].vlink} title={data[1].vname} year={data[1].year} time={data[1].duration} tag1={data[1].tag1} tag2={data[1].tag2} episodes={data[1].vep} />
+                        <Card id={"card3"} img={data[2].imgUrl} href={data[2].vlink} title={data[2].vname} year={data[2].year} time={data[2].duration} tag1={data[2].tag1} tag2={data[2].tag2} episodes={data[2].vep} />
+                        <Card id={"card4"} img={data[3].imgUrl} href={data[3].vlink} title={data[3].vname} year={data[3].year} time={data[3].duration} tag1={data[3].tag1} tag2={data[3].tag2} episodes={data[3].vep} />
+                        <Card id={"card5"} img={data[4].imgUrl} href={data[4].vlink} title={data[4].vname} year={data[4].year} time={data[4].duration} tag1={data[4].tag1} tag2={data[4].tag2} episodes={data[4].vep} />
                         {/* <ins className="eas6a97888e2" data-zoneid="5391284"></ins> */}
-                        <Card id={"card6"} img={data[5].imgUrl} href={data[5].vlink} title={data[5].vname} year={data[5].year} time={data[5].duration + " mins/ep"} tag1={data[5].tag1} tag2={data[5].tag2} episodes={data[5].vep} />
-                        <Card id={"card7"} img={data[6].imgUrl} href={data[6].vlink} title={data[6].vname} year={data[6].year} time={data[6].duration + " mins/ep"} tag1={data[6].tag1} tag2={data[6].tag2} episodes={data[6].vep} />
-                        <Card id={"card8"} img={data[7].imgUrl} href={data[7].vlink} title={data[7].vname} year={data[7].year} time={data[7].duration + " mins/ep"} tag1={data[7].tag1} tag2={data[7].tag2} episodes={data[7].vep} />
-                        <Card id={"card9"} img={data[8].imgUrl} href={data[8].vlink} title={data[8].vname} year={data[8].year} time={data[8].duration + " mins/ep"} tag1={data[8].tag1} tag2={data[8].tag2} episodes={data[8].vep} />
-                        <Card id={"card10"} img={data[9].imgUrl} href={data[9].vlink} title={data[9].vname} year={data[9].year} time={data[9].duration + " mins/ep"} tag1={data[9].tag1} tag2={data[9].tag2} episodes={data[9].vep} />
+                        <Card id={"card6"} img={data[5].imgUrl} href={data[5].vlink} title={data[5].vname} year={data[5].year} time={data[5].duration} tag1={data[5].tag1} tag2={data[5].tag2} episodes={data[5].vep} />
+                        <Card id={"card7"} img={data[6].imgUrl} href={data[6].vlink} title={data[6].vname} year={data[6].year} time={data[6].duration} tag1={data[6].tag1} tag2={data[6].tag2} episodes={data[6].vep} />
+                        <Card id={"card8"} img={data[7].imgUrl} href={data[7].vlink} title={data[7].vname} year={data[7].year} time={data[7].duration} tag1={data[7].tag1} tag2={data[7].tag2} episodes={data[7].vep} />
+                        <Card id={"card9"} img={data[8].imgUrl} href={data[8].vlink} title={data[8].vname} year={data[8].year} time={data[8].duration} tag1={data[8].tag1} tag2={data[8].tag2} episodes={data[8].vep} />
+                        <Card id={"card10"} img={data[9].imgUrl} href={data[9].vlink} title={data[9].vname} year={data[9].year} time={data[9].duration} tag1={data[9].tag1} tag2={data[9].tag2} episodes={data[9].vep} />
                     </div>
                 </div>
             </div>
