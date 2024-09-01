@@ -18,6 +18,7 @@
   "profile": "プロフィール",
   "support": "で6Animeを支援する",
   "episodes": "エピソード",
+  "episode": "エピソード",
   "minsep": "分/エピソード",
   "genre": "ジャンル",
   "view_all": "すべて表示",
@@ -43,5 +44,16 @@
   "copyright": "著作権",
   "termsofservice": "利用規約",
   "disclaimer": "免責事項",
-  "disclaimertxt": "免責事項: このサイトはサーバー上にファイルを保存していません。すべてのコンテンツは非提携の第三者によって提供されています。"
+  "disclaimertxt": "免責事項: このサイトはサーバー上にファイルを保存していません。すべてのコンテンツは非提携の第三者によって提供されています。",
+  "share": "このアニメを共有する",
+  "description": "説明",
+  "publisher": "出版社",
+  "duration": "再生時間",
+  "premiered": "初公開",
+  "last_updated": "最終更新",
+  "views": "再生回数",
+  "related_anime": "関連アニメ",
+  "popular_anime": "人気アニメ",
+  "next_ep": "次のエピソード",
+  "prev_ep": "前のエピソード"
 }

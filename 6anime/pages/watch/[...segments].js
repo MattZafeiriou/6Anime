@@ -5,8 +5,10 @@ import { createRoot } from 'react-dom/client';
 import VideoPlayer from '../../components/VideoPlayer';
 import Head from 'next/head'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids }) {
+    const {t} = useTranslation('common');
     const router = useRouter()
     const { segments } = router.query
     if (typeof window === 'undefined') {
@@ -204,7 +206,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         setPremiered(date);
         setUpdated(date_);
         setSeason(info.season);
-        setEpisodesdu(info.duration + " min/ep");
+        setEpisodesdu(info.duration + " " + t('minsep'));
         setOtherSeasonFolders(info.other_season_folders);
         setOtherSeasonNames(info.other_season_names);
         if (info.other_season_folders.length > 0)
@@ -418,7 +420,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                     <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img} /></a>
                     <div style={{ display: 'block' }}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
-                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} {t('episodes')}</h5>
                         <h5 className='related_anime_info watch-eye'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
@@ -433,7 +435,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                     <a href={props.link}><img alt="" id={props.img_id} className='related_anime_img' src={props.img} /></a>
                     <div style={{ display: 'block' }}>
                         <h3 className='related_anime_title'><a href={props.link}>{props.title}</a></h3>
-                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} episodes</h5>
+                        <h5 className='related_anime_info'>{props.type} <span>&#8226;</span> {props.epsno} {t('episodes')}</h5>
                         <h5 className='related_anime_info'><i className="fa-solid fa-eye"></i> {props.views}</h5>
                     </div>
                 </div>
@@ -463,8 +465,8 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
             <div className='playerdiv'>
                 <div className='playerr'>
                     <div className='title'>
-                        {JSON.parse(animeinfo).type == "Movie" ? <h3 style={{ display: 'flex' }} id='title'>{title}</h3> : <h3 style={{ display: 'flex' }} id='title'>{title} - Episode {episode}</h3>}
-                        <h5><a href='../../'>Home</a> <span>&#62;</span> <a href={type == "Movie" ? "/movies" : "/series"}>{type == "Movie" ? "Movie" : "Series"}</a> <span>&#62;</span> <span id="animename">{title}</span></h5>
+                        {JSON.parse(animeinfo).type == "Movie" ? <h3 style={{ display: 'flex' }} id='title'>{title}</h3> : <h3 style={{ display: 'flex' }} id='title'>{title} - {t('episode')} {episode}</h3>}
+                        <h5><a href='../../'>{t('home')}</a> <span>&#62;</span> <a href={type == "Movie" ? "/movies" : "/series"}>{type == "Movie" ? t('movies') : t('series')}</a> <span>&#62;</span> <span id="animename">{title}</span></h5>
                     </div>
                     {/* Player Section starts here */}
                     <div className="main_player">
@@ -480,10 +482,10 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                         <div className='separator' />
                         <div className='pcontainer'>
                             <div id="previous_ep">
-                                <Button id="previous_ep" text="Previous Episode" customStyle={{ padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'left', lineHeight: '1em' }} />
+                                <Button id="previous_ep" text={t('prev_ep')} customStyle={{ padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'left', lineHeight: '1em' }} />
                             </div>
                             <div id="next_ep">
-                                <Button id="next_ep" text="Next Episode" customStyle={{ padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'right', lineHeight: '1em' }} />
+                                <Button id="next_ep" text={t('next_ep')} customStyle={{ padding: '.5em', backgroundColor: 'var(--main)', color: 'white', minWidth: '45%', height: '3em', float: 'right', lineHeight: '1em' }} />
                             </div>
                         </div>
                         <div className='episode_100s pcontainer'>
@@ -497,7 +499,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                                 <div className='infocontainer'>
                                     <img className='anime_img' alt="" src={img} />
                                     <div style={{ display: 'block' }}>
-                                        <h2 id='anime_desc'>Description</h2>
+                                        <h2 id='anime_desc'>{t('description')}</h2>
                                         <div className='separator' />
                                         <p style={{ marginTop: '1em' }} id='anime_description'>{description}</p>
                                         <div id='tags' className='tags'>
@@ -508,17 +510,17 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                             <div className='separator' />
                             <div style={{ marginTop: '1em' }}>
                                 <div className='anime_info'>
-                                    <Info name='Publisher' text={studios} />
-                                    <Info name='Episodes' text={episodesno} />
-                                    <Info name='Duration' text={episodesdu} />
-                                    <Info name='Premiered' text={premiered} />
-                                    <Info name='Last Updated' text={updated} />
-                                    <Info name='Views' text={viewsFormatted} />
+                                    <Info name={t('publisher')} text={studios} />
+                                    <Info name={t('episodes')} text={episodesno} />
+                                    <Info name={t('duration')} text={episodesdu} />
+                                    <Info name={t('premiered')} text={premiered} />
+                                    <Info name={t('last_updated')} text={updated} />
+                                    <Info name={t('views')} text={viewsFormatted} />
                                 </div>
                             </div>
                             <div className='separator' />
                             <div className='share_social'>
-                                <h2><i className='fa-solid fa-share'></i> Share this anime</h2>
+                                <h2><i className='fa-solid fa-share'></i> {t('share')}</h2>
                                 <div className='social_icons'>
                                     <a id="fb" href={`https://www.facebook.com/sharer/sharer.php?u=6anime.tv&t=${encodeURI("I just watched " + title + " on 6Anime.tv")}`} target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook"></i></a>
                                     <a id="x" href={`https://twitter.com/intent/tweet?text=${"I just watched " + title + " on 6Anime.tv"}`} target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
@@ -531,7 +533,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                 </div>
                 <div className='right_side'>
                     <div className='section related_anime_div'>
-                        <h3 className='section_title'>Related Anime</h3>
+                        <h3 className='section_title'>{t('related_anime')}</h3>
                         <div className='related_anime_del'>
                             {other_season_ids.map((item, index) => (
                                 <a href={"/watch/" + item}>{item}</a>
@@ -540,7 +542,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
 
                     </div>
                     <div className='section popular_anime_div'>
-                        <h3 className='section_title'>Popular Anime</h3>
+                        <h3 className='section_title'>{t('popular_anime')}</h3>
 
                     </div>
                 </div>

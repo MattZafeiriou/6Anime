@@ -18,6 +18,7 @@
     "profile": "Profile",
     "support": "Support 6Anime by donating via ",
     "episodes": "episodes",
+    "episode": "episode",
     "minsep": "mins/ep",
     "genre": "Genre",
     "view_all": "View All",
@@ -43,5 +44,16 @@
     "copyright": "Copyright",
     "termsofservice": "Terms of Service",
     "disclaimer": "Disclaimer",
-    "disclaimertxt": "Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties."
+    "disclaimertxt": "Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.",
+    "share": "Share this anime",
+    "description": "Description",
+    "publisher": "Publisher",
+    "duration": "Duration",
+    "premiered": "Premiered",
+    "last_updated": "Last Updated",
+    "views": "Views",
+    "related_anime": "Related Anime",
+    "popular_anime": "Popular Anime",
+    "next_ep": "Next Episode",
+    "prev_ep": "Previous Episode"
 }
