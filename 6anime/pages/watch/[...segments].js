@@ -4,6 +4,7 @@ import Sponsored from '../../components/Sponsored';
 import { createRoot } from 'react-dom/client';
 import VideoPlayer from '../../components/VideoPlayer';
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids }) {
     const router = useRouter()
