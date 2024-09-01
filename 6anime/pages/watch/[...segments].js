@@ -581,7 +581,7 @@ export async function getServerSideProps(context) {
             other_season_ids.push(data);
         }
     }
-    const languageHandler = require('../lib/languageHandler');
+    const languageHandler = require('../../lib/languageHandler');
 
     // Return the segment as props
     return {

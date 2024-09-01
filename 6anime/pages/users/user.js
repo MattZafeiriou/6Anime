@@ -51,7 +51,7 @@ export async function getServerSideProps(context, { req, res }) {
         return { props: {} };
     }
     const data = await res_.json();
-    const languageHandler = require('../lib/languageHandler');
+    const languageHandler = require('../../lib/languageHandler');
     return {
         props: {
             data,
