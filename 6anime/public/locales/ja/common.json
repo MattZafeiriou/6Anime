@@ -92,5 +92,11 @@
   "password_uppercase": "パスワードには少なくとも1つの大文字を含める必要があります。",
   "password_special": "パスワードには少なくとも1つの特殊文字を含める必要があります。",
   "incorrect_email_pass": "メールアドレスまたはパスワードが正しくありません。",
-  "already_have_account": "既にアカウントをお持ちですか？"
+  "already_have_account": "既にアカウントをお持ちですか？",
+  "form_submit": "フォームが正常に送信されました",
+  "or": "または",
+  "reset_password": "パスワードをリセットする",
+  "reset_password_email": "パスワードリセットのメールが送信されました。メールをご確認ください。",
+  "reset_password_success": "パスワードのリセットが成功しました。新しいパスワードでログインできます。",
+  "invalid_token": "無効なトークンです。もう一度お試しください。"
 }

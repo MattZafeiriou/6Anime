@@ -3,6 +3,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Head from 'next/head'
 import EmailValidator from 'email-validator';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Login({ token, validate }) {
 
@@ -167,7 +168,6 @@ export default function Login({ token, validate }) {
     }
 
     if (pass) {
-      alert('test')
       fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/passwordreset', {
         method: 'POST',
         headers: {
@@ -184,6 +184,7 @@ export default function Login({ token, validate }) {
       });
     }
   }
+  const {t} = useTranslation();
 
   return (
     <>
@@ -192,52 +193,51 @@ export default function Login({ token, validate }) {
       </Head>
       <div className="loginmain">
         <form>
-          <h1 id="login_h"><span className='minW'><b>Reset Your Password</b></span></h1>
+          <h1 id="login_h"><span className='minW'><b>{t('reset_password')}</b></span></h1>
           <div className="form-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="Enter email" required />
-            <div id="emailError" className='text-danger hidden'>Please enter a valid email address.</div>
+            <label for="email">{t('email')}</label>
+            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="name@example.com" required />
+            <div id="emailError" className='text-danger hidden'>{t('valid_email')}</div>
           </div>
           <br />
           <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
-          <div id="completecaptcha" className='text-danger hidden'>Please complete the captcha.</div>
-          <div id="unexpectedError" className='text-danger hidden'>An unexpected error occurred. Please try again later.</div>
-          <div id="confirmed" className='text-danger hidden'>Password reset email sent. Please check your email.</div>
-          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Reset Password</button>
+          <div id="completecaptcha" className='text-danger hidden'>{t('captcha')}</div>
+          <div id="unexpectedError" className='text-danger hidden'>{t('unexpected_error')}</div>
+          <div id="confirmed" className='text-danger hidden'>{t('reset_password_email')}</div>
+          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">{t('reset_password')}</button>
           <p className="login text-right">
-            <a href="/login">Log In</a> or <a href="/register">Register</a>
+            <a href="/login">{t('login')}</a> {t('or')} <a href="/register">{t('register')}</a>
           </p>
         </form>
       </div>
       <div className="loginmain hidden">
         <form>
-          <h1 id="login_h"><span className='minW'><b>Reset Your Password</b></span></h1>
+          <h1 id="login_h"><span className='minW'><b>{t('reset_password')}</b></span></h1>
           <div className="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder="Enter password" required />
-            <div id="passwordLengthError" className='text-danger hidden'>The password must be at least 8 characters long.</div>
-            <div id="passwordMaxLengthError" className='text-danger hidden'>The password must be at most 100 characters long.</div>
-            <div id="passwordCapitalError" className='text-danger hidden'>The password must have at least one capital letter.</div>
-            <div id="passwordCharacterError" className='text-danger hidden'>The password must have at least one special character.</div>
+            <label for="password">{t('password')}</label>
+            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder={t('enter_password')} required />
+            <div id="passwordLengthError" className='text-danger hidden'>{t('password_8_chars')}</div>
+            <div id="passwordMaxLengthError" className='text-danger hidden'>{t('password_100_chars')}</div>
+            <div id="passwordCapitalError" className='text-danger hidden'>{t('password_uppercase')}</div>
+            <div id="passwordCharacterError" className='text-danger hidden'>{t('password_special')}</div>
           </div>
           <div className="form-group repeatPassword">
-            <label for="repeatpassword">Repeat Password</label>
-            <input type="password" id="repeatpassword" className="form-control" onInput={repeatPasswordInput} placeholder="Repeat password" required />
-            <div id="passwordUnmatch" className='text-danger hidden'>The passwords do not match.</div>
+            <label for="repeatpassword">{t('repeat_password')}</label>
+            <input type="password" id="repeatpassword" className="form-control" onInput={repeatPasswordInput} placeholder={t('repeat_password')} required />
+            <div id="passwordUnmatch" className='text-danger hidden'>{t('password_mismatch')}</div>
           </div>
           <br />
           <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
-          <div id="completecaptcha" className='text-danger hidden'>Please complete the captcha.</div>
-          <div id="unexpectedError" className='text-danger hidden'>An unexpected error occurred. Please try again later.</div>
-          <div id="passwordresetconfirm" className='text-accept hidden'>Your password has been successfully reset.</div>
-          <button onClick={resetPassword} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Reset Password</button>
+          <div id="completecaptcha" className='text-danger hidden'>{t('captcha')}</div>
+          <div id="unexpectedError" className='text-danger hidden'>{t('unexpected_error')}</div>
+          <button onClick={resetPassword} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">{t('reset_password')}</button>
           <p className="login text-right">
-            <a href="/login">Log In</a> or <a href="/register">Register</a>
+            <a href="/login">{t('login')}</a> {t('or')} <a href="/register">{t('register')}</a>
           </p>
         </form>
       </div>
-      <h1 className='text-center hidden' id='invalidtoken'>Invalid token. Please try <a href="/passwordreset">again.</a></h1>
-      <h1 className='text-center hidden' id='passwordresetsuccess'>Password reset successfully. Please <a href="/login">log in.</a></h1>
+      <h1 className='text-center hidden' id='invalidtoken'><a href="/passwordreset">{t('invalid_token')}</a></h1>
+      <h1 className='text-center hidden' id='passwordresetsuccess'>{t('reset_password_success')}</h1>
     </>
   );
 }
@@ -245,6 +245,8 @@ export default function Login({ token, validate }) {
 import { validateToken } from './../lib/passwordResetLib';
 
 export async function getServerSideProps(context) {
+  const languageHandler = require('../lib/languageHandler');
+
   if (context.query && context.query.token) {
     let token = context.query.token;
 
@@ -253,12 +255,12 @@ export async function getServerSideProps(context) {
       return {
         props: {
           token: token,
-          validate: validate
+          validate: validate,
+          ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
         }
       }
     }
   }
-  const languageHandler = require('../lib/languageHandler');
 
   return {
     props: {

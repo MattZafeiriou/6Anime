@@ -92,5 +92,11 @@
     "password_uppercase": "The password must contain at least one uppercase letter.",
     "password_special": "The password must contain at least one special character.",
     "incorrect_email_pass": "Incorrect email or password.",
-    "already_have_account": "Already have an account?"
+    "already_have_account": "Already have an account?",
+    "form_submit": "Form submitted succesfully",
+    "or": "or",
+    "reset_password": "Reset Password",
+    "reset_password_email": "Password reset email sent. Please check your email.",
+    "reset_password_success": "Password reset successful. You can now login with your new password.",
+    "invalid_token": "Invalid token. Please try again."
 }

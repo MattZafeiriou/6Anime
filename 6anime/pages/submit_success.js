@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 
 export default function submit_success() {
+    const {t} = useTranslation();
     return (
         <>
             <Head>
@@ -17,7 +19,7 @@ export default function submit_success() {
                 />
             </Head>
             <div style={{ color: 'white', margin: '10vw', marginTop: '1em' }}>
-                <h1>Form submitted succesfully!</h1>
+                <h1>{t('form_submit')}</h1>
             </div>
         </>
     );

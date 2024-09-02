@@ -1,4 +1,4 @@
-let passwords = {'nigga': 'matuaioszafeiriou@gmail.com'};
+global.passwords = {"nigga": "matuaioszafeiriou@gmail.com"};
 
 function createToken(email, length = 20) {
     const token = makecode(length);

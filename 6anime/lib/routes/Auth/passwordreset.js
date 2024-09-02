@@ -63,7 +63,8 @@ async function post(req, res, next) {
         const token = passwordResetLib.createToken(body.email);
 
         // Send the email
-        EmailService.sendPasswordResetEmail(body.email, token);
+        console.log(token);
+        //EmailService.sendPasswordResetEmail(body.email, token);
 
         res.status(200);
     }
