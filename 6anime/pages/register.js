@@ -3,8 +3,10 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Head from 'next/head'
 import EmailValidator from 'email-validator';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ data }) {
+  const {t} = useTranslation();
 
   let ver = false;
   // Change the background color of the body
@@ -229,47 +231,47 @@ export default function Login({ data }) {
       </Head>
       <div className="loginmain">
         <form>
-          <h1 id="login_h"><span className='minW'><b>Register</b></span></h1>
+          <h1 id="login_h"><span className='minW'><b>{t('register')}</b></span></h1>
           <div className="form-group username">
-            <label for="username">Username</label>
-            <input type="text" id="username" className="form-control" onInput={usernameInput} placeholder="Enter a username" required />
-            <div id="invalidUsername" className='text-danger hidden'>The username can only contain lowercase letters, numbers, and underscores.</div>
-            <div id="usernameLengthError" className='text-danger hidden'>The username must be at least 3 characters long.</div>
-            <div id="usernameMaxLengthError" className='text-danger hidden'>The username must be at most 20 characters long.</div>
-            <div id="takenUsername" className='text-danger hidden'>The username is already in use.</div>
+            <label for="username">{t('username')}</label>
+            <input type="text" id="username" className="form-control" onInput={usernameInput} placeholder={t('enter_username')} required />
+            <div id="invalidUsername" className='text-danger hidden'>{t('username_chars')}</div>
+            <div id="usernameLengthError" className='text-danger hidden'>{t('username_3_chars')}</div>
+            <div id="usernameMaxLengthError" className='text-danger hidden'>{t('username_20_chars')}</div>
+            <div id="takenUsername" className='text-danger hidden'>{t('username_taken')}</div>
           </div>
           <div className="form-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="Enter email" required />
-            <div id="emailError" className='text-danger hidden'>Please enter a valid email address.</div>
-            <div id="takenEmail" className='text-danger hidden'>The email is already in use.</div>
+            <label for="email">{t('email')}</label>
+            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="name@example.com" required />
+            <div id="emailError" className='text-danger hidden'>{t('valid_email')}</div>
+            <div id="takenEmail" className='text-danger hidden'>{t('email_taken')}</div>
           </div>
           <div className="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder="Enter password" required />
-            <div id="passwordLengthError" className='text-danger hidden'>The password must be at least 8 characters long.</div>
-            <div id="passwordMaxLengthError" className='text-danger hidden'>The password must be at most 100 characters long.</div>
-            <div id="passwordCapitalError" className='text-danger hidden'>The password must have at least one capital letter.</div>
-            <div id="passwordCharacterError" className='text-danger hidden'>The password must have at least one special character.</div>
+            <label for="password">{t('password')}</label>
+            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder={t('enter_password')} required />
+            <div id="passwordLengthError" className='text-danger hidden'>{t('password_8_chars')}</div>
+            <div id="passwordMaxLengthError" className='text-danger hidden'>{t('password_100_chars')}</div>
+            <div id="passwordCapitalError" className='text-danger hidden'>{t('password_uppercase')}</div>
+            <div id="passwordCharacterError" className='text-danger hidden'>{t('password_special')}</div>
           </div>
           <div className="form-group repeatPassword">
-            <label for="repeatpassword">Repeat Password</label>
-            <input type="password" id="repeatpassword" className="form-control" onInput={repeatPasswordInput} placeholder="Repeat password" required />
-            <div id="passwordUnmatch" className='text-danger hidden'>The passwords do not match.</div>
+            <label for="repeatpassword">{t('repeat_password')}</label>
+            <input type="password" id="repeatpassword" className="form-control" onInput={repeatPasswordInput} placeholder={t('repeat_password')} required />
+            <div id="passwordUnmatch" className='text-danger hidden'>{t('password_mismatch')}</div>
           </div>
           <div className="form-group">
             <div className="custom-control custom-checkbox">
               <input type="checkbox" className="custom-control-input" id="rememberme" />
-              <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">Remember me</label>
+              <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">{t('remember_me')}</label>
             </div>
           </div>
           <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
-          <div id="completecaptcha" className='text-danger hidden'>Please complete the captcha.</div>
-          <div id="invalidCredentials" className='text-danger hidden'>The email or password is incorrect.</div>
-          <div id="unexpectedError" className='text-danger hidden'>An unexpected error occurred. Please try again later.</div>
-          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Register</button>
+          <div id="completecaptcha" className='text-danger hidden'>{t('captcha')}</div>
+          <div id="invalidCredentials" className='text-danger hidden'>{t('incorrect_email_pass')}</div>
+          <div id="unexpectedError" className='text-danger hidden'>{t('unexpected_error')}</div>
+          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">{t('register')}</button>
           <p className="login text-right">
-            <a href="/login">Already have an account?</a>
+            <a href="/login">{t('already_have_account')}</a>
           </p>
         </form>
       </div>

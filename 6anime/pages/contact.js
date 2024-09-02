@@ -3,6 +3,7 @@ import { Form, Button, Toast, ToastContainer } from 'react-bootstrap';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Head from 'next/head'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 
 export default function Contact({ data }) {
@@ -65,6 +66,7 @@ export default function Contact({ data }) {
         showToast: false,
         ipAddress: ''
     }
+    const {t} = useTranslation('common');
 
     return (
         <>
@@ -82,54 +84,54 @@ export default function Contact({ data }) {
             </Head>
             <div className="contact_main">
                 <div className='container'>
-                    <h1>Contact Us</h1>
+                    <h1>{t('contactus')}</h1>
                     <Form noValidate validated={state.validated} action="" onSubmit={SubmitForm}>
                         <br />
                         <Form.Group controlId="contactForm.name">
-                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>Name <span id='required'>*</span></Form.Label>
+                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>{t('name')} <span id='required'>*</span></Form.Label>
                             <Form.Control type="text" className='contact_name' required placeholder="John Doe" />
                             <Form.Control.Feedback type="invalid">
-                                This field is required.
+                            {t('required')}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br />
                         <Form.Group controlId="contactForm.email">
-                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>Email address <span id='required'>*</span></Form.Label>
+                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>{t('email')} <span id='required'>*</span></Form.Label>
                             <Form.Control type="email" className='contact_email' required placeholder="name@example.com" />
                             <Form.Control.Feedback type="invalid">
-                                Write a valid email.
+                            {t('valid_email')}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br />
                         <Form.Group controlId="contactForm.subject">
-                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>Subject <span id='required'>*</span></Form.Label>
+                            <Form.Label style={{ color: 'rgb(180,180,180)' }}>{t('subject')} <span id='required'>*</span></Form.Label>
                             <Form.Select required className='contact_subject' aria-label="Floating label select example">
-                                <option selected disabled value="">Select Subject</option>
-                                <option value="technical">Technical Issues</option>
-                                <option value="streaming">Streaming Issues</option>
-                                <option value="missing_video">Missing Video</option>
-                                <option value="other">Other</option>
+                                <option selected disabled value="">{t('select_subject')}</option>
+                                <option value="technical">{t('technical_issue')}</option>
+                                <option value="streaming">{t('streaming_issue')}</option>
+                                <option value="advertising">{t('advertising')}</option>
+                                <option value="other">{t('other')}</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
-                                This field is required.
+                            {t('required')}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br />
                         <Form.Group style={{ color: 'rgb(180,180,180)', minWidth: '20vw' }} controlId="contactForm.text">
-                            <Form.Label>Message <span id='required'>*</span></Form.Label>
+                            <Form.Label>{t('message')} <span id='required'>*</span></Form.Label>
                             <Form.Control as="textarea" className='contact_text' required rows={5} />
                             <Form.Control.Feedback type="invalid">
-                                This field is required.
+                            {t('required')}
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br />
                         <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
-                        <Button variant="dark" type="submit">Submit</Button>
+                        <Button variant="dark" type="submit">{t('submit')}</Button>
                     </Form>
                 </div>
                 <div className='container'>
-                    <h1>Donate</h1>
-                    <p>If you want to support our work and keep the website running you may donate through the following methods:</p>
+                    <h1>{t('donate')}</h1>
+                    <p>{t('contact_don')}</p>
                     <br />
 
                     <a href='../donate_paypal'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png' alt='PayPal' /></a>
@@ -141,7 +143,7 @@ export default function Contact({ data }) {
                     <a href='../donate_ethereum'><img src='https://altcoinsbox.com/wp-content/uploads/2023/01/full-ethereum-logo-grey.png' alt='Ethereum' /></a>
                     <br />
                     <br />
-                    <p>Thank you for preferring us!</p>
+                    <p>{t('contact_thanks')}</p>
                 </div>
             </div>
             <ToastContainer

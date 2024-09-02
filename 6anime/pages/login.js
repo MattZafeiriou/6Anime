@@ -3,8 +3,10 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Head from 'next/head'
 import EmailValidator from 'email-validator';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ data }) {
+  const {t} = useTranslation();
 
   let ver = false;
   // Change the background color of the body
@@ -14,7 +16,7 @@ export default function Login({ data }) {
       return;
     }
     document.body.classList.add('loginbg');
-    document.getElementsByClassName('login_button')[0].children[0].innerHTML = 'Register';
+    document.getElementsByClassName('login_button')[0].children[0].innerHTML = t('register');
     document.getElementsByClassName('login_button')[0].parentElement.href = '/register';
   });
 
@@ -90,32 +92,32 @@ export default function Login({ data }) {
       </Head>
       <div className="loginmain">
         <form>
-          <h1 id="login_h"><span className='minW'><b>Log In</b></span></h1>
+          <h1 id="login_h"><span className='minW'><b>{t('login')}</b></span></h1>
           <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="Enter email" required />
-            <div id="emailError" className='text-danger hidden'>Please enter a valid email address.</div>
+            <label htmlFor="email">{t('email')}</label>
+            <input type="email" id="email" className="form-control" onInput={emailInput} placeholder="name@example.com" required />
+            <div id="emailError" className='text-danger hidden'>{t('valid_email')}</div>
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder="Enter password" required />
+            <label htmlFor="password">{t('password')}</label>
+            <input type="password" id="password" className="form-control" onInput={passwordInput} placeholder={t('password')} required />
           </div>
           <div className="form-group">
             <div className="custom-control custom-checkbox">
               <input type="checkbox" className="custom-control-input" id="rememberme" />
-              <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">Remember me</label>
+              <label className="custom-control-label" htmlFor="rememberme" id="remembermebutton">{t('remember_me')}</label>
             </div>
           </div>
           <HCaptcha sitekey="956fe9d4-8e58-4abb-aacf-ed674089796e" onVerify={onVerifyCaptcha} />
-          <div id="completecaptcha" className='text-danger hidden'>Please complete the captcha.</div>
-          <div id="invalidCredentials" className='text-danger hidden'>The email or password is incorrect.</div>
-          <div id="unexpectedError" className='text-danger hidden'>An unexpected error occurred. Please try again later.</div>
-          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">Login</button>
+          <div id="completecaptcha" className='text-danger hidden'>{t('captcha')}</div>
+          <div id="invalidCredentials" className='text-danger hidden'>{t('invalid_email_pass')}</div>
+          <div id="unexpectedError" className='text-danger hidden'>{t('unexpected_error')}</div>
+          <button onClick={submit} type="submit" id="submitbutton" className="btn btn-primary btn-block h-captcha">{t('login')}</button>
           <p className="forgot-password text-right">
-            Forgot <a href="/passwordreset">password?</a>
+            <a href="/passwordreset">{t('forgot_password')}</a>
           </p>
           <p className="register text-right">
-            Don't have an account? <a href="/register">Register</a>
+          {t('dont_have_account')} <a href="/register">{t('register')}</a>
           </p>
         </form>
       </div>
