@@ -88,12 +88,12 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
         <meta property="og:title" content="6Anime - Watch free anime" />
         <meta
           property="og:description"
-          content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+          content="6Anime: The best 9anime and aniwave alternative. Watch free anime online with competitive streaming and access to any anime you desire."
         />
         <meta name="6a97888e-site-verification" content="9e546de5dabc0ef6e7fe0048a624cd82"/>
         <meta
           name="description"
-          content="6Anime: Your ultimate anime destination. Enjoy free, competitive streaming with access to any anime you desire."
+          content="6Anime: The best 9anime and aniwave alternative. Watch free anime online with competitive streaming and access to any anime you desire."
         />
       </Head>
       <div className='main_page'>

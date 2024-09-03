@@ -9,6 +9,7 @@ import '../styles/About.css'
 import '../styles/Contact.css'
 import '../styles/Donate.css'
 import '../styles/AnimeList.css'
+import '../styles/Blog.css'
 import '../styles/VideoPlayer.css'
 import '../styles/Player.css'
 import '../styles/Disclaimer.css'
@@ -94,7 +95,7 @@ function App({ Component, pageProps, data }) {
         <link href="/manifest.json" rel="manifest" />
         <meta
           name="keywords"
-          content="anime, free anime, attack on titan, naruto, one piece, 6anime.tv, 6anime, hd anime, watch anime, movies, series"
+          content="9anime alternative, aniwave alternative, anime, free anime, attack on titan, naruto, one piece, 6anime.tv, 6anime, hd anime, watch anime, movies, series"
         />
       </Head>
       {/* <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> */}
