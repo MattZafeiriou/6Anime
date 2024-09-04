@@ -15,7 +15,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         let oof = JSON.parse(animeinfo).name;
         let oof2 = oof.split(" ");
         //capitalize every first letter
-        const max = JSON.parse(animeinfo).episodes > 50 ? 50 : JSON.parse(animeinfo).episodes;
+        const max = JSON.parse(animeinfo).episodes > 5 ? 5 : JSON.parse(animeinfo).episodes;
         const episodes = Array.from({ length: max }, (_, index) => index + 1);
         for (let i = 0; i < oof2.length; i++) {
             oof2[i] = oof2[i].charAt(0).toUpperCase() + oof2[i].slice(1);
