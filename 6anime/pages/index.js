@@ -46,7 +46,7 @@ function CarouselImg(props) {
   );
 }
 
-export default function Page({ data, trendingdata, genredata, tag, latestdata }) {
+export default function Page({ data, trendingdata, genredata, moviesdata, seriesdata, tag, latestdata }) {
   useEffect(() => {
     document.getElementById("home").classList.add("active");
     document.getElementById("homem").classList.add("active");
@@ -118,8 +118,10 @@ export default function Page({ data, trendingdata, genredata, tag, latestdata })
             <Sponsored />
           </div>
           <Trending title={t('trending_anime')} link="/trending" id="0" data={trendingdata} />
-          <Trending title={t('genre') + `: ${tag}`} link={`/search?genre=${tag}`} id="1" data={genredata} />
-          <Trending title={t('latest_releases')} link="/search?" id="2" data={latestdata} />
+          <Trending title={t('movies')} link="/movies" id="1" data={moviesdata} />
+          <Trending title={t('series')} link="/series" id="2" data={seriesdata} />
+          <Trending title={t('latest_releases')} link="/search" id="3" data={latestdata} />
+          <Trending title={t('genre') + `: ${tag}`} link={`/search?genre=${tag}`} id="4" data={genredata} />
           <RandomVideo />
         </div>
         {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
@@ -166,6 +168,8 @@ async function getAnimeInfo(data) {
   return animeInfo;
 }
 let genre = [];
+let movies = [];
+let series = [];
 let latest = [];
 let info = [];
 let recommendations = [];
@@ -177,6 +181,8 @@ export async function getServerSideProps(context) {
   if (lastUpdate !== date.getDate()) // Update every day
   {
     genre = [];
+    movies = [];
+    series = [];
     latest = [];
     info = [];
     recommendations = [];
@@ -207,6 +213,28 @@ export async function getServerSideProps(context) {
     genre = animeInfo;
   }
 
+  if (movies.length === 0) {
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?type=movie&sort=Score&chars=&limit=20');
+    const data_ = await res_.json();
+    let _data = [];
+    for (let i = 0; i < data_.length; i++) {
+      _data.push(Number(data_[i].split("-")[data_[i].split("-").length - 1]));
+    }
+    const animeInfo = await getAnimeInfo(_data);
+    movies = animeInfo;
+  }
+
+  if (series.length === 0) {
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?type=series&sort=Score&chars=&limit=20');
+    const data_ = await res_.json();
+    let _data = [];
+    for (let i = 0; i < data_.length; i++) {
+      _data.push(Number(data_[i].split("-")[data_[i].split("-").length - 1]));
+    }
+    const animeInfo = await getAnimeInfo(_data);
+    series = animeInfo;
+  }
+
   if (latest.length === 0) {
     const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/search?sort=Release%20Date&chars=&limit=20');
     const data_ = await res_.json();
@@ -225,6 +253,8 @@ export async function getServerSideProps(context) {
       data: recommendations,
       trendingdata: info,
       genredata: genre,
+      moviesdata: movies,
+      seriesdata: series,
       tag: tag,
       latestdata: latest,
       ...(await serverSideTranslations(languageHandler.getLanguage(context), ['common'])),
