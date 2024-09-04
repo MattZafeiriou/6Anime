@@ -2,12 +2,7 @@ var sqlHandler = require('../sqlHandler');
 
 /* get popular anime. */
 function get(req, res) {
-    const url = decodeURI(req.originalUrl);
-    var oof = url.split("/");
-    const queryString = oof[oof.length - 1];
-
-    const urlParams = new URLSearchParams(queryString);
-    let max = +urlParams.get("max");
+    let max = +req.query.max;
     if (isNaN(max)) {
         res.status(400).send("Invalid max parameter.");
         return;

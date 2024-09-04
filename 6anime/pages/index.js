@@ -196,7 +196,7 @@ export async function getServerSideProps(context) {
   }
 
   if (info.length === 0) {
-    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getpopular?max=10');
+    const res_ = await fetch(process.env.NEXT_PUBLIC_SS_API_URL + '/getpopular?max=20');
     const data_ = await res_.json();
     const animeInfo = await getAnimeInfo(data_);
     info = animeInfo;
