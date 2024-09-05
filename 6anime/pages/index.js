@@ -10,7 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function Tag(props) {
   return (
-    <div className='anime_tag'>
+    <div className='main_anime_tag'>
       <a href={"/search?genre=" + props.name}>
         <p>{props.name}</p>
       </a>

@@ -116,8 +116,6 @@ export default function Trending({ id, data, title, link }) {
         list.addEventListener('touchmove', (event) => {
             const x = event.targetTouches[0].pageX;
             if (!dragging) {
-                if (window.innerWidth < 800) return;
-
                 startX = x + offset;
                 dragging = true;
                 document.getElementsByClassName('trending_list')[id].classList.remove('fullyLeft');
