@@ -6,28 +6,21 @@ export default function RandomVideo({ data }) {
     const { t } = useTranslation();
 
     function handleScroll() {
-        let windowBottom = document.documentElement.scrollTop + window.innerHeight;
-        let sectionTop = document.getElementsByClassName("random_video_span")[0].offsetTop;
-        if (windowBottom > sectionTop) {
-            document.getElementsByClassName("random_video")[0].classList.add("video_headtitle_shown");
+        document.getElementsByClassName("random_video")[0].classList.add("video_headtitle_shown");
+        if (getCookie("featured") === null) {
+            const url = "/getfeatured"
+            fetch(process.env.NEXT_PUBLIC_API_URL + url)
+                .then(response => response.json())
+                .then(data => {
+                    setRandomVideo(data);
+                    setCookie("featured", JSON.stringify(data), 3);
+                })
+        } else {
+            const data = JSON.parse(getCookie("featured"));
+            setRandomVideo(data);
         }
-        sectionTop = document.getElementsByClassName("random_video_trailer")[0].offsetTop;
-        if (windowBottom > sectionTop) {
-            if (getCookie("featured") === null) {
-                const url = "/getfeatured"
-                fetch(process.env.NEXT_PUBLIC_API_URL + url)
-                    .then(response => response.json())
-                    .then(data => {
-                        setRandomVideo(data);
-                        setCookie("featured", JSON.stringify(data), 3);
-                    })
-            } else {
-                const data = JSON.parse(getCookie("featured"));
-                setRandomVideo(data);
-            }
-            document.getElementsByClassName("random_video_trailer")[0].classList.add("random_video_trailer_shown");
-            document.getElementsByClassName("random_video_trailer_info")[0].classList.add("random_video_trailer_info_shown");
-        }
+        document.getElementsByClassName("random_video_trailer")[0].classList.add("random_video_trailer_shown");
+        document.getElementsByClassName("random_video_trailer_info")[0].classList.add("random_video_trailer_info_shown");
     }
 
     function setRandomVideo(data) {
@@ -60,10 +53,6 @@ export default function RandomVideo({ data }) {
         return null;
     }
 
-    function eraseCookie(name) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-
     function setCookie(name, value, days) {
         let expires = "";
         if (days) {
@@ -76,15 +65,13 @@ export default function RandomVideo({ data }) {
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        handleScroll();
     }, []);
 
     return (
         <>
             <div className='random_video'>
                 <span className='random_video_span' />
-                <h2>{t('dkwtw')}</h2>
-                <h3>{t('helptxt')}</h3>
                 <div className='random_video_trailer'>
                     <div className='random_video_trailer_vid'>
                         <iframe id="random_video_trailer" src="" title="" allowFullScreen></iframe>

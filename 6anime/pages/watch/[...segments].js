@@ -94,7 +94,6 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
     const [viewsFormatted, setViewsFormatted] = useState("");
 
     let customStyle = {
-        fontFamily: 'Poppins',
         backgroundColor: 'rgb(80, 80, 80, 1)',
         color: 'white',
         border: 'none',
@@ -107,7 +106,6 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         marginBottom: '.5em'
     };
     let customSelectedStyle = {
-        fontFamily: 'Poppins',
         backgroundColor: 'var(--mainhover)',
         color: 'white',
         border: 'none',
@@ -218,11 +216,11 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         setLoadedInfo(true);
         await fetch(process.env.NEXT_PUBLIC_API_URL + "/getviews/?id=" + id)
             .then(res => res.text())
-            .then(res => {
+            .then(res => async () =>{
                 setViews(parseInt(res) + 1);
                 setViewsFormatted(formatViews(parseInt(res) + 1));
 
-                fetch(process.env.NEXT_PUBLIC_API_URL + "/addview/?id=" + id + "&ep=" + episode)
+                await fetch(process.env.NEXT_PUBLIC_API_URL + "/addview/?id=" + id + "&ep=" + episode)
                     .then(res => res.text())
                     .then(() => { })
             })

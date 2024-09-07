@@ -18,7 +18,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
     if (proms !== undefined && proms.startOptions !== undefined)
         startOptions = proms.startOptions;
 
-    function search() {
+    async function search() {
         deleteAllAnime();
         const genre = (filters["Genre"] === undefined || filters["Genre"] === "") ? "" : "&genre=" + encodeURIComponent(filters["Genre"]);
         const country = (filters["Country"] === undefined || filters["Country"] === "") ? "" : "&country=" + encodeURIComponent(filters["Country"]);
@@ -35,7 +35,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
         url = url.replace("&", "?");
         url = "/search" + url;
 
-        fetch(process.env.NEXT_PUBLIC_API_URL + url)
+        await fetch(process.env.NEXT_PUBLIC_API_URL + url)
             .then(res => res.json())
             .then(data => {
                 data.forEach(element => {
@@ -135,7 +135,11 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                                                 removeFilter(proms.name, proms.id, option);
                                             }
                                         }
-                                    }} type={proms.radio ? addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == proms.selected, proms.id) : 'checkbox'} id={'anime-list-filter-item-' + option.replaceAll(' ', '-')} name={'anime-list-filter-item-' + proms.name} value={'anime-list-filter-item-' + option} />
+                                    }}
+                                    type={proms.radio ? addRadio('anime-list-filter-item-' + option.replaceAll(' ', '-'), option == proms.selected, proms.id) : 'checkbox'}
+                                    id={'anime-list-filter-item-' + option.replaceAll(' ', '-')}
+                                    name={'anime-list-filter-item-' + proms.name}
+                                    value={'anime-list-filter-item-' + option} />
                                     <label htmlFor={'anime-list-filter-item-' + option.replaceAll(' ', '-')}>{option}</label>
                                 </div>
                             );
@@ -179,6 +183,15 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
         }
     }
 
+    function setAllFilters(name, filters) {
+        if (!filters) return;
+        const filter = filters.split(',');
+        filter.forEach(element => {
+            document.querySelector('#anime-list-filter-item-' + element.replaceAll(' ', '-')).checked = true;
+            addFilter(name, String(name).toLowerCase() + "filter", element);
+        });
+    }
+
     useEffect(() => {
             const url = window.location.href;
             const urlParams = new URLSearchParams(url.split('?')[1]);
@@ -191,14 +204,14 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
             const language = urlParams.get('language') === null ? "" : urlParams.get('language');
             const sort = urlParams.get('sort') === null ? "" : urlParams.get('sort');
     
-            addFilter("Genre", "genrefilter", genre);
-            filters["Country"] = country;
-            filters["Season"] = season;
-            filters["Year"] = year;
-            filters["Type"] = type;
-            filters["Status"] = status;
-            filters["Language"] = language;
-            filters["Sort"] = sort;
+            setAllFilters("Genre", genre);
+            setAllFilters("Country", country);
+            setAllFilters("Season", season);
+            setAllFilters("Year", year);
+            setAllFilters("Type", type);
+            setAllFilters("Status", status);
+            setAllFilters("Language", language);
+            setAllFilters("Sort", sort);
     }, []);
     const {t} = useTranslation('common');
 
@@ -220,7 +233,7 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 <h1>Search on 6Anime.tv</h1><hr/>
                 <div className='anime-list-header'>
                     <div className='anime-list-header-filters'>
-                        <Filter name={t('genre')} selected="Action" rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
+                        <Filter name={t('genre')} rows="3" maxWidth="500px" id="genrefilter" options="Action,Adventure,Cars,Comedy,Dementia,Demons,Drama,Ecchi,Fantasy,Game,Harem,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire" />
                         <Filter name={t('country')} rows="1" id="countryfilter" options="JP,KO,CH" />
                         <Filter name={t('season')} rows="1" id="seasonfilter" options="Spring,Summer,Fall,Winter" />
                         <Filter name={t('year')} rows="4" maxWidth="350px" id="yearfilter" options="2024,2023,2022,2021,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999" />
@@ -236,7 +249,6 @@ export default function AnimeList({ startInput = "", startOptions = "" }) {
                 </div>
                 <div className='anime-list-container'>
                 </div>
-                {/* <ins className="eas6a97888e2" data-zoneid="5391284"></ins> */}
             </div>
         </>
     );

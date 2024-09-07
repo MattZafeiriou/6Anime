@@ -194,7 +194,7 @@
     padding: .8em;
     background-color: #222228;
     border: solid var(--main) 1px;
-    font-family: serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
     border-radius: 5px;
 }
@@ -240,7 +240,7 @@
 
 #anime_description {
     color: rgb(180,180,180);
-    font-family: 'PT Serif', serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 #anime_desc {
@@ -248,7 +248,7 @@
 }
 
 .title {
-    font-family: 'PT Serif';
+    font-family: 'Poppins', sans-serif;
     color: white;
     width: 100%;
 }
@@ -256,8 +256,6 @@
 /* For display smaller than 800px */
 @media screen and (max-width: 800px) {
     .title {
-        font-family: 'PT Serif';
-        color: white;
         padding-left: 1em;
     }
 }
@@ -297,7 +295,7 @@
 
 .info_ {
     display: block;
-    font-family: 'PT Serif';
+    font-family: 'Poppins', sans-serif;
 }
 
 .info_tag {
@@ -314,6 +312,11 @@
 
 .infocontainer {
     display: flex;
+}
+
+#previous_ep, #next_ep {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
 }
 
 @media screen and (max-width: 800px) {
