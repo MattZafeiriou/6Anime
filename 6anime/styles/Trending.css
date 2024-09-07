@@ -39,7 +39,7 @@
 
 .trending_cards {
     display: flex;
-    margin-top: 1em;
+    margin-top: .5em;
 }
 
 
@@ -176,4 +176,45 @@
 
 .fullyRight {
     transition-duration: .3s;
+}
+
+.trending_bar input[type="range"] {
+    -webkit-appearance: none;
+    width: 90vw;
+    height: 1px;
+    background: #d3d3d3;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border: none;
+    border-radius: 5px;
+    margin-top: 0px;
+}
+
+.trending_bar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 0;
+}
+
+.trending_bar input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    opacity: 0;
+}
+
+.trending_bar input[type="range"]::-moz-range-progress {
+    background-color: var(--main);
+}
+
+.trending_bar input[type="range"]::-moz-range-track {
+    background-color: #d3d3d3;
+}
+
+.trending_bar input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    background: #d3d3d3;
+    border-radius: 5px;
 }

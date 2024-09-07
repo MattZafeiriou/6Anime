@@ -16,8 +16,6 @@ export default function Login({ data }) {
       return;
     }
     document.body.classList.add('loginbg');
-    document.getElementsByClassName('login_button')[0].children[0].innerHTML = t('register');
-    document.getElementsByClassName('login_button')[0].parentElement.href = '/register';
   });
 
   function submit(e) {

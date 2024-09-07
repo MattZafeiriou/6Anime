@@ -83,7 +83,12 @@ export default function Trending({ id, data, title, link }) {
                 const divWidth = window.innerWidth * .9; // 90% of window width
                 const bruh = divWidth / cardWidth;
 
+                const bar = document.getElementsByClassName('trending_range')[id];
+
                 const max = cardWidth * (state.maxCards - bruh);
+
+                bar.value = (diff / max) * 500;
+
                 if (diff < max && diff > 0)
                     document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + diff + 'px)';
                 else if (diff >= max) {
@@ -129,7 +134,11 @@ export default function Trending({ id, data, title, link }) {
             const divWidth = window.innerWidth * .9; // 90% of window width
             const bruh = divWidth / cardWidth;
 
+            const bar = document.getElementsByClassName('trending_range')[id];
+
             const max = cardWidth * (state.maxCards - bruh);
+
+            bar.value = (diff / max) * 500;
             if (diff < max && diff > 0)
                 document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + diff + 'px)';
             else if (diff >= max) {
@@ -178,6 +187,9 @@ export default function Trending({ id, data, title, link }) {
                 <div className='trending_header'>
                     <h2>{title}</h2>
                     <a href={link}>{t('view_all')} <i className="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div className="trending_bar">
+                    <input type="range" min="0" max="500" value="0" className="trending_range" id="trending_range" />
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={startDragging} onMouseUp={stopDragging} onDragEnd={stopDragging}>
                     <div className='trending_cards'>

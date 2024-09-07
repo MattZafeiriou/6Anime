@@ -15,7 +15,7 @@ body {
 .topp {
     width: 100vw;
     height: 60px;
-    background-color: rgba(10,10,10,.9);
+    background-color: rgba(20,20,20,.9);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -33,17 +33,18 @@ body {
 
 .searchtop {
     transition-duration: .1s;
-    width: 310px;
+    width: 0px;
     margin-top: 10px;
     margin-left: 10px;
     float: right;
-    border: solid rgba(255,255,255,.2) 1px;
+    border: solid rgba(255,255,255,0) 1px;
     border-radius: 5px;
 }
+
 .searchtop input[type=text] {
     transition-duration: 300ms;
-    width: calc(100% - 36px);
-    float: right;
+    width: 0px;
+    float: left;
     padding: 7px;
     font-size: 1em;
     border: none;
@@ -51,15 +52,41 @@ body {
     color: rgb(200,200,200);
 }
 
+#searchingtop {
+    transition-duration: 0.3s;
+    opacity: 0;
+}
+
+#searchButton:focus ~ #searchingtop {
+    color: white;
+    width: calc(100% - 36px);
+    opacity: 1;;
+}
+
+#searchingtop:focus {
+    width: calc(100% - 36px);
+    opacity: 1;
+}
+
+.searchtop:focus-within {
+    width: 310px;
+    border: solid rgba(255,255,255,.2) 1px;
+}
+
+.searchtop:focus-within #searchButton {
+    fill: white;   
+}
+
 .searchtop:focus-within {
     border-color: var(--main);
+    opacity: 1;
 }
 
 .searchtop button {
     float: right;
     background-color: rgba(0,0,0,0);
     transition-duration: 0.2s;
-    padding: 4px 0px 4px 10px;
+    padding: 4px 10px 4px 0px;
     font-size: 17px;
     cursor: pointer;
     border: none;
@@ -69,7 +96,7 @@ body {
 .dropdown-content-top {
     transition-duration: .2s;
     z-index: 3;
-    margin-top: 50px;
+    margin-top: 45px;
     padding: 7px 0px;
     width: 310px;
     position: absolute;
@@ -132,12 +159,14 @@ body {
     font-weight: 500;
     letter-spacing: 1px;
     text-decoration: none;
-    padding: 9px 15px;
+    padding: 7px 15px 4px 15px;
     margin: 10px 2px 0px 6px;
     float: right;
-    font-size: .9em;
-    background: var(--main);
-    box-shadow: 0px 0px 10px rgba(0,0,0,.1);
+    font-size: 1.2em;
+}
+
+.login_button #login {
+    color: rgb(150, 150, 150);
 }
 
 .top_right .profile {
@@ -163,7 +192,11 @@ body {
 }
 
 .login_button:hover {
-    background-color: var(--maindark);
+    background-color: rgba(30,30,30,.9);
+}
+
+.login_button:hover #login {
+    color: white;
 }
 
 #login {
@@ -176,10 +209,20 @@ body {
     margin-right: 1em;
     width: 50px;
     float: left;
-    fill: none;
+    fill: blue;
+    fill-opacity: 1;
+}
+
+#logo {
+    fill: blue;
+    fill-opacity: 1;
 }
 
 #searchButton {
+    fill: rgb(150,150,150);
+}
+
+#searchButton:hover {
     fill: white;
 }
 

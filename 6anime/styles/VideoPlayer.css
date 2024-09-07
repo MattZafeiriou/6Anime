@@ -192,7 +192,7 @@
     min-width: 1.2em;
 } 
 
-input[type="range"] {
+.controls input[type="range"] {
     transition-duration: .1s;
     appearance: none;
     -webkit-appearance: none; /* Remove default styles in WebKit browsers */
@@ -230,7 +230,7 @@ input[type="range"] {
     height: 5px;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+.controls input[type="range"]::-webkit-slider-thumb {
     transition-duration: .2s;
     -webkit-appearance: none; /* Remove default styles in WebKit browsers */
     width: 9px; /* Set a specific thumb width */
@@ -242,7 +242,7 @@ input[type="range"]::-webkit-slider-thumb {
     opacity: 0;
 }
 
-input[type="range"]::-moz-range-thumb {
+.controls input[type="range"]::-moz-range-thumb {
     transition-duration: .2s;
     width: 9px; /* Set a specific thumb width for Firefox */
     height: 9px; /* Set a specific thumb height for Firefox */

@@ -93,6 +93,11 @@ export default function Header() {
     }
 
     function search() {
+        var em = document.getElementById("searchingtop");
+        var temp = window.getComputedStyle(em).getPropertyValue("opacity");
+        if (temp < 1) {
+            return;
+        }
         const searchinput = document.getElementById("searchingtop").value;
         window.location.href = "/search?search=" + encodeURI(searchinput);
     }
@@ -208,69 +213,69 @@ export default function Header() {
 
     return (
         <>
-        <div className="topp">
-            <div className="top">
-                <a id="logo" href="/">
-                    <Image alt='Logo Image' src={'/logo.svg'} />
-                </a>
-                <div className="top_left">
-                    <a className="left_list" href="/"><div id="home">{t('home')}</div></a>
-                    <a className="left_list" href="/series"><div id="series">{t('series')}</div></a>
-                    <a className="left_list" href="/movies"><div id="movies">{t('movies')}</div></a>
-                    <a className="left_list" href="/contact"><div id="contact_us">{t('contactus')}</div></a>
-                    <a className="left_list" href="/donate"><div id="donate">{t('donate')}</div></a>
-                    <a className="left_list" onClick={
-                        () => {
-                            if (getCookie('lang') === 'ja')
-                                setCookie('lang', 'en', 365);
-                            else
-                                setCookie('lang', 'ja', 365);
-                            window.location.reload();
-                        }
-                    }><div id="lang">{t('lang')}</div></a>
-                </div>
-                <div className="top_right">
-                    <a href='/login'>
-                        <div className='login_button'>
-                            <div id="login">{t('login')}</div>
-                        </div>
+            <div className="topp">
+                <div className="top">
+                    <a id="logo" href="/">
+                        <Image alt='Logo Image' src={'/logo.svg'} />
                     </a>
-                </div>
-
-                {/* mobile menu button */}
-                <div className='mobile_menu'>
-                    <div className='mobile_menu_button' onClick={toggleMenu}>
-                        <div className='mobile_menu_button_line'></div>
-                        <div className='mobile_menu_button_line'></div>
-                        <div className='mobile_menu_button_line'></div>
+                    <div className="top_left">
+                        <a className="left_list" href="/"><div id="home">{t('home')}</div></a>
+                        <a className="left_list" href="/series"><div id="series">{t('series')}</div></a>
+                        <a className="left_list" href="/movies"><div id="movies">{t('movies')}</div></a>
+                        <a className="left_list" href="/contact"><div id="contact_us">{t('contactus')}</div></a>
+                        <a className="left_list" href="/donate"><div id="donate">{t('donate')}</div></a>
+                        <a className="left_list" onClick={
+                            () => {
+                                if (getCookie('lang') === 'ja')
+                                    setCookie('lang', 'en', 365);
+                                else
+                                    setCookie('lang', 'ja', 365);
+                                window.location.reload();
+                            }
+                        }><div id="lang">{t('lang')}</div></a>
                     </div>
-                    <div className='mobile_menu_content'>
-                        <div className='mobile_menu_items'>
-                            <a href="/"><div id="homem">{t('home')}</div></a>
-                            <a href="/about"><div id="aboutm">{t('about')}</div></a>
-                            <a href="/movies"><div id="moviesm">{t('movies')}</div></a>
-                            <a href="/series"><div id="seriesm">{t('series')}</div></a>
-                            <a href="/contact"><div id="contact_usm">{t('contactus')}</div></a>
-                            <a href="/donate"><div id="donatem">{t('donate')}</div></a>
-                            <a href="/login"><div id="loginm">{t('login')}</div></a>
-                            <a onClick={
-                                () => {
-                                    if (getCookie('lang') === 'ja')
-                                        setCookie('lang', 'en', 365);
-                                    else
-                                        setCookie('lang', 'ja', 365);
-                                    window.location.reload();
-                                }
-                            }><div id="langm">{t('lang')}</div></a>
+                    <div className="top_right">
+                        <a href='/login'>
+                            <div className='login_button'>
+                                <div id="login"><i class="fa-solid fa-user"></i></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {/* mobile menu button */}
+                    <div className='mobile_menu'>
+                        <div className='mobile_menu_button' onClick={toggleMenu}>
+                            <div className='mobile_menu_button_line'></div>
+                            <div className='mobile_menu_button_line'></div>
+                            <div className='mobile_menu_button_line'></div>
+                        </div>
+                        <div className='mobile_menu_content'>
+                            <div className='mobile_menu_items'>
+                                <a href="/"><div id="homem">{t('home')}</div></a>
+                                <a href="/about"><div id="aboutm">{t('about')}</div></a>
+                                <a href="/movies"><div id="moviesm">{t('movies')}</div></a>
+                                <a href="/series"><div id="seriesm">{t('series')}</div></a>
+                                <a href="/contact"><div id="contact_usm">{t('contactus')}</div></a>
+                                <a href="/donate"><div id="donatem">{t('donate')}</div></a>
+                                <a href="/login"><div id="loginm">{t('login')}</div></a>
+                                <a onClick={
+                                    () => {
+                                        if (getCookie('lang') === 'ja')
+                                            setCookie('lang', 'en', 365);
+                                        else
+                                            setCookie('lang', 'ja', 365);
+                                        window.location.reload();
+                                    }
+                                }><div id="langm">{t('lang')}</div></a>
+                            </div>
                         </div>
                     </div>
+                    <div className="searchtop">
+                        <button onClick={search} id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
+                        <input type="text" autoComplete="off" id="searchingtop" onFocus={addTopDropdown} onBlur={removeTopDropdown} placeholder={t('search_placeholder')} onInput={typingTop} />
+                        <div className="dropdown-content-top inactive-dropdown" id="topdropdown"></div>
+                    </div>
                 </div>
-                <div className="searchtop">
-                    <input type="text" autoComplete="off" id="searchingtop" onFocus={addTopDropdown} onBlur={removeTopDropdown} placeholder={t('search_placeholder')} onInput={typingTop} />
-                    <button onClick={search} id="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 50 50"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path></svg></button>
-                    <div className="dropdown-content-top inactive-dropdown" id="topdropdown"></div>
-                </div>
-            </div>
             </div>
         </>
     );
