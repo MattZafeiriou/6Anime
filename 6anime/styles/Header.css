@@ -12,6 +12,15 @@ body {
     background-color: rgb(39, 39, 39);
 }
 
+.topp {
+    width: 100vw;
+    height: 60px;
+    background-color: rgba(10,10,10,.9);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 .top {
     overflow: hidden;
     width: 90vw;
@@ -25,7 +34,7 @@ body {
 .searchtop {
     transition-duration: .1s;
     width: 310px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 10px;
     float: right;
     border: solid rgba(255,255,255,.2) 1px;
@@ -107,7 +116,7 @@ body {
     color: #EDECE5;
     padding: 4px;
     margin: 10px;
-    margin-top: 25px;
+    margin-top: 15px;
     float: left;
     font-size: .9em;
 }
@@ -124,7 +133,7 @@ body {
     letter-spacing: 1px;
     text-decoration: none;
     padding: 9px 15px;
-    margin: 15px 2px 0px 6px;
+    margin: 10px 2px 0px 6px;
     float: right;
     font-size: .9em;
     background: var(--main);
@@ -136,7 +145,7 @@ body {
     border-radius: 50%;
     font-weight: 600;
     text-decoration: none;
-    margin: 15px 2px 6px 6px;
+    margin: 10px 2px 6px 6px;
     float: right;
     font-size: .9em;
     display: flex;
@@ -163,7 +172,7 @@ body {
 
 #logo img {
     border-radius: 3px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-right: 1em;
     width: 50px;
     float: left;
