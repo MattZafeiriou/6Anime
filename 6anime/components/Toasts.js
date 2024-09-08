@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 function Toasts() {
     const {t, i18n } = useTranslation();
+
     // css is at main.css
     function removeToast() {
         document.querySelector('.donate_toast').classList.add("donate_toast_disable");
@@ -12,9 +13,12 @@ function Toasts() {
         }, 300);
     }
     useEffect(() => {
+        const pageviews = +localStorage.getItem('pageviews') || 0;
+        localStorage.setItem('pageviews', pageviews + 1);
         setTimeout(() =>
         {
-            document.querySelector('.donate_toast').classList.remove('donate_toast_disable');
+            if ((pageviews + 1) % 5 === 0) // show toast every 5 pageviews without the first one
+                document.querySelector('.donate_toast').classList.remove('donate_toast_disable');
         }, 1000);
     }, []);
 

@@ -172,35 +172,37 @@ export default function Header() {
             const token = getCookie('token');
             if (token) {
                 //alert('You are logged in');
-                document.getElementsByClassName("top_right")[0].innerHTML = '';
                 document.getElementById("loginm").innerHTML = t('profile');
                 document.getElementById("loginm").parentElement.href = '/profile';
 
-                const raDiv = document.getElementsByClassName('top_right')[0];
-                const newDiv = document.createElement('div');
-                raDiv.appendChild(newDiv);
-                // Render the component into the new div
-                const root = createRoot(newDiv);
+                document.getElementById("loginhref").href = '/profile';
 
-                const img = sessionStorage.getItem('profilepic');
-                if (img) {
-                    const url = img;
-                    root.render(<Profile src={url} />)
-                } else {
-                    root.render(<Profile />)
-                    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
-                    const data = await response.blob();
-                    const url = URL.createObjectURL(data);
-                    document.getElementById("profilepic").src = url;
 
-                    // save image to local storage
-                    const reader = new FileReader();
-                    reader.readAsDataURL(data);
-                    reader.onloadend = function () {
-                        const base64data = reader.result;
-                        sessionStorage.setItem('profilepic', base64data);
-                    }
-                }
+                // const raDiv = document.getElementsByClassName('top_right')[0];
+                // const newDiv = document.createElement('div');
+                // raDiv.appendChild(newDiv);
+                // // Render the component into the new div
+                // const root = createRoot(newDiv);
+
+                // const img = sessionStorage.getItem('profilepic');
+                // if (img) {
+                //     const url = img;
+                //     root.render(<Profile src={url} />)
+                // } else {
+                //     root.render(<Profile />)
+                //     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/getprofilepic');
+                //     const data = await response.blob();
+                //     const url = URL.createObjectURL(data);
+                //     document.getElementById("profilepic").src = url;
+
+                //     // save image to local storage
+                //     const reader = new FileReader();
+                //     reader.readAsDataURL(data);
+                //     reader.onloadend = function () {
+                //         const base64data = reader.result;
+                //         sessionStorage.setItem('profilepic', base64data);
+                //     }
+                // }
             } else {
                 //alert('You are not logged in');
             }
@@ -235,7 +237,7 @@ export default function Header() {
                         }><div id="lang">{t('lang')}</div></a>
                     </div>
                     <div className="top_right">
-                        <a href='/login'>
+                        <a href='/login' id="loginhref">
                             <div className='login_button'>
                                 <div id="login"><i class="fa-solid fa-user"></i></div>
                             </div>

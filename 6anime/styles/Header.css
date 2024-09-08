@@ -15,7 +15,7 @@ body {
 .topp {
     width: 100vw;
     height: 60px;
-    background-color: rgba(20,20,20,.9);
+    background-color: rgba(20,20,20,1);
     position: sticky;
     top: 0;
     z-index: 100;

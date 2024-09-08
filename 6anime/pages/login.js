@@ -55,8 +55,6 @@ export default function Login({ data }) {
             window.location.href = "/";
           });
         } else {
-          document.getElementById("email").classList.add("is-invalid");
-          document.getElementById("password").classList.add("is-invalid");
           document.getElementById("invalidCredentials").classList.remove("hidden");
         }
       })
