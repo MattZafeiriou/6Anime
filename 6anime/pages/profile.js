@@ -206,7 +206,7 @@ export default function Profile({ data }) {
     );
 }
 
-export async function getServerSideProps(context, { req, res }) {
+export async function getServerSideProps({req, res}, context) {
     const id = getAccountId.getAccountId(req, res);
     if (!id) {
         res.writeHead(302, { Location: '/login' });

@@ -170,7 +170,7 @@ function addAnime(id, res = null) {
                 const api_id = +data.id;
                 if (data.episodes.length == 0) {
                     if (res)
-                    res.status(404).send("Anime not found");
+                    res.status(404).send("Anime has no episodes");
                     return;
                 }
                 const api_episode = data.episodes[0].id.replace("-episode-1", "");
