@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 
-export default function Trending({ id, data, title, link }) {
+export default function Trending({ id, data, title, link, featured = 2 }) {
     const { t } = useTranslation();
     let offset = 0;
     let startX = 0;
     let dragging = false;
+
     let state = {
         firstCard: 1,
-        lastCard: 20,
-        maxCards: 20,
+        lastCard: 20 - featured,
+        maxCards: 20 - featured,
     };
     function startDragging(event) {
         if (dragging) return;
@@ -44,6 +45,25 @@ export default function Trending({ id, data, title, link }) {
                 </div>
             </div>
         );
+    }
+
+    function FeaturedCard(props) {
+        return (
+            <div className="featuredtrending_card">
+                <div className="featuredtrending_card_img">
+                    <a id="button" href={props.href}>
+                        <img id="img" loading="lazy" src={props.img} alt='anime poster' />
+                    </a>
+                </div>
+                <div className='featuredtrending_card_info'>
+                    <h2>{props.title}</h2>
+                    <p id="info"><span>{props.year}</span> <span>&#183;</span> <span>{props.episodes} {t('episodes')}</span></p>
+                    <p>{props.desc}</p>
+                    <div style={{marginBottom:"2em"}}></div>
+                    <a href={props.href} className="featuredtrending_card_watch_button"><i class="fa-solid fa-play"></i>{t('watch_now').toUpperCase()}</a>
+                </div>
+            </div>
+        )
     }
 
     function stopDragging(event) {
@@ -89,7 +109,7 @@ export default function Trending({ id, data, title, link }) {
 
                 const currentPercentage = (diff / max) * 100;
                 bar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
-    
+
                 if (diff < max && diff > 0)
                     document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + diff + 'px)';
                 else if (diff >= max) {
@@ -196,18 +216,24 @@ export default function Trending({ id, data, title, link }) {
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={startDragging} onMouseUp={stopDragging} onDragEnd={stopDragging}>
                     <div className='trending_cards'>
-                        {/* add for loop for card1 to card10 */}
-
                         {
-                            data.slice(1, 21).map((item, index) => {
+                            data.slice(state.firstCard - 1 + featured, state.maxCards + featured).map((item, index) => {
                                 return (
-                                    <Card key={index} id={"card" + (index)} img={item.imgUrl} href={item.vlink} title={item.vname} year={item.year} time={item.duration} tag1={item.tag1} tag2={item.tag2} episodes={item.vep} />
+                                    <Card id={"card" + (index)} img={item.imgUrl} href={item.vlink} title={item.vname} year={item.year} time={item.duration} tag1={item.tag1} tag2={item.tag2} episodes={item.vep} />
                                 );
                             })
                         }
-
-                        <Card id={"card1"} img={data[0].imgUrl} href={data[0].vlink} title={data[0].vname} year={data[0].year} time={data[0].duration} tag1={data[0].tag1} tag2={data[0].tag2} episodes={data[0].vep} />
                     </div>
+                </div>
+
+                <div className="featuredtrending">
+                    {
+                        data.slice(state.firstCard - 1, featured).map((item, index) => {
+                            return (
+                                <FeaturedCard id={"card" + (index)} desc={item.description} img={item.banner} href={item.vlink} title={item.vname} year={item.year} time={item.duration} tag1={item.tag1} tag2={item.tag2} episodes={item.vep} />
+                            );
+                        })
+                    }
                 </div>
             </div>
         </>

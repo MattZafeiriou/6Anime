@@ -203,19 +203,22 @@ body {
     color: white;
 }
 
+/*
+set #logo img all white because it is svg
+*/
+
 #logo img {
     border-radius: 3px;
     margin-top: 5px;
     margin-right: 1em;
     width: 50px;
     float: left;
-    fill: blue;
-    fill-opacity: 1;
+    transition-duration: .2s;
 }
 
-#logo {
-    fill: blue;
-    fill-opacity: 1;
+#logo img:hover {
+    filter: brightness(10);
+
 }
 
 #searchButton {

@@ -117,11 +117,11 @@ export default function Page({ data, trendingdata, genredata, moviesdata, series
           <div className='main_page_sponsor'>
             <Sponsored />
           </div>
-          <Trending title={t('trending_anime')} link="/trending" id="0" data={trendingdata} />
-          <Trending title={t('movies')} link="/movies" id="1" data={moviesdata} />
-          <Trending title={t('series')} link="/series" id="2" data={seriesdata} />
-          <Trending title={t('latest_releases')} link="/search" id="3" data={latestdata} />
-          <Trending title={t('genre') + `: ${tag}`} link={`/search?genre=${tag}`} id="4" data={genredata} />
+          <Trending title={t('trending_anime')} link="/trending" id="0" data={trendingdata} featured="1" />
+          <Trending title={t('movies')} link="/movies" id="1" data={moviesdata} featured="0" />
+          <Trending title={t('series')} link="/series" id="2" data={seriesdata} featured="2" />
+          <Trending title={t('latest_releases')} link="/search" id="3" data={latestdata} featured="3" />
+          <Trending title={t('genre') + `: ${tag}`} link={`/search?genre=${tag}`} id="4" data={genredata} featured="0" />
           <RandomVideo />
         </div>
         {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
@@ -140,6 +140,7 @@ async function getAnimeInfo(data) {
         const info = JSON.parse(data);
         const id = info.id;
         const imgUrl = info.poster;
+        const banner = info.banner;
         const vname = info.name;
         const vep = info.episodes;
         const premiered = info.premiered;
@@ -149,16 +150,19 @@ async function getAnimeInfo(data) {
         const tag2 = genre[1];
         const year = premiered.split('-')[0];
         const vlink = "/watch/" + info.folder_name + "-" + id;
+        const description = info.description
         animeInfo.push({
           id: id,
           imgUrl: imgUrl,
+          banner: banner,
           vname: vname,
           vep: vep,
           year: year,
           duration: duration,
           tag1: tag1,
           tag2: tag2,
-          vlink: vlink
+          vlink: vlink,
+          description: description
         });
       })
       .catch(error => {

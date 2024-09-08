@@ -126,7 +126,7 @@
     opacity: 0;
     transition-duration: .3s;
     color: white;
-    background-color: rgba(255,255,255,.3);
+    background-color: rgba(255, 255, 255, .3);
     backdrop-filter: blur(3px);
     border-radius: 5px;
     border: none;
@@ -181,34 +181,154 @@
 .trending_bar input[type="range"] {
     transition-duration: .1s;
     appearance: none;
-    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
-    width: 90vw; /* Full-width */
-    height: 1px; /* Set a fixed height */
+    -webkit-appearance: none;
+    /* Remove default styles in WebKit browsers */
+    width: 90vw;
+    /* Full-width */
+    height: 1px;
+    /* Set a fixed height */
     background: #ddd;
-    border-radius: 5px; /* Rounded corners */
-    outline: none; /* Remove default focus style */
+    border-radius: 5px;
+    /* Rounded corners */
+    outline: none;
+    /* Remove default focus style */
 }
 
 
 .trending_bar input[type="range"]::-webkit-slider-thumb {
     transition-duration: .2s;
-    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
-    width: 9px; /* Set a specific thumb width */
-    height: 9px; /* Set a specific thumb height */
-    background: var(--main); /* Green thumb color */
+    -webkit-appearance: none;
+    /* Remove default styles in WebKit browsers */
+    width: 9px;
+    /* Set a specific thumb width */
+    height: 9px;
+    /* Set a specific thumb height */
+    background: var(--main);
+    /* Green thumb color */
     border: solid var(--main) 1px;
-    border-radius: 50%; /* Round the thumb */
-    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 50%;
+    /* Round the thumb */
+    cursor: pointer;
+    /* Add a pointer cursor on hover */
     opacity: 0;
 }
 
 .trending_bar input[type="range"]::-moz-range-thumb {
     transition-duration: .2s;
-    width: 9px; /* Set a specific thumb width for Firefox */
-    height: 9px; /* Set a specific thumb height for Firefox */
-    background: var(--main); /* Green thumb color for Firefox */
+    width: 9px;
+    /* Set a specific thumb width for Firefox */
+    height: 9px;
+    /* Set a specific thumb height for Firefox */
+    background: var(--main);
+    /* Green thumb color for Firefox */
     border: solid var(--main) 1px;
-    border-radius: 50%; /* Round the thumb for Firefox */
-    cursor: pointer; /* Add a pointer cursor on hover for Firefox */
+    border-radius: 50%;
+    /* Round the thumb for Firefox */
+    cursor: pointer;
+    /* Add a pointer cursor on hover for Firefox */
     opacity: 0;
+}
+
+.featuredtrending_card {
+    display: flex;
+    margin-top: .5em;
+    width: 70vw;
+    margin: 3em 0px 3em 10vw;
+}
+
+.featuredtrending_card img {
+    transition-duration: .3s;
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.featuredtrending_card_img {
+    margin-right: 1.5em;
+}
+
+.featuredtrending_card_info {
+    color: white;
+}
+
+.featuredtrending_card_info h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0em;
+}
+
+.featuredtrending_card_info p {
+    font-size: 1em;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: .5em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.featuredtrending_card_watch_button {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2em;
+    font-family: 'Poppins', sans-serif;
+    padding: 7px;
+    border-radius: 2px;
+    transition-duration: .3s;
+    border: solid var(--main) 2px;
+}
+
+.featuredtrending_card_watch_button:hover {
+    box-shadow: 0px 0px 10px var(--main);
+    background-color: var(--main);
+}
+
+.featuredtrending_card_watch_button i {
+    margin-right: 10px;
+}
+
+.featuredtrending_card_info #info {
+    color: rgb(100, 100, 100);
+}
+
+
+@media only screen and (max-width: 800px) {
+    .featuredtrending_card {
+        display: flex;
+        flex-direction: column;
+        margin-top: .5em;
+        width: 90vw;
+        margin: 0px 0px 3em 0px;
+
+    }
+
+    .featuredtrending_card img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .featuredtrending_card_img {
+        margin-right: 0px;
+    }
+
+    .featuredtrending_card_info p {
+        font-size: 1em;
+        font-weight: 400;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: .5em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        /* number of lines to show */
+        line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
 }
