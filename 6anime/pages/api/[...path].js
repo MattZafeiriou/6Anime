@@ -24,6 +24,7 @@ const isAdmin = require('../../lib/routes/Auth/isAdmin');
 const cors = require('cors');
 const crypto = require('crypto');
 const sqlHandler = require('../../lib/sqlHandler');
+const removeToast = require('../../lib/routes/Statistics/removetoast');
 const rateLimit = require("express-rate-limit");
 
 // Enable CORS
@@ -116,6 +117,7 @@ export default async function handler(req, res) {
   // Handle case insensitivity by converting the path to lowercase
   const request = apiPath.toLowerCase();
   handleVisitors(req, res);
+  console.log(request);
 
   if (req.method === 'GET') {
     if (request === 'testapi') {
@@ -150,6 +152,8 @@ export default async function handler(req, res) {
       getuserinfo(req, res);
     } else if (request === 'isadmin') {
       isAdmin(req, res);
+    } else if (request === 'stats_removetoast') {
+      removeToast(req, res);
     } else {
       res.status(404).send('API route not found.');
     }

@@ -24,6 +24,13 @@ CREATE TABLE Users(
     verification_code TEXT NOT NULL
 );
 
+--@block
+CREATE TABLE Statistics(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    type TEXT NOT NULL,
+    value TEXT NOT NULL
+);
+
 -- @block
 CREATE TABLE Anime(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,

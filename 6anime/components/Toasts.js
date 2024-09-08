@@ -6,6 +6,7 @@ function Toasts() {
     // css is at main.css
     function removeToast() {
         document.querySelector('.donate_toast').classList.add("donate_toast_disable");
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/stats_removetoast');
         setTimeout(() => {
             document.querySelector('.donate_toast').style.display = 'none';
         }, 300);
