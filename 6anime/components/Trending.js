@@ -87,8 +87,9 @@ export default function Trending({ id, data, title, link }) {
 
                 const max = cardWidth * (state.maxCards - bruh);
 
-                bar.value = (diff / max) * 500;
-
+                const currentPercentage = (diff / max) * 100;
+                bar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+    
                 if (diff < max && diff > 0)
                     document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + diff + 'px)';
                 else if (diff >= max) {
@@ -136,9 +137,11 @@ export default function Trending({ id, data, title, link }) {
 
             const bar = document.getElementsByClassName('trending_range')[id];
 
-            const max = cardWidth * (state.maxCards - bruh);
+            const max = cardWidth * (state.maxCards - bruh) - 10;
 
-            bar.value = (diff / max) * 500;
+            const currentPercentage = (diff / max) * 100;
+            bar.style.background = `linear-gradient(to right, var(--bar) 0%, var(--bar) ${currentPercentage}%, #fff ${currentPercentage}%, white 100%)`;
+
             if (diff < max && diff > 0)
                 document.getElementsByClassName('trending_list')[id].style.transform = 'translateX(-' + diff + 'px)';
             else if (diff >= max) {
