@@ -216,11 +216,11 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
         setLoadedInfo(true);
         await fetch(process.env.NEXT_PUBLIC_API_URL + "/getviews/?id=" + id)
             .then(res => res.text())
-            .then(res => async () =>{
+            .then(res => {
                 setViews(parseInt(res) + 1);
                 setViewsFormatted(formatViews(parseInt(res) + 1));
 
-                await fetch(process.env.NEXT_PUBLIC_API_URL + "/addview/?id=" + id + "&ep=" + episode)
+                fetch(process.env.NEXT_PUBLIC_API_URL + "/addview/?id=" + id + "&ep=" + episode)
                     .then(res => res.text())
                     .then(() => { })
             })

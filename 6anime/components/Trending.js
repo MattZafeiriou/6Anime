@@ -189,7 +189,7 @@ export default function Trending({ id, data, title, link }) {
                     <a href={link}>{t('view_all')} <i className="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div className="trending_bar">
-                    <input type="range" min="0" max="500" value="0" className="trending_range" id="trending_range" />
+                    <input type="range" min="0" max="500" value="0" className="trending_range" readOnly id="trending_range" />
                 </div>
                 <div className='trending_list' draggable="true" onDragStart={startDragging} onMouseUp={stopDragging} onDragEnd={stopDragging}>
                     <div className='trending_cards'>
