@@ -15,10 +15,15 @@ function Toasts() {
     useEffect(() => {
         const pageviews = +localStorage.getItem('pageviews') || 0;
         localStorage.setItem('pageviews', pageviews + 1);
+
+        document.querySelector('.donate_toast').style.display = 'none';
+
         setTimeout(() =>
         {
-            if ((pageviews + 1) % 5 === 0) // show toast every 5 pageviews without the first one
+            if ((pageviews + 1) % 5 === 0) { // show toast every 5 pageviews without the first one
+                document.querySelector('.donate_toast').style.display = 'flex';
                 document.querySelector('.donate_toast').classList.remove('donate_toast_disable');
+            }
         }, 1000);
     }, []);
 
