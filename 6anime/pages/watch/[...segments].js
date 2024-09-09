@@ -472,7 +472,7 @@ export default function Watch({ titleseg, epsegment, animeinfo, other_season_ids
                         <div className='player'>
                             {/* Video Player */}
                             {/* <ins class="eas6a97888e6" data-zoneid="5391318"></ins> */}
-                            <VideoPlayer banner={banner} />
+                            <VideoPlayer banner={JSON.parse(animeinfo).banner} />
                         </div>
                         {/* Add our sponsor */}
                         <Sponsored />

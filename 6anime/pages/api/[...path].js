@@ -117,7 +117,6 @@ export default async function handler(req, res) {
   // Handle case insensitivity by converting the path to lowercase
   const request = apiPath.toLowerCase();
   handleVisitors(req, res);
-  console.log(request);
 
   if (req.method === 'GET') {
     if (request === 'testapi') {

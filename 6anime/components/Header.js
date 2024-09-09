@@ -225,6 +225,7 @@ export default function Header() {
                         <a className="left_list" href="/series"><div id="series">{t('series')}</div></a>
                         <a className="left_list" href="/movies"><div id="movies">{t('movies')}</div></a>
                         <a className="left_list" href="/contact"><div id="contact_us">{t('contactus')}</div></a>
+                        <a className="left_list" href="/about"><div id="about">{t('about')}</div></a>
                         <a className="left_list" href="/donate"><div id="donate">{t('donate')}</div></a>
                         <a className="left_list" onClick={
                             () => {

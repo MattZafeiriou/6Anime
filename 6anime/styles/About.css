@@ -21,6 +21,10 @@
     font-weight: 300;
 }
 
+#faqh2 {
+    margin-bottom: 1em;
+}
+
 @media screen and (max-width: 800px) {
     .aboutmain p {
         line-height: 1.2em;
@@ -32,31 +36,37 @@ button {
 }
 
 .accordion-body {
-    background-color: hsl(0, 0%, 15%) !important;
-    color: white;
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: rgb(200,200,200);
 }
 
 .accordion-button {
-    background-color: hsl(0, 0%, 15%) !important;
+    background-color: rgba(0, 0, 0, 0) !important;
     color: white;
 }
 
-.accordion-item button{
-    background-color:hsl(0, 0%, 15%) !important;
+.accordion-item {
+    background-color: rgba(0, 0, 0, 0) !important;
+    color: white;
+}
+
+.accordion-item button {
+    background-color: rgba(0, 0, 0, 0) !important;
     color: white !important;
 }
 
 .accordion-button::after {
-    background-image: none !important;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
 }
 
 .accordion-button button:focus {
     box-shadow: none !important;
     color: white;
-    background-color: hsl(0, 0%, 10%) !important;
+    background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .accordion-button:not(.collapsed) {
-color: white !important;
-background-color: hsl(0, 0%, 10%) !important;
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0) !important;
 }

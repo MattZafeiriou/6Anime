@@ -24,7 +24,7 @@ export default function About({ data }) {
         <h1>About Us</h1>
         <p>6Anime is an anime streaming service that is safe and easy to use. It provides a wide range of anime series, movies, and OVAs such as Naruto, One Piece, Dragon Ball, Attack on Titan, My Hero Academia, and many more. 6Anime is a free website that allows you to watch anime without any restrictions. You can watch anime on 6Anime without creating an account. 6Anime is the best place to watch anime online for free. We update our website regularly with the latest anime series and movies. You can watch anime on 6Anime on any device, including your PC, laptop, tablet, and smartphone. 6Anime is the ultimate anime destination for all anime lovers. Enjoy free, competitive streaming with access to any anime you desire.</p>
         <br />
-        <h2>Frequently Asked Questions</h2>
+        <h2 id="faqh2">Frequently Asked Questions</h2>
         <Accordion>
           <Accordion.Item eventKey="0">
             <Accordion.Header>Is 6Anime.tv safe to use?</Accordion.Header>

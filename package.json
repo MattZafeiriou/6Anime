@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@consumet/extensions": "^1.7.0"
+  }
+}
