@@ -145,6 +145,8 @@ async function updateAnime() {
       if (Number(anime.api_id) !== NaN)
         id = Number(anime.api_id);
       const data = await getAnimeInfo(id);
+      if (!data)
+        continue;
       const currentEpisode = data.currentEpisode;
       let status = data.status;
       if (status == "Completed")

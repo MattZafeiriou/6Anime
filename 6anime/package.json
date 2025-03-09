@@ -3,7 +3,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev -p 9000",
-    "start": "next start -p 9000"
+    "start": "npx next -p 9000"
   },
   "dependencies": {
     "@consumet/extensions": "^1.5.6",

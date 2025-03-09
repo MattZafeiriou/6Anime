@@ -240,7 +240,7 @@ export default function Header() {
                     <div className="top_right">
                         <a href='/login' id="loginhref">
                             <div className='login_button'>
-                                <div id="login"><i class="fa-solid fa-user"></i></div>
+                                <div id="login"><i className="fa-solid fa-user"></i></div>
                             </div>
                         </a>
                     </div>
